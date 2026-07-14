@@ -1,0 +1,915 @@
+{
+    "name": "EOB - CARIN Blue Button  - Inpatient",
+    "mnemonic": "EOB_C4BB_INPATIENT",
+    "tenantUid": "00000000-0000-0000-0000-000000000000",
+    "description": "PIQI Rubric for Explanation of Benefits (EOBs) for Inpatient services based on the CARIN IG for Blue Button (C4BB) implementation guide.",
+    "version": 2026,
+    "authorityName": "None",
+    "model": {
+        "name": "Patient EOB Model",
+        "mnemonic": "PAT_EOB_V1",
+        "version": 1
+    },
+    "source": {
+        "name": "PIQI Alliance",
+        "mnemonic": "PIQI.ALLIANCE"
+    },
+    "criteria": [
+        {
+            "sequence": 1,
+            "description": null,
+            "entity": "CLAIM_UNIQUE_ID",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "medical claim identifier is populated",
+            "failureNameOverride": "medical claim identifier is populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 2,
+            "description": null,
+            "entity": "CLAIM_IDENTIFIER_TYPE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "medical claim identifier type is valid value",
+            "failureNameOverride": "medical claim identifier type is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "payerid,naiccode,pat,um,uc",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 3,
+            "description": null,
+            "entity": "CLAIM_PROCESSING_STATUS_CODE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "medical claim status is valid value",
+            "failureNameOverride": "medical claim status is not valid value",
+            "conditionalSam": "ATTR_ISPOPULATED",
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "active,cancelled,draft,entered-in-error,entered in error",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 4,
+            "description": null,
+            "entity": "CLAIM_TYPE_CODE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "medical claim type is 'institutional'",
+            "failureNameOverride": "medical claim type is not 'institutional'",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "institutional",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 5,
+            "description": null,
+            "entity": "CLAIM_SUB_TYPE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "medical claim type is valid value",
+            "failureNameOverride": "medical claim type is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "inpatient,outpatient",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 6,
+            "description": null,
+            "entity": "CLAIM_USE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "medical claim use is valid value",
+            "failureNameOverride": "medical claim use is valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "claim,preauthorization,predetermination",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 7,
+            "description": null,
+            "entity": "CLAIM_START_DATE",
+            "samMnemonic": "ATTR_ISPASTDATE",
+            "samNameOverride": "medical claim start date is valid past date",
+            "failureNameOverride": "medical claim start date is not valid past date",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 8,
+            "description": null,
+            "entity": "CLAIM_END_DATE",
+            "samMnemonic": "ATTR_ISPASTDATE",
+            "samNameOverride": "medical claim is valid past date",
+            "failureNameOverride": "medical claim is not valid past date",
+            "conditionalSam": "ATTR_ISPOPULATED",
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 9,
+            "description": null,
+            "entity": "CLAIM_ADJUDICATION_DATE",
+            "samMnemonic": "ATTR_ISPASTDATE",
+            "samNameOverride": "medical claim adjudication date is valid past date",
+            "failureNameOverride": "medical claim adjudication date is not valid past date",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 10,
+            "description": null,
+            "entity": "CLAIM_PAYEE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "medical claim payee is populated",
+            "failureNameOverride": "medical claim payee is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 11,
+            "description": null,
+            "entity": "CLAIM_PAYEE_TYPE_CODE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "claim payee type is valid value",
+            "failureNameOverride": "claim payee type is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "beneficiary,subscriber,provider,other",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 12,
+            "description": null,
+            "entity": "CLAIM_PAYMENT_STATUS_CODE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "claim payment status is valid value",
+            "failureNameOverride": "claim payment status is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "queued,complete,error,partial",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 13,
+            "description": "We currently do not have access to UB04 codes",
+            "entity": "CLAIM_BILL_FACILITY_TYPE_CODE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "claim bill type is populated",
+            "failureNameOverride": "claim bill type is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 14,
+            "description": null,
+            "entity": "MEMB_ID",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "member id is populated",
+            "failureNameOverride": "member id is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 15,
+            "description": null,
+            "entity": "MEMB_IDTYPE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "member id type is valid value",
+            "failureNameOverride": "member id type is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "um,pat,MB,MR",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 16,
+            "description": null,
+            "entity": "MEMB_UNIQUEID",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "member unique id is populated",
+            "failureNameOverride": "member unique id is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 17,
+            "description": null,
+            "entity": "MEMB_BIRTHSEX",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "member sex is valid value",
+            "failureNameOverride": "member sex is valid not value",
+            "conditionalSam": "ATTR_ISPOPULATED",
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "male,female,other,unknown",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 18,
+            "description": null,
+            "entity": "MEMB_DOB",
+            "samMnemonic": "ATTR_ISPASTDATE",
+            "samNameOverride": "member date of birth is valid past date",
+            "failureNameOverride": "member date of birth is not valid",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 19,
+            "description": null,
+            "entity": "COVER_PLANID",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "plan identifier is populated",
+            "failureNameOverride": "plan identifier is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 20,
+            "description": null,
+            "entity": "COVER_GROUPID",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "group identifier is populated",
+            "failureNameOverride": "group identifier is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 21,
+            "description": null,
+            "entity": "COVER_STATUS",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "coverage status is populated",
+            "failureNameOverride": "coverage status is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 22,
+            "description": null,
+            "entity": "COVER_RELATION",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "subscriber relationship is valid value",
+            "failureNameOverride": "subscriber relationship is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "child,parent,spouse,common,other,self,injured",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 23,
+            "description": null,
+            "entity": "CLAIM_LAST_UPDATE_DATE",
+            "samMnemonic": "ATTR_ISTIMESTAMP",
+            "samNameOverride": "last update is valid timestamp",
+            "failureNameOverride": "last update is valid not timestamp",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 24,
+            "description": null,
+            "entity": "CLAIM_ADJUSTED_REL",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "adjusted relationship is valid value",
+            "failureNameOverride": "adjusted relationship is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "prior,replacedby",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 25,
+            "description": null,
+            "entity": "CLAIM_PAID_DATE",
+            "samMnemonic": "ATTR_ISDATE",
+            "samNameOverride": "paid date is valid date",
+            "failureNameOverride": "paid date is not valid date",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 26,
+            "description": null,
+            "entity": "CLAIM_RECEIVED_DATE",
+            "samMnemonic": "ATTR_ISPASTDATE",
+            "samNameOverride": "received date is valid past date",
+            "failureNameOverride": "received date is not valid past date",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 27,
+            "description": null,
+            "entity": "CLAIM_MEMBER_ADMISSION_DATE",
+            "samMnemonic": "ATTR_ISPASTDATE",
+            "samNameOverride": "member admission date is valid past date",
+            "failureNameOverride": "member admission date is not valid past date",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 28,
+            "description": null,
+            "entity": "CLAIM_DISCHARGE_DATE",
+            "samMnemonic": "ATTR_ISPASTDATE",
+            "samNameOverride": "member discharge date is valid past date",
+            "failureNameOverride": "member discharge date is not valid past date",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 29,
+            "description": "Should be UB04 FL-15 but content not available for validation",
+            "entity": "CLAIM_INPATIENT_SOURCE_ADMIN_CODE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "inpatient source admin code is populated",
+            "failureNameOverride": "inpatient source admin code is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 30,
+            "description": "should be UB04 FL-14 but we do not have the content",
+            "entity": "CLAIM_INPATIENT_ADMIN_TYPE_CODE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "inpatient admin type code is populated",
+            "failureNameOverride": "inpatient admin type code is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 31,
+            "description": "should be UB04 FL-17 but we don't have the content",
+            "entity": "CLAIM_PATIENT_DISCHARGE_STATUS_CODE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "discharge status code is populated",
+            "failureNameOverride": "discharge status code is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 32,
+            "description": "Should be looking for DRG code compatibility",
+            "entity": "CLAIM_DRG_CODE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "DRG code is populated",
+            "failureNameOverride": "DRG code is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 33,
+            "description": "Should be checking x12 reason code compatibility",
+            "entity": "CLAIM_PAYMENT_DENIAL_CODE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "denial code is populated",
+            "failureNameOverride": "denial code is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 34,
+            "description": null,
+            "entity": "CLAIM_ADJUDICATION_AMOUNT_TYPE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "adj amount type is valid value",
+            "failureNameOverride": "adj amount type is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "submitted,copay,eligible,deductibe;,benefit,coinsurance,noncovered,priorpayerpaid,paidbypatient,paidbypatientcash,paidbypatienthealthaccount,paidtopatient,paidtoprovider,memberliability,discount,drugcost",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 35,
+            "description": null,
+            "entity": "CLAIM_PAYAMT",
+            "samMnemonic": "ATTR_ISDECIMAL",
+            "samNameOverride": "claim payment amount is decimal",
+            "failureNameOverride": "claim payment amount is not decimal",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 36,
+            "description": null,
+            "entity": "CLAIM_TOTAL_AMOUNT",
+            "samMnemonic": "ATTR_ISDECIMAL",
+            "samNameOverride": "claim total amount is decimal",
+            "failureNameOverride": "claim total amount is not decimal",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 37,
+            "description": null,
+            "entity": "DIAG_DIAGNOSIS",
+            "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+            "samNameOverride": "diagnosis is ICD9 or ICD10",
+            "failureNameOverride": "diagnosis is neither ICD9 nor ICD10",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": true,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "CODE_SYSTEM_CSV",
+                    "parameterValue": "WHO_ICD9CMD31,WHO_ICD10CM_FULL",
+                    "parameterValueTypeName": "Code System",
+                    "parameterName": "Code System CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 38,
+            "description": null,
+            "entity": "DIAG_DIAG_TYPE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "diagnosis type is valid value",
+            "failureNameOverride": "diagnosis type is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "principal,other",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 39,
+            "description": null,
+            "entity": "DIAG_PRESENT_ON_ADM_IND",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "present on admission indicator is valid value",
+            "failureNameOverride": "present on admission indicator is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "Y,N,U,W,1",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 40,
+            "description": null,
+            "entity": "PROC_PROCEDURE",
+            "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+            "samNameOverride": "claim procedure is ICD9p or ICD10PCS",
+            "failureNameOverride": "claim procedure is neither ICD9p nor ICD10PCS",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": true,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "CODE_SYSTEM_CSV",
+                    "parameterValue": "WHO_ICD9CMP31,WHO_ICD10PCS_FULL",
+                    "parameterValueTypeName": "Code System",
+                    "parameterName": "Code System CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 41,
+            "description": null,
+            "entity": "PROC_PROC_TYPE",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "procedure type is valid value",
+            "failureNameOverride": "procedure type is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "principal,other",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 42,
+            "description": null,
+            "entity": "PROC_PERF_DATE",
+            "samMnemonic": "ATTR_ISDATE",
+            "samNameOverride": "procedure date is valid",
+            "failureNameOverride": "procedure date is not valid",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 43,
+            "description": null,
+            "entity": "LINE_NUMBER",
+            "samMnemonic": "ATTR_ISPOSITIVENUMBER",
+            "samNameOverride": "line number is positive number",
+            "failureNameOverride": "line number is not positive number",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 44,
+            "description": "should be UB04 FL-42 codes but we dont have the content",
+            "entity": "LINE_REVENUE_CENTER_CODE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "revenue code is populated",
+            "failureNameOverride": "revenue code is populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 45,
+            "description": "** Need to ad HIPPS codes to terminology server and update",
+            "entity": "LINE_PROCEDURE_CODE",
+            "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+            "samNameOverride": "line procedure code is CPT, HCPCS or HIPPS code",
+            "failureNameOverride": "line procedure code is not CPT, HCPCS code",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "CODE_SYSTEM_CSV",
+                    "parameterValue": "AMA_CPT,HCPCS_CODES",
+                    "parameterValueTypeName": "Code System",
+                    "parameterName": "Code System CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 46,
+            "description": null,
+            "entity": "LINE_PROCEDURE_CODE_MOD",
+            "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+            "samNameOverride": "line procedure code modifier is CPT or HCPCS modifier",
+            "failureNameOverride": "line procedure code modifier is not CPT or HCPCS modifier",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "CODE_SYSTEM_CSV",
+                    "parameterValue": "AMA_CPTMOD,HCPCS_MOD",
+                    "parameterValueTypeName": "Code System",
+                    "parameterName": "Code System CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 47,
+            "description": null,
+            "entity": "LINE_ALLOWED_UNITS",
+            "samMnemonic": "ATTR_ISPOSITIVENUMBER",
+            "samNameOverride": "allowed units is positive number",
+            "failureNameOverride": "allowed units is not positive number",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 48,
+            "description": "Need to be x12 code - need the content",
+            "entity": "LINE_PAYMENT_DENIAL_CODE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "line payment denial code is populated",
+            "failureNameOverride": "line payment denial code is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Informational",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 49,
+            "description": null,
+            "entity": "LINE_PAYMENT_AMT",
+            "samMnemonic": "ATTR_ISDECIMAL",
+            "samNameOverride": "line payment amount is decimal",
+            "failureNameOverride": "line payment amount is not decimal",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 50,
+            "description": null,
+            "entity": "LINE_BENEFIT_PAYMENT_STATUS",
+            "samMnemonic": "ATTR_INLIST",
+            "samNameOverride": "line benefit payment status is valid value",
+            "failureNameOverride": "line benefit payment status is not valid value",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [
+                {
+                    "samParameterMnemonic": "LIST_CSV",
+                    "parameterValue": "innetwork,outofnetwork,other",
+                    "parameterValueTypeName": "Simple List (CSV)",
+                    "parameterName": "List CSV"
+                }
+            ],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 51,
+            "description": null,
+            "entity": "PROV_NPI",
+            "samMnemonic": "ATTRIBUTE_IS_FORMATTED_AS_NPI",
+            "samNameOverride": "NPI is formatted correctly",
+            "failureNameOverride": "NPI is not formatted correctly",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 52,
+            "description": null,
+            "entity": "PROV_CARE_TEAM_ROLE",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "care team role is populated",
+            "failureNameOverride": "care team role is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 53,
+            "description": null,
+            "entity": "PROV_PROV_CONTRACT_STATUS",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "Contract status is populated",
+            "failureNameOverride": "Contract status is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        },
+        {
+            "sequence": 54,
+            "description": null,
+            "entity": "PROV_SITE_OF_SERV_NET_STATUS",
+            "samMnemonic": "ATTR_ISPOPULATED",
+            "samNameOverride": "service network status is populated",
+            "failureNameOverride": "service network status is not populated",
+            "conditionalSam": null,
+            "scoringEffect": "Scoring",
+            "scoringWeight": 1,
+            "criticalityIndicator": false,
+            "samParameters": [],
+            "conditionalSamParameters": []
+        }
+    ]
+}

@@ -1,0 +1,1404 @@
+{
+  "name": "USCDI v3.1",
+  "mnemonic": "USCDI_V31",
+  "description": "USCDI 3",
+  "version": null,
+  "authorityName": "USCDI",
+  "model": {
+    "name": "Patient Clinical Model 1.0",
+    "mnemonic": "PAT_CLINICAL_V1",
+    "version": 1
+  },
+  "source": {
+    "name": "PIQI Alliance",
+    "mnemonic": "PIQI.ALLIANCE"
+  },
+  "criteria": [
+    {
+      "sequence": 1,
+      "description": "",
+      "entity": "ALG_REACT",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "allergy reaction is SNOMED-CT",
+      "failureNameOverride": "allergy reaction is not SNOMED-CT",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 2,
+      "description": "",
+      "entity": "ALG_SUB",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "allergy substance is RxNorm or SNOMED-CT",
+      "failureNameOverride": "allergy substance is not RxNorm or SNOMED-CT",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT,NLM_RXN",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 3,
+      "description": null,
+      "entity": "CAREPLAN_NARRATIVE",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "Care plan narrative is populated",
+      "failureNameOverride": "care plan narrative is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 4,
+      "description": "",
+      "entity": "PRACTITIONER_IDENTIFIER",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "practitioner identifier is populated",
+      "failureNameOverride": "practitioner identifier is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 5,
+      "description": "",
+      "entity": "PRACTITIONER_NAME",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "practioner name is populated",
+      "failureNameOverride": "practitoner name is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 6,
+      "description": null,
+      "entity": "PRACTITIONER_ROLE",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "practitioner role is populated",
+      "failureNameOverride": "practitioner role not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 7,
+      "description": null,
+      "entity": "PRACTITIONER_ADDRESS",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "practitioner location is populated",
+      "failureNameOverride": "practitioner location not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 8,
+      "description": null,
+      "entity": "PRACTITIONER_TELECOM",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "practitioner telecom is populated",
+      "failureNameOverride": "practitioner telecom not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 9,
+      "description": "",
+      "entity": "DOC_TYPE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "document type is in LOINC",
+      "failureNameOverride": "document type is not in LOINC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "REGEN_LOINC",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 10,
+      "description": "",
+      "entity": "DOC_HAS_ATTACHMENT",
+      "samMnemonic": "ATTRIBUTE_INDICATOR_IS_TRUE",
+      "samNameOverride": "document has attachment",
+      "failureNameOverride": "document does not have attachment",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 11,
+      "description": "",
+      "entity": "DOC_EFFDATE",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "document date is past date",
+      "failureNameOverride": "document date is not past date",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 12,
+      "description": "",
+      "entity": "LAB_TEST",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "lab test is LOINC",
+      "failureNameOverride": "lab test is not LOINC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "REGEN_LOINC",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 13,
+      "description": "",
+      "entity": "LAB_RESVALUE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "lab qualitative result is SNOMED-CT",
+      "failureNameOverride": "lab qualitative result is not SNOMED-CT",
+      "conditionalSam": "OBSERVATIONVALUE_ISQUALITATIVE",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": [
+        {
+          "samParameterMnemonic": "VALID_ATTRIBUTE_LIST",
+          "parameterValue": "CD,CE,CWE",
+          "parameterValueTypeName": "Simple List (CSV)",
+          "parameterName": "Valid Attribute List"
+        }
+      ]
+    },
+    {
+      "sequence": 14,
+      "description": "",
+      "entity": "LAB_RESUOM",
+      "samMnemonic": "ATTR_INEXTERNALLIST",
+      "samNameOverride": "lab result unit is UCUM",
+      "failureNameOverride": "lab result unit is not UCUM",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "EXTERNAL_LIST_MNEMONIC",
+          "parameterValue": "UCUM",
+          "parameterValueTypeName": "Content Set",
+          "parameterName": "External List  Mnemonic"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 15,
+      "description": "",
+      "entity": "LAB_SPECTYPE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "lab specimen type is SNOMED-CT",
+      "failureNameOverride": "lab specimen type is not SNOMED-CT",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 16,
+      "description": "",
+      "entity": "LAB_PERFDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "lab test performed date is valid",
+      "failureNameOverride": "lab test performed date is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 17,
+      "description": "",
+      "entity": "LAB_RSTAT",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "lab result status is populated",
+      "failureNameOverride": "lab result status is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 18,
+      "description": "",
+      "entity": "CND_COND",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "condition is SNOMED-CT or ICD10CM",
+      "failureNameOverride": "condition is not SNOMED-CT or ICD10CM",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT,WHO_ICD10CM_FULL",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 19,
+      "description": "",
+      "entity": "CND_ONDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "condition onset date is valid",
+      "failureNameOverride": "condition onset date is invalid",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 20,
+      "description": "",
+      "entity": "CND_RESDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "condition resolution date is valid",
+      "failureNameOverride": "condition resolution date is invalid",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 21,
+      "description": "",
+      "entity": "CND_CLINICALSTATUS",
+      "samMnemonic": "ATTR_INLIST",
+      "samNameOverride": "condition clinical status is valid",
+      "failureNameOverride": "condition clinical status is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "LIST_CSV",
+          "parameterValue": "active,recurrence,relapse,inactive,remission,resolved",
+          "parameterValueTypeName": "Simple List (CSV)",
+          "parameterName": "List CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 22,
+      "description": null,
+      "entity": "CND_VERIFICATIONSTATUS",
+      "samMnemonic": "ATTR_INLIST",
+      "samNameOverride": "condition verification status is valid",
+      "failureNameOverride": "condition verification status invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "LIST_CSV",
+          "parameterValue": "unconfirmed,provisional,differential,confirmed,refuted,entered-in-error,entered in error",
+          "parameterValueTypeName": "Simple List (CSV)",
+          "parameterName": "List CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 23,
+      "description": "",
+      "entity": "DEM_PATID",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "patient identifier is populated",
+      "failureNameOverride": "patient identifier not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 24,
+      "description": null,
+      "entity": "DEM_FIRSTNAME",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "patient first name is populated",
+      "failureNameOverride": "patient first name is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 25,
+      "description": null,
+      "entity": "DEM_LASTNAME",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "patient last name is populated",
+      "failureNameOverride": "patient last name is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 26,
+      "description": null,
+      "entity": "DEM_CURRENTADDRESS",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "patient address is populated",
+      "failureNameOverride": "patient address is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 27,
+      "description": null,
+      "entity": "DEM_TELECOM",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "patient telecom is populated",
+      "failureNameOverride": "patient telecom is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 28,
+      "description": null,
+      "entity": "DEM_EMAILADDRESS",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "patient email address is populated",
+      "failureNameOverride": "patient email address is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 29,
+      "description": "",
+      "entity": "DEM_DOB",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "patient date of birth is valid past date",
+      "failureNameOverride": "patient date of birth  is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 30,
+      "description": "",
+      "entity": "DEM_SEX",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "patient birth sex is SNOMED-CT",
+      "failureNameOverride": "patient birth sex is not SNOMED-CT",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 31,
+      "description": "",
+      "entity": "DEM_ETHN",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "patient ethnicity is valid code",
+      "failureNameOverride": "patient ethnicity  is not valid code",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "CDC_RE",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 32,
+      "description": "",
+      "entity": "DEM_RACE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "patient race is valid concept",
+      "failureNameOverride": "patient race is not valid concept",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "CDC_RE",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 33,
+      "description": "",
+      "entity": "DEM_DECDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "patient date of death is valid past date",
+      "failureNameOverride": "patient date of death is not valid past date",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 34,
+      "description": null,
+      "entity": "DEM_TRIBALAFFILIATION",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "tribal affiliation is valid concept",
+      "failureNameOverride": "tribal affiliation is not valid concept",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "HL7_TEUS",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 35,
+      "description": "",
+      "entity": "DEM_LANG",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "patient primary language code is valid",
+      "failureNameOverride": "patient primary language code is not valid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "ISO_639-2",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 36,
+      "description": "",
+      "entity": "IMM_ADMDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "immunization date is valid",
+      "failureNameOverride": "immunization date is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 37,
+      "description": "",
+      "entity": "IMM_VACC",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "Immunization is NDC or CVX ",
+      "failureNameOverride": "Immunization is not NDC or CVX ",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "FDA_PACK,CDC_CVX",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 38,
+      "description": "",
+      "entity": "MED_DRUG",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "medication is RxNorm or NDC",
+      "failureNameOverride": "medication is not RxNorm or NDC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "NLM_RXN,FDA_PACK",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 39,
+      "description": "",
+      "entity": "MED_DOSEAMT",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "medication dose is populated",
+      "failureNameOverride": "medication dose is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 40,
+      "description": "",
+      "entity": "MED_DOSEAMTUOM",
+      "samMnemonic": "ATTR_INEXTERNALLIST",
+      "samNameOverride": "medication dose unit is UCUM",
+      "failureNameOverride": "medication dose unit is not UCUM",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "EXTERNAL_LIST_MNEMONIC",
+          "parameterValue": "UCUM",
+          "parameterValueTypeName": "Content Set",
+          "parameterName": "External List  Mnemonic"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 41,
+      "description": "",
+      "entity": "MED_IND",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "medication indication is SNOMED-CT or ICD-10",
+      "failureNameOverride": "medication indication not SNOMED-CT or ICD-10",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT,WHO_ICD10CM_FULL",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 42,
+      "description": "",
+      "entity": "MED_FSTAT",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "medication fill status is populated",
+      "failureNameOverride": "medication fill status not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 43,
+      "description": "",
+      "entity": "PRC_PROC",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "procedure is compatible concept",
+      "failureNameOverride": "procedure is not compatible concept",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "AMA_CPT,HCPCS_CODES,WHO_ICD10PCS_FULL,SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 44,
+      "description": "",
+      "entity": "PRC_PRCDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "procedure date is valid past date",
+      "failureNameOverride": "procedure date is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 45,
+      "description": "",
+      "entity": "PRC_RSN",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "procedure reason is populated",
+      "failureNameOverride": "procedure reason not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 46,
+      "description": "",
+      "entity": "ENC_TYPE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "encounter type exists in code system",
+      "failureNameOverride": "encounter type does not exist in code system",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "AMA_CPT,SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 47,
+      "description": "",
+      "entity": "ENC_DATETIME",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "encounter date is in the past",
+      "failureNameOverride": "encounter date is in not the past",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 48,
+      "description": "",
+      "entity": "ENC_ENDDATETIME",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "encounter end date in past",
+      "failureNameOverride": "encounter end date not in past",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 49,
+      "description": "",
+      "entity": "ENC_DIAGNOSIS",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "encounter diagnosis is SNOMED-CT or ICD-10-CM",
+      "failureNameOverride": "encounter diagnosis is not SNOMED-CT or ICD-10-CM",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT,WHO_ICD10CM_FULL",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 50,
+      "description": "",
+      "entity": "ENC_DISPOSITION",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "encounter disposition is populated",
+      "failureNameOverride": "encounter disposition is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 51,
+      "description": "",
+      "entity": "ENC_LOCATION",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "encounter location is populated",
+      "failureNameOverride": "encounter location is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 52,
+      "description": "",
+      "entity": "VIT_VITAL",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "vital sign is in LOINC",
+      "failureNameOverride": "vital sign is not in LOINC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "REGEN_LOINC",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 53,
+      "description": "",
+      "entity": "VIT_RESVAL",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "vital sign result is populated",
+      "failureNameOverride": "vital sign result is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 54,
+      "description": "",
+      "entity": "VIT_RESUNIT",
+      "samMnemonic": "ATTR_INEXTERNALLIST",
+      "samNameOverride": "vital sign result unit is UCUM",
+      "failureNameOverride": "vital sign result unit is not UCUM",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "EXTERNAL_LIST_MNEMONIC",
+          "parameterValue": "UCUM",
+          "parameterValueTypeName": "Content Set",
+          "parameterName": "External List  Mnemonic"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 55,
+      "description": "",
+      "entity": "VIT_PERFDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "vital sign performed date is valid past date",
+      "failureNameOverride": "vital sign performed date is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 56,
+      "description": "",
+      "entity": "VIT_RSTAT",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "vital sign result status is populated",
+      "failureNameOverride": "vital sign result status is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 57,
+      "description": "",
+      "entity": "IMAGING_PROCEDURE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "imaging procedure is LOINC",
+      "failureNameOverride": "imaging procedure is not LOINC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "REGEN_LOINC",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 58,
+      "description": "",
+      "entity": "IMAGING_RPT_DATETIME",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "imaging report date is valid past dated",
+      "failureNameOverride": "imaging report date is invalid",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 59,
+      "description": "",
+      "entity": "IMAGING_RPT_HASATTACHMENT",
+      "samMnemonic": "ATTRIBUTE_INDICATOR_IS_TRUE",
+      "samNameOverride": "imaging report has attachment",
+      "failureNameOverride": "imaging report is missing attachment",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 60,
+      "description": "",
+      "entity": "HA_ITEM",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "health status assessment is  LOINC",
+      "failureNameOverride": "health status assessment is  not LOINC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "REGEN_LOINC",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 61,
+      "description": "",
+      "entity": "HA_EFFDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "health assessment date is date in past",
+      "failureNameOverride": "health assessment date is not date in past",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 62,
+      "description": "",
+      "entity": "HA_RESVAL",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "health assessment result is populated",
+      "failureNameOverride": "health assessment result is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 63,
+      "description": "",
+      "entity": "HA_RESUOM",
+      "samMnemonic": "ATTR_INEXTERNALLIST",
+      "samNameOverride": "health assessment result unit is UCUM",
+      "failureNameOverride": "health assessment result unit is not UCUM",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "EXTERNAL_LIST_MNEMONIC",
+          "parameterValue": "UCUM",
+          "parameterValueTypeName": "Content Set",
+          "parameterName": "External List  Mnemonic"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 64,
+      "description": "",
+      "entity": "GOAL_GOAL",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "goal is SNOMED-CT or LOINC",
+      "failureNameOverride": "goal is SNOMED or LOINC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "REGEN_LOINC,SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 65,
+      "description": "",
+      "entity": "GOAL_EFFDATE",
+      "samMnemonic": "ATTR_ISDATE",
+      "samNameOverride": "goal date is valid",
+      "failureNameOverride": "goal date is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 66,
+      "description": "",
+      "entity": "PRC_STATUS",
+      "samMnemonic": "ATTR_INLIST",
+      "samNameOverride": "Procedure status is in list",
+      "failureNameOverride": "Procedure status is not in list",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "LIST_CSV",
+          "parameterValue": "preparation,in-progress,not-done,on-hold,stopped,completed,entered-in-error,unknown,in progress,on hold,entered in error",
+          "parameterValueTypeName": "Simple List (CSV)",
+          "parameterName": "List CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 67,
+      "description": "",
+      "entity": "DEV_DEVID",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "implantable device id is populated",
+      "failureNameOverride": "implantable device id is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 68,
+      "description": "",
+      "entity": "DEV_DEVTYPE",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "implantable device type is populated",
+      "failureNameOverride": "implantable device type is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 69,
+      "description": null,
+      "entity": "CLINICAL_TESTS_TEST",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "clinical test is LOINC ",
+      "failureNameOverride": "clinical test not LOINC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "REGEN_LOINC",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 70,
+      "description": null,
+      "entity": "CLINICAL_TESTS_EFFECTIVEDATETIME",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "clinical performed date is valid past date",
+      "failureNameOverride": "clinical performed date is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 71,
+      "description": null,
+      "entity": "CLINICAL_TESTS_RESULTUNIT",
+      "samMnemonic": "ATTR_INEXTERNALLIST",
+      "samNameOverride": "clinical test result unit is UCUM",
+      "failureNameOverride": "clinical test result unit is not UCUM",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "EXTERNAL_LIST_MNEMONIC",
+          "parameterValue": "UCUM",
+          "parameterValueTypeName": "Content Set",
+          "parameterName": "External List  Mnemonic"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 72,
+      "description": null,
+      "entity": "CLINICAL_TESTS_RESULTVALUE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "clinical test result is SNOMED-CT",
+      "failureNameOverride": "clinical test result is not SNOMED-CT",
+      "conditionalSam": "OBSERVATIONVALUE_ISQUALITATIVE",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": [
+        {
+          "samParameterMnemonic": "VALID_ATTRIBUTE_LIST",
+          "parameterValue": "CLINICAL_TESTS_RESULTVALUE",
+          "parameterValueTypeName": "Simple List (CSV)",
+          "parameterName": "Valid Attribute List"
+        }
+      ]
+    },
+    {
+      "sequence": 73,
+      "description": null,
+      "entity": "COVERAGE_TYPE",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "coverage type is populated",
+      "failureNameOverride": "coverage type not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 74,
+      "description": null,
+      "entity": "COVERAGE_STATUS",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "coverage status is populated",
+      "failureNameOverride": "coverage status not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 75,
+      "description": null,
+      "entity": "COVERAGE_RELATIONSHIP",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "coverage relationship is populated",
+      "failureNameOverride": "coverage relationship not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 76,
+      "description": null,
+      "entity": "COVERAGE_MEMBERIDENTIFIER",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "coverage member id is populated",
+      "failureNameOverride": "coverage member id not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 77,
+      "description": null,
+      "entity": "COVERAGE_SUBSCRIBERIDENTIFIER",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "coverage subscriber id is populated",
+      "failureNameOverride": "coverage subscriber id not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 78,
+      "description": null,
+      "entity": "COVERAGE_GROUPIDENTIFIER",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "coverage group id is populated",
+      "failureNameOverride": "coverage group id not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 79,
+      "description": null,
+      "entity": "COVERAGE_PAYORIDENTIFIER",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "coverage payer id is populated",
+      "failureNameOverride": "coverage payer id not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 80,
+      "description": null,
+      "entity": "PROVENANCE_RECORDEDDATETIME",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "provenance date is valid past date",
+      "failureNameOverride": "provenance date is invalid",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 81,
+      "description": null,
+      "entity": "PROVENANCE_AGENTORGNAME",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "provenance org name is populated",
+      "failureNameOverride": "provenance org name not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 82,
+      "description": null,
+      "entity": "PROVENANCE_AGENTORGAIDENTIFIER",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "provenance org id is populated",
+      "failureNameOverride": "provenance org id is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    }
+  ]
+}

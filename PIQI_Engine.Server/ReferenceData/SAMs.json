@@ -1,75 +1,23 @@
 {
   "SAMLibrary": [
     {
-      "mnemonic": "A_CORY_SAM",
-      "name": "A Cory Sam",
-      "inputType": "ATR",
-      "HDQTDimensionMnemonic": "CONF_INCOMP",
-      "createdDateTime": "2025-10-17T13:47:29.657",
-      "modifiedDateTime": "2025-10-17T13:47:29.660",
+      "mnemonic": "ATTR_IN_VALUESET",
+      "name": "Attribute In value set",
+      "FailName": "Attribute not in value set",
+      "inputType": "CC",
+      "HDQTDimensionMnemonic": "PLAUS_SITU",
+      "executionTypeMnemonic": "STANDALONE",
+      "createdDateTime": "2026-06-25T17:15:44.440",
+      "lastModifiedDate": "2026-06-25T18:05:49.570",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
       },
       "parameters": [
         {
-          "name": "Range Set Param",
-          "Mnemonic": "RANGE_SET_PARAM",
-          "parameterValueTypeName": "Range Set",
-          "isOptional": "false"
-        },
-        {
-          "name": "Regex Param",
-          "Mnemonic": "REGEX_PARAM",
-          "parameterValueTypeName": "Regular Expression",
-          "isOptional": "false"
-        },
-        {
-          "name": "Detection Param",
-          "Mnemonic": "DETECTION_PARAM",
-          "parameterValueTypeName": "Detection Set",
-          "isOptional": "false"
-        },
-        {
-          "name": "Model Class Param",
-          "Mnemonic": "MODEL_CLASS_PARAM",
-          "parameterValueTypeName": "Model Class",
-          "isOptional": "false"
-        },
-        {
-          "name": "Simple Value Param",
-          "Mnemonic": "SIMPLE_VALUE_PARAM",
-          "parameterValueTypeName": "Simple Value",
-          "isOptional": "false"
-        },
-        {
-          "name": "Value Set Param",
-          "Mnemonic": "VALUE_SET_PARAM",
+          "name": "Value Set Mnemonic",
+          "Mnemonic": "VALUE_SET_MNEMONIC",
           "parameterValueTypeName": "Value Set",
-          "isOptional": "false"
-        },
-        {
-          "name": "Simple List Param",
-          "Mnemonic": "SIMPLE_LIST_PARAM",
-          "parameterValueTypeName": "Simple List (CSV)",
-          "isOptional": "false"
-        },
-        {
-          "name": "Content Set Param",
-          "Mnemonic": "CONTENT_SET_PARAM",
-          "parameterValueTypeName": "Content Set",
-          "isOptional": "false"
-        },
-        {
-          "name": "Model Attr Param",
-          "Mnemonic": "MODEL_ATTR_PARAM",
-          "parameterValueTypeName": "Model Attribute",
-          "isOptional": "false"
-        },
-        {
-          "name": "Code System Param",
-          "Mnemonic": "CODE_SYSTEM_PARAM",
-          "parameterValueTypeName": "Code System",
           "isOptional": "false"
         }
       ]
@@ -84,7 +32,7 @@
       "HDQTDimensionMnemonic": "CONF_INVMBR",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-05-16T22:36:24.080",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -108,7 +56,7 @@
       "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:54:11.427",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -131,7 +79,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-07T20:00:10.457",
-      "modifiedDateTime": "2025-10-07T20:00:10.457",
+      "lastModifiedDate": "2025-10-07T20:00:10.457",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -146,7 +94,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-07T20:02:25.657",
-      "modifiedDateTime": "2025-10-07T20:02:25.657",
+      "lastModifiedDate": "2025-10-07T20:02:25.657",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -161,7 +109,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:46:30.797",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -176,7 +124,22 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:40:48.187",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2026-04-27T19:55:03.227",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      }
+    },
+    {
+      "mnemonic": "ATTR_ISDATEYEAR",
+      "name": "Attribute Is Date or Year",
+      "FailName": "invalid date or year",
+      "inputType": "ATR",
+      "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
+      "HDQTDimensionMnemonic": "ACC_INVFMT",
+      "executionTypeMnemonic": "STANDALONE",
+      "createdDateTime": "2026-04-27T19:53:17.237",
+      "lastModifiedDate": "2026-04-27T19:56:42.727",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -191,7 +154,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:42:18.163",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -206,7 +169,7 @@
       "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-04T21:42:45.517",
-      "modifiedDateTime": "2025-09-04T21:42:45.517",
+      "lastModifiedDate": "2025-09-04T21:42:45.517",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -221,7 +184,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:42:44.613",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -236,7 +199,7 @@
       "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:55:56.123",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -251,7 +214,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:41:31.810",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -266,7 +229,7 @@
       "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:57:36.650",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -280,7 +243,7 @@
       "HDQTDimensionMnemonic": "AV_UNPOP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:34:52.740",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -295,7 +258,7 @@
       "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:43:22.207",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -310,7 +273,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:51:22.907",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -325,7 +288,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-05-16T22:26:10.530",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -340,7 +303,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-05-16T22:27:17.127",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -355,7 +318,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:50:09.720",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -378,7 +341,7 @@
       "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-12-09T16:24:57.483",
-      "modifiedDateTime": "2025-12-09T16:24:57.483",
+      "lastModifiedDate": "2025-12-09T16:24:57.483",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -392,11 +355,34 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-11-24T20:42:21.697",
-      "modifiedDateTime": "2025-11-24T20:42:21.697",
+      "lastModifiedDate": "2025-11-24T20:42:21.697",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
       }
+    },
+    {
+      "mnemonic": "ATTRIBUTE_IS_IN_EXTERNAL_LIST_SET",
+      "name": "Attribute Is In External List Set",
+      "FailName": "Attribute not in all external lists",
+      "inputType": "ATR",
+      "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
+      "HDQTDimensionMnemonic": "CONF_INVMBR",
+      "executionTypeMnemonic": "STANDALONE",
+      "createdDateTime": "2026-01-27T20:59:43.027",
+      "lastModifiedDate": "2026-01-27T20:59:43.027",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "External List CSV",
+          "Mnemonic": "EXTERNAL_LIST_CSV",
+          "parameterValueTypeName": "Simple List (CSV)",
+          "isOptional": "false"
+        }
+      ]
     },
     {
       "mnemonic": "ATTRIBUTE_WITHIN_MODEL_BOUNDS",
@@ -406,7 +392,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-31T16:48:09.757",
-      "modifiedDateTime": "2025-10-31T16:48:09.757",
+      "lastModifiedDate": "2025-10-31T16:48:09.757",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -428,7 +414,7 @@
       "HDQTDimensionMnemonic": "AV_MISS",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-18T19:46:30.580",
-      "modifiedDateTime": "2025-09-18T19:46:30.580",
+      "lastModifiedDate": "2025-09-18T19:46:30.580",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -462,7 +448,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-11-24T20:06:12.117",
-      "modifiedDateTime": "2025-11-24T20:06:12.117",
+      "lastModifiedDate": "2025-11-24T20:06:12.117",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -491,7 +477,7 @@
       "HDQTDimensionMnemonic": "AV_UNPOP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-04-03T19:30:27.457",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -506,7 +492,7 @@
       "HDQTDimensionMnemonic": "AV_UNPOP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-04-03T19:29:53.303",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -521,7 +507,7 @@
       "HDQTDimensionMnemonic": "AV_UNPOP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-04-03T19:30:27.457",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -536,7 +522,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-03-20T15:59:38.063",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -551,7 +537,7 @@
       "HDQTDimensionMnemonic": "CONF_OBSOL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:38:28.517",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -566,7 +552,7 @@
       "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:35:53.377",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -581,7 +567,7 @@
       "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T15:20:06.587",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -597,7 +583,7 @@
       "HDQTDimensionMnemonic": "CONF_INVMBR",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:36:59.027",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -613,7 +599,7 @@
       "HDQTDimensionMnemonic": "CONF_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:39:21.247",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -628,33 +614,13 @@
       ]
     },
     {
-      "mnemonic": "CORY_VALUESET_DETECTION",
-      "name": "Cory ValueSet Detection",
-      "HDQTDimensionMnemonic": "AV_UNPOP",
-      "executionTypeMnemonic": "STANDALONE",
-      "createdDateTime": "2025-10-17T20:23:07.997",
-      "modifiedDateTime": "2025-10-17T20:23:07.997",
-      "Source": {
-        "Name": "PIQI Alliance",
-        "Mnemonic": "PIQI.ALLIANCE"
-      },
-      "parameters": [
-        {
-          "name": "ValueSet Group Mnemonic",
-          "Mnemonic": "VALUESET_GROUP_MNEMONIC",
-          "parameterValueTypeName": "Detection Set",
-          "isOptional": "false"
-        }
-      ]
-    },
-    {
       "mnemonic": "CUSTOM_EXTERNAL_ASSESSMENT",
       "name": "Custom External Assessment",
       "FailName": "Custom assessment failed",
       "HDQTDimensionMnemonic": "PLAUS_CLIN",
       "executionTypeMnemonic": "WEB_SERVICE",
       "createdDateTime": "2025-09-04T14:30:28.780",
-      "modifiedDateTime": "2025-09-04T14:30:28.780",
+      "lastModifiedDate": "2026-04-24T16:09:55.543",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -676,7 +642,7 @@
       "HDQTDimensionMnemonic": "PLAUS_SITU",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-11-13T17:10:56.093",
-      "modifiedDateTime": "2025-11-13T17:10:56.093",
+      "lastModifiedDate": "2025-11-13T17:10:56.093",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -704,7 +670,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-09T18:15:49.327",
-      "modifiedDateTime": "2025-10-09T18:15:49.327",
+      "lastModifiedDate": "2025-10-09T18:15:49.327",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -718,7 +684,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-11-13T16:40:20.790",
-      "modifiedDateTime": "2025-11-13T16:40:20.790",
+      "lastModifiedDate": "2025-11-13T16:40:20.790",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -745,7 +711,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-11-24T19:37:57.080",
-      "modifiedDateTime": "2025-11-24T19:37:57.080",
+      "lastModifiedDate": "2025-11-24T19:37:57.080",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -772,7 +738,7 @@
       "inputType": "CLS",
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "createdDateTime": "2025-10-29T19:49:22.030",
-      "modifiedDateTime": "2025-10-29T19:49:22.030",
+      "lastModifiedDate": "2025-10-29T19:49:22.030",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -806,7 +772,7 @@
       "HDQTDimensionMnemonic": "PLAUS_SITU",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-29T20:48:21.600",
-      "modifiedDateTime": "2025-09-29T16:52:36.213",
+      "lastModifiedDate": "2025-09-29T16:52:36.213",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -834,7 +800,7 @@
       "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-07T21:37:57.210",
-      "modifiedDateTime": "2025-10-07T21:37:57.210",
+      "lastModifiedDate": "2025-10-07T21:37:57.210",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -856,7 +822,7 @@
       "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-04T21:49:26.980",
-      "modifiedDateTime": "2025-09-04T21:49:26.980",
+      "lastModifiedDate": "2025-09-04T21:49:26.980",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -870,7 +836,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-29T20:44:01.623",
-      "modifiedDateTime": "2025-09-29T16:45:50.670",
+      "lastModifiedDate": "2025-09-29T16:45:50.670",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -898,7 +864,7 @@
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-29T20:40:52.530",
-      "modifiedDateTime": "2025-09-29T16:43:13.347",
+      "lastModifiedDate": "2025-09-29T16:43:13.347",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -931,34 +897,6 @@
       ]
     },
     {
-      "mnemonic": "ELEMENT_OCCURS_BEFORE_ATTR",
-      "name": "Model: Timing - element occurs before date attribute",
-      "FailName": "Model: Timing - element occurs after date attribute",
-      "inputType": "ROOT",
-      "HDQTDimensionMnemonic": "PLAUS_TEMP",
-      "executionTypeMnemonic": "STANDALONE",
-      "createdDateTime": "2025-09-29T20:46:18.273",
-      "modifiedDateTime": "2025-09-29T16:47:19.520",
-      "Source": {
-        "Name": "PIQI Alliance",
-        "Mnemonic": "PIQI.ALLIANCE"
-      },
-      "parameters": [
-        {
-          "name": "Attribute Mnemonic",
-          "Mnemonic": "ATTRIBUTE_MNEMONIC",
-          "parameterValueTypeName": "Model Attribute",
-          "isOptional": "false"
-        },
-        {
-          "name": "Element Value Set",
-          "Mnemonic": "ELEMENT_VALUE_SET",
-          "parameterValueTypeName": "Value Set",
-          "isOptional": "false"
-        }
-      ]
-    },
-    {
       "mnemonic": "ELEMENT_PRIM_CONCEPT_IN_VALUESET",
       "name": "Element primary concept In value set",
       "FailName": "Element primary concept not In value set",
@@ -966,7 +904,7 @@
       "HDQTDimensionMnemonic": "PLAUS_SITU",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-29T20:35:25.670",
-      "modifiedDateTime": "2025-09-29T16:38:41.427",
+      "lastModifiedDate": "2025-09-29T16:38:41.427",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -988,7 +926,7 @@
       "HDQTDimensionMnemonic": "PLAUS_SITU",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-29T20:37:15.960",
-      "modifiedDateTime": "2025-09-29T16:38:29.643",
+      "lastModifiedDate": "2025-09-29T16:38:29.643",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1009,7 +947,7 @@
       "HDQTDimensionMnemonic": "PLAUS_CLIN",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-08T22:20:37.730",
-      "modifiedDateTime": "2025-10-08T22:20:37.730",
+      "lastModifiedDate": "2025-10-08T22:20:37.730",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1031,7 +969,7 @@
       "HDQTDimensionMnemonic": "PLAUS_CLIN",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-09T14:35:33.370",
-      "modifiedDateTime": "2025-10-09T14:35:33.370",
+      "lastModifiedDate": "2025-10-09T14:35:33.370",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1053,7 +991,7 @@
       "HDQTDimensionMnemonic": "PLAUS_SITU",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-29T16:30:12.637",
-      "modifiedDateTime": "2025-10-29T16:30:12.637",
+      "lastModifiedDate": "2025-10-29T16:30:12.637",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1075,7 +1013,7 @@
       "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-01-23T19:42:46.977",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2026-04-24T19:44:02",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1089,7 +1027,7 @@
       "HDQTDimensionMnemonic": "PLAUS_CLIN",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-29T20:53:13.470",
-      "modifiedDateTime": "2025-09-29T16:54:00.743",
+      "lastModifiedDate": "2025-09-29T16:54:00.743",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1118,7 +1056,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-02-26T15:48:09.783",
-      "modifiedDateTime": "2025-03-24T10:47:56.737",
+      "lastModifiedDate": "2025-03-24T10:47:56.737",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1140,7 +1078,7 @@
       "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-06-04T17:47:24.737",
-      "modifiedDateTime": "2025-03-24T10:47:56.737",
+      "lastModifiedDate": "2025-03-24T10:47:56.737",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1155,7 +1093,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-09-04T21:44:46.877",
-      "modifiedDateTime": "2025-09-04T21:44:46.877",
+      "lastModifiedDate": "2025-09-04T21:44:46.877",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1176,7 +1114,7 @@
       "HDQTDimensionMnemonic": "ACC_INVGRP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T15:24:14.323",
-      "modifiedDateTime": "2025-03-24T10:47:56.737",
+      "lastModifiedDate": "2025-03-24T10:47:56.737",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1191,20 +1129,21 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:53:09.457",
-      "modifiedDateTime": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
-        "Name": "PIQI Alliance",
+        "Name": "PIQI Alliance", 
         "Mnemonic": "PIQI.ALLIANCE"
       }
     },
     {
       "mnemonic": "VALUESET_DETECTION",
       "name": "ValueSet Detection",
+      "FailName": "not a thing",
       "inputType": "ROOT",
       "HDQTDimensionMnemonic": "AV_UNPOP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-08-07T14:25:10.063",
-      "modifiedDateTime": "2025-08-07T14:25:10.063",
+      "lastModifiedDate": "2025-08-07T14:25:10.063",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"

@@ -1,0 +1,19 @@
+{
+    "ContentSetLibrary": [
+        {
+            "ContentSetTypeMnemonic": "TEXT",
+            "Mnemonic": "UCUM",
+            "Name": "UCUM"
+        },
+        {
+            "ContentSetTypeMnemonic": "PRIMARYCONCEPT_UOM",
+            "Mnemonic": "PC_UOM",
+            "Name": "PrimaryConcept UOM"
+        },
+        {
+            "ContentSetTypeMnemonic": "PRIMARYCONCEPT_UOM_VALUE_RANGE",
+            "Mnemonic": "PC_UOM_VALUE_RANGE",
+            "Name": "PrimaryConcept UOM Value Range"
+        }
+    ]
+}

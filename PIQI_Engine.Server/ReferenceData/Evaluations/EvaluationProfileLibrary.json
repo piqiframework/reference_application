@@ -10,10 +10,15 @@
       "mnemonic": "USCDI_V2",
       "filePath": "ReferenceData/Evaluations/USCDI_V2.json"
     },
-	{
+    {
       "name": "USCDI v3.1",
       "mnemonic": "USCDI_V31",
-      "filePath": "ReferenceData/Evaluations/USCDI_v3_1.json"
+      "filePath": "ReferenceData/Evaluations/USCDI_V31.json"
+    },
+	{
+      "name": "EOB - CARIN Blue Button  - Inpatient",
+      "mnemonic": "EOB_C4BB_INPATIENT",
+      "filePath": "ReferenceData/Evaluations/EOB_C4BB_INPATIENT.json"
     }
   ]
 }
