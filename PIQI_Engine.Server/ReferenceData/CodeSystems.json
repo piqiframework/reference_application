@@ -1,6 +1,17 @@
 {
   "codeSystemLibrary": [
     {
+      "name": "FHIR - Languages (BCP-47)",
+      "mnemonic": "BCP_47",
+      "codeSystemIdentifiers": [
+        "2.16.840.1.113883.4.642.3.2",
+        "bcp47",
+        "urn:ietf:bcp:47",
+        "BCP_47",
+        "ietf:bcp:47"
+      ]
+    },
+    {
       "name": "CPT",
       "mnemonic": "AMA_CPT",
       "codeSystemIdentifiers": [
