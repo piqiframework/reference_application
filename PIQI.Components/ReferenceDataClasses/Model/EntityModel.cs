@@ -73,6 +73,20 @@
 
         #region Methods
 
+        #region Get Methods
+        /// <summary>
+        /// Gets an entity from the <see cref="EntityList"/> by its mnemonic.
+        /// </summary>
+        /// <param name="entityMnemonic">The mnemonic of the entity to retrieve.</param>
+        /// <returns>
+        /// The <see cref="Entity"/> with the specified mnemonic, or <c>null</c> if no matching entity is found.
+        /// </returns>
+        public Entity? GetEntity(string entityMnemonic)
+        {
+            return EntityList.FirstOrDefault(e => e.Mnemonic == entityMnemonic);
+        }
+        #endregion
+
         /// <summary>
         /// Builds the entity hierarchy and populates the EntityList.
         /// </summary>
@@ -89,7 +103,7 @@
                     {
                         if (entity.EntityType.EntityTypeValue == EntityDataTypeEnum.CLS)
                         {
-                            classEntity = new Entity(entity, parentEntity.Cardinality?.CardinalityValue);
+                            classEntity = new Entity(entity, parentEntity);
                             if (root != null)
                             {
                                 if (root.Children == null) root.Children = new List<Entity>();

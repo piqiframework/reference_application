@@ -1,24 +1,24 @@
-﻿using PIQI.Components.SAMs;
-using PIQI.Components.Models;
+﻿using PIQI.Components.Models;
+using PIQI.Components.SAMs;
 using PIQI.Components.Services;
 
 namespace PIQI_Engine.Server.Engines.SAMs
 {
     /// <summary>
-    /// A SAM implementation that evaluates whether a <see cref="CodeableConcept"/> contained
+    /// A SAM implementation that evaluates whether an attribute (specifically a <see cref="CodeableConcept"/>) contained
     /// within a <see cref="MessageModelItem"/> exists in a specified value set.
     /// </summary>
-    public class SAM_ConceptIsInValueSet : SAMBase
+    public class SAM_AttrInValueSet : SAMBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SAM_ConceptIsInValueSet"/> class.
+        /// Initializes a new instance of the <see cref="SAM_AttrInValueSet"/> class.
         /// </summary>
         /// <param name="sam">The parent SAM object that owns this evaluation.</param>
         /// <param name="samService">
         /// Service used to access reference data, including value sets and code systems,
         /// and for performing supporting FHIR API calls.
         /// </param>
-        public SAM_ConceptIsInValueSet(SAM sam, SAMService samService) : base(sam, samService) { }
+        public SAM_AttrInValueSet(SAM sam, SAMService samService) : base(sam, samService) { }
 
         /// <summary>
         /// Evaluates whether the <see cref="CodeableConcept"/> in the request is contained
@@ -41,9 +41,10 @@ namespace PIQI_Engine.Server.Engines.SAMs
             {
                 // Set the message model item
                 EvaluationItem evaluationItem = (EvaluationItem)request.EvaluationObject;
-                MessageModelItem item = evaluationItem?.MessageItem;
+                if (evaluationItem.ItemType != EntityItemTypeEnum.Attribute) throw new Exception($"Sam [{this.SAMObject.Name}] must be bound to an attribute");
 
-                // Since we're an attr sam we want to play with the item's message data
+                // Get message data from the message model item and validate that it is a CodeableConcept
+                MessageModelItem item = evaluationItem?.MessageItem;
                 BaseText data = (BaseText)item.MessageData;
 
                 // Validate the data format
@@ -54,17 +55,20 @@ namespace PIQI_Engine.Server.Engines.SAMs
                 if (request.ParmList == null) throw new Exception("Parameter list was not supplied");
 
                 // Get value set
-                Tuple<string, string> arg1 = request.ParmList.Where(t => t.Item1 == "value set mnemonic").FirstOrDefault();
-                if (arg1 == null) throw new Exception("[value set mnemonic] parameter not found");
-                string setMnemonic = arg1.Item2;
+                string valueSetMnemonic = request.GetParameterValue("VALUE_SET_MNEMONIC");
+                if (string.IsNullOrWhiteSpace(valueSetMnemonic)) return result.Skip("Parameter [Value Set Mnemonic] was not supplied");
 
                 // Get all valid code/code systems from the value set via the value set mnemonic parameter
-                ValueSet valueSet = await _SAMService.GetValueSetAsync(setMnemonic);
+                ValueSet valueSet = await _SAMService.GetValueSetAsync(valueSetMnemonic);
 
                 //Check if there are any codings in the data that are in the codingList from the value set
                 if (codeableConcept?.CodingList != null &&
-                    valueSet.CodingList.Any(c => codeableConcept.CodingList.Any(cd => cd.CodeValue.Equals(c.CodeValue) && cd.CodeSystemList != null &&
-                    cd.CodeSystemList.Any(cs => _SAMService.Message.RefData.GetCodeSystem(cs) == _SAMService.Message.RefData.GetCodeSystem(c.CodeSystem)))))
+                    valueSet.CodingList.Any(c => codeableConcept.CodingList.Any(cd =>
+                    cd.IsValid && 
+                    cd.CodeValue.Equals(c.CodeValue) && cd.CodeSystemList != null &&
+                    cd.CodeSystemList.Any(cs =>
+                    _SAMService.Message?.RefData.GetCodeSystem(cs) == null ? cs == c.CodeSystem : 
+                    _SAMService.Message.RefData.GetCodeSystem(cs) == _SAMService.Message.RefData.GetCodeSystem(c.CodeSystem)))))
                 {
                     passed = true;
                 }
@@ -82,7 +86,7 @@ namespace PIQI_Engine.Server.Engines.SAMs
         /// <summary>
         /// Gets the mnemonic code for this SAM implementation.
         /// </summary>
-        public static string StaticMnemonic => "CONCEPT_ISINVALUESET";
+        public static string StaticMnemonic => "ATTR_INVALUESET";
         /// <summary>
         /// Gets the mnemonic string associated with this instance.
         /// </summary>

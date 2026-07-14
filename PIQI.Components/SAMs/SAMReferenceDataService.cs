@@ -1,4 +1,6 @@
-﻿using PIQI.Components.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PIQI.Components.Models;
+using PIQI.Data;
 using System.Net;
 using System.Text.Json;
 
@@ -17,6 +19,11 @@ namespace PIQI.Components.Services
         /// used for performing FHIR resource lookups.
         /// </summary>
         protected readonly IFHIRClientProvider _fhirClientProvider;
+
+        /// <summary>
+        /// Provides access to the <see cref="PIQIDbContext"/> for database operations.
+        /// </summary>
+        protected readonly PIQIDbContext _dbContext;
 
         /// <summary>
         /// Gets the <see cref="HttpClient"/> instance used to make HTTP requests to the FHIR server.
@@ -43,13 +50,20 @@ namespace PIQI.Components.Services
         /// <param name="fhirClientProvider">
         /// An implementation of <see cref="IFHIRClientProvider"/> used to make FHIR API calls.
         /// </param>
+        /// <param name="client">
+        /// The <see cref="HttpClient"/> instance used to make HTTP requests.
+        /// </param>
+        /// <param name="dbContext">
+        /// The <see cref="PIQIDbContext"/> instance used for database operations.
+        /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Thrown if <paramref name="fhirClientProvider"/> is <c>null</c>.
+        /// Thrown if <paramref name="fhirClientProvider"/> or <paramref name="dbContext"/> is <c>null</c>.
         /// </exception>
-        public SAMService(IFHIRClientProvider fhirClientProvider, HttpClient client)
+        public SAMService(IFHIRClientProvider fhirClientProvider, HttpClient client, PIQIDbContext dbContext)
         {
             _fhirClientProvider = fhirClientProvider ?? throw new ArgumentNullException(nameof(fhirClientProvider));
             Client = client;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         #endregion
@@ -121,7 +135,7 @@ namespace PIQI.Components.Services
                 foreach (Coding coding in codeableConcept.CodingList)
                 {
                     // Get all code system list identifiers based on the coding's recognized code system
-                    var codeSystem = coding.HasRecognizedCodeSystem? Message.RefData.GetCodeSystem(coding.RecognizedCodeSystem) : null;
+                    var codeSystem = coding.HasRecognizedCodeSystem? Message.RefData.GetCodeSystem(coding?.RecognizedCodeSystem) : null;
 
                     if (codeSystem?.FhirUri != null)
                     {
@@ -195,7 +209,7 @@ namespace PIQI.Components.Services
                 if (valueSet?.FhirUri != null)
                     response = await _fhirClientProvider.GetValueSetAsync(valueSet.FhirUri);
                 else
-                    response = await _fhirClientProvider.GetValueSetAsync(valueSetMnemonic);
+                    response = await _fhirClientProvider.GetValueSetAsync(valueSetMnemonic); 
 
                 if (response == null || !response.IsSuccessStatusCode)
                     throw new Exception($"Unexpected status code from FHIR client provider: {response.StatusCode}");
@@ -214,6 +228,63 @@ namespace PIQI.Components.Services
                 }
 
                 return valueSet;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Checks if a primary unit mart entry exists for the specified code system, code value, and UOM text.
+        /// </summary>
+        /// <param name="codeSystem">The code system to check.</param>
+        /// <param name="codeValue">The code value to check.</param>
+        /// <param name="uomText">The unit of measure text to check.</param>
+        /// <returns>
+        /// A <see cref="Task{Boolean}"/> representing the asynchronous operation.
+        /// Returns <c>true</c> if a matching entry exists; otherwise, <c>false</c>.
+        /// </returns>
+        public async Task<bool> CheckPrimaryUnitMartAsync(string? codeSystem, string? codeValue, string? uomText)
+        {
+            try
+            {
+                if (codeSystem == null || codeValue == null || uomText == null) return false;
+                return await _dbContext.PrimaryUnitMart
+                    .AnyAsync(p => p.CodeSystemMnemonic == codeSystem && 
+                                  p.CodeValue == codeValue && 
+                                  p.UOMText == uomText);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the range values for a specified code system, code value, and UOM text.
+        /// </summary>
+        /// <param name="codeSystem">The code system to check.</param>
+        /// <param name="codeValue">The code value to check.</param>
+        /// <param name="uomText">The unit of measure text to check.</param>
+        /// <returns>
+        /// A <see cref="Task{ValueTuple}"/> representing the asynchronous operation.
+        /// Returns a tuple containing the minimum and maximum values if a matching entry exists; otherwise, <c>null</c>.
+        /// </returns>
+        public async Task<(double? MinValue, double? MaxValue)?> CheckRangeSetMartAsync(string? codeSystem, string? codeValue, string? uomText)
+        {
+            try
+            {
+                if (codeSystem == null || codeValue == null || uomText == null) return null;
+                
+                var rangeSet = await _dbContext.RangeSetMart
+                    .FirstOrDefaultAsync(p => p.CodeSystemMnemonic == codeSystem &&
+                                             p.CodeValue == codeValue &&
+                                             p.UOMText == uomText);
+                
+                if (rangeSet == null) return null;
+                
+                return (MinValue: rangeSet.MinValue, MaxValue: rangeSet.MaxValue);
             }
             catch
             {

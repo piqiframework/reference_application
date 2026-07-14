@@ -1,4 +1,7 @@
-﻿namespace PIQI.Components.Models
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace PIQI.Components.Models
 {
     /// <summary>
     /// Represents a role associated with an entity, including its type and attribute information.
@@ -13,7 +16,9 @@
         /// <summary>
         /// Gets or sets the mnemonic identifier for the role type.
         /// </summary>
-        public string RoleTypeMnemonic { get; set; } = null!;
+        [JsonProperty(PropertyName = "RoleTypeMnemonic")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public RoleTypeEnum RoleTypeMnemonic { get; set; }
 
         /// <summary>
         /// Gets or sets the descriptive name of the attribute associated with this role.

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using PIQI.Components.Models;
 using PIQI.Service.WebTesting.Rest;
 using System.Net;
-using System.Text.RegularExpressions;
+using System.Text.Json;
 
 namespace PIQI.Service.Test;
 
@@ -16,6 +16,8 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         _client = application.CreateClient();
     }
 
+    #region Test Cases
+
     [Theory]
     [InlineData("/PIQI/ScoreMessage")]
     public async Task ScoresMessage1_ReturnsExpectedResponse(string endpoint)
@@ -23,12 +25,12 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Arrange
         var piqiRequest = new PIQIRequest
         {
-            DataProviderID = "TestProvider",
+            ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
             EvaluationRubricMnemonic = "USCDI_V3",
             MessageID = "Msg001",
-            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Test1_PIQI.json"))
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test1_PIQI.json"))
         };
         var result = new PIQIResponse();
         var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
@@ -39,272 +41,30 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var contentType = response.Content.Headers.ContentType.MediaType;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
         if (contentType == "text/plain" || contentType == "application/json")
         {
             var responseBody = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<PIQIResponse>(responseBody);
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
 
             Assert.NotNull(result);
         }
 
         #region Check Results
 
-        #region Overall Message Results
-        Assert.Equal(result.Succeeded, true);
-        Assert.Equal(result.ScoringData.MessageResults.PIQIScore, 54);
-        Assert.Equal(result.ScoringData.MessageResults.Numerator, 6);
-        Assert.Equal(result.ScoringData.MessageResults.Denominator, 11);
-        Assert.Equal(result.ScoringData.MessageResults.CriticalFailureCount, 0);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedPIQIScore, 54);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedNumerator, 6);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedDenominator, 11);
-        #endregion
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test1_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
 
-        #region Data Class Results
-        Assert.Equal(result.ScoringData.DataClassResults.Count, 15);
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
 
-        #region Allergies
-        var allergies = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Allergies");
-        Assert.Equal(allergies.InstanceCount, 0);
-        Assert.Equal(allergies.PIQIScore, 0);
-        Assert.Equal(allergies.Numerator, 0);
-        Assert.Equal(allergies.Denominator, 0);
-        Assert.Equal(allergies.CriticalFailureCount, 0);
-        Assert.Equal(allergies.WeightedPIQIScore, 0);
-        Assert.Equal(allergies.WeightedNumerator, 0);
-        Assert.Equal(allergies.WeightedDenominator, 0);
-        #endregion
+        #region Scoring Data
 
-        #region Clinical Documents
-        var clinicalDocuments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocuments.InstanceCount, 0);
-        Assert.Equal(clinicalDocuments.PIQIScore, 0);
-        Assert.Equal(clinicalDocuments.Numerator, 0);
-        Assert.Equal(clinicalDocuments.Denominator, 0);
-        Assert.Equal(clinicalDocuments.CriticalFailureCount, 0);
-        Assert.Equal(clinicalDocuments.WeightedPIQIScore, 0);
-        Assert.Equal(clinicalDocuments.WeightedNumerator, 0);
-        Assert.Equal(clinicalDocuments.WeightedDenominator, 0);
-        #endregion
-
-        #region Conditions
-        var conditions = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Conditions");
-        Assert.Equal(conditions.InstanceCount, 0);
-        Assert.Equal(conditions.PIQIScore, 0);
-        Assert.Equal(conditions.Numerator, 0);
-        Assert.Equal(conditions.Denominator, 0);
-        Assert.Equal(conditions.CriticalFailureCount, 0);
-        Assert.Equal(conditions.WeightedPIQIScore, 0);
-        Assert.Equal(conditions.WeightedNumerator, 0);
-        Assert.Equal(conditions.WeightedDenominator, 0);
-        #endregion
-
-        #region Demographics
-        var demographics = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Demographics");
-        Assert.Equal(demographics.InstanceCount, 1);
-        Assert.Equal(demographics.PIQIScore, 75);
-        Assert.Equal(demographics.Numerator, 3);
-        Assert.Equal(demographics.Denominator, 4);
-        Assert.Equal(demographics.CriticalFailureCount, 0);
-        Assert.Equal(demographics.WeightedPIQIScore, 75);
-        Assert.Equal(demographics.WeightedNumerator, 3);
-        Assert.Equal(demographics.WeightedDenominator, 4);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImaging = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImaging.InstanceCount, 0);
-        Assert.Equal(diagnosticImaging.PIQIScore, 0);
-        Assert.Equal(diagnosticImaging.Numerator, 0);
-        Assert.Equal(diagnosticImaging.Denominator, 0);
-        Assert.Equal(diagnosticImaging.CriticalFailureCount, 0);
-        Assert.Equal(diagnosticImaging.WeightedPIQIScore, 0);
-        Assert.Equal(diagnosticImaging.WeightedNumerator, 0);
-        Assert.Equal(diagnosticImaging.WeightedDenominator, 0);
-        #endregion
-
-        #region Encounters
-        var encounters = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Encounters");
-        Assert.Equal(encounters.InstanceCount, 1);
-        Assert.Equal(encounters.PIQIScore, 40);
-        Assert.Equal(encounters.Numerator, 2);
-        Assert.Equal(encounters.Denominator, 5);
-        Assert.Equal(encounters.CriticalFailureCount, 0);
-        Assert.Equal(encounters.WeightedPIQIScore, 40);
-        Assert.Equal(encounters.WeightedNumerator, 2);
-        Assert.Equal(encounters.WeightedDenominator, 5);
-        #endregion
-
-        #region Goals
-        var goals = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Goals");
-        Assert.Equal(goals.InstanceCount, 0);
-        Assert.Equal(goals.PIQIScore, 0);
-        Assert.Equal(goals.Numerator, 0);
-        Assert.Equal(goals.Denominator, 0);
-        Assert.Equal(goals.CriticalFailureCount, 0);
-        Assert.Equal(goals.WeightedPIQIScore, 0);
-        Assert.Equal(goals.WeightedNumerator, 0);
-        Assert.Equal(goals.WeightedDenominator, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessments.InstanceCount, 1);
-        Assert.Equal(healthAssessments.PIQIScore, 50);
-        Assert.Equal(healthAssessments.Numerator, 1);
-        Assert.Equal(healthAssessments.Denominator, 2);
-        Assert.Equal(healthAssessments.CriticalFailureCount, 0);
-        Assert.Equal(healthAssessments.WeightedPIQIScore, 50);
-        Assert.Equal(healthAssessments.WeightedNumerator, 1);
-        Assert.Equal(healthAssessments.WeightedDenominator, 2);
-        #endregion
-
-        #region Immunizations
-        var immunizations = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Immunizations");
-        Assert.Equal(immunizations.InstanceCount, 0);
-        Assert.Equal(immunizations.PIQIScore, 0);
-        Assert.Equal(immunizations.Numerator, 0);
-        Assert.Equal(immunizations.Denominator, 0);
-        Assert.Equal(immunizations.CriticalFailureCount, 0);
-        Assert.Equal(immunizations.WeightedPIQIScore, 0);
-        Assert.Equal(immunizations.WeightedNumerator, 0);
-        Assert.Equal(immunizations.WeightedDenominator, 0);
-        #endregion
-
-        #region Lab Results
-        var labResults = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Lab Results");
-        Assert.Equal(labResults.InstanceCount, 0);
-        Assert.Equal(labResults.PIQIScore, 0);
-        Assert.Equal(labResults.Numerator, 0);
-        Assert.Equal(labResults.Denominator, 0);
-        Assert.Equal(labResults.CriticalFailureCount, 0);
-        Assert.Equal(labResults.WeightedPIQIScore, 0);
-        Assert.Equal(labResults.WeightedNumerator, 0);
-        Assert.Equal(labResults.WeightedDenominator, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevices = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevices.InstanceCount, 0);
-        Assert.Equal(medicalDevices.PIQIScore, 0);
-        Assert.Equal(medicalDevices.Numerator, 0);
-        Assert.Equal(medicalDevices.Denominator, 0);
-        Assert.Equal(medicalDevices.CriticalFailureCount, 0);
-        Assert.Equal(medicalDevices.WeightedPIQIScore, 0);
-        Assert.Equal(medicalDevices.WeightedNumerator, 0);
-        Assert.Equal(medicalDevices.WeightedDenominator, 0);
-        #endregion
-
-        #region Medications
-        var medications = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medications");
-        Assert.Equal(medications.InstanceCount, 0);
-        Assert.Equal(medications.PIQIScore, 0);
-        Assert.Equal(medications.Numerator, 0);
-        Assert.Equal(medications.Denominator, 0);
-        Assert.Equal(medications.CriticalFailureCount, 0);
-        Assert.Equal(medications.WeightedPIQIScore, 0);
-        Assert.Equal(medications.WeightedNumerator, 0);
-        Assert.Equal(medications.WeightedDenominator, 0);
-        #endregion
-
-        #region Procedures
-        var procedures = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Procedures");
-        Assert.Equal(procedures.InstanceCount, 0);
-        Assert.Equal(procedures.PIQIScore, 0);
-        Assert.Equal(procedures.Numerator, 0);
-        Assert.Equal(procedures.Denominator, 0);
-        Assert.Equal(procedures.CriticalFailureCount, 0);
-        Assert.Equal(procedures.WeightedPIQIScore, 0);
-        Assert.Equal(procedures.WeightedNumerator, 0);
-        Assert.Equal(procedures.WeightedDenominator, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSigns = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSigns.InstanceCount, 0);
-        Assert.Equal(vitalSigns.PIQIScore, 0);
-        Assert.Equal(vitalSigns.Numerator, 0);
-        Assert.Equal(vitalSigns.Denominator, 0);
-        Assert.Equal(vitalSigns.CriticalFailureCount, 0);
-        Assert.Equal(vitalSigns.WeightedPIQIScore, 0);
-        Assert.Equal(vitalSigns.WeightedNumerator, 0);
-        Assert.Equal(vitalSigns.WeightedDenominator, 0);
-        #endregion
-
-        #endregion
-
-        #region Informational Results
-        Assert.Equal(result.ScoringData.InformationalResults.Count, 15);
-
-        #region Allergies
-        var allergiesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Allergies");
-        Assert.Equal(allergiesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Clinical Documents
-        var clinicalDocumentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocumentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Conditions
-        var conditionsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Conditions");
-        Assert.Equal(conditionsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Demographics
-        var demographicsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Demographics");
-        Assert.Equal(demographicsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImagingInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImagingInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Encounters
-        var encountersInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Encounters");
-        Assert.Equal(encountersInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Goals
-        var goalsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Goals");
-        Assert.Equal(goalsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessmentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessmentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Immunizations");
-        Assert.Equal(immunizationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Lab Results
-        var labResultsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Lab Results");
-        Assert.Equal(labResultsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevicesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevicesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medications
-        var medicationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medications");
-        Assert.Equal(medicationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Procedures
-        var proceduresInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Procedures");
-        Assert.Equal(proceduresInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSignsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSignsInfo.EvaluationList.Count, 0);
-        #endregion
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
 
         #endregion
 
@@ -318,12 +78,12 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Arrange
         var piqiRequest = new PIQIRequest
         {
-            DataProviderID = "TestProvider",
+            ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
             EvaluationRubricMnemonic = "USCDI_V3",
             MessageID = "Msg001",
-            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Test1_PIQI.json"))
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test1_PIQI.json"))
         };
         var result = new PIQIResponse();
         var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
@@ -334,277 +94,39 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var contentType = response.Content.Headers.ContentType.MediaType;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
         if (contentType == "text/plain" || contentType == "application/json")
         {
             var responseBody = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<PIQIResponse>(responseBody);
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
 
             Assert.NotNull(result);
         }
 
         #region Check Results
 
-        #region Overall Message Results
-        Assert.Equal(result.Succeeded, true);
-        Assert.Equal(result.ScoringData.MessageResults.PIQIScore, 54);
-        Assert.Equal(result.ScoringData.MessageResults.Numerator, 6);
-        Assert.Equal(result.ScoringData.MessageResults.Denominator, 11);
-        Assert.Equal(result.ScoringData.MessageResults.CriticalFailureCount, 0);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedPIQIScore, 54);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedNumerator, 6);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedDenominator, 11);
-        #endregion
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test1_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
 
-        #region Data Class Results
-        Assert.Equal(result.ScoringData.DataClassResults.Count, 15);
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
 
-        #region Allergies
-        var allergies = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Allergies");
-        Assert.Equal(allergies.InstanceCount, 0);
-        Assert.Equal(allergies.PIQIScore, 0);
-        Assert.Equal(allergies.Numerator, 0);
-        Assert.Equal(allergies.Denominator, 0);
-        Assert.Equal(allergies.CriticalFailureCount, 0);
-        Assert.Equal(allergies.WeightedPIQIScore, 0);
-        Assert.Equal(allergies.WeightedNumerator, 0);
-        Assert.Equal(allergies.WeightedDenominator, 0);
-        #endregion
+        #region Scoring Data
 
-        #region Clinical Documents
-        var clinicalDocuments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocuments.InstanceCount, 0);
-        Assert.Equal(clinicalDocuments.PIQIScore, 0);
-        Assert.Equal(clinicalDocuments.Numerator, 0);
-        Assert.Equal(clinicalDocuments.Denominator, 0);
-        Assert.Equal(clinicalDocuments.CriticalFailureCount, 0);
-        Assert.Equal(clinicalDocuments.WeightedPIQIScore, 0);
-        Assert.Equal(clinicalDocuments.WeightedNumerator, 0);
-        Assert.Equal(clinicalDocuments.WeightedDenominator, 0);
-        #endregion
-
-        #region Conditions
-        var conditions = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Conditions");
-        Assert.Equal(conditions.InstanceCount, 0);
-        Assert.Equal(conditions.PIQIScore, 0);
-        Assert.Equal(conditions.Numerator, 0);
-        Assert.Equal(conditions.Denominator, 0);
-        Assert.Equal(conditions.CriticalFailureCount, 0);
-        Assert.Equal(conditions.WeightedPIQIScore, 0);
-        Assert.Equal(conditions.WeightedNumerator, 0);
-        Assert.Equal(conditions.WeightedDenominator, 0);
-        #endregion
-
-        #region Demographics
-        var demographics = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Demographics");
-        Assert.Equal(demographics.InstanceCount, 1);
-        Assert.Equal(demographics.PIQIScore, 75);
-        Assert.Equal(demographics.Numerator, 3);
-        Assert.Equal(demographics.Denominator, 4);
-        Assert.Equal(demographics.CriticalFailureCount, 0);
-        Assert.Equal(demographics.WeightedPIQIScore, 75);
-        Assert.Equal(demographics.WeightedNumerator, 3);
-        Assert.Equal(demographics.WeightedDenominator, 4);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImaging = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImaging.InstanceCount, 0);
-        Assert.Equal(diagnosticImaging.PIQIScore, 0);
-        Assert.Equal(diagnosticImaging.Numerator, 0);
-        Assert.Equal(diagnosticImaging.Denominator, 0);
-        Assert.Equal(diagnosticImaging.CriticalFailureCount, 0);
-        Assert.Equal(diagnosticImaging.WeightedPIQIScore, 0);
-        Assert.Equal(diagnosticImaging.WeightedNumerator, 0);
-        Assert.Equal(diagnosticImaging.WeightedDenominator, 0);
-        #endregion
-
-        #region Encounters
-        var encounters = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Encounters");
-        Assert.Equal(encounters.InstanceCount, 1);
-        Assert.Equal(encounters.PIQIScore, 40);
-        Assert.Equal(encounters.Numerator, 2);
-        Assert.Equal(encounters.Denominator, 5);
-        Assert.Equal(encounters.CriticalFailureCount, 0);
-        Assert.Equal(encounters.WeightedPIQIScore, 40);
-        Assert.Equal(encounters.WeightedNumerator, 2);
-        Assert.Equal(encounters.WeightedDenominator, 5);
-        #endregion
-
-        #region Goals
-        var goals = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Goals");
-        Assert.Equal(goals.InstanceCount, 0);
-        Assert.Equal(goals.PIQIScore, 0);
-        Assert.Equal(goals.Numerator, 0);
-        Assert.Equal(goals.Denominator, 0);
-        Assert.Equal(goals.CriticalFailureCount, 0);
-        Assert.Equal(goals.WeightedPIQIScore, 0);
-        Assert.Equal(goals.WeightedNumerator, 0);
-        Assert.Equal(goals.WeightedDenominator, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessments.InstanceCount, 1);
-        Assert.Equal(healthAssessments.PIQIScore, 50);
-        Assert.Equal(healthAssessments.Numerator, 1);
-        Assert.Equal(healthAssessments.Denominator, 2);
-        Assert.Equal(healthAssessments.CriticalFailureCount, 0);
-        Assert.Equal(healthAssessments.WeightedPIQIScore, 50);
-        Assert.Equal(healthAssessments.WeightedNumerator, 1);
-        Assert.Equal(healthAssessments.WeightedDenominator, 2);
-        #endregion
-
-        #region Immunizations
-        var immunizations = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Immunizations");
-        Assert.Equal(immunizations.InstanceCount, 0);
-        Assert.Equal(immunizations.PIQIScore, 0);
-        Assert.Equal(immunizations.Numerator, 0);
-        Assert.Equal(immunizations.Denominator, 0);
-        Assert.Equal(immunizations.CriticalFailureCount, 0);
-        Assert.Equal(immunizations.WeightedPIQIScore, 0);
-        Assert.Equal(immunizations.WeightedNumerator, 0);
-        Assert.Equal(immunizations.WeightedDenominator, 0);
-        #endregion
-
-        #region Lab Results
-        var labResults = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Lab Results");
-        Assert.Equal(labResults.InstanceCount, 0);
-        Assert.Equal(labResults.PIQIScore, 0);
-        Assert.Equal(labResults.Numerator, 0);
-        Assert.Equal(labResults.Denominator, 0);
-        Assert.Equal(labResults.CriticalFailureCount, 0);
-        Assert.Equal(labResults.WeightedPIQIScore, 0);
-        Assert.Equal(labResults.WeightedNumerator, 0);
-        Assert.Equal(labResults.WeightedDenominator, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevices = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevices.InstanceCount, 0);
-        Assert.Equal(medicalDevices.PIQIScore, 0);
-        Assert.Equal(medicalDevices.Numerator, 0);
-        Assert.Equal(medicalDevices.Denominator, 0);
-        Assert.Equal(medicalDevices.CriticalFailureCount, 0);
-        Assert.Equal(medicalDevices.WeightedPIQIScore, 0);
-        Assert.Equal(medicalDevices.WeightedNumerator, 0);
-        Assert.Equal(medicalDevices.WeightedDenominator, 0);
-        #endregion
-
-        #region Medications
-        var medications = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medications");
-        Assert.Equal(medications.InstanceCount, 0);
-        Assert.Equal(medications.PIQIScore, 0);
-        Assert.Equal(medications.Numerator, 0);
-        Assert.Equal(medications.Denominator, 0);
-        Assert.Equal(medications.CriticalFailureCount, 0);
-        Assert.Equal(medications.WeightedPIQIScore, 0);
-        Assert.Equal(medications.WeightedNumerator, 0);
-        Assert.Equal(medications.WeightedDenominator, 0);
-        #endregion
-
-        #region Procedures
-        var procedures = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Procedures");
-        Assert.Equal(procedures.InstanceCount, 0);
-        Assert.Equal(procedures.PIQIScore, 0);
-        Assert.Equal(procedures.Numerator, 0);
-        Assert.Equal(procedures.Denominator, 0);
-        Assert.Equal(procedures.CriticalFailureCount, 0);
-        Assert.Equal(procedures.WeightedPIQIScore, 0);
-        Assert.Equal(procedures.WeightedNumerator, 0);
-        Assert.Equal(procedures.WeightedDenominator, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSigns = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSigns.InstanceCount, 0);
-        Assert.Equal(vitalSigns.PIQIScore, 0);
-        Assert.Equal(vitalSigns.Numerator, 0);
-        Assert.Equal(vitalSigns.Denominator, 0);
-        Assert.Equal(vitalSigns.CriticalFailureCount, 0);
-        Assert.Equal(vitalSigns.WeightedPIQIScore, 0);
-        Assert.Equal(vitalSigns.WeightedNumerator, 0);
-        Assert.Equal(vitalSigns.WeightedDenominator, 0);
-        #endregion
-
-        #endregion
-
-        #region Informational Results
-        Assert.Equal(result.ScoringData.InformationalResults.Count, 15);
-
-        #region Allergies
-        var allergiesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Allergies");
-        Assert.Equal(allergiesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Clinical Documents
-        var clinicalDocumentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocumentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Conditions
-        var conditionsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Conditions");
-        Assert.Equal(conditionsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Demographics
-        var demographicsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Demographics");
-        Assert.Equal(demographicsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImagingInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImagingInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Encounters
-        var encountersInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Encounters");
-        Assert.Equal(encountersInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Goals
-        var goalsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Goals");
-        Assert.Equal(goalsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessmentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessmentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Immunizations");
-        Assert.Equal(immunizationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Lab Results
-        var labResultsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Lab Results");
-        Assert.Equal(labResultsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevicesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevicesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medications
-        var medicationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medications");
-        Assert.Equal(medicationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Procedures
-        var proceduresInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Procedures");
-        Assert.Equal(proceduresInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSignsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSignsInfo.EvaluationList.Count, 0);
-        #endregion
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
 
         #endregion
 
         #region Audit Results
-        Assert.Equal(Regex.Replace(result.AuditedMessage, @"\s+", ""), Regex.Replace("{\r\n  \"EntityModelMnemonic\": \"PAT_CLINICAL_V1\",\r\n  \"DataProviderID\": \"TestProvider\",\r\n  \"DataSourceID\": \"TestSource\",\r\n  \"MessageID\": \"Msg001\",\r\n  \"Audit\": {\r\n    \"messageNumerator\": \"6\",\r\n    \"messageDenominator\": \"11\",\r\n    \"messageScore\": \"54\",\r\n    \"messageNumeratorWeighted\": \"6\",\r\n    \"messageDenominatorWeighted\": \"11\",\r\n    \"messageScoreWeighted\": \"54\",\r\n    \"messageCriticalFailureCount\": \"0\"\r\n  },\r\n  \"patient\": {\r\n    \"allergies\": [],\r\n    \"clinicalDocuments\": [],\r\n    \"conditions\": [],\r\n    \"demographics\": [\r\n      {\r\n        \"birthDate\": {\r\n          \"data\": \"2009-01-01\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_DOB\",\r\n                \"attributeName\": \"birthDate\",\r\n                \"assessment\": \"Date of birth is valid past date\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"birthSex\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"http://hl7.org/fhir/administrative-gender\",\r\n                \"code\": \"male\",\r\n                \"display\": \"male\"\r\n              }\r\n            ],\r\n            \"text\": \"male\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_SEX\",\r\n                \"attributeName\": \"birthSex\",\r\n                \"assessment\": \"Birth sex is SNOMED-CT\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"invalid concept\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"deathDate\": {},\r\n        \"deceased\": {},\r\n        \"ethnicity\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\r\n                \"code\": \"2135-2\",\r\n                \"display\": \"Hispanic or Latino\"\r\n              }\r\n            ],\r\n            \"text\": \"Hispanic or Latino\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_ETHN\",\r\n                \"attributeName\": \"ethnicity\",\r\n                \"assessment\": \"Ethnicity is valid code\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"genderIdentity\": {},\r\n        \"maritalStatus\": {},\r\n        \"patientIdentifier\": {},\r\n        \"primaryLanguage\": {},\r\n        \"race\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\r\n                \"code\": \"1002-5\",\r\n                \"display\": \"American Indian or Alaska Native\"\r\n              }\r\n            ],\r\n            \"text\": \"American Indian or Alaska Native\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_RACE\",\r\n                \"attributeName\": \"race\",\r\n                \"assessment\": \"Race is valid concept\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"75\",\r\n          \"elementScoreWeighted\": \"75\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"3\",\r\n          \"elementDenominator\": \"4\"\r\n        }\r\n      }\r\n    ],\r\n    \"diagnosticImaging\": [],\r\n    \"encounters\": [\r\n      {\r\n        \"encounterDateTime\": {\r\n          \"data\": \"1/2/2026 3:00:00 AM\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DATETIME\",\r\n                \"attributeName\": \"encounter date/time\",\r\n                \"assessment\": \"Encounter date is in the past\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterDiagnosis\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DIAGNOSIS\",\r\n                \"attributeName\": \"encounter diagnosis\",\r\n                \"assessment\": \"Diagnosis is SNOMED-CT or ICD-10-CM\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"unpopulated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterDisposition\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DISPOSITION\",\r\n                \"attributeName\": \"encounter disposition\",\r\n                \"assessment\": \"Encounter disposition is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter disposition is not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterEndDateTime\": {},\r\n        \"encounterIdentifier\": {},\r\n        \"encounterLocation\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_LOCATION\",\r\n                \"attributeName\": \"encounter location\",\r\n                \"assessment\": \"Encounter location is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter location is not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterReason\": {},\r\n        \"encounterStatus\": {},\r\n        \"encounterType\": {\r\n          \"data\": {\r\n            \"text\": \"Psychiatric interview and evaluation (procedure)\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_TYPE\",\r\n                \"attributeName\": \"encounter type\",\r\n                \"assessment\": \"Encounter type is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"40\",\r\n          \"elementScoreWeighted\": \"40\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"2\",\r\n          \"elementDenominator\": \"5\"\r\n        }\r\n      }\r\n    ],\r\n    \"goals\": [],\r\n    \"healthAssessments\": [\r\n      {\r\n        \"assessment\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"http://loinc.org\",\r\n                \"code\": \"73831-0\",\r\n                \"display\": \"Adolescent depression screening assessment\"\r\n              }\r\n            ],\r\n            \"text\": \"Adolescent depression screening assessment\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"HA_ITEM\",\r\n                \"attributeName\": \"assessment\",\r\n                \"assessment\": \"Health status assessment is  LOINC or SNOMED-CT\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"effectiveDate\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"HA_EFFDT\",\r\n                \"attributeName\": \"effectiveDate\",\r\n                \"assessment\": \"Health Status assessment date is date in past\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"unpopulated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"issueDateTime\": {},\r\n        \"resultUnit\": {},\r\n        \"resultValue\": {\r\n          \"data\": {\r\n            \"text\": \"true\",\r\n            \"type\": {\r\n              \"text\": \"ST\"\r\n            }\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"50\",\r\n          \"elementScoreWeighted\": \"50\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"1\",\r\n          \"elementDenominator\": \"2\"\r\n        }\r\n      }\r\n    ],\r\n    \"immunizations\": [],\r\n    \"labResults\": [],\r\n    \"medicalDevices\": [],\r\n    \"medications\": [],\r\n    \"procedures\": [],\r\n    \"providers\": [],\r\n    \"vitalSigns\": []\r\n  }\r\n}", @"\s+", ""));
+
+        if (expectedresult.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the expected result file.");
+        if (result.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the actual result.");
+        AuditCompare(expectedresult.AuditedMessage, result.AuditedMessage);
+
         #endregion
 
         #endregion
@@ -617,12 +139,12 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Arrange
         var piqiRequest = new PIQIRequest
         {
-            DataProviderID = "TestProvider",
+            ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
             EvaluationRubricMnemonic = "USCDI_V3",
             MessageID = "Msg002",
-            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Test2_PIQI.json"))
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test2_PIQI.json"))
         };
         var result = new PIQIResponse();
         var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
@@ -633,272 +155,30 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var contentType = response.Content.Headers.ContentType.MediaType;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
         if (contentType == "text/plain" || contentType == "application/json")
         {
             var responseBody = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<PIQIResponse>(responseBody);
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
 
             Assert.NotNull(result);
         }
 
         #region Check Results
 
-        #region Overall Message Results
-        Assert.Equal(result.Succeeded, true);
-        Assert.Equal(result.ScoringData.MessageResults.PIQIScore, 44);
-        Assert.Equal(result.ScoringData.MessageResults.Numerator, 4);
-        Assert.Equal(result.ScoringData.MessageResults.Denominator, 9);
-        Assert.Equal(result.ScoringData.MessageResults.CriticalFailureCount, 0);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedPIQIScore, 44);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedNumerator, 4);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedDenominator, 9);
-        #endregion
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test2_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
 
-        #region Data Class Results
-        Assert.Equal(result.ScoringData.DataClassResults.Count, 15);
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
 
-        #region Allergies
-        var allergies = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Allergies");
-        Assert.Equal(allergies.InstanceCount, 0);
-        Assert.Equal(allergies.PIQIScore, 0);
-        Assert.Equal(allergies.Numerator, 0);
-        Assert.Equal(allergies.Denominator, 0);
-        Assert.Equal(allergies.CriticalFailureCount, 0);
-        Assert.Equal(allergies.WeightedPIQIScore, 0);
-        Assert.Equal(allergies.WeightedNumerator, 0);
-        Assert.Equal(allergies.WeightedDenominator, 0);
-        #endregion
+        #region Scoring Data
 
-        #region Clinical Documents
-        var clinicalDocuments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocuments.InstanceCount, 0);
-        Assert.Equal(clinicalDocuments.PIQIScore, 0);
-        Assert.Equal(clinicalDocuments.Numerator, 0);
-        Assert.Equal(clinicalDocuments.Denominator, 0);
-        Assert.Equal(clinicalDocuments.CriticalFailureCount, 0);
-        Assert.Equal(clinicalDocuments.WeightedPIQIScore, 0);
-        Assert.Equal(clinicalDocuments.WeightedNumerator, 0);
-        Assert.Equal(clinicalDocuments.WeightedDenominator, 0);
-        #endregion
-
-        #region Conditions
-        var conditions = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Conditions");
-        Assert.Equal(conditions.InstanceCount, 0);
-        Assert.Equal(conditions.PIQIScore, 0);
-        Assert.Equal(conditions.Numerator, 0);
-        Assert.Equal(conditions.Denominator, 0);
-        Assert.Equal(conditions.CriticalFailureCount, 0);
-        Assert.Equal(conditions.WeightedPIQIScore, 0);
-        Assert.Equal(conditions.WeightedNumerator, 0);
-        Assert.Equal(conditions.WeightedDenominator, 0);
-        #endregion
-
-        #region Demographics
-        var demographics = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Demographics");
-        Assert.Equal(demographics.InstanceCount, 1);
-        Assert.Equal(demographics.PIQIScore, 75);
-        Assert.Equal(demographics.Numerator, 3);
-        Assert.Equal(demographics.Denominator, 4);
-        Assert.Equal(demographics.CriticalFailureCount, 0);
-        Assert.Equal(demographics.WeightedPIQIScore, 75);
-        Assert.Equal(demographics.WeightedNumerator, 3);
-        Assert.Equal(demographics.WeightedDenominator, 4);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImaging = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImaging.InstanceCount, 0);
-        Assert.Equal(diagnosticImaging.PIQIScore, 0);
-        Assert.Equal(diagnosticImaging.Numerator, 0);
-        Assert.Equal(diagnosticImaging.Denominator, 0);
-        Assert.Equal(diagnosticImaging.CriticalFailureCount, 0);
-        Assert.Equal(diagnosticImaging.WeightedPIQIScore, 0);
-        Assert.Equal(diagnosticImaging.WeightedNumerator, 0);
-        Assert.Equal(diagnosticImaging.WeightedDenominator, 0);
-        #endregion
-
-        #region Encounters
-        var encounters = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Encounters");
-        Assert.Equal(encounters.InstanceCount, 1);
-        Assert.Equal(encounters.PIQIScore, 20);
-        Assert.Equal(encounters.Numerator, 1);
-        Assert.Equal(encounters.Denominator, 5);
-        Assert.Equal(encounters.CriticalFailureCount, 0);
-        Assert.Equal(encounters.WeightedPIQIScore, 20);
-        Assert.Equal(encounters.WeightedNumerator, 1);
-        Assert.Equal(encounters.WeightedDenominator, 5);
-        #endregion
-
-        #region Goals
-        var goals = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Goals");
-        Assert.Equal(goals.InstanceCount, 0);
-        Assert.Equal(goals.PIQIScore, 0);
-        Assert.Equal(goals.Numerator, 0);
-        Assert.Equal(goals.Denominator, 0);
-        Assert.Equal(goals.CriticalFailureCount, 0);
-        Assert.Equal(goals.WeightedPIQIScore, 0);
-        Assert.Equal(goals.WeightedNumerator, 0);
-        Assert.Equal(goals.WeightedDenominator, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessments.InstanceCount, 0);
-        Assert.Equal(healthAssessments.PIQIScore, 0);
-        Assert.Equal(healthAssessments.Numerator, 0);
-        Assert.Equal(healthAssessments.Denominator, 0);
-        Assert.Equal(healthAssessments.CriticalFailureCount, 0);
-        Assert.Equal(healthAssessments.WeightedPIQIScore, 0);
-        Assert.Equal(healthAssessments.WeightedNumerator, 0);
-        Assert.Equal(healthAssessments.WeightedDenominator, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizations = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Immunizations");
-        Assert.Equal(immunizations.InstanceCount, 0);
-        Assert.Equal(immunizations.PIQIScore, 0);
-        Assert.Equal(immunizations.Numerator, 0);
-        Assert.Equal(immunizations.Denominator, 0);
-        Assert.Equal(immunizations.CriticalFailureCount, 0);
-        Assert.Equal(immunizations.WeightedPIQIScore, 0);
-        Assert.Equal(immunizations.WeightedNumerator, 0);
-        Assert.Equal(immunizations.WeightedDenominator, 0);
-        #endregion
-
-        #region Lab Results
-        var labResults = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Lab Results");
-        Assert.Equal(labResults.InstanceCount, 0);
-        Assert.Equal(labResults.PIQIScore, 0);
-        Assert.Equal(labResults.Numerator, 0);
-        Assert.Equal(labResults.Denominator, 0);
-        Assert.Equal(labResults.CriticalFailureCount, 0);
-        Assert.Equal(labResults.WeightedPIQIScore, 0);
-        Assert.Equal(labResults.WeightedNumerator, 0);
-        Assert.Equal(labResults.WeightedDenominator, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevices = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevices.InstanceCount, 0);
-        Assert.Equal(medicalDevices.PIQIScore, 0);
-        Assert.Equal(medicalDevices.Numerator, 0);
-        Assert.Equal(medicalDevices.Denominator, 0);
-        Assert.Equal(medicalDevices.CriticalFailureCount, 0);
-        Assert.Equal(medicalDevices.WeightedPIQIScore, 0);
-        Assert.Equal(medicalDevices.WeightedNumerator, 0);
-        Assert.Equal(medicalDevices.WeightedDenominator, 0);
-        #endregion
-
-        #region Medications
-        var medications = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medications");
-        Assert.Equal(medications.InstanceCount, 0);
-        Assert.Equal(medications.PIQIScore, 0);
-        Assert.Equal(medications.Numerator, 0);
-        Assert.Equal(medications.Denominator, 0);
-        Assert.Equal(medications.CriticalFailureCount, 0);
-        Assert.Equal(medications.WeightedPIQIScore, 0);
-        Assert.Equal(medications.WeightedNumerator, 0);
-        Assert.Equal(medications.WeightedDenominator, 0);
-        #endregion
-
-        #region Procedures
-        var procedures = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Procedures");
-        Assert.Equal(procedures.InstanceCount, 0);
-        Assert.Equal(procedures.PIQIScore, 0);
-        Assert.Equal(procedures.Numerator, 0);
-        Assert.Equal(procedures.Denominator, 0);
-        Assert.Equal(procedures.CriticalFailureCount, 0);
-        Assert.Equal(procedures.WeightedPIQIScore, 0);
-        Assert.Equal(procedures.WeightedNumerator, 0);
-        Assert.Equal(procedures.WeightedDenominator, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSigns = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSigns.InstanceCount, 0);
-        Assert.Equal(vitalSigns.PIQIScore, 0);
-        Assert.Equal(vitalSigns.Numerator, 0);
-        Assert.Equal(vitalSigns.Denominator, 0);
-        Assert.Equal(vitalSigns.CriticalFailureCount, 0);
-        Assert.Equal(vitalSigns.WeightedPIQIScore, 0);
-        Assert.Equal(vitalSigns.WeightedNumerator, 0);
-        Assert.Equal(vitalSigns.WeightedDenominator, 0);
-        #endregion
-
-        #endregion
-
-        #region Informational Results
-        Assert.Equal(result.ScoringData.InformationalResults.Count, 15);
-
-        #region Allergies
-        var allergiesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Allergies");
-        Assert.Equal(allergiesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Clinical Documents
-        var clinicalDocumentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocumentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Conditions
-        var conditionsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Conditions");
-        Assert.Equal(conditionsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Demographics
-        var demographicsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Demographics");
-        Assert.Equal(demographicsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImagingInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImagingInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Encounters
-        var encountersInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Encounters");
-        Assert.Equal(encountersInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Goals
-        var goalsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Goals");
-        Assert.Equal(goalsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessmentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessmentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Immunizations");
-        Assert.Equal(immunizationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Lab Results
-        var labResultsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Lab Results");
-        Assert.Equal(labResultsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevicesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevicesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medications
-        var medicationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medications");
-        Assert.Equal(medicationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Procedures
-        var proceduresInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Procedures");
-        Assert.Equal(proceduresInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSignsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSignsInfo.EvaluationList.Count, 0);
-        #endregion
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
 
         #endregion
 
@@ -912,12 +192,12 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Arrange
         var piqiRequest = new PIQIRequest
         {
-            DataProviderID = "TestProvider",
+            ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
             EvaluationRubricMnemonic = "USCDI_V3",
             MessageID = "Msg002",
-            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Test2_PIQI.json"))
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test2_PIQI.json"))
         };
         var result = new PIQIResponse();
         var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
@@ -928,277 +208,39 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var contentType = response.Content.Headers.ContentType.MediaType;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
         if (contentType == "text/plain" || contentType == "application/json")
         {
             var responseBody = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<PIQIResponse>(responseBody);
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
 
             Assert.NotNull(result);
         }
 
         #region Check Results
 
-        #region Overall Message Results
-        Assert.Equal(result.Succeeded, true);
-        Assert.Equal(result.ScoringData.MessageResults.PIQIScore, 44);
-        Assert.Equal(result.ScoringData.MessageResults.Numerator, 4);
-        Assert.Equal(result.ScoringData.MessageResults.Denominator, 9);
-        Assert.Equal(result.ScoringData.MessageResults.CriticalFailureCount, 0);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedPIQIScore, 44);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedNumerator, 4);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedDenominator, 9);
-        #endregion
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test2_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
 
-        #region Data Class Results
-        Assert.Equal(result.ScoringData.DataClassResults.Count, 15);
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
 
-        #region Allergies
-        var allergies = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Allergies");
-        Assert.Equal(allergies.InstanceCount, 0);
-        Assert.Equal(allergies.PIQIScore, 0);
-        Assert.Equal(allergies.Numerator, 0);
-        Assert.Equal(allergies.Denominator, 0);
-        Assert.Equal(allergies.CriticalFailureCount, 0);
-        Assert.Equal(allergies.WeightedPIQIScore, 0);
-        Assert.Equal(allergies.WeightedNumerator, 0);
-        Assert.Equal(allergies.WeightedDenominator, 0);
-        #endregion
+        #region Scoring Data
 
-        #region Clinical Documents
-        var clinicalDocuments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocuments.InstanceCount, 0);
-        Assert.Equal(clinicalDocuments.PIQIScore, 0);
-        Assert.Equal(clinicalDocuments.Numerator, 0);
-        Assert.Equal(clinicalDocuments.Denominator, 0);
-        Assert.Equal(clinicalDocuments.CriticalFailureCount, 0);
-        Assert.Equal(clinicalDocuments.WeightedPIQIScore, 0);
-        Assert.Equal(clinicalDocuments.WeightedNumerator, 0);
-        Assert.Equal(clinicalDocuments.WeightedDenominator, 0);
-        #endregion
-
-        #region Conditions
-        var conditions = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Conditions");
-        Assert.Equal(conditions.InstanceCount, 0);
-        Assert.Equal(conditions.PIQIScore, 0);
-        Assert.Equal(conditions.Numerator, 0);
-        Assert.Equal(conditions.Denominator, 0);
-        Assert.Equal(conditions.CriticalFailureCount, 0);
-        Assert.Equal(conditions.WeightedPIQIScore, 0);
-        Assert.Equal(conditions.WeightedNumerator, 0);
-        Assert.Equal(conditions.WeightedDenominator, 0);
-        #endregion
-
-        #region Demographics
-        var demographics = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Demographics");
-        Assert.Equal(demographics.InstanceCount, 1);
-        Assert.Equal(demographics.PIQIScore, 75);
-        Assert.Equal(demographics.Numerator, 3);
-        Assert.Equal(demographics.Denominator, 4);
-        Assert.Equal(demographics.CriticalFailureCount, 0);
-        Assert.Equal(demographics.WeightedPIQIScore, 75);
-        Assert.Equal(demographics.WeightedNumerator, 3);
-        Assert.Equal(demographics.WeightedDenominator, 4);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImaging = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImaging.InstanceCount, 0);
-        Assert.Equal(diagnosticImaging.PIQIScore, 0);
-        Assert.Equal(diagnosticImaging.Numerator, 0);
-        Assert.Equal(diagnosticImaging.Denominator, 0);
-        Assert.Equal(diagnosticImaging.CriticalFailureCount, 0);
-        Assert.Equal(diagnosticImaging.WeightedPIQIScore, 0);
-        Assert.Equal(diagnosticImaging.WeightedNumerator, 0);
-        Assert.Equal(diagnosticImaging.WeightedDenominator, 0);
-        #endregion
-
-        #region Encounters
-        var encounters = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Encounters");
-        Assert.Equal(encounters.InstanceCount, 1);
-        Assert.Equal(encounters.PIQIScore, 20);
-        Assert.Equal(encounters.Numerator, 1);
-        Assert.Equal(encounters.Denominator, 5);
-        Assert.Equal(encounters.CriticalFailureCount, 0);
-        Assert.Equal(encounters.WeightedPIQIScore, 20);
-        Assert.Equal(encounters.WeightedNumerator, 1);
-        Assert.Equal(encounters.WeightedDenominator, 5);
-        #endregion
-
-        #region Goals
-        var goals = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Goals");
-        Assert.Equal(goals.InstanceCount, 0);
-        Assert.Equal(goals.PIQIScore, 0);
-        Assert.Equal(goals.Numerator, 0);
-        Assert.Equal(goals.Denominator, 0);
-        Assert.Equal(goals.CriticalFailureCount, 0);
-        Assert.Equal(goals.WeightedPIQIScore, 0);
-        Assert.Equal(goals.WeightedNumerator, 0);
-        Assert.Equal(goals.WeightedDenominator, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessments.InstanceCount, 0);
-        Assert.Equal(healthAssessments.PIQIScore, 0);
-        Assert.Equal(healthAssessments.Numerator, 0);
-        Assert.Equal(healthAssessments.Denominator, 0);
-        Assert.Equal(healthAssessments.CriticalFailureCount, 0);
-        Assert.Equal(healthAssessments.WeightedPIQIScore, 0);
-        Assert.Equal(healthAssessments.WeightedNumerator, 0);
-        Assert.Equal(healthAssessments.WeightedDenominator, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizations = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Immunizations");
-        Assert.Equal(immunizations.InstanceCount, 0);
-        Assert.Equal(immunizations.PIQIScore, 0);
-        Assert.Equal(immunizations.Numerator, 0);
-        Assert.Equal(immunizations.Denominator, 0);
-        Assert.Equal(immunizations.CriticalFailureCount, 0);
-        Assert.Equal(immunizations.WeightedPIQIScore, 0);
-        Assert.Equal(immunizations.WeightedNumerator, 0);
-        Assert.Equal(immunizations.WeightedDenominator, 0);
-        #endregion
-
-        #region Lab Results
-        var labResults = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Lab Results");
-        Assert.Equal(labResults.InstanceCount, 0);
-        Assert.Equal(labResults.PIQIScore, 0);
-        Assert.Equal(labResults.Numerator, 0);
-        Assert.Equal(labResults.Denominator, 0);
-        Assert.Equal(labResults.CriticalFailureCount, 0);
-        Assert.Equal(labResults.WeightedPIQIScore, 0);
-        Assert.Equal(labResults.WeightedNumerator, 0);
-        Assert.Equal(labResults.WeightedDenominator, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevices = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevices.InstanceCount, 0);
-        Assert.Equal(medicalDevices.PIQIScore, 0);
-        Assert.Equal(medicalDevices.Numerator, 0);
-        Assert.Equal(medicalDevices.Denominator, 0);
-        Assert.Equal(medicalDevices.CriticalFailureCount, 0);
-        Assert.Equal(medicalDevices.WeightedPIQIScore, 0);
-        Assert.Equal(medicalDevices.WeightedNumerator, 0);
-        Assert.Equal(medicalDevices.WeightedDenominator, 0);
-        #endregion
-
-        #region Medications
-        var medications = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medications");
-        Assert.Equal(medications.InstanceCount, 0);
-        Assert.Equal(medications.PIQIScore, 0);
-        Assert.Equal(medications.Numerator, 0);
-        Assert.Equal(medications.Denominator, 0);
-        Assert.Equal(medications.CriticalFailureCount, 0);
-        Assert.Equal(medications.WeightedPIQIScore, 0);
-        Assert.Equal(medications.WeightedNumerator, 0);
-        Assert.Equal(medications.WeightedDenominator, 0);
-        #endregion
-
-        #region Procedures
-        var procedures = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Procedures");
-        Assert.Equal(procedures.InstanceCount, 0);
-        Assert.Equal(procedures.PIQIScore, 0);
-        Assert.Equal(procedures.Numerator, 0);
-        Assert.Equal(procedures.Denominator, 0);
-        Assert.Equal(procedures.CriticalFailureCount, 0);
-        Assert.Equal(procedures.WeightedPIQIScore, 0);
-        Assert.Equal(procedures.WeightedNumerator, 0);
-        Assert.Equal(procedures.WeightedDenominator, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSigns = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSigns.InstanceCount, 0);
-        Assert.Equal(vitalSigns.PIQIScore, 0);
-        Assert.Equal(vitalSigns.Numerator, 0);
-        Assert.Equal(vitalSigns.Denominator, 0);
-        Assert.Equal(vitalSigns.CriticalFailureCount, 0);
-        Assert.Equal(vitalSigns.WeightedPIQIScore, 0);
-        Assert.Equal(vitalSigns.WeightedNumerator, 0);
-        Assert.Equal(vitalSigns.WeightedDenominator, 0);
-        #endregion
-
-        #endregion
-
-        #region Informational Results
-        Assert.Equal(result.ScoringData.InformationalResults.Count, 15);
-
-        #region Allergies
-        var allergiesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Allergies");
-        Assert.Equal(allergiesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Clinical Documents
-        var clinicalDocumentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocumentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Conditions
-        var conditionsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Conditions");
-        Assert.Equal(conditionsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Demographics
-        var demographicsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Demographics");
-        Assert.Equal(demographicsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImagingInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImagingInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Encounters
-        var encountersInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Encounters");
-        Assert.Equal(encountersInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Goals
-        var goalsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Goals");
-        Assert.Equal(goalsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessmentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessmentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Immunizations");
-        Assert.Equal(immunizationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Lab Results
-        var labResultsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Lab Results");
-        Assert.Equal(labResultsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevicesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevicesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medications
-        var medicationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medications");
-        Assert.Equal(medicationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Procedures
-        var proceduresInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Procedures");
-        Assert.Equal(proceduresInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSignsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSignsInfo.EvaluationList.Count, 0);
-        #endregion
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
 
         #endregion
 
         #region Audit Results
-        Assert.Equal(Regex.Replace(result.AuditedMessage, @"\s+", ""), Regex.Replace("{\r\n  \"EntityModelMnemonic\": \"PAT_CLINICAL_V1\",\r\n  \"DataProviderID\": \"TestProvider\",\r\n  \"DataSourceID\": \"TestSource\",\r\n  \"MessageID\": \"Msg002\",\r\n  \"Audit\": {\r\n    \"messageNumerator\": \"4\",\r\n    \"messageDenominator\": \"9\",\r\n    \"messageScore\": \"44\",\r\n    \"messageNumeratorWeighted\": \"4\",\r\n    \"messageDenominatorWeighted\": \"9\",\r\n    \"messageScoreWeighted\": \"44\",\r\n    \"messageCriticalFailureCount\": \"0\"\r\n  },\r\n  \"patient\": {\r\n    \"allergies\": [],\r\n    \"clinicalDocuments\": [],\r\n    \"conditions\": [],\r\n    \"demographics\": [\r\n      {\r\n        \"birthDate\": {\r\n          \"data\": \"2015-01-01\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_DOB\",\r\n                \"attributeName\": \"birthDate\",\r\n                \"assessment\": \"Date of birth is valid past date\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"birthSex\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"http://hl7.org/fhir/administrative-gender\",\r\n                \"code\": \"unknown\",\r\n                \"display\": \"unknown\"\r\n              }\r\n            ],\r\n            \"text\": \"unknown\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_SEX\",\r\n                \"attributeName\": \"birthSex\",\r\n                \"assessment\": \"Birth sex is SNOMED-CT\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"invalid concept\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"deathDate\": {},\r\n        \"deceased\": {},\r\n        \"ethnicity\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\r\n                \"code\": \"2135-2\",\r\n                \"display\": \"Hispanic or Latino\"\r\n              }\r\n            ],\r\n            \"text\": \"Hispanic or Latino\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_ETHN\",\r\n                \"attributeName\": \"ethnicity\",\r\n                \"assessment\": \"Ethnicity is valid code\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"genderIdentity\": {},\r\n        \"maritalStatus\": {},\r\n        \"patientIdentifier\": {},\r\n        \"primaryLanguage\": {},\r\n        \"race\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\r\n                \"code\": \"1002-5\",\r\n                \"display\": \"American Indian or Alaska Native\"\r\n              }\r\n            ],\r\n            \"text\": \"American Indian or Alaska Native\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_RACE\",\r\n                \"attributeName\": \"race\",\r\n                \"assessment\": \"Race is valid concept\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"75\",\r\n          \"elementScoreWeighted\": \"75\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"3\",\r\n          \"elementDenominator\": \"4\"\r\n        }\r\n      }\r\n    ],\r\n    \"diagnosticImaging\": [],\r\n    \"encounters\": [\r\n      {\r\n        \"encounterDateTime\": {\r\n          \"data\": \"8/12/2026 4:00:00 AM\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DATETIME\",\r\n                \"attributeName\": \"encounter date/time\",\r\n                \"assessment\": \"Encounter date is in the past\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter date is in not the past\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterDiagnosis\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DIAGNOSIS\",\r\n                \"attributeName\": \"encounter diagnosis\",\r\n                \"assessment\": \"Diagnosis is SNOMED-CT or ICD-10-CM\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"unpopulated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterDisposition\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DISPOSITION\",\r\n                \"attributeName\": \"encounter disposition\",\r\n                \"assessment\": \"Encounter disposition is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter disposition is not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterEndDateTime\": {},\r\n        \"encounterIdentifier\": {},\r\n        \"encounterLocation\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_LOCATION\",\r\n                \"attributeName\": \"encounter location\",\r\n                \"assessment\": \"Encounter location is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter location is not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterReason\": {},\r\n        \"encounterStatus\": {},\r\n        \"encounterType\": {\r\n          \"data\": {\r\n            \"text\": \"Psychiatric interview and evaluation (procedure)\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_TYPE\",\r\n                \"attributeName\": \"encounter type\",\r\n                \"assessment\": \"Encounter type is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"20\",\r\n          \"elementScoreWeighted\": \"20\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"1\",\r\n          \"elementDenominator\": \"5\"\r\n        }\r\n      }\r\n    ],\r\n    \"goals\": [],\r\n    \"healthAssessments\": [],\r\n    \"immunizations\": [],\r\n    \"labResults\": [],\r\n    \"medicalDevices\": [],\r\n    \"medications\": [],\r\n    \"procedures\": [],\r\n    \"providers\": [],\r\n    \"vitalSigns\": []\r\n  }\r\n}", @"\s+", ""));
+
+        if (expectedresult.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the expected result file.");
+        if (result.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the actual result.");
+        AuditCompare(expectedresult.AuditedMessage, result.AuditedMessage);
+
         #endregion
 
         #endregion
@@ -1211,12 +253,12 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Arrange
         var piqiRequest = new PIQIRequest
         {
-            DataProviderID = "TestProvider",
+            ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
             EvaluationRubricMnemonic = "USCDI_V3",
             MessageID = "Msg003",
-            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Test3_PIQI.json"))
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test3_PIQI.json"))
         };
         var result = new PIQIResponse();
         var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
@@ -1227,272 +269,30 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var contentType = response.Content.Headers.ContentType.MediaType;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
         if (contentType == "text/plain" || contentType == "application/json")
         {
             var responseBody = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<PIQIResponse>(responseBody);
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
 
             Assert.NotNull(result);
         }
 
         #region Check Results
 
-        #region Overall Message Results
-        Assert.Equal(result.Succeeded, true);
-        Assert.Equal(result.ScoringData.MessageResults.PIQIScore, 42);
-        Assert.Equal(result.ScoringData.MessageResults.Numerator, 6);
-        Assert.Equal(result.ScoringData.MessageResults.Denominator, 14);
-        Assert.Equal(result.ScoringData.MessageResults.CriticalFailureCount, 0);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedPIQIScore, 42);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedNumerator, 6);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedDenominator, 14);
-        #endregion
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test3_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
 
-        #region Data Class Results
-        Assert.Equal(result.ScoringData.DataClassResults.Count, 15);
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
 
-        #region Allergies
-        var allergies = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Allergies");
-        Assert.Equal(allergies.InstanceCount, 0);
-        Assert.Equal(allergies.PIQIScore, 0);
-        Assert.Equal(allergies.Numerator, 0);
-        Assert.Equal(allergies.Denominator, 0);
-        Assert.Equal(allergies.CriticalFailureCount, 0);
-        Assert.Equal(allergies.WeightedPIQIScore, 0);
-        Assert.Equal(allergies.WeightedNumerator, 0);
-        Assert.Equal(allergies.WeightedDenominator, 0);
-        #endregion
+        #region Scoring Data
 
-        #region Clinical Documents
-        var clinicalDocuments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocuments.InstanceCount, 0);
-        Assert.Equal(clinicalDocuments.PIQIScore, 0);
-        Assert.Equal(clinicalDocuments.Numerator, 0);
-        Assert.Equal(clinicalDocuments.Denominator, 0);
-        Assert.Equal(clinicalDocuments.CriticalFailureCount, 0);
-        Assert.Equal(clinicalDocuments.WeightedPIQIScore, 0);
-        Assert.Equal(clinicalDocuments.WeightedNumerator, 0);
-        Assert.Equal(clinicalDocuments.WeightedDenominator, 0);
-        #endregion
-
-        #region Conditions
-        var conditions = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Conditions");
-        Assert.Equal(conditions.InstanceCount, 0);
-        Assert.Equal(conditions.PIQIScore, 0);
-        Assert.Equal(conditions.Numerator, 0);
-        Assert.Equal(conditions.Denominator, 0);
-        Assert.Equal(conditions.CriticalFailureCount, 0);
-        Assert.Equal(conditions.WeightedPIQIScore, 0);
-        Assert.Equal(conditions.WeightedNumerator, 0);
-        Assert.Equal(conditions.WeightedDenominator, 0);
-        #endregion
-
-        #region Demographics
-        var demographics = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Demographics");
-        Assert.Equal(demographics.InstanceCount, 1);
-        Assert.Equal(demographics.PIQIScore, 75);
-        Assert.Equal(demographics.Numerator, 3);
-        Assert.Equal(demographics.Denominator, 4);
-        Assert.Equal(demographics.CriticalFailureCount, 0);
-        Assert.Equal(demographics.WeightedPIQIScore, 75);
-        Assert.Equal(demographics.WeightedNumerator, 3);
-        Assert.Equal(demographics.WeightedDenominator, 4);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImaging = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImaging.InstanceCount, 0);
-        Assert.Equal(diagnosticImaging.PIQIScore, 0);
-        Assert.Equal(diagnosticImaging.Numerator, 0);
-        Assert.Equal(diagnosticImaging.Denominator, 0);
-        Assert.Equal(diagnosticImaging.CriticalFailureCount, 0);
-        Assert.Equal(diagnosticImaging.WeightedPIQIScore, 0);
-        Assert.Equal(diagnosticImaging.WeightedNumerator, 0);
-        Assert.Equal(diagnosticImaging.WeightedDenominator, 0);
-        #endregion
-
-        #region Encounters
-        var encounters = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Encounters");
-        Assert.Equal(encounters.InstanceCount, 1);
-        Assert.Equal(encounters.PIQIScore, 20);
-        Assert.Equal(encounters.Numerator, 1);
-        Assert.Equal(encounters.Denominator, 5);
-        Assert.Equal(encounters.CriticalFailureCount, 0);
-        Assert.Equal(encounters.WeightedPIQIScore, 20);
-        Assert.Equal(encounters.WeightedNumerator, 1);
-        Assert.Equal(encounters.WeightedDenominator, 5);
-        #endregion
-
-        #region Goals
-        var goals = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Goals");
-        Assert.Equal(goals.InstanceCount, 0);
-        Assert.Equal(goals.PIQIScore, 0);
-        Assert.Equal(goals.Numerator, 0);
-        Assert.Equal(goals.Denominator, 0);
-        Assert.Equal(goals.CriticalFailureCount, 0);
-        Assert.Equal(goals.WeightedPIQIScore, 0);
-        Assert.Equal(goals.WeightedNumerator, 0);
-        Assert.Equal(goals.WeightedDenominator, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessments.InstanceCount, 1);
-        Assert.Equal(healthAssessments.PIQIScore, 50);
-        Assert.Equal(healthAssessments.Numerator, 1);
-        Assert.Equal(healthAssessments.Denominator, 2);
-        Assert.Equal(healthAssessments.CriticalFailureCount, 0);
-        Assert.Equal(healthAssessments.WeightedPIQIScore, 50);
-        Assert.Equal(healthAssessments.WeightedNumerator, 1);
-        Assert.Equal(healthAssessments.WeightedDenominator, 2);
-        #endregion
-
-        #region Immunizations
-        var immunizations = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Immunizations");
-        Assert.Equal(immunizations.InstanceCount, 0);
-        Assert.Equal(immunizations.PIQIScore, 0);
-        Assert.Equal(immunizations.Numerator, 0);
-        Assert.Equal(immunizations.Denominator, 0);
-        Assert.Equal(immunizations.CriticalFailureCount, 0);
-        Assert.Equal(immunizations.WeightedPIQIScore, 0);
-        Assert.Equal(immunizations.WeightedNumerator, 0);
-        Assert.Equal(immunizations.WeightedDenominator, 0);
-        #endregion
-
-        #region Lab Results
-        var labResults = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Lab Results");
-        Assert.Equal(labResults.InstanceCount, 0);
-        Assert.Equal(labResults.PIQIScore, 0);
-        Assert.Equal(labResults.Numerator, 0);
-        Assert.Equal(labResults.Denominator, 0);
-        Assert.Equal(labResults.CriticalFailureCount, 0);
-        Assert.Equal(labResults.WeightedPIQIScore, 0);
-        Assert.Equal(labResults.WeightedNumerator, 0);
-        Assert.Equal(labResults.WeightedDenominator, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevices = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevices.InstanceCount, 0);
-        Assert.Equal(medicalDevices.PIQIScore, 0);
-        Assert.Equal(medicalDevices.Numerator, 0);
-        Assert.Equal(medicalDevices.Denominator, 0);
-        Assert.Equal(medicalDevices.CriticalFailureCount, 0);
-        Assert.Equal(medicalDevices.WeightedPIQIScore, 0);
-        Assert.Equal(medicalDevices.WeightedNumerator, 0);
-        Assert.Equal(medicalDevices.WeightedDenominator, 0);
-        #endregion
-
-        #region Medications
-        var medications = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medications");
-        Assert.Equal(medications.InstanceCount, 0);
-        Assert.Equal(medications.PIQIScore, 0);
-        Assert.Equal(medications.Numerator, 0);
-        Assert.Equal(medications.Denominator, 0);
-        Assert.Equal(medications.CriticalFailureCount, 0);
-        Assert.Equal(medications.WeightedPIQIScore, 0);
-        Assert.Equal(medications.WeightedNumerator, 0);
-        Assert.Equal(medications.WeightedDenominator, 0);
-        #endregion
-
-        #region Procedures
-        var procedures = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Procedures");
-        Assert.Equal(procedures.InstanceCount, 1);
-        Assert.Equal(procedures.PIQIScore, 33);
-        Assert.Equal(procedures.Numerator, 1);
-        Assert.Equal(procedures.Denominator, 3);
-        Assert.Equal(procedures.CriticalFailureCount, 0);
-        Assert.Equal(procedures.WeightedPIQIScore, 33);
-        Assert.Equal(procedures.WeightedNumerator, 1);
-        Assert.Equal(procedures.WeightedDenominator, 3);
-        #endregion
-
-        #region Vital Signs
-        var vitalSigns = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSigns.InstanceCount, 0);
-        Assert.Equal(vitalSigns.PIQIScore, 0);
-        Assert.Equal(vitalSigns.Numerator, 0);
-        Assert.Equal(vitalSigns.Denominator, 0);
-        Assert.Equal(vitalSigns.CriticalFailureCount, 0);
-        Assert.Equal(vitalSigns.WeightedPIQIScore, 0);
-        Assert.Equal(vitalSigns.WeightedNumerator, 0);
-        Assert.Equal(vitalSigns.WeightedDenominator, 0);
-        #endregion
-
-        #endregion
-
-        #region Informational Results
-        Assert.Equal(result.ScoringData.InformationalResults.Count, 15);
-
-        #region Allergies
-        var allergiesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Allergies");
-        Assert.Equal(allergiesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Clinical Documents
-        var clinicalDocumentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocumentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Conditions
-        var conditionsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Conditions");
-        Assert.Equal(conditionsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Demographics
-        var demographicsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Demographics");
-        Assert.Equal(demographicsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImagingInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImagingInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Encounters
-        var encountersInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Encounters");
-        Assert.Equal(encountersInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Goals
-        var goalsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Goals");
-        Assert.Equal(goalsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessmentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessmentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Immunizations");
-        Assert.Equal(immunizationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Lab Results
-        var labResultsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Lab Results");
-        Assert.Equal(labResultsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevicesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevicesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medications
-        var medicationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medications");
-        Assert.Equal(medicationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Procedures
-        var proceduresInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Procedures");
-        Assert.Equal(proceduresInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSignsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSignsInfo.EvaluationList.Count, 0);
-        #endregion
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
 
         #endregion
 
@@ -1506,12 +306,12 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Arrange
         var piqiRequest = new PIQIRequest
         {
-            DataProviderID = "TestProvider",
+            ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
             EvaluationRubricMnemonic = "USCDI_V3",
             MessageID = "Msg003",
-            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Test3_PIQI.json"))
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test3_PIQI.json"))
         };
         var result = new PIQIResponse();
         var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
@@ -1521,278 +321,40 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var contentType = response.Content.Headers.ContentType.MediaType;
+        var contentType = response.Content.Headers.ContentType.MediaType; 
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
         if (contentType == "text/plain" || contentType == "application/json")
         {
             var responseBody = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<PIQIResponse>(responseBody);
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
 
             Assert.NotNull(result);
         }
 
         #region Check Results
 
-        #region Overall Message Results
-        Assert.Equal(result.Succeeded, true);
-        Assert.Equal(result.ScoringData.MessageResults.PIQIScore, 42);
-        Assert.Equal(result.ScoringData.MessageResults.Numerator, 6);
-        Assert.Equal(result.ScoringData.MessageResults.Denominator, 14);
-        Assert.Equal(result.ScoringData.MessageResults.CriticalFailureCount, 0);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedPIQIScore, 42);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedNumerator, 6);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedDenominator, 14);
-        #endregion
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test3_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
 
-        #region Data Class Results
-        Assert.Equal(result.ScoringData.DataClassResults.Count, 15);
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
 
-        #region Allergies
-        var allergies = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Allergies");
-        Assert.Equal(allergies.InstanceCount, 0);
-        Assert.Equal(allergies.PIQIScore, 0);
-        Assert.Equal(allergies.Numerator, 0);
-        Assert.Equal(allergies.Denominator, 0);
-        Assert.Equal(allergies.CriticalFailureCount, 0);
-        Assert.Equal(allergies.WeightedPIQIScore, 0);
-        Assert.Equal(allergies.WeightedNumerator, 0);
-        Assert.Equal(allergies.WeightedDenominator, 0);
-        #endregion
+        #region Scoring Data
 
-        #region Clinical Documents
-        var clinicalDocuments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocuments.InstanceCount, 0);
-        Assert.Equal(clinicalDocuments.PIQIScore, 0);
-        Assert.Equal(clinicalDocuments.Numerator, 0);
-        Assert.Equal(clinicalDocuments.Denominator, 0);
-        Assert.Equal(clinicalDocuments.CriticalFailureCount, 0);
-        Assert.Equal(clinicalDocuments.WeightedPIQIScore, 0);
-        Assert.Equal(clinicalDocuments.WeightedNumerator, 0);
-        Assert.Equal(clinicalDocuments.WeightedDenominator, 0);
-        #endregion
-
-        #region Conditions
-        var conditions = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Conditions");
-        Assert.Equal(conditions.InstanceCount, 0);
-        Assert.Equal(conditions.PIQIScore, 0);
-        Assert.Equal(conditions.Numerator, 0);
-        Assert.Equal(conditions.Denominator, 0);
-        Assert.Equal(conditions.CriticalFailureCount, 0);
-        Assert.Equal(conditions.WeightedPIQIScore, 0);
-        Assert.Equal(conditions.WeightedNumerator, 0);
-        Assert.Equal(conditions.WeightedDenominator, 0);
-        #endregion
-
-        #region Demographics
-        var demographics = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Demographics");
-        Assert.Equal(demographics.InstanceCount, 1);
-        Assert.Equal(demographics.PIQIScore, 75);
-        Assert.Equal(demographics.Numerator, 3);
-        Assert.Equal(demographics.Denominator, 4);
-        Assert.Equal(demographics.CriticalFailureCount, 0);
-        Assert.Equal(demographics.WeightedPIQIScore, 75);
-        Assert.Equal(demographics.WeightedNumerator, 3);
-        Assert.Equal(demographics.WeightedDenominator, 4);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImaging = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImaging.InstanceCount, 0);
-        Assert.Equal(diagnosticImaging.PIQIScore, 0);
-        Assert.Equal(diagnosticImaging.Numerator, 0);
-        Assert.Equal(diagnosticImaging.Denominator, 0);
-        Assert.Equal(diagnosticImaging.CriticalFailureCount, 0);
-        Assert.Equal(diagnosticImaging.WeightedPIQIScore, 0);
-        Assert.Equal(diagnosticImaging.WeightedNumerator, 0);
-        Assert.Equal(diagnosticImaging.WeightedDenominator, 0);
-        #endregion
-
-        #region Encounters
-        var encounters = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Encounters");
-        Assert.Equal(encounters.InstanceCount, 1);
-        Assert.Equal(encounters.PIQIScore, 20);
-        Assert.Equal(encounters.Numerator, 1);
-        Assert.Equal(encounters.Denominator, 5);
-        Assert.Equal(encounters.CriticalFailureCount, 0);
-        Assert.Equal(encounters.WeightedPIQIScore, 20);
-        Assert.Equal(encounters.WeightedNumerator, 1);
-        Assert.Equal(encounters.WeightedDenominator, 5);
-        #endregion
-
-        #region Goals
-        var goals = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Goals");
-        Assert.Equal(goals.InstanceCount, 0);
-        Assert.Equal(goals.PIQIScore, 0);
-        Assert.Equal(goals.Numerator, 0);
-        Assert.Equal(goals.Denominator, 0);
-        Assert.Equal(goals.CriticalFailureCount, 0);
-        Assert.Equal(goals.WeightedPIQIScore, 0);
-        Assert.Equal(goals.WeightedNumerator, 0);
-        Assert.Equal(goals.WeightedDenominator, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessments.InstanceCount, 1);
-        Assert.Equal(healthAssessments.PIQIScore, 50);
-        Assert.Equal(healthAssessments.Numerator, 1);
-        Assert.Equal(healthAssessments.Denominator, 2);
-        Assert.Equal(healthAssessments.CriticalFailureCount, 0);
-        Assert.Equal(healthAssessments.WeightedPIQIScore, 50);
-        Assert.Equal(healthAssessments.WeightedNumerator, 1);
-        Assert.Equal(healthAssessments.WeightedDenominator, 2);
-        #endregion
-
-        #region Immunizations
-        var immunizations = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Immunizations");
-        Assert.Equal(immunizations.InstanceCount, 0);
-        Assert.Equal(immunizations.PIQIScore, 0);
-        Assert.Equal(immunizations.Numerator, 0);
-        Assert.Equal(immunizations.Denominator, 0);
-        Assert.Equal(immunizations.CriticalFailureCount, 0);
-        Assert.Equal(immunizations.WeightedPIQIScore, 0);
-        Assert.Equal(immunizations.WeightedNumerator, 0);
-        Assert.Equal(immunizations.WeightedDenominator, 0);
-        #endregion
-
-        #region Lab Results
-        var labResults = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Lab Results");
-        Assert.Equal(labResults.InstanceCount, 0);
-        Assert.Equal(labResults.PIQIScore, 0);
-        Assert.Equal(labResults.Numerator, 0);
-        Assert.Equal(labResults.Denominator, 0);
-        Assert.Equal(labResults.CriticalFailureCount, 0);
-        Assert.Equal(labResults.WeightedPIQIScore, 0);
-        Assert.Equal(labResults.WeightedNumerator, 0);
-        Assert.Equal(labResults.WeightedDenominator, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevices = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevices.InstanceCount, 0);
-        Assert.Equal(medicalDevices.PIQIScore, 0);
-        Assert.Equal(medicalDevices.Numerator, 0);
-        Assert.Equal(medicalDevices.Denominator, 0);
-        Assert.Equal(medicalDevices.CriticalFailureCount, 0);
-        Assert.Equal(medicalDevices.WeightedPIQIScore, 0);
-        Assert.Equal(medicalDevices.WeightedNumerator, 0);
-        Assert.Equal(medicalDevices.WeightedDenominator, 0);
-        #endregion
-
-        #region Medications
-        var medications = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medications");
-        Assert.Equal(medications.InstanceCount, 0);
-        Assert.Equal(medications.PIQIScore, 0);
-        Assert.Equal(medications.Numerator, 0);
-        Assert.Equal(medications.Denominator, 0);
-        Assert.Equal(medications.CriticalFailureCount, 0);
-        Assert.Equal(medications.WeightedPIQIScore, 0);
-        Assert.Equal(medications.WeightedNumerator, 0);
-        Assert.Equal(medications.WeightedDenominator, 0);
-        #endregion
-
-        #region Procedures
-        var procedures = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Procedures");
-        Assert.Equal(procedures.InstanceCount, 1);
-        Assert.Equal(procedures.PIQIScore, 33);
-        Assert.Equal(procedures.Numerator, 1);
-        Assert.Equal(procedures.Denominator, 3);
-        Assert.Equal(procedures.CriticalFailureCount, 0);
-        Assert.Equal(procedures.WeightedPIQIScore, 33);
-        Assert.Equal(procedures.WeightedNumerator, 1);
-        Assert.Equal(procedures.WeightedDenominator, 3);
-        #endregion
-
-        #region Vital Signs
-        var vitalSigns = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSigns.InstanceCount, 0);
-        Assert.Equal(vitalSigns.PIQIScore, 0);
-        Assert.Equal(vitalSigns.Numerator, 0);
-        Assert.Equal(vitalSigns.Denominator, 0);
-        Assert.Equal(vitalSigns.CriticalFailureCount, 0);
-        Assert.Equal(vitalSigns.WeightedPIQIScore, 0);
-        Assert.Equal(vitalSigns.WeightedNumerator, 0);
-        Assert.Equal(vitalSigns.WeightedDenominator, 0);
-        #endregion
-
-        #endregion
-
-        #region Informational Results
-        Assert.Equal(result.ScoringData.InformationalResults.Count, 15);
-
-        #region Allergies
-        var allergiesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Allergies");
-        Assert.Equal(allergiesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Clinical Documents
-        var clinicalDocumentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocumentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Conditions
-        var conditionsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Conditions");
-        Assert.Equal(conditionsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Demographics
-        var demographicsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Demographics");
-        Assert.Equal(demographicsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImagingInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImagingInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Encounters
-        var encountersInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Encounters");
-        Assert.Equal(encountersInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Goals
-        var goalsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Goals");
-        Assert.Equal(goalsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessmentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessmentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Immunizations");
-        Assert.Equal(immunizationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Lab Results
-        var labResultsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Lab Results");
-        Assert.Equal(labResultsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevicesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevicesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medications
-        var medicationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medications");
-        Assert.Equal(medicationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Procedures
-        var proceduresInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Procedures");
-        Assert.Equal(proceduresInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSignsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSignsInfo.EvaluationList.Count, 0);
-        #endregion
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
 
         #endregion
 
         #region Audit Results
-        Assert.Equal(Regex.Replace(result.AuditedMessage, @"\s+", ""), Regex.Replace("{\r\n  \"EntityModelMnemonic\": \"PAT_CLINICAL_V1\",\r\n  \"DataProviderID\": \"TestProvider\",\r\n  \"DataSourceID\": \"TestSource\",\r\n  \"MessageID\": \"Msg003\",\r\n  \"Audit\": {\r\n    \"messageNumerator\": \"6\",\r\n    \"messageDenominator\": \"14\",\r\n    \"messageScore\": \"42\",\r\n    \"messageNumeratorWeighted\": \"6\",\r\n    \"messageDenominatorWeighted\": \"14\",\r\n    \"messageScoreWeighted\": \"42\",\r\n    \"messageCriticalFailureCount\": \"0\"\r\n  },\r\n  \"patient\": {\r\n    \"allergies\": [],\r\n    \"clinicalDocuments\": [],\r\n    \"conditions\": [],\r\n    \"demographics\": [\r\n      {\r\n        \"birthDate\": {\r\n          \"data\": \"2014-01-01\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_DOB\",\r\n                \"attributeName\": \"birthDate\",\r\n                \"assessment\": \"Date of birth is valid past date\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"birthSex\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"http://hl7.org/fhir/administrative-gender\",\r\n                \"code\": \"male\",\r\n                \"display\": \"male\"\r\n              }\r\n            ],\r\n            \"text\": \"male\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_SEX\",\r\n                \"attributeName\": \"birthSex\",\r\n                \"assessment\": \"Birth sex is SNOMED-CT\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"invalid concept\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"deathDate\": {},\r\n        \"deceased\": {},\r\n        \"ethnicity\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\r\n                \"code\": \"2135-2\",\r\n                \"display\": \"Hispanic or Latino\"\r\n              }\r\n            ],\r\n            \"text\": \"Hispanic or Latino\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_ETHN\",\r\n                \"attributeName\": \"ethnicity\",\r\n                \"assessment\": \"Ethnicity is valid code\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"genderIdentity\": {},\r\n        \"maritalStatus\": {},\r\n        \"patientIdentifier\": {},\r\n        \"primaryLanguage\": {},\r\n        \"race\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\r\n                \"code\": \"1002-5\",\r\n                \"display\": \"American Indian or Alaska Native\"\r\n              }\r\n            ],\r\n            \"text\": \"American Indian or Alaska Native\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_RACE\",\r\n                \"attributeName\": \"race\",\r\n                \"assessment\": \"Race is valid concept\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"75\",\r\n          \"elementScoreWeighted\": \"75\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"3\",\r\n          \"elementDenominator\": \"4\"\r\n        }\r\n      }\r\n    ],\r\n    \"diagnosticImaging\": [],\r\n    \"encounters\": [\r\n      {\r\n        \"encounterDateTime\": {\r\n          \"data\": \"6/21/2026 4:00:00 AM\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DATETIME\",\r\n                \"attributeName\": \"encounter date/time\",\r\n                \"assessment\": \"Encounter date is in the past\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter date is in not the past\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterDiagnosis\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DIAGNOSIS\",\r\n                \"attributeName\": \"encounter diagnosis\",\r\n                \"assessment\": \"Diagnosis is SNOMED-CT or ICD-10-CM\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"unpopulated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterDisposition\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DISPOSITION\",\r\n                \"attributeName\": \"encounter disposition\",\r\n                \"assessment\": \"Encounter disposition is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter disposition is not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterEndDateTime\": {},\r\n        \"encounterIdentifier\": {},\r\n        \"encounterLocation\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_LOCATION\",\r\n                \"attributeName\": \"encounter location\",\r\n                \"assessment\": \"Encounter location is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter location is not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterReason\": {},\r\n        \"encounterStatus\": {},\r\n        \"encounterType\": {\r\n          \"data\": {\r\n            \"text\": \"Psychiatric interview and evaluation (procedure)\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_TYPE\",\r\n                \"attributeName\": \"encounter type\",\r\n                \"assessment\": \"Encounter type is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"20\",\r\n          \"elementScoreWeighted\": \"20\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"1\",\r\n          \"elementDenominator\": \"5\"\r\n        }\r\n      }\r\n    ],\r\n    \"goals\": [],\r\n    \"healthAssessments\": [\r\n      {\r\n        \"assessment\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"http://loinc.org\",\r\n                \"code\": \"73831-0\",\r\n                \"display\": \"Adolescent depression screening assessment\"\r\n              }\r\n            ],\r\n            \"text\": \"Adolescent depression screening assessment\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"HA_ITEM\",\r\n                \"attributeName\": \"assessment\",\r\n                \"assessment\": \"Health status assessment is  LOINC or SNOMED-CT\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"effectiveDate\": {\r\n          \"data\": \"6/21/2026 4:00:00 AM\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"HA_EFFDT\",\r\n                \"attributeName\": \"effectiveDate\",\r\n                \"assessment\": \"Health Status assessment date is date in past\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Health Status assessment date is not date in past\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"issueDateTime\": {},\r\n        \"resultUnit\": {},\r\n        \"resultValue\": {\r\n          \"data\": {\r\n            \"text\": \"Depression screening positive (finding)\",\r\n            \"type\": {\r\n              \"text\": \"CE\"\r\n            }\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"50\",\r\n          \"elementScoreWeighted\": \"50\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"1\",\r\n          \"elementDenominator\": \"2\"\r\n        }\r\n      }\r\n    ],\r\n    \"immunizations\": [],\r\n    \"labResults\": [],\r\n    \"medicalDevices\": [],\r\n    \"medications\": [],\r\n    \"procedures\": [\r\n      {\r\n        \"procedure\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"http://snomed.info/sct\",\r\n                \"code\": \"108313002\",\r\n                \"display\": \"Family psychotherapy procedure (regime/therapy)\"\r\n              }\r\n            ],\r\n            \"text\": \"Family psychotherapy procedure (regime/therapy)\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"PRC_PROC\",\r\n                \"attributeName\": \"procedure\",\r\n                \"assessment\": \"Procedure is valid concept\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"procedurePerformedDate\": {},\r\n        \"procedureStatus\": {},\r\n        \"procedureDateTime\": {\r\n          \"data\": \"6/21/2026 4:00:00 AM\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"PRC_PRCDT\",\r\n                \"attributeName\": \"procedureDateTime\",\r\n                \"assessment\": \"Procedure date is valid\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Procedure date is invalid\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"procedureReason\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"PRC_RSN\",\r\n                \"attributeName\": \"procedureReason\",\r\n                \"assessment\": \"Procedure reason is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Procedure reason not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"33\",\r\n          \"elementScoreWeighted\": \"33\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"1\",\r\n          \"elementDenominator\": \"3\"\r\n        }\r\n      }\r\n    ],\r\n    \"providers\": [],\r\n    \"vitalSigns\": []\r\n  }\r\n}", @"\s+", ""));
+
+        if (expectedresult.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the expected result file.");
+        if (result.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the actual result.");
+        AuditCompare(expectedresult.AuditedMessage, result.AuditedMessage);
+
         #endregion
 
         #endregion
@@ -1805,12 +367,12 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Arrange
         var piqiRequest = new PIQIRequest
         {
-            DataProviderID = "TestProvider",
+            ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
             EvaluationRubricMnemonic = "USCDI_V3",
             MessageID = "Msg004",
-            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Test4_PIQI.json"))
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test4_PIQI.json"))
         };
         var result = new PIQIResponse();
         var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
@@ -1820,273 +382,31 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var contentType = response.Content.Headers.ContentType.MediaType;
+        var contentType = response.Content.Headers.ContentType.MediaType; 
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
         if (contentType == "text/plain" || contentType == "application/json")
         {
             var responseBody = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<PIQIResponse>(responseBody);
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
 
             Assert.NotNull(result);
         }
 
         #region Check Results
 
-        #region Overall Message Results
-        Assert.Equal(result.Succeeded, true);
-        Assert.Equal(result.ScoringData.MessageResults.PIQIScore, 45);
-        Assert.Equal(result.ScoringData.MessageResults.Numerator, 5);
-        Assert.Equal(result.ScoringData.MessageResults.Denominator, 11);
-        Assert.Equal(result.ScoringData.MessageResults.CriticalFailureCount, 0);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedPIQIScore, 45);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedNumerator, 5);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedDenominator, 11);
-        #endregion
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test4_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
 
-        #region Data Class Results
-        Assert.Equal(result.ScoringData.DataClassResults.Count, 15);
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
 
-        #region Allergies
-        var allergies = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Allergies");
-        Assert.Equal(allergies.InstanceCount, 0);
-        Assert.Equal(allergies.PIQIScore, 0);
-        Assert.Equal(allergies.Numerator, 0);
-        Assert.Equal(allergies.Denominator, 0);
-        Assert.Equal(allergies.CriticalFailureCount, 0);
-        Assert.Equal(allergies.WeightedPIQIScore, 0);
-        Assert.Equal(allergies.WeightedNumerator, 0);
-        Assert.Equal(allergies.WeightedDenominator, 0);
-        #endregion
+        #region Scoring Data
 
-        #region Clinical Documents
-        var clinicalDocuments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocuments.InstanceCount, 0);
-        Assert.Equal(clinicalDocuments.PIQIScore, 0);
-        Assert.Equal(clinicalDocuments.Numerator, 0);
-        Assert.Equal(clinicalDocuments.Denominator, 0);
-        Assert.Equal(clinicalDocuments.CriticalFailureCount, 0);
-        Assert.Equal(clinicalDocuments.WeightedPIQIScore, 0);
-        Assert.Equal(clinicalDocuments.WeightedNumerator, 0);
-        Assert.Equal(clinicalDocuments.WeightedDenominator, 0);
-        #endregion
-
-        #region Conditions
-        var conditions = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Conditions");
-        Assert.Equal(conditions.InstanceCount, 0);
-        Assert.Equal(conditions.PIQIScore, 0);
-        Assert.Equal(conditions.Numerator, 0);
-        Assert.Equal(conditions.Denominator, 0);
-        Assert.Equal(conditions.CriticalFailureCount, 0);
-        Assert.Equal(conditions.WeightedPIQIScore, 0);
-        Assert.Equal(conditions.WeightedNumerator, 0);
-        Assert.Equal(conditions.WeightedDenominator, 0);
-        #endregion
-
-        #region Demographics
-        var demographics = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Demographics");
-        Assert.Equal(demographics.InstanceCount, 1);
-        Assert.Equal(demographics.PIQIScore, 75);
-        Assert.Equal(demographics.Numerator, 3);
-        Assert.Equal(demographics.Denominator, 4);
-        Assert.Equal(demographics.CriticalFailureCount, 0);
-        Assert.Equal(demographics.WeightedPIQIScore, 75);
-        Assert.Equal(demographics.WeightedNumerator, 3);
-        Assert.Equal(demographics.WeightedDenominator, 4);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImaging = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImaging.InstanceCount, 0);
-        Assert.Equal(diagnosticImaging.PIQIScore, 0);
-        Assert.Equal(diagnosticImaging.Numerator, 0);
-        Assert.Equal(diagnosticImaging.Denominator, 0);
-        Assert.Equal(diagnosticImaging.CriticalFailureCount, 0);
-        Assert.Equal(diagnosticImaging.WeightedPIQIScore, 0);
-        Assert.Equal(diagnosticImaging.WeightedNumerator, 0);
-        Assert.Equal(diagnosticImaging.WeightedDenominator, 0);
-        #endregion
-
-        #region Encounters
-        var encounters = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Encounters");
-        Assert.Equal(encounters.InstanceCount, 1);
-        Assert.Equal(encounters.PIQIScore, 20);
-        Assert.Equal(encounters.Numerator, 1);
-        Assert.Equal(encounters.Denominator, 5);
-        Assert.Equal(encounters.CriticalFailureCount, 0);
-        Assert.Equal(encounters.WeightedPIQIScore, 20);
-        Assert.Equal(encounters.WeightedNumerator, 1);
-        Assert.Equal(encounters.WeightedDenominator, 5);
-        #endregion
-
-        #region Goals
-        var goals = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Goals");
-        Assert.Equal(goals.InstanceCount, 0);
-        Assert.Equal(goals.PIQIScore, 0);
-        Assert.Equal(goals.Numerator, 0);
-        Assert.Equal(goals.Denominator, 0);
-        Assert.Equal(goals.CriticalFailureCount, 0);
-        Assert.Equal(goals.WeightedPIQIScore, 0);
-        Assert.Equal(goals.WeightedNumerator, 0);
-        Assert.Equal(goals.WeightedDenominator, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessments.InstanceCount, 1);
-        Assert.Equal(healthAssessments.PIQIScore, 50);
-        Assert.Equal(healthAssessments.Numerator, 1);
-        Assert.Equal(healthAssessments.Denominator, 2);
-        Assert.Equal(healthAssessments.CriticalFailureCount, 0);
-        Assert.Equal(healthAssessments.WeightedPIQIScore, 50);
-        Assert.Equal(healthAssessments.WeightedNumerator, 1);
-        Assert.Equal(healthAssessments.WeightedDenominator, 2);
-        #endregion
-
-        #region Immunizations
-        var immunizations = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Immunizations");
-        Assert.Equal(immunizations.InstanceCount, 0);
-        Assert.Equal(immunizations.PIQIScore, 0);
-        Assert.Equal(immunizations.Numerator, 0);
-        Assert.Equal(immunizations.Denominator, 0);
-        Assert.Equal(immunizations.CriticalFailureCount, 0);
-        Assert.Equal(immunizations.WeightedPIQIScore, 0);
-        Assert.Equal(immunizations.WeightedNumerator, 0);
-        Assert.Equal(immunizations.WeightedDenominator, 0);
-        #endregion
-
-        #region Lab Results
-        var labResults = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Lab Results");
-        Assert.Equal(labResults.InstanceCount, 0);
-        Assert.Equal(labResults.PIQIScore, 0);
-        Assert.Equal(labResults.Numerator, 0);
-        Assert.Equal(labResults.Denominator, 0);
-        Assert.Equal(labResults.CriticalFailureCount, 0);
-        Assert.Equal(labResults.WeightedPIQIScore, 0);
-        Assert.Equal(labResults.WeightedNumerator, 0);
-        Assert.Equal(labResults.WeightedDenominator, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevices = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevices.InstanceCount, 0);
-        Assert.Equal(medicalDevices.PIQIScore, 0);
-        Assert.Equal(medicalDevices.Numerator, 0);
-        Assert.Equal(medicalDevices.Denominator, 0);
-        Assert.Equal(medicalDevices.CriticalFailureCount, 0);
-        Assert.Equal(medicalDevices.WeightedPIQIScore, 0);
-        Assert.Equal(medicalDevices.WeightedNumerator, 0);
-        Assert.Equal(medicalDevices.WeightedDenominator, 0);
-        #endregion
-
-        #region Medications
-        var medications = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medications");
-        Assert.Equal(medications.InstanceCount, 0);
-        Assert.Equal(medications.PIQIScore, 0);
-        Assert.Equal(medications.Numerator, 0);
-        Assert.Equal(medications.Denominator, 0);
-        Assert.Equal(medications.CriticalFailureCount, 0);
-        Assert.Equal(medications.WeightedPIQIScore, 0);
-        Assert.Equal(medications.WeightedNumerator, 0);
-        Assert.Equal(medications.WeightedDenominator, 0);
-        #endregion
-
-        #region Procedures
-        var procedures = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Procedures");
-        Assert.Equal(procedures.InstanceCount, 0);
-        Assert.Equal(procedures.PIQIScore, 0);
-        Assert.Equal(procedures.Numerator, 0);
-        Assert.Equal(procedures.Denominator, 0);
-        Assert.Equal(procedures.CriticalFailureCount, 0);
-        Assert.Equal(procedures.WeightedPIQIScore, 0);
-        Assert.Equal(procedures.WeightedNumerator, 0);
-        Assert.Equal(procedures.WeightedDenominator, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSigns = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSigns.InstanceCount, 0);
-        Assert.Equal(vitalSigns.PIQIScore, 0);
-        Assert.Equal(vitalSigns.Numerator, 0);
-        Assert.Equal(vitalSigns.Denominator, 0);
-        Assert.Equal(vitalSigns.CriticalFailureCount, 0);
-        Assert.Equal(vitalSigns.WeightedPIQIScore, 0);
-        Assert.Equal(vitalSigns.WeightedNumerator, 0);
-        Assert.Equal(vitalSigns.WeightedDenominator, 0);
-        #endregion
-
-        #endregion
-
-        #region Informational Results
-        Assert.Equal(result.ScoringData.InformationalResults.Count, 15);
-
-        #region Allergies
-        var allergiesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Allergies");
-        Assert.Equal(allergiesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Clinical Documents
-        var clinicalDocumentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocumentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Conditions
-        var conditionsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Conditions");
-        Assert.Equal(conditionsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Demographics
-        var demographicsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Demographics");
-        Assert.Equal(demographicsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImagingInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImagingInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Encounters
-        var encountersInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Encounters");
-        Assert.Equal(encountersInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Goals
-        var goalsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Goals");
-        Assert.Equal(goalsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessmentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessmentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Immunizations");
-        Assert.Equal(immunizationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Lab Results
-        var labResultsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Lab Results");
-        Assert.Equal(labResultsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevicesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevicesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medications
-        var medicationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medications");
-        Assert.Equal(medicationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Procedures
-        var proceduresInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Procedures");
-        Assert.Equal(proceduresInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSignsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSignsInfo.EvaluationList.Count, 0);
-        #endregion
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
 
         #endregion
 
@@ -2100,12 +420,12 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Arrange
         var piqiRequest = new PIQIRequest
         {
-            DataProviderID = "TestProvider",
+            ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
             EvaluationRubricMnemonic = "USCDI_V3",
             MessageID = "Msg004",
-            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Test4_PIQI.json"))
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test4_PIQI.json"))
         };
         var result = new PIQIResponse();
         var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
@@ -2116,279 +436,456 @@ public class PIQIControllerTests : RestClient, IClassFixture<WebApplicationFacto
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var contentType = response.Content.Headers.ContentType.MediaType;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
         if (contentType == "text/plain" || contentType == "application/json")
         {
             var responseBody = await response.Content.ReadAsStringAsync();
-            result = JsonConvert.DeserializeObject<PIQIResponse>(responseBody);
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
 
             Assert.NotNull(result);
         }
 
         #region Check Results
 
-        #region Overall Message Results
-        Assert.Equal(result.Succeeded, true);
-        Assert.Equal(result.ScoringData.MessageResults.PIQIScore, 45);
-        Assert.Equal(result.ScoringData.MessageResults.Numerator, 5);
-        Assert.Equal(result.ScoringData.MessageResults.Denominator, 11);
-        Assert.Equal(result.ScoringData.MessageResults.CriticalFailureCount, 0);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedPIQIScore, 45);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedNumerator, 5);
-        Assert.Equal(result.ScoringData.MessageResults.WeightedDenominator, 11);
-        #endregion
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test4_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
 
-        #region Data Class Results
-        Assert.Equal(result.ScoringData.DataClassResults.Count, 15);
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
 
-        #region Allergies
-        var allergies = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Allergies");
-        Assert.Equal(allergies.InstanceCount, 0);
-        Assert.Equal(allergies.PIQIScore, 0);
-        Assert.Equal(allergies.Numerator, 0);
-        Assert.Equal(allergies.Denominator, 0);
-        Assert.Equal(allergies.CriticalFailureCount, 0);
-        Assert.Equal(allergies.WeightedPIQIScore, 0);
-        Assert.Equal(allergies.WeightedNumerator, 0);
-        Assert.Equal(allergies.WeightedDenominator, 0);
-        #endregion
+        #region Scoring Data
 
-        #region Clinical Documents
-        var clinicalDocuments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocuments.InstanceCount, 0);
-        Assert.Equal(clinicalDocuments.PIQIScore, 0);
-        Assert.Equal(clinicalDocuments.Numerator, 0);
-        Assert.Equal(clinicalDocuments.Denominator, 0);
-        Assert.Equal(clinicalDocuments.CriticalFailureCount, 0);
-        Assert.Equal(clinicalDocuments.WeightedPIQIScore, 0);
-        Assert.Equal(clinicalDocuments.WeightedNumerator, 0);
-        Assert.Equal(clinicalDocuments.WeightedDenominator, 0);
-        #endregion
-
-        #region Conditions
-        var conditions = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Conditions");
-        Assert.Equal(conditions.InstanceCount, 0);
-        Assert.Equal(conditions.PIQIScore, 0);
-        Assert.Equal(conditions.Numerator, 0);
-        Assert.Equal(conditions.Denominator, 0);
-        Assert.Equal(conditions.CriticalFailureCount, 0);
-        Assert.Equal(conditions.WeightedPIQIScore, 0);
-        Assert.Equal(conditions.WeightedNumerator, 0);
-        Assert.Equal(conditions.WeightedDenominator, 0);
-        #endregion
-
-        #region Demographics
-        var demographics = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Demographics");
-        Assert.Equal(demographics.InstanceCount, 1);
-        Assert.Equal(demographics.PIQIScore, 75);
-        Assert.Equal(demographics.Numerator, 3);
-        Assert.Equal(demographics.Denominator, 4);
-        Assert.Equal(demographics.CriticalFailureCount, 0);
-        Assert.Equal(demographics.WeightedPIQIScore, 75);
-        Assert.Equal(demographics.WeightedNumerator, 3);
-        Assert.Equal(demographics.WeightedDenominator, 4);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImaging = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImaging.InstanceCount, 0);
-        Assert.Equal(diagnosticImaging.PIQIScore, 0);
-        Assert.Equal(diagnosticImaging.Numerator, 0);
-        Assert.Equal(diagnosticImaging.Denominator, 0);
-        Assert.Equal(diagnosticImaging.CriticalFailureCount, 0);
-        Assert.Equal(diagnosticImaging.WeightedPIQIScore, 0);
-        Assert.Equal(diagnosticImaging.WeightedNumerator, 0);
-        Assert.Equal(diagnosticImaging.WeightedDenominator, 0);
-        #endregion
-
-        #region Encounters
-        var encounters = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Encounters");
-        Assert.Equal(encounters.InstanceCount, 1);
-        Assert.Equal(encounters.PIQIScore, 20);
-        Assert.Equal(encounters.Numerator, 1);
-        Assert.Equal(encounters.Denominator, 5);
-        Assert.Equal(encounters.CriticalFailureCount, 0);
-        Assert.Equal(encounters.WeightedPIQIScore, 20);
-        Assert.Equal(encounters.WeightedNumerator, 1);
-        Assert.Equal(encounters.WeightedDenominator, 5);
-        #endregion
-
-        #region Goals
-        var goals = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Goals");
-        Assert.Equal(goals.InstanceCount, 0);
-        Assert.Equal(goals.PIQIScore, 0);
-        Assert.Equal(goals.Numerator, 0);
-        Assert.Equal(goals.Denominator, 0);
-        Assert.Equal(goals.CriticalFailureCount, 0);
-        Assert.Equal(goals.WeightedPIQIScore, 0);
-        Assert.Equal(goals.WeightedNumerator, 0);
-        Assert.Equal(goals.WeightedDenominator, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessments = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessments.InstanceCount, 1);
-        Assert.Equal(healthAssessments.PIQIScore, 50);
-        Assert.Equal(healthAssessments.Numerator, 1);
-        Assert.Equal(healthAssessments.Denominator, 2);
-        Assert.Equal(healthAssessments.CriticalFailureCount, 0);
-        Assert.Equal(healthAssessments.WeightedPIQIScore, 50);
-        Assert.Equal(healthAssessments.WeightedNumerator, 1);
-        Assert.Equal(healthAssessments.WeightedDenominator, 2);
-        #endregion
-
-        #region Immunizations
-        var immunizations = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Immunizations");
-        Assert.Equal(immunizations.InstanceCount, 0);
-        Assert.Equal(immunizations.PIQIScore, 0);
-        Assert.Equal(immunizations.Numerator, 0);
-        Assert.Equal(immunizations.Denominator, 0);
-        Assert.Equal(immunizations.CriticalFailureCount, 0);
-        Assert.Equal(immunizations.WeightedPIQIScore, 0);
-        Assert.Equal(immunizations.WeightedNumerator, 0);
-        Assert.Equal(immunizations.WeightedDenominator, 0);
-        #endregion
-
-        #region Lab Results
-        var labResults = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Lab Results");
-        Assert.Equal(labResults.InstanceCount, 0);
-        Assert.Equal(labResults.PIQIScore, 0);
-        Assert.Equal(labResults.Numerator, 0);
-        Assert.Equal(labResults.Denominator, 0);
-        Assert.Equal(labResults.CriticalFailureCount, 0);
-        Assert.Equal(labResults.WeightedPIQIScore, 0);
-        Assert.Equal(labResults.WeightedNumerator, 0);
-        Assert.Equal(labResults.WeightedDenominator, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevices = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevices.InstanceCount, 0);
-        Assert.Equal(medicalDevices.PIQIScore, 0);
-        Assert.Equal(medicalDevices.Numerator, 0);
-        Assert.Equal(medicalDevices.Denominator, 0);
-        Assert.Equal(medicalDevices.CriticalFailureCount, 0);
-        Assert.Equal(medicalDevices.WeightedPIQIScore, 0);
-        Assert.Equal(medicalDevices.WeightedNumerator, 0);
-        Assert.Equal(medicalDevices.WeightedDenominator, 0);
-        #endregion
-
-        #region Medications
-        var medications = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Medications");
-        Assert.Equal(medications.InstanceCount, 0);
-        Assert.Equal(medications.PIQIScore, 0);
-        Assert.Equal(medications.Numerator, 0);
-        Assert.Equal(medications.Denominator, 0);
-        Assert.Equal(medications.CriticalFailureCount, 0);
-        Assert.Equal(medications.WeightedPIQIScore, 0);
-        Assert.Equal(medications.WeightedNumerator, 0);
-        Assert.Equal(medications.WeightedDenominator, 0);
-        #endregion
-
-        #region Procedures
-        var procedures = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Procedures");
-        Assert.Equal(procedures.InstanceCount, 0);
-        Assert.Equal(procedures.PIQIScore, 0);
-        Assert.Equal(procedures.Numerator, 0);
-        Assert.Equal(procedures.Denominator, 0);
-        Assert.Equal(procedures.CriticalFailureCount, 0);
-        Assert.Equal(procedures.WeightedPIQIScore, 0);
-        Assert.Equal(procedures.WeightedNumerator, 0);
-        Assert.Equal(procedures.WeightedDenominator, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSigns = result.ScoringData.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSigns.InstanceCount, 0);
-        Assert.Equal(vitalSigns.PIQIScore, 0);
-        Assert.Equal(vitalSigns.Numerator, 0);
-        Assert.Equal(vitalSigns.Denominator, 0);
-        Assert.Equal(vitalSigns.CriticalFailureCount, 0);
-        Assert.Equal(vitalSigns.WeightedPIQIScore, 0);
-        Assert.Equal(vitalSigns.WeightedNumerator, 0);
-        Assert.Equal(vitalSigns.WeightedDenominator, 0);
-        #endregion
-
-        #endregion
-
-        #region Informational Results
-        Assert.Equal(result.ScoringData.InformationalResults.Count, 15);
-
-        #region Allergies
-        var allergiesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Allergies");
-        Assert.Equal(allergiesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Clinical Documents
-        var clinicalDocumentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Clinical Documents");
-        Assert.Equal(clinicalDocumentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Conditions
-        var conditionsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Conditions");
-        Assert.Equal(conditionsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Demographics
-        var demographicsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Demographics");
-        Assert.Equal(demographicsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Diagnostic Imaging
-        var diagnosticImagingInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Diagnostic Imaging");
-        Assert.Equal(diagnosticImagingInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Encounters
-        var encountersInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Encounters");
-        Assert.Equal(encountersInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Goals
-        var goalsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Goals");
-        Assert.Equal(goalsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Health Assessments
-        var healthAssessmentsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Health Assessments");
-        Assert.Equal(healthAssessmentsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Immunizations
-        var immunizationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Immunizations");
-        Assert.Equal(immunizationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Lab Results
-        var labResultsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Lab Results");
-        Assert.Equal(labResultsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medical Devices
-        var medicalDevicesInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medical Devices");
-        Assert.Equal(medicalDevicesInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Medications
-        var medicationsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Medications");
-        Assert.Equal(medicationsInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Procedures
-        var proceduresInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Procedures");
-        Assert.Equal(proceduresInfo.EvaluationList.Count, 0);
-        #endregion
-
-        #region Vital Signs
-        var vitalSignsInfo = result.ScoringData.InformationalResults.FirstOrDefault(ir => ir.DataClassName == "Vital Signs");
-        Assert.Equal(vitalSignsInfo.EvaluationList.Count, 0);
-        #endregion
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
 
         #endregion
 
         #region Audit Results
-        Assert.Equal(Regex.Replace(result.AuditedMessage, @"\s+", ""), Regex.Replace("{\r\n  \"EntityModelMnemonic\": \"PAT_CLINICAL_V1\",\r\n  \"DataProviderID\": \"TestProvider\",\r\n  \"DataSourceID\": \"TestSource\",\r\n  \"MessageID\": \"Msg004\",\r\n  \"Audit\": {\r\n    \"messageNumerator\": \"5\",\r\n    \"messageDenominator\": \"11\",\r\n    \"messageScore\": \"45\",\r\n    \"messageNumeratorWeighted\": \"5\",\r\n    \"messageDenominatorWeighted\": \"11\",\r\n    \"messageScoreWeighted\": \"45\",\r\n    \"messageCriticalFailureCount\": \"0\"\r\n  },\r\n  \"patient\": {\r\n    \"allergies\": [],\r\n    \"clinicalDocuments\": [],\r\n    \"conditions\": [],\r\n    \"demographics\": [\r\n      {\r\n        \"birthDate\": {\r\n          \"data\": \"2009-01-01\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_DOB\",\r\n                \"attributeName\": \"birthDate\",\r\n                \"assessment\": \"Date of birth is valid past date\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"birthSex\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"http://hl7.org/fhir/administrative-gender\",\r\n                \"code\": \"male\",\r\n                \"display\": \"male\"\r\n              }\r\n            ],\r\n            \"text\": \"male\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_SEX\",\r\n                \"attributeName\": \"birthSex\",\r\n                \"assessment\": \"Birth sex is SNOMED-CT\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"invalid concept\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"deathDate\": {},\r\n        \"deceased\": {},\r\n        \"ethnicity\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\r\n                \"code\": \"2135-2\",\r\n                \"display\": \"Hispanic or Latino\"\r\n              }\r\n            ],\r\n            \"text\": \"Hispanic or Latino\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_ETHN\",\r\n                \"attributeName\": \"ethnicity\",\r\n                \"assessment\": \"Ethnicity is valid code\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"genderIdentity\": {},\r\n        \"maritalStatus\": {},\r\n        \"patientIdentifier\": {},\r\n        \"primaryLanguage\": {},\r\n        \"race\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"urn:oid:2.16.840.1.113883.6.238\",\r\n                \"code\": \"1002-5\",\r\n                \"display\": \"American Indian or Alaska Native\"\r\n              }\r\n            ],\r\n            \"text\": \"American Indian or Alaska Native\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"DEM_RACE\",\r\n                \"attributeName\": \"race\",\r\n                \"assessment\": \"Race is valid concept\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"75\",\r\n          \"elementScoreWeighted\": \"75\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"3\",\r\n          \"elementDenominator\": \"4\"\r\n        }\r\n      }\r\n    ],\r\n    \"diagnosticImaging\": [],\r\n    \"encounters\": [\r\n      {\r\n        \"encounterDateTime\": {\r\n          \"data\": \"6/21/2026 4:00:00 AM\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DATETIME\",\r\n                \"attributeName\": \"encounter date/time\",\r\n                \"assessment\": \"Encounter date is in the past\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter date is in not the past\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterDiagnosis\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DIAGNOSIS\",\r\n                \"attributeName\": \"encounter diagnosis\",\r\n                \"assessment\": \"Diagnosis is SNOMED-CT or ICD-10-CM\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"unpopulated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterDisposition\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_DISPOSITION\",\r\n                \"attributeName\": \"encounter disposition\",\r\n                \"assessment\": \"Encounter disposition is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter disposition is not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterEndDateTime\": {},\r\n        \"encounterIdentifier\": {},\r\n        \"encounterLocation\": {\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_LOCATION\",\r\n                \"attributeName\": \"encounter location\",\r\n                \"assessment\": \"Encounter location is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Encounter location is not populated\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"encounterReason\": {},\r\n        \"encounterStatus\": {},\r\n        \"encounterType\": {\r\n          \"data\": {\r\n            \"text\": \"Psychiatric interview and evaluation (procedure)\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"ENC_TYPE\",\r\n                \"attributeName\": \"encounter type\",\r\n                \"assessment\": \"Encounter type is populated\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"20\",\r\n          \"elementScoreWeighted\": \"20\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"1\",\r\n          \"elementDenominator\": \"5\"\r\n        }\r\n      }\r\n    ],\r\n    \"goals\": [],\r\n    \"healthAssessments\": [\r\n      {\r\n        \"assessment\": {\r\n          \"data\": {\r\n            \"codings\": [\r\n              {\r\n                \"system\": \"http://loinc.org\",\r\n                \"code\": \"73831-0\",\r\n                \"display\": \"Adolescent depression screening assessment\"\r\n              }\r\n            ],\r\n            \"text\": \"Adolescent depression screening assessment\"\r\n          },\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"100\",\r\n              \"attributeScoreWeighted\": \"100\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"1\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"HA_ITEM\",\r\n                \"attributeName\": \"assessment\",\r\n                \"assessment\": \"Health status assessment is  LOINC or SNOMED-CT\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Passed\",\r\n                \"reason\": \"\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"effectiveDate\": {\r\n          \"data\": \"6/15/2026 4:00:00 AM\",\r\n          \"attributeAudit\": {\r\n            \"scoringData\": {\r\n              \"attributeScore\": \"0\",\r\n              \"attributeScoreWeighted\": \"0\",\r\n              \"attributeCriticalFailureCount\": \"0\",\r\n              \"attributeNumerator\": \"0\",\r\n              \"attributeDenominator\": \"1\"\r\n            },\r\n            \"assessmentItems\": [\r\n              {\r\n                \"attributeMnemonic\": \"HA_EFFDT\",\r\n                \"attributeName\": \"effectiveDate\",\r\n                \"assessment\": \"Health Status assessment date is date in past\",\r\n                \"effect\": \"Scoring\",\r\n                \"status\": \"Failed\",\r\n                \"reason\": \"Health Status assessment date is not date in past\"\r\n              }\r\n            ],\r\n            \"InformationalItems\": []\r\n          }\r\n        },\r\n        \"issueDateTime\": {},\r\n        \"resultUnit\": {},\r\n        \"resultValue\": {\r\n          \"data\": {\r\n            \"text\": \"Depression screening negative (finding)\",\r\n            \"type\": {\r\n              \"text\": \"CE\"\r\n            }\r\n          }\r\n        },\r\n        \"elementAudit\": {\r\n          \"elementScore\": \"50\",\r\n          \"elementScoreWeighted\": \"50\",\r\n          \"elementCriticalFailureCount\": \"0\",\r\n          \"elementNumerator\": \"1\",\r\n          \"elementDenominator\": \"2\"\r\n        }\r\n      }\r\n    ],\r\n    \"immunizations\": [],\r\n    \"labResults\": [],\r\n    \"medicalDevices\": [],\r\n    \"medications\": [],\r\n    \"procedures\": [],\r\n    \"providers\": [],\r\n    \"vitalSigns\": []\r\n  }\r\n}", @"\s+", ""));
+
+        if (expectedresult.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the expected result file.");
+        if (result.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the actual result.");
+        AuditCompare(expectedresult.AuditedMessage, result.AuditedMessage);
+
         #endregion
 
         #endregion
     }
+
+    [Theory]
+    [InlineData("/PIQI/ScoreMessage")]
+    public async Task ScoresMessage5_ReturnsExpectedResponse(string endpoint)
+    {
+        // Arrange
+        var piqiRequest = new PIQIRequest
+        {
+            ContributorID = "TestProvider",
+            DataSourceID = "TestSource",
+            PIQIModelMnemonic = "PAT_CLINICAL_V1",
+            EvaluationRubricMnemonic = "USCDI_V3",
+            MessageID = "Msg005",
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test5_PIQI.json"))
+        };
+        var result = new PIQIResponse();
+        var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
+
+        // Act
+        var response = await _client.PostAsync(endpoint, requestContent);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var contentType = response.Content.Headers.ContentType.MediaType;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        if (contentType == "text/plain" || contentType == "application/json")
+        {
+            var responseBody = await response.Content.ReadAsStringAsync();
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
+
+            Assert.NotNull(result);
+        }
+
+        #region Check Results
+
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test5_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
+
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
+
+        #region Scoring Data
+
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
+
+        #endregion
+
+        #endregion
+    }
+
+    [Theory]
+    [InlineData("/PIQI/ScoreAuditMessage")]
+    public async Task ScoreAuditMessage5_ReturnsExpectedResponse(string endpoint)
+    {
+        // Arrange
+        var piqiRequest = new PIQIRequest
+        {
+            ContributorID = "TestProvider",
+            DataSourceID = "TestSource",
+            PIQIModelMnemonic = "PAT_CLINICAL_V1",
+            EvaluationRubricMnemonic = "USCDI_V3",
+            MessageID = "Msg005",
+            MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test5_PIQI.json"))
+        };
+        var result = new PIQIResponse();
+        var requestContent = new StringContent(JsonConvert.SerializeObject(piqiRequest), System.Text.Encoding.UTF8, "application/json");
+
+        // Act
+        var response = await _client.PostAsync(endpoint, requestContent);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var contentType = response.Content.Headers.ContentType.MediaType;
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        if (contentType == "text/plain" || contentType == "application/json")
+        {
+            var responseBody = await response.Content.ReadAsStringAsync();
+            result = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(responseBody, options);
+
+            Assert.NotNull(result);
+        }
+
+        #region Check Results
+
+        string? expectedOutputString = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/ExpectedOutput/Test5_Result.json"));
+        if (expectedOutputString == null) Assert.Fail("Expected output result file not found.");
+
+        PIQIResponse? expectedresult = System.Text.Json.JsonSerializer.Deserialize<PIQIResponse>(expectedOutputString, options);
+        if (expectedresult == null) Assert.Fail("Failed to deserialize expected result file.");
+
+        #region Scoring Data
+
+        if (expectedresult.ScoringData == null) Assert.Fail("Missing or invalid scoring data in the expected result file.");
+        ScoreDataCompare(expectedresult.ScoringData, result.ScoringData);
+
+        #endregion
+
+        #region Audit Results
+
+        if (expectedresult.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the expected result file.");
+        if (result.AuditedMessage == null) Assert.Fail("Missing or invalid audited message in the actual result.");
+        AuditCompare(expectedresult.AuditedMessage, result.AuditedMessage);
+
+        #endregion
+
+        #endregion
+    }
+
+    #endregion
+
+    #region Helper Methods
+
+    private bool JsonCompare(object? obj, object? another)
+    {
+        if (ReferenceEquals(obj, another)) return true;
+        if (obj == null && another == null) return true;
+        if ((obj == null) || (another == null)) return false;
+        if (obj.GetType() != another.GetType()) return false;
+
+        var objJson = JsonConvert.SerializeObject(obj);
+        var anotherJson = JsonConvert.SerializeObject(another);
+
+        return objJson == anotherJson;
+    }
+
+    private void ScoreDataCompare(PIQIStatResponse expectedScore, PIQIStatResponse actualScore)
+    {
+        // Compare full scoring block first to see if there are any differences at all before drilling down to specific properties for easier debugging
+        if (!JsonCompare(actualScore, expectedScore))
+        {
+            // Check overall message score
+            if (!JsonCompare(actualScore.MessageResults, expectedScore.MessageResults))
+            {
+                var auditProperties = expectedScore.MessageResults.GetType().GetProperties();
+                foreach (var prop in auditProperties)
+                {
+                    var resultValue = prop.GetValue(actualScore.MessageResults);
+                    var expectedValue = prop.GetValue(expectedScore.MessageResults);
+                    Assert.True(
+                        expectedValue?.Equals(resultValue),
+                        $"Failure. Values do not match." +
+                        $"\nScoring block: Message Results\tProperty: {prop.Name}" +
+                        $"\nExpected: '{expectedValue}'\nActual: '{resultValue}'"
+                    );
+                }
+            }
+
+            // Check each data class score
+            foreach (var expectedDataClassResult in expectedScore.DataClassResults)
+            {
+                var actualDataClassResult = actualScore.DataClassResults.FirstOrDefault(dcr => dcr.DataClassName == expectedDataClassResult.DataClassName);
+                if (actualDataClassResult == null) Assert.Fail($"Failure. Missing or invalid class in actual result." +
+                    $"\nExpected: DataClassResults - {expectedDataClassResult.DataClassName}");
+
+                if (!JsonCompare(expectedDataClassResult, actualDataClassResult))
+                {
+                    var dataClassProperties = expectedDataClassResult.GetType().GetProperties();
+                    foreach (var prop in dataClassProperties)
+                    {
+                        var resultValue = prop.GetValue(actualDataClassResult);
+                        var expectedValue = prop.GetValue(expectedDataClassResult);
+                        Assert.True(
+                            expectedValue.Equals(resultValue),
+                            $"Failure. Values do not match." +
+                            $"\nScoring block: DataClassResults\nClass: {expectedDataClassResult.DataClassName}\tProperty: {prop.Name}" +
+                            $"\nExpected: '{expectedValue}'\nActual: '{resultValue}'"
+                        );
+                    }
+                }
+            }
+
+            // Check each informational result
+            foreach (var expectedInformationalResult in expectedScore.InformationalResults)
+            {
+                var actualInformationalResult = actualScore.InformationalResults.FirstOrDefault(ir => ir.DataClassName == expectedInformationalResult.DataClassName);
+                if (actualInformationalResult == null) Assert.Fail($"Failure. Missing or invalid informational item in actual result." +
+                    $"\nExpected: InformationalResults - {expectedInformationalResult.DataClassName}");
+
+                // Check each class's informational evaluations to see if the overall class informational result doesn't match
+                if (!JsonCompare(expectedInformationalResult, actualInformationalResult))
+                {
+                    // Check each specific informational evaluation in the class evaluation list
+                    foreach (var expectedEvaluation in expectedInformationalResult.EvaluationList)
+                    {
+                        var actualEvaluation = actualInformationalResult.EvaluationList.FirstOrDefault(e => e.EvaluationName == expectedEvaluation.EvaluationName && e.EntityName == expectedEvaluation.EntityName);
+                        if (actualEvaluation == null) Assert.Fail($"Failure. Missing or invalid informational evaluation in actual result." +
+                            $"\nExpected: InformationalResults - {expectedInformationalResult.DataClassName}.{expectedEvaluation.EntityName}\tEvaluation: {expectedEvaluation.EvaluationName}");
+
+                        // Check each specific informational evaluation property if the overall evaluation
+                        if (!JsonCompare(expectedEvaluation, actualEvaluation))
+                        {
+                            var evaluationProperties = expectedEvaluation.GetType().GetProperties();
+                            foreach (var prop in evaluationProperties)
+                            {
+                                var resultValue = prop.GetValue(actualEvaluation);
+                                var expectedValue = prop.GetValue(expectedEvaluation);
+                                Assert.True(
+                                    expectedValue?.Equals(resultValue),
+                                    $"Failure. Values do not match." +
+                                    $"\nScoring block: InformationalResults\nEntity: {expectedInformationalResult.DataClassName}.{expectedEvaluation.EntityName}\tEvaulation: {expectedEvaluation.EvaluationName}\tProperty: {prop.Name}" +
+                                    $"\nExpected: '{expectedValue}'\nActual: '{resultValue}'"
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void AuditCompare(PIQIAuditResponse expectedAudit, PIQIAuditResponse actualMessage)
+    {
+        if (!JsonCompare(actualMessage, expectedAudit))
+        {
+            // Check overall audit score
+            if (actualMessage.Audit == null) Assert.Fail("Failure. Missing audit in actual result.");
+            if (expectedAudit.Audit == null) Assert.Fail("Failure. Missing audit in expected result.");
+            if (!JsonCompare(actualMessage.Audit, expectedAudit.Audit))
+            {
+                var auditProperties = expectedAudit.Audit.GetType().GetProperties();
+                foreach (var prop in auditProperties)
+                {
+                    var resultValue = prop.GetValue(actualMessage.Audit);
+                    var expectedValue = prop.GetValue(expectedAudit.Audit);
+                    Assert.True(
+                        expectedValue?.Equals(resultValue),
+                        $"Failure. Values do not match." +
+                        $"\nScoring block: Audit\tProperty: {prop.Name}" +
+                        $"\nExpected: '{expectedValue}'\nActual: '{resultValue}'"
+                    );
+                }
+            }
+
+            // Check audit root
+            if (actualMessage.Root == null) Assert.Fail("Failure. Missing audit root in actual result.");
+            if (expectedAudit.Root == null) Assert.Fail("Failure. Missing audit root in expected result.");
+            if (!JsonCompare(actualMessage.Root, expectedAudit.Root))
+            {
+                // Assert matching class count
+                Assert.True(
+                    expectedAudit.Root.Classes?.Count == actualMessage.Root?.Classes?.Count,
+                    $"Failure. Values do not match." +
+                    $"\n{actualMessage.Root?.RootName}.Classes\tProperty: Count" +
+                    $"\nExpected: '{expectedAudit.Root.Classes?.Count}'\nActual: '{actualMessage.Root?.Classes?.Count}'"
+                );
+
+                // Check each class in the audit root
+                foreach (var expectedClassValue in expectedAudit.Root.Classes ?? [])
+                {
+                    var actualClassValue = actualMessage.Root?.Classes?.FirstOrDefault(c => c.ClassName == expectedClassValue.ClassName);
+                    if (actualClassValue == null) Assert.Fail($"Failure. Missing or invalid class in actual result." +
+                        $"\nExpected: {expectedAudit.Root.RootName}.{expectedClassValue.ClassName}");
+
+                    if (!JsonCompare(expectedClassValue, actualClassValue))
+                    {
+                        // If the classes don't match, check each element within the class
+                        // Assert matching element count
+                        Assert.True(
+                            actualClassValue.Elements?.Count == expectedClassValue.Elements?.Count,
+                            $"Failure. Values do not match." +
+                            $"\n{actualMessage.Root?.RootName}.{actualClassValue.ClassName}.Elements\tProperty: Count" +
+                            $"\nExpected: '{expectedClassValue.Elements?.Count}'\nActual: '{actualClassValue.Elements?.Count}'"
+                        );
+
+                        // Check each element in the class
+                        var elementindex = 0;
+                        while (elementindex < expectedClassValue.Elements?.Count)
+                        {
+                            var expectedElementValue = expectedClassValue.Elements[elementindex];
+                            var actualElementValue = actualClassValue.Elements?[elementindex];
+
+                            // Check the elements at matching index positions
+                            if (!JsonCompare(actualElementValue, expectedElementValue))
+                            {
+                                // Check the elements are matching at the attribute level
+                                // Assert matching attribute count
+                                Assert.True(
+                                    expectedElementValue.Attributes?.Count == actualElementValue?.Attributes?.Count,
+                                    $"Failure. Values do not match." +
+                                    $"\n{actualMessage.Root?.RootName}.{actualClassValue.ClassName}[{elementindex}].Attributes\tProperty: Count" +
+                                    $"\nExpected: '{expectedElementValue.Attributes?.Count}'\nActual: '{actualElementValue?.Attributes?.Count}'"
+                                );
+
+                                // Check each attribute in the element
+                                foreach (var expectedAttributeValue in expectedElementValue.Attributes ?? [])
+                                {
+                                    var actualAttributeValue = actualElementValue?.Attributes?.FirstOrDefault(a => a.AttributeName == expectedAttributeValue.AttributeName);
+                                    if (actualAttributeValue == null) 
+                                        Assert.Fail($"Failure. Missing or invalid attribute in actual result." +
+                                            $"\nExpected: {expectedAudit.Root?.RootName}.{expectedClassValue.ClassName}[{elementindex}].{expectedAttributeValue.AttributeName}");
+
+                                    // If the attributes don't match, check each property within the attribute's assessmentItems and InformationalItems
+                                    if (!JsonCompare(actualAttributeValue, expectedAttributeValue))
+                                    {
+                                        // Compare AssessmentItems
+                                        foreach (var expectedAssessment in expectedAttributeValue.AttributeAudit?.AssessmentItems ?? [])
+                                        {
+                                            var actualAssessment = actualAttributeValue.AttributeAudit?.AssessmentItems?.FirstOrDefault(a => a.Assessment == expectedAssessment.Assessment);
+                                            if (actualAssessment == null)
+                                                Assert.Fail($"Failure. Missing or invalid attribute assessment in actual result." +
+                                                    $"\nExpected: {expectedAudit.Root?.RootName}.{expectedClassValue.ClassName}[{elementindex}].{expectedAttributeValue.AttributeName}\tAssessment: {expectedAssessment.Assessment}");
+
+                                            if (!JsonCompare(actualAssessment, expectedAssessment))
+                                            {
+                                                var assessmentProperties = expectedAssessment.GetType().GetProperties();
+                                                foreach (var prop in assessmentProperties)
+                                                {
+                                                    var resultValue = prop.GetValue(actualAssessment);
+                                                    var expectedValue = prop.GetValue(expectedAssessment);
+                                                    Assert.True(
+                                                       expectedValue?.Equals(resultValue),
+                                                       $"Failure. Values do not match." +
+                                                       $"\n{actualMessage.Root?.RootName}.{actualClassValue.ClassName}[{elementindex}].{actualAttributeValue.AttributeName} - AssessmentItems" +
+                                                       $"\nAssessment: {actualAssessment.Assessment}\tProperty: {prop.Name}" +
+                                                       $"\nExpected: '{expectedValue}'\nActual: '{resultValue}'"
+                                                   );
+                                                }
+                                            }
+                                        }
+
+                                        // Compare InformationalItems
+                                        foreach (var expectedInformationalAssessment in expectedAttributeValue.AttributeAudit?.InformationalItems ?? [])
+                                        {
+                                            var actualInformationalAssessment = actualAttributeValue.AttributeAudit?.InformationalItems?.FirstOrDefault(a => a.Assessment == expectedInformationalAssessment.Assessment);
+                                            if (actualInformationalAssessment == null)
+                                                Assert.Fail($"Failure. Missing or invalid attribute informational assessment in actual result." +
+                                                    $"\nExpected: {expectedAudit.Root?.RootName}.{expectedClassValue.ClassName}[{elementindex}].{expectedAttributeValue.AttributeName}\tAssessment: {expectedInformationalAssessment.Assessment}");
+
+                                            if (!JsonCompare(actualInformationalAssessment, expectedInformationalAssessment))
+                                            {
+                                                var informationalProperties = expectedInformationalAssessment.GetType().GetProperties();
+                                                foreach (var prop in informationalProperties)
+                                                {
+                                                    var resultValue = prop.GetValue(actualInformationalAssessment);
+                                                    var expectedValue = prop.GetValue(expectedInformationalAssessment);
+                                                    Assert.True(
+                                                       expectedValue?.Equals(resultValue),
+                                                       $"Failure. Values do not match." +
+                                                       $"\n{actualMessage.Root?.RootName}.{actualClassValue.ClassName}[{elementindex}].{actualAttributeValue.AttributeName} - InformationalItems" +
+                                                       $"\nInformational Assessment: {actualInformationalAssessment.Assessment}\tProperty: {prop.Name}" +
+                                                       $"\nExpected: '{expectedValue}'\nActual: '{resultValue}'"
+                                                   );
+                                                }
+                                            }
+                                        }
+
+                                        // Compare ScoringData
+                                        if (!JsonCompare(actualAttributeValue.AttributeAudit?.ScoringData, expectedAttributeValue.AttributeAudit?.ScoringData))
+                                        {
+                                            var scoringProperties = expectedAttributeValue.AttributeAudit?.ScoringData.GetType().GetProperties();
+                                            foreach (var prop in scoringProperties ?? [])
+                                            {
+                                                var resultValue = prop.GetValue(actualAttributeValue.AttributeAudit?.ScoringData);
+                                                var expectedValue = prop.GetValue(expectedAttributeValue.AttributeAudit?.ScoringData);
+                                                Assert.True(
+                                                   expectedValue?.Equals(resultValue),
+                                                   $"Failure. Values do not match." +
+                                                   $"\n{actualMessage.Root?.RootName}.{actualClassValue.ClassName}[{elementindex}].{actualAttributeValue.AttributeName} - ScoringData\tProperty: {prop.Name}" +
+                                                   $"\nExpected: '{expectedValue}'\nActual: '{resultValue}'"
+                                               );
+                                            }
+                                        }
+
+                                        // Compare Attribute Data
+                                        if (!JsonCompare(actualAttributeValue.Data, expectedAttributeValue.Data))
+                                        {
+                                            var dataProperties = expectedAttributeValue.Data?.GetType().GetProperties();
+                                            foreach (var prop in dataProperties ?? [])
+                                            {
+                                                var resultValue = prop.GetValue(actualAttributeValue.Data);
+                                                var expectedValue = prop.GetValue(expectedAttributeValue.Data);
+                                                Assert.True(
+                                                    JsonCompare(expectedValue, resultValue),
+                                                    $"Failure. Values do not match." +
+                                                    $"\n{actualMessage.Root?.RootName}.{actualClassValue.ClassName}[{elementindex}].{actualAttributeValue.AttributeName} - Data\tProperty: {prop.Name}" +
+                                                    $"\nExpected: '{(expectedValue.GetType().IsPrimitive || expectedValue is string ? expectedValue.ToString()! : JsonConvert.SerializeObject(expectedValue))}'" +
+                                                    $"\nActual: '{(resultValue.GetType().IsPrimitive || resultValue is string ? resultValue.ToString()! : JsonConvert.SerializeObject(resultValue))}'"
+                                                );
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // If there are still no fails, check if the element level audits match
+                                var elementAuditProperties = expectedElementValue.ElementAudit?.GetType().GetProperties();
+                                foreach (var prop in elementAuditProperties ?? [])
+                                {
+                                    var resultValue = prop.GetValue(actualElementValue?.ElementAudit);
+                                    var expectedValue = prop.GetValue(expectedElementValue.ElementAudit);
+                                    Assert.True(
+                                       expectedValue?.Equals(resultValue),
+                                       $"Failure. Values do not match." +
+                                       $"\n{actualMessage.Root?.RootName}.{actualClassValue.ClassName}[{elementindex}] - ElementAudit\tProperty: {prop.Name}" +
+                                       $"\nExpected: '{expectedValue}'\nActual: '{resultValue}'"
+                                   );
+                                }
+                            }
+
+                            // Increment index
+                            elementindex++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #endregion
 }

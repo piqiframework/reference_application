@@ -100,7 +100,7 @@ namespace PIQI.Components.Models
         /// <param name="cardinality">
         /// The <see cref="CardinalityEnum"/> value that specifies the cardinatliy for the new class entity.
         /// </param>
-        public Entity(Entity entityBase, CardinalityEnum? cardinality)
+        public Entity(Entity entityBase, Entity? parentEntity)
         {
             Name = entityBase.Name;
             Mnemonic = entityBase.Mnemonic;
@@ -108,9 +108,9 @@ namespace PIQI.Components.Models
             FieldName = entityBase.FieldName;
             Description = entityBase.Description;
             EntityType = entityBase.EntityType;
-            if (cardinality.HasValue)
-                Cardinality = new Cardinality(cardinality.Value);
+            Cardinality = parentEntity?.Cardinality;
 
+            Roles = parentEntity?.Roles;
             Children = new List<Entity>();
         }
 

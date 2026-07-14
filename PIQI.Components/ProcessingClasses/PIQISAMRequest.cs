@@ -30,6 +30,23 @@
         #region Methods
 
         /// <summary>
+        /// Retrieves the value of a parameter by its name.
+        /// </summary>
+        /// <param name="name">The name of the parameter to retrieve.</param>
+        /// <returns>
+        /// The value of the parameter if found; otherwise, <c>null</c>.
+        /// </returns>
+        /// <remarks>
+        /// The parameter name comparison is case-insensitive.
+        /// </remarks>
+        public string GetParameterValue(string name)
+        {
+            if (ParmList == null) return null;
+            var parameter = ParmList.FirstOrDefault(p => string.Equals(p.Item1, name, StringComparison.OrdinalIgnoreCase));
+            return parameter != null ? parameter.Item2 : null;
+        }
+
+        /// <summary>
         /// Adds a new parameter to the request.
         /// </summary>
         /// <param name="name">The name of the parameter.</param>

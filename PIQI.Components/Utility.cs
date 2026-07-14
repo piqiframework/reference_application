@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using PIQI.Components.Models;
 
 namespace PIQI.Components.Services
 {
@@ -9,6 +8,19 @@ namespace PIQI.Components.Services
     public class Utility
     {
         #region Conversion
+
+        /// <summary>
+        /// Converts an object to an integer. Returns 0 if the object is null or cannot be converted.
+        /// </summary>
+        /// <param name="value">The object to convert.</param>
+        /// <returns>An integer representing the object's value, or 0 if conversion fails.</returns>
+        public static int ObjInt(object value)
+        {
+            int result = 0;
+            if (value != null)
+                int.TryParse(value.ToString(), out result);
+            return result;
+        }   
 
         /// <summary>
         /// Converts an object to a nullable <see cref="DateTime"/>. Returns null if the object is null or cannot be converted.
@@ -187,125 +199,6 @@ namespace PIQI.Components.Services
             }
             return list;
         }
-        #endregion
-
-        #region Add methods
-        /// <summary>
-        /// Adds a new <see cref="JObject"/> to a <see cref="JArray"/>.
-        /// </summary>
-        /// <param name="parent">Parent <see cref="JArray"/> to add the object to.</param>
-        /// <returns>The newly created <see cref="JObject"/>.</returns>
-        public static JObject JSON_AddObject(JArray parent)
-        {
-            JObject obj = new JObject();
-            parent.Add(obj);
-            return obj;
-        }
-
-        /// <summary>
-        /// Adds a new <see cref="JObject"/> to a parent <see cref="JObject"/> with the specified name.
-        /// </summary>
-        /// <param name="parent">Parent <see cref="JObject"/>.</param>
-        /// <param name="name">Name of the new object.</param>
-        /// <returns>The newly created <see cref="JObject"/>.</returns>
-        public static JObject JSON_AddObject(JObject parent, string name)
-        {
-            JObject obj = new JObject();
-            parent.Add(name, obj);
-            return obj;
-        }
-
-        /// <summary>
-        /// Adds a new <see cref="JObject"/> to a parent <see cref="JObject"/> with the specified name.
-        /// </summary>
-        /// <param name="parent">Parent <see cref="JObject"/>.</param>
-        /// <param name="name">Name of the new object.</param>
-        /// <returns>The newly created <see cref="JObject"/>.</returns>
-        public static JObject JSON_AddObject(JArray parent, string name)
-        {
-            JObject obj = new JObject();
-            parent.Add(obj);
-            return obj;
-        }
-
-        /// <summary>
-        /// Adds a new <see cref="JArray"/> to a parent <see cref="JObject"/> with the specified name.
-        /// </summary>
-        /// <param name="parent">Parent <see cref="JObject"/>.</param>
-        /// <param name="name">Name of the new array.</param>
-        /// <returns>The newly created <see cref="JArray"/>.</returns>
-        public static JArray JSON_AddArray(JObject parent, string name)
-        {
-            JArray array = new JArray();
-            parent.Add(name, array);
-            return array;
-        }
-
-        /// <summary>
-        /// Adds a CodeableConcept object to a parent <see cref="JObject"/>.
-        /// </summary>
-        /// <param name="concept">The <see cref="CodeableConcept"/> to add.</param>
-        /// <returns>The newly created <see cref="JObject"/> representing the CodeableConcept.</returns>
-        public static JObject JSON_AddCodeableConceptObject(CodeableConcept concept)
-        {
-            JObject cc = new JObject();
-            if (concept.CodingList != null && concept.CodingList.Count > 0)
-            {
-                JArray codings = new JArray();
-                foreach (Coding coding in concept.CodingList)
-                {
-                    JObject codingToken = new JObject();
-                    codingToken.Add("system", coding.CodeSystem);
-                    codingToken.Add("code", coding.CodeValue);
-                    codingToken.Add("display", coding.CodeText);
-                    codings.Add(codingToken);
-                }
-                cc.Add("codings", codings);
-            }
-            cc.Add("text", concept.Text);
-
-            return cc;
-        }
-
-        /// <summary>
-        /// Adds a <see cref="Value"/> object to a parent <see cref="JObject"/>.
-        /// </summary>
-        /// <param name="value">The <see cref="Value"/> object to add.</param>
-        /// <returns>The newly created <see cref="JObject"/> representing the value.</returns>
-
-        public static JObject JSON_AddValueObject(Value value)
-        {
-            JObject v = new JObject();
-            v.Add("text", value.Text ?? "");
-
-            if (value.TypeCC != null)
-            {
-                var cc = JSON_AddCodeableConceptObject(value.TypeCC);
-                if (cc != null)
-                {
-                    v.Add("type", cc);
-                }
-            }
-
-            return v;
-        }
-
-        /// <summary>
-        /// Adds a <see cref="ReferenceRange"/> object to a parent <see cref="JObject"/>.
-        /// </summary>
-        /// <param name="range">The <see cref="ReferenceRange"/> object to add.</param>
-        /// <returns>The newly created <see cref="JObject"/> representing the reference range.</returns>
-
-        public static JObject JSON_AddRefRangeObject(ReferenceRange range)
-        {
-            JObject rr = new JObject();
-            rr.Add("text", range.Text ?? "");
-            rr.Add("lowValue", range.LowValue);
-            rr.Add("highValue", range.HighValue);
-
-            return rr;
-        }
-
         #endregion
 
         #endregion

@@ -9,13 +9,13 @@ namespace PIQI.Components.Models
     public class PIQIRequest
     {
         /// <summary>
-        /// Identifier for the data provider submitting the request.
+        /// Identifier for the data contributor submitting the request.
         /// Optional if included in the message.
         /// </summary>
-        public string? DataProviderID { get; set; }
+        public string? ContributorID { get; set; }
 
         /// <summary>
-        /// Identifier for the specific data source within the provider.
+        /// Identifier for the specific data source within the contributor.
         /// Optional if included in the message.
         /// </summary>
         public string? DataSourceID { get; set; }

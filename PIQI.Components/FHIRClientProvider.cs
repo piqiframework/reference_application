@@ -101,7 +101,7 @@
             try
             {
                 // Build query string
-                var query = $"ValueSet/$expand/{valueSetMnemonic}";
+                var query = $"ValueSet/{valueSetMnemonic}";
                 return await Client.GetAsync(query);
             }
             catch (Exception ex)

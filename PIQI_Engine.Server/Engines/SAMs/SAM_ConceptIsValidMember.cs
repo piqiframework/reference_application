@@ -60,6 +60,10 @@ namespace PIQI_Engine.Server.Engines.SAMs
                 if (data is not CodeableConcept codeableConcept)
                     throw new Exception("CodeableConceptIsValidMember expects a CodeableConcept value.");
 
+                // Verify at least one complete coding exists
+                if (!codeableConcept.CodingList.Any(c => c.IsComplete == true)) 
+                    passed = false;
+
                 // Get our parameter for valid code systems
                 if (request.ParmList == null) throw new Exception("Parameter list was not supplied");
                 Tuple<string, string> arg1 = request.ParmList.Where(t => t.Item1 == "CODE_SYSTEM_CSV").FirstOrDefault();

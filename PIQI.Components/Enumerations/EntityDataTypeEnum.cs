@@ -38,6 +38,11 @@
         /// <summary>
         /// Represents a text entity type.
         /// </summary>
-        ATR = 7
+        ATR = 7,
+
+        /// <summary>
+        /// Represents a collection of codeable concepts.
+        /// </summary>
+        CCC = 8
     }
 }

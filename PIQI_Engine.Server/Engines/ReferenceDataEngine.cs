@@ -58,7 +58,7 @@ namespace PIQI_Engine.Server.Engines
                 PIQIReferenceData refData = new PIQIReferenceData();
 
                 // Code systems
-                List<CodeSystem>? result1 = LoadCodeSystems();
+                List<CodeSystem>? result1 = LoadCodeSystems(); 
                 if (result1 == null) throw new Exception("Missing or failed to load code systems.");
                 refData.CodeSystemList = result1;
 
@@ -92,7 +92,7 @@ namespace PIQI_Engine.Server.Engines
                 if (evalModelMnemonic == null) throw new Exception("Missing PIQI model mnemonic in evaluation rubric.");
 
                 Model? result8 = LoadModel(evalModelMnemonic);
-                if (result8 == null) throw new Exception($"Missing or failed to load model: {evalModelMnemonic}.");
+                if (result8 == null) throw new Exception($"Missing or failed to load model: {evalModelMnemonic}."); 
                 refData.Model = result8;
 
                 // Entities

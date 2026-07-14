@@ -24,6 +24,17 @@
         /// </summary>
         public Dictionary<Guid, EvaluationResult> EvaluationResultDict { get; set; }
 
+        /// <summary>
+        /// Gets or sets the model start date, typically derived from the StartDate data role
+        /// of the first class with a cardinality of 1.
+        /// </summary>
+        public DateTime? ModelStart { get; set; }
+
+        /// <summary>
+        /// Gets or sets the model end date, typically derived from the EndDate data role
+        /// of the first class with a cardinality of 1.
+        /// </summary>
+        public DateTime? ModelEnd { get; set; }
         #endregion
 
         #region Constructors
@@ -51,13 +62,15 @@
         /// <param name="messageModel">The message model containing the actual message data.</param>
         public void Load(EntityModel entityModel, MessageModel messageModel)
         {
+            Entity? elementEntity = null;
+
             // Add the root item
             EvaluationItem? rootEvalItem = AddEvalItem(entityModel.Root, null, messageModel.RootItem);
             if (rootEvalItem != null)
                 RootItem = rootEvalItem;
-
+             
             // Process classes
-            if (entityModel?.Root?.Children != null)
+            if (entityModel?.Root?.Children != null) 
             {
                 foreach (Entity classEntity in entityModel.Root.Children.OrderBy(t => t.Name))
                 {
@@ -71,7 +84,7 @@
                     // Note: elements only exist within the message model so we process from there
                     if (classMessageItem != null)
                     {
-                        Entity? elementEntity = classEntity.Children?.First();
+                        elementEntity = classEntity.Children?.First();
                         foreach (MessageModelItem elementMessageItem in classMessageItem.ChildDict.Values.OrderBy(t => t.ElementSequence))
                         {
                             // Add element item
@@ -86,6 +99,31 @@
                                 EvaluationItem? attrEvalItem = AddEvalItem(attrEntity, elementEvalItem, attrMessageItem);
                             }
 
+                        }
+                    }
+                }
+            }
+
+            // Once model is loaded, see if we can get values for ModelStart and ModelEnd. These values should be the StartDate and EndDate dataroles for the
+            // first (and hopefully only) class with a cardinality of 1
+            Entity? elementEntityClass = entityModel?.EntityList.Where(t => t.Cardinality?.CardinalityValue == CardinalityEnum.ONE).FirstOrDefault();
+            elementEntity = elementEntityClass?.Children?.FirstOrDefault(t => t.EntityType?.EntityTypeValue == EntityDataTypeEnum.ELM);
+            if (elementEntityClass != null && elementEntity != null)
+            {
+                var elementEntityKey = $"{RootItem.Key}|{elementEntityClass.Mnemonic}|{elementEntity.Mnemonic}.1";
+             
+                EvaluationItem singElementItem = GetEvalItem(elementEntityKey);
+                if (singElementItem != null)
+                {
+                    ModelStart = singElementItem.GetStartDate();
+                    ModelEnd = singElementItem.GetEndDate();
+
+                    if (ModelStart != null || ModelEnd != null)
+                    {
+                        foreach (EvaluationItem ei in EvaluationItemDict.Values)
+                        {
+                            ei.ModelStartDate = ModelStart;
+                            ei.ModelEndDate = ModelEnd;
                         }
                     }
                 }
@@ -118,6 +156,21 @@
 
             // Return our new item
             return newEvaluationItem;
+        }
+
+        /// <summary>
+        /// Retrieves an <see cref="EvaluationItem"/> from the manager's dictionary using its unique key.
+        /// </summary>
+        /// <param name="itemKey">The unique key of the evaluation item to retrieve.</param>
+        /// <returns>
+        /// The <see cref="EvaluationItem"/> corresponding to the specified <paramref name="itemKey"/>.
+        /// Returns <c>null</c> if no matching item is found.
+        /// </returns>
+        public EvaluationItem GetEvalItem(string itemKey)
+        {
+            if (EvaluationItemDict.ContainsKey(itemKey))
+                return EvaluationItemDict[itemKey]; 
+            return null;
         }
         #endregion
 

@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using PIQI.Components.Services;
-
-namespace PIQI.Components.Models
+﻿namespace PIQI.Components.Models
 {
     /// <summary>
     /// Represents a PIQI message and its associated evaluation context.
@@ -67,7 +64,7 @@ namespace PIQI.Components.Models
             // Create a new stat result object
             StatResponse = new StatResponse();
 
-            try
+            try  
             {
                 // Process results for each scorable evaluation result
                 foreach (var evaluationResult in EvaluationManager.EvaluationResultDict.Values)
@@ -107,99 +104,42 @@ namespace PIQI.Components.Models
         /// Generates a JSON-formatted audit result for the current PIQI message.
         /// </summary>
         /// <returns>A JSON string representing the audit result.</returns>
-        public string GenerateAuditResponse()
+        public PIQIAuditResponse GenerateAuditResponse()
         {
             try
             {
-                // Create root message object
-                JObject msg = new JObject();
-
-                // Add header info
-                msg.Add("EntityModelMnemonic", MessageModel.Header.EntityModelMnemonic);
-                msg.Add("DataProviderID", PIQIRequest.DataProviderID ?? MessageModel.Header.ProviderName);
-                msg.Add("DataSourceID", PIQIRequest.DataSourceID ?? MessageModel.Header.DataSourceName);
-                msg.Add("MessageID", PIQIRequest.MessageID ?? MessageModel.Header.ClientMessageID);
+                // Create base AuditData object
+                PIQIAuditResponse auditResponse = new PIQIAuditResponse(MessageModel.Header.EntityModelMnemonic, MessageModel.Header.ContributorName, MessageModel.Header.DataSourceName, MessageModel.Header.ClientMessageID);
 
                 // Add message-level audit info
-                Audit_AddMessageInfo(msg, FormattedStatResponse);
+                auditResponse.Audit = Audit_AddMessageInfo(FormattedStatResponse);
 
-                // Process the message model recursively
-                Audit_ProcessMessageModelItem(EvaluationManager.RootItem, msg);
+                // Process message model
+                auditResponse.Root = Audit_ProcessRoot(EvaluationManager.RootItem);
 
-                return msg.ToString();
+                // Return
+                return auditResponse;
             }
             catch
             {
                 throw;
             }
         }
-
-        /// <summary>
-        /// Recursively processes a message model item and adds audit information to the JSON node.
-        /// </summary>
-        /// <param name="item">The message model item to process.</param>
-        /// <param name="parentItem">The optional model item parent to process (Needed for element sequence on attribute).</param>
-        /// <param name="parentNode">The parent JSON node to attach audit information.</param>
-        /// <param name="entity">The optional entity to process. Used in tandem with item to include processed entities without item data</param>
-
-        private void Audit_ProcessMessageModelItem(EvaluationItem evaluationItem, JToken parentNode)
+        public PIQIAuditResult Audit_AddMessageInfo(PIQIStatResponse statResponse)
         {
             try
             {
-                JObject? elementNode = null;
-                string itemName = evaluationItem?.Entity?.FieldName ?? evaluationItem?.Entity?.Name ?? "UNKNOWN";
+                PIQIAuditResult auditResult = new PIQIAuditResult(
+                    statResponse.MessageResults.Numerator,
+                    statResponse.MessageResults.Denominator,
+                    (statResponse.MessageResults.Denominator > 0 ? ((int)((double)statResponse.MessageResults.Numerator / (double)statResponse.MessageResults.Denominator * 100)) : 0),
+                    statResponse.MessageResults.WeightedNumerator,
+                    statResponse.MessageResults.WeightedDenominator,
+                    (statResponse.MessageResults.WeightedDenominator > 0 ? (int)((double)statResponse.MessageResults.WeightedNumerator / (double)statResponse.MessageResults.WeightedDenominator * 100) : 0),
+                    statResponse.MessageResults.CriticalFailureCount
+                );
 
-                if (evaluationItem.ItemType == EntityItemTypeEnum.Root)
-                {
-                    JObject itemNode = Utility.JSON_AddObject((JObject)parentNode, itemName);
-
-                    foreach (EvaluationItem classEvaluationItem in evaluationItem.ChildDict?.Values?.OrderBy(e => e.Entity?.Name).ToList() ?? [])
-                        Audit_ProcessMessageModelItem(classEvaluationItem, itemNode);
-                }
-                else if (evaluationItem.ItemType == EntityItemTypeEnum.Class)
-                {
-                    JArray itemNode = Utility.JSON_AddArray((JObject)parentNode, itemName);
-
-                    foreach (EvaluationItem elementEvaluationItem in evaluationItem.ChildDict?.Values?.OrderBy(e => e.Entity?.Name).ToList() ?? [])
-                        Audit_ProcessMessageModelItem(elementEvaluationItem, itemNode);
-                }
-                else if (evaluationItem.ItemType == EntityItemTypeEnum.Element)
-                {
-                    JObject itemNode = Utility.JSON_AddObject((JArray)parentNode, itemName);
-                    elementNode = itemNode;
-
-                    foreach (EvaluationItem attributeEvaluationItem in evaluationItem.ChildDict?.Values?.OrderBy(e => e.Entity?.Name).ToList() ?? [])
-                        Audit_ProcessMessageModelItem(attributeEvaluationItem, itemNode);
-                }
-                else if (evaluationItem.ItemType == EntityItemTypeEnum.Attribute)
-                {
-                    JObject? attrAuditItem = new JObject();
-                    if (evaluationItem.MessageItem != null)
-                    {
-                        JToken? attrDataItem = null;
-
-                        // Handle leaf elements according to their data type
-                        if (evaluationItem.Entity?.EntityType.EntityTypeValue == EntityDataTypeEnum.CC)
-                            attrDataItem = Utility.JSON_AddCodeableConceptObject((CodeableConcept)evaluationItem.MessageItem?.MessageData);
-                        else if (evaluationItem.Entity?.EntityType.EntityTypeValue == EntityDataTypeEnum.OBSVAL)
-                            attrDataItem = Utility.JSON_AddValueObject((Value)evaluationItem.MessageItem?.MessageData);
-                        else if (evaluationItem.Entity?.EntityType.EntityTypeValue == EntityDataTypeEnum.RV)
-                            attrDataItem = Utility.JSON_AddRefRangeObject((ReferenceRange)evaluationItem.MessageItem?.MessageData);
-                        else
-                            attrDataItem = (evaluationItem.MessageItem?.MessageData?.Text ?? "");
-
-                        if (attrDataItem == null) throw new Exception("Attribute information not found.");
-                        attrAuditItem.Add("data", attrDataItem);
-                    }
-
-                    Audit_AddAttributeInfo(evaluationItem, attrAuditItem);
-
-                    ((JObject)parentNode).Add(itemName, attrAuditItem);
-                }
-
-                if (elementNode != null)
-                    Audit_AddElementInfo(evaluationItem, elementNode);
-                else if (elementNode != null) throw new Exception("Element information not found.");
+                return auditResult;
             }
             catch
             {
@@ -207,185 +147,256 @@ namespace PIQI.Components.Models
             }
         }
 
-        /// <summary>
-        /// Adds message-level audit information such as scoring summary.
-        /// </summary>
-        /// <param name="parent">Parent JSON node to attach the audit info.</param>
-        /// <param name="statResponse">The formatted statistical result for this message.</param>
-        public void Audit_AddMessageInfo(JObject parent, PIQIStatResponse statResponse)
+        #region Root Audit
+
+        private PIQIAuditDataRoot Audit_ProcessRoot(EvaluationItem item)
         {
-            try
-            {
-                JObject audit = Utility.JSON_AddObject(parent, "Audit");
+            PIQIAuditDataRoot auditDataRoot = new PIQIAuditDataRoot(item.Entity.FieldName);
 
-                audit.Add("messageNumerator", statResponse.MessageResults.Numerator.ToString());
-                audit.Add("messageDenominator", statResponse.MessageResults.Denominator.ToString());
-                audit.Add("messageScore", (statResponse.MessageResults.Denominator > 0 ? ((int)((double)statResponse.MessageResults.Numerator / (double)statResponse.MessageResults.Denominator * 100)) : 0).ToString());
-                audit.Add("messageNumeratorWeighted", statResponse.MessageResults.WeightedNumerator.ToString());
-                audit.Add("messageDenominatorWeighted", statResponse.MessageResults.WeightedDenominator.ToString());
-                audit.Add("messageScoreWeighted", (statResponse.MessageResults.WeightedDenominator > 0 ? (int)((double)statResponse.MessageResults.WeightedNumerator / (double)statResponse.MessageResults.WeightedDenominator * 100) : 0).ToString());
-                audit.Add("messageCriticalFailureCount", statResponse.MessageResults.CriticalFailureCount.ToString());
-            }
-            catch
+            // Assert it's a root node.
+            if (item.ItemType != EntityItemTypeEnum.Root)
+                throw new ArgumentException();
+
+            // The root node contains classes.
+            if (item.ChildDict.Count > 0)
             {
-                throw;
+                auditDataRoot.Classes = new List<PIQIAuditDataClass>();
+
+                foreach (EvaluationItem child in item.ChildDict.Values)
+                    auditDataRoot.Classes.Add(Audit_ProcessClass(child));
             }
+
+            return auditDataRoot;
         }
 
-        /// <summary>
-        /// Adds element-level audit information for a specific message model item.
-        /// </summary>
-        /// <param name="parent">The JSON node to attach the element audit info.</param>
-        /// <param name="elementItem">The message model element item to audit.</param>
-        /// <returns>The audit JSON node for the element.</returns>
-        private JObject? Audit_AddElementInfo(EvaluationItem elementEvaluationItem, JObject parent)
+        #endregion
+
+        #region Class Audit
+
+        private PIQIAuditDataClass Audit_ProcessClass(EvaluationItem item)
         {
-            JObject? auditNode = null;
+            PIQIAuditDataClass auditDataClass = new PIQIAuditDataClass(item.Entity.FieldName);
 
-            try
+            // Assert it's a class node.
+            if (item.ItemType != EntityItemTypeEnum.Class)
+                throw new ArgumentException();
+
+            // The class node contains elements.
+            if (item.ChildDict.Count > 0)
             {
-                List<EvaluationResult> elementEvaluationResultList = EvaluationManager.EvaluationResultDict.Values
-               .Where(er => er.EvaluationItem.ElementEntityMnemonic == elementEvaluationItem.Entity.Mnemonic && er.EvaluationItem.ElementSequence == elementEvaluationItem.ElementSequence).ToList();
+                auditDataClass.Elements = new List<PIQIAuditDataElement>();
+                foreach (EvaluationItem child in item.ChildDict.Values)
+                    auditDataClass.Elements.Add(Audit_ProcessElement(child));
+            }
 
-                if (elementEvaluationResultList.Count > 0)
+            return auditDataClass;
+        }
+
+        #endregion
+
+        #region Element Audit
+
+        private PIQIAuditDataElement Audit_ProcessElement(EvaluationItem item)
+        {
+            PIQIAuditDataElement auditDataElement = new PIQIAuditDataElement();
+
+            // Assert it's an element node.
+            if (item.ItemType != EntityItemTypeEnum.Element)
+                throw new ArgumentException();
+
+            // The element node contains attributes.
+            if (item.ChildDict.Values.Count > 0)
+            {
+                auditDataElement.Attributes = new List<PIQIAuditDataAttribute>();
+                foreach (EvaluationItem child in item.ChildDict.Values)
+                    auditDataElement.Attributes.Add(Audit_ProcessAttribute(child));
+
+                auditDataElement.ElementAudit = Audit_AddElementAudit(item);
+            }
+
+            return auditDataElement;
+        }
+
+        private static PIQIAuditDataElementAudit? Audit_AddElementAudit(EvaluationItem elementItem)
+        {
+            // Get all results for this element, including all attribute results
+            List<EvaluationResult> resultList = elementItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+            foreach (EvaluationItem attrItem in elementItem.ChildDict.Values)
+            {
+                List<EvaluationResult> attrResultList = attrItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+                if (attrResultList.Count > 0)
+                    resultList.AddRange(attrResultList);
+            }
+
+            // Exit condition - no results to audit
+            if (resultList.Count < 1)
+                return null;
+
+            // Calculate scoring 
+            int denominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Count();
+            int weightedDenominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Sum(t => t.Criterion.ScoringWeight);
+            int numerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Count();
+            int weightedNumerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Sum(t => t.Criterion.ScoringWeight);
+            int score = 0;
+            if (denominator > 0)
+                score = (int)Math.Truncate((float)numerator / (float)denominator * (float)100);
+            int weightedScore = 0;
+            if (weightedDenominator > 0)
+                weightedScore = (int)Math.Truncate((float)weightedNumerator / (float)weightedDenominator * (float)100);
+            int criticalFailureCount = resultList.Where(t => t.IsScoring && t.IsCritical && t.EvalFailed).Count();
+
+            // Create the Audit and scoringData nodes
+            PIQIAuditDataElementAudit auditDataElementAudit = new PIQIAuditDataElementAudit(score, weightedScore, criticalFailureCount, numerator, denominator);
+
+            return auditDataElementAudit;
+        }
+
+        #endregion
+
+        #region Attribute Audit
+
+        private PIQIAuditDataAttribute Audit_ProcessAttribute(EvaluationItem item)
+        {
+            PIQIAuditDataAttribute auditDataAttribute = new PIQIAuditDataAttribute(item.Entity.FieldName);
+
+            // Assert it's an attribute node.
+            if (item.ItemType != EntityItemTypeEnum.Attribute)
+                throw new ArgumentException();
+
+            // Attributes are a bit more involved.
+            // First, print the data, based on datatype.
+            if (item.HasMessageItem)
+            {
+                switch (item.Entity.EntityType.EntityTypeValue)
                 {
-                    auditNode = Utility.JSON_AddObject(parent, "elementAudit");
-
-                    int denominator = 0;
-                    int denominatorWeight = 0;
-                    int numerator = 0;
-                    int numeratorWeight = 0;
-                    int criticalFailureCount = 0;
-
-                    foreach (EvaluationResult result in elementEvaluationResultList
-                                 .Where(er => !er.IsDependent && !er.IsConditional)
-                                 .OrderBy(er => er.EntityMnemonic).ThenBy(er => er.SamDisplayName))
-                    {
-                        if (result.EvalPassed)
-                        {
-                            if (result.IsScoring)
-                            {
-                                denominator++;
-                                denominatorWeight += result.ScoringWeight;
-                                numerator++;
-                                numeratorWeight += result.ScoringWeight;
-                            }
-                        }
-                        else if (result.EvalFailed)
-                        {
-                            if (result.IsScoring)
-                            {
-                                denominator++;
-                                denominatorWeight += result.ScoringWeight;
-                                if (result.IsCritical) criticalFailureCount++;
-                            }
-                        }
-                    }
-
-                    double elementScore = denominator > 0 ? (double)numerator / denominator * 100 : 0;
-                    double elementScoreW = denominatorWeight > 0 ? (double)numeratorWeight / denominatorWeight * 100 : 0;
-
-                    auditNode.Add("elementScore", ((int)elementScore).ToString());
-                    auditNode.Add("elementScoreWeighted", ((int)elementScoreW).ToString());
-                    auditNode.Add("elementCriticalFailureCount", criticalFailureCount.ToString());
-                    auditNode.Add("elementNumerator", numerator.ToString());
-                    auditNode.Add("elementDenominator", denominator.ToString());
+                    case EntityDataTypeEnum.CC:
+                        auditDataAttribute.Data = Audit_ProcessAttribute_CodeableConcept((CodeableConcept)item.MessageItem.MessageData);
+                        break;
+                    case EntityDataTypeEnum.OBSVAL:
+                        auditDataAttribute.Data = Audit_ProcessAttribute_ObservationValue((Value)item.MessageItem.MessageData);
+                        break;
+                    case EntityDataTypeEnum.RV:
+                        auditDataAttribute.Data = Audit_ProcessAttribute_ReferenceRange((ReferenceRange)item.MessageItem.MessageData);
+                        break;
+                    case EntityDataTypeEnum.ROOT:
+                    case EntityDataTypeEnum.CLS:
+                    case EntityDataTypeEnum.ELM:
+                    case EntityDataTypeEnum.ATR:
+                    default:
+                        auditDataAttribute.Data = Audit_ProcessAttribute_Text(item.MessageItem.MessageData);
+                        break;
                 }
             }
-            catch
-            {
-                throw;
-            }
-            return auditNode;
+            // Then do the audit.
+            if (item.HasResults)
+                auditDataAttribute.AttributeAudit = Audit_AddAttributeAudit(item);
+
+            return auditDataAttribute;
         }
 
-        /// <summary>
-        /// Adds element-level audit information for a specific message model item.
-        /// </summary>
-        /// <param name="parent">The JSON node to attach the element audit info.</param>
-        /// <param name="attributeItem">The message model element item to audit.</param>
-        /// <returns>The audit JSON node for the element.</returns>
-        private JObject? Audit_AddAttributeInfo(EvaluationItem attributeEvaluationItem, JObject parent)
+        private static PIQIAuditDataAttributeData_CodeableConcept Audit_ProcessAttribute_CodeableConcept(CodeableConcept concept)
         {
-            JObject? auditNode = null;
+            List<PIQIAuditDataAttributeData_CodeableConceptCodings> codings = new List<PIQIAuditDataAttributeData_CodeableConceptCodings>();
 
-            try
+            PIQIAuditDataAttributeData_CodeableConcept auditDataAttributeData_CodeableConcept = new PIQIAuditDataAttributeData_CodeableConcept(concept.Text);
+
+            // List codings, if they exist
+            if (concept.CodingList != null && concept.CodingList.Count > 0)
             {
-                List<EvaluationResult> attributeEvaluationResultList = EvaluationManager.EvaluationResultDict.Values
-                .Where(er => er.EvaluationItem == attributeEvaluationItem).ToList();
-
-                if (attributeEvaluationResultList.Count > 0)
-                {
-                    auditNode = Utility.JSON_AddObject(parent, "attributeAudit");
-                    JObject attributeNode = Utility.JSON_AddObject(auditNode, "scoringData");
-                    JArray assessmentNode = Utility.JSON_AddArray(auditNode, "assessmentItems");
-                    JArray informationalNode = Utility.JSON_AddArray(auditNode, "InformationalItems");
-
-                    int denominator = 0;
-                    int denominatorWeight = 0;
-                    int numerator = 0;
-                    int numeratorWeight = 0;
-                    int criticalFailureCount = 0;
-
-                    foreach (EvaluationResult result in attributeEvaluationResultList
-                                 .Where(er => !er.IsDependent && !er.IsConditional)
-                                 .OrderBy(er => er.EntityMnemonic).ThenBy(er => er.SamDisplayName))
-                    {
-                        JObject attrNode = result.IsScoring ? Utility.JSON_AddObject(assessmentNode) : Utility.JSON_AddObject(informationalNode);
-                        attrNode.Add("attributeMnemonic", result.EntityMnemonic);
-                        attrNode.Add("attributeName", result.EntityName ?? "");
-                        attrNode.Add("assessment", result.SamDisplayName ?? RefData.GetSAM(result.SamMnemonic ?? "")?.Name ?? result.SamMnemonic);
-                        attrNode.Add("effect", result.IsScoring ? "Scoring" : "Informational");
-
-                        if (result.EvalPassed)
-                        {
-                            attrNode.Add("status", "Passed");
-                            if (result.IsScoring)
-                            {
-                                denominator++;
-                                denominatorWeight += result.ScoringWeight;
-                                numerator++;
-                                numeratorWeight += result.ScoringWeight;
-                            }
-                            attrNode.Add("reason", "");
-                        }
-                        else if (result.EvalSkipped)
-                        {
-                            attrNode.Add("status", "Skipped");
-                            attrNode.Add("reason", result.Reason ?? (RefData.GetSAM(result.SkipSamMnemonic ?? "")?.FailName ?? RefData.GetSAM(result.SkipSamMnemonic ?? "")?.Name));
-                        }
-                        else if (result.EvalFailed)
-                        {
-                            attrNode.Add("status", "Failed");
-                            attrNode.Add("reason", result.Reason ?? 
-                                (result.FailSamMnemonic == result.Criterion.SAMMnemonic ? 
-                                (result.Criterion.FailureNameOverride ?? result.Criterion.SamNameOverride ?? RefData.GetSAM(result.FailSamMnemonic ?? "")?.FailName ?? RefData.GetSAM(result.FailSamMnemonic ?? "")?.Name) : 
-                                (RefData.GetSAM(result.FailSamMnemonic ?? "")?.FailName ?? RefData.GetSAM(result.FailSamMnemonic ?? "")?.Name)));
-                            if (result.IsScoring)
-                            {
-                                denominator++;
-                                denominatorWeight += result.ScoringWeight;
-                                if (result.IsCritical) criticalFailureCount++;
-                            }
-                        }
-                    }
-
-                    double attributetScore = denominator > 0 ? (double)numerator / denominator * 100 : 0;
-                    double attributeScoreW = denominatorWeight > 0 ? (double)numeratorWeight / denominatorWeight * 100 : 0;
-
-                    attributeNode.Add("attributeScore", ((int)attributetScore).ToString());
-                    attributeNode.Add("attributeScoreWeighted", ((int)attributeScoreW).ToString());
-                    attributeNode.Add("attributeCriticalFailureCount", criticalFailureCount.ToString());
-                    attributeNode.Add("attributeNumerator", numerator.ToString());
-                    attributeNode.Add("attributeDenominator", denominator.ToString());
-                }
+                auditDataAttributeData_CodeableConcept.Codings = new List<PIQIAuditDataAttributeData_CodeableConceptCodings>();
+                foreach (Coding coding in concept.CodingList)
+                    auditDataAttributeData_CodeableConcept.Codings.Add(new PIQIAuditDataAttributeData_CodeableConceptCodings(coding.CodeSystem, coding.CodeValue, coding.CodeText));
             }
-            catch
-            {
-                throw;
-            }
-            return auditNode;
+
+            return auditDataAttributeData_CodeableConcept;
         }
+
+        private static PIQIAuditDataAttributeData_ObservationValue Audit_ProcessAttribute_ObservationValue(Value value)
+        {
+            // There will always be a text value
+            PIQIAuditDataAttributeData_ObservationValue auditDataAttributeData_ObservationValue = new PIQIAuditDataAttributeData_ObservationValue(value.Text);
+
+            // We might have a TypeCC, and said type (might?) have a CodeableConcept.
+            if (value.TypeCC != null)
+                auditDataAttributeData_ObservationValue.Type = Audit_ProcessAttribute_CodeableConcept(value.TypeCC);
+
+            // Probably should add value cc here, even though we've never actually seen one
+
+            return auditDataAttributeData_ObservationValue;
+        }
+
+        private static PIQIAuditDataAttributeData_ReferenceRange Audit_ProcessAttribute_ReferenceRange(ReferenceRange range)
+        {
+            return new PIQIAuditDataAttributeData_ReferenceRange(range.Text, range.LowValue, range.HighValue);
+        }
+
+        private static PIQIAuditDataAttributeData_Text Audit_ProcessAttribute_Text(BaseText item)
+        {
+            return new PIQIAuditDataAttributeData_Text(item.Text);
+        }
+        private PIQIAuditDataAttributeAudit? Audit_AddAttributeAudit(EvaluationItem data)
+        {
+            PIQIAuditDataAttributeAuditScoringData scoringData = Audit_AddAttributeAudit_ScoringData(data);
+            PIQIAuditDataAttributeAudit auditDataAttributeAudit = new PIQIAuditDataAttributeAudit(scoringData);
+
+            // Scoring and Informational assessments
+            foreach (EvaluationResult result in data.CriteriaResultDict.Values.Where(t => t.IsScoring == true).OrderBy(t => t.SamDisplayName))
+            {
+                if (auditDataAttributeAudit.AssessmentItems == null)
+                    auditDataAttributeAudit.AssessmentItems = new List<PIQIAuditDataAttributeAuditAssessmentItem>();
+
+                auditDataAttributeAudit.AssessmentItems.Add(Audit_AddAttributeAudit_AssessmentItem(result, "Scoring"));
+            }
+            foreach (EvaluationResult result in data.CriteriaResultDict.Values.Where(t => t.IsInformational == true).OrderBy(t => t.SamDisplayName))
+            {
+                if (auditDataAttributeAudit.InformationalItems == null)
+                    auditDataAttributeAudit.InformationalItems = new List<PIQIAuditDataAttributeAuditAssessmentItem>();
+
+                auditDataAttributeAudit.InformationalItems.Add(Audit_AddAttributeAudit_AssessmentItem(result, "Informational"));
+            }
+
+            return auditDataAttributeAudit;
+        }
+
+        private static PIQIAuditDataAttributeAuditScoringData Audit_AddAttributeAudit_ScoringData(EvaluationItem data)
+        {
+            // Calculate scoring 
+            List<EvaluationResult> resultList = data.CriteriaResultDict.Values.ToList();
+            int denominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Count();
+            int weightedDenominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Sum(t => t.Criterion.ScoringWeight);
+            int numerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Count();
+            int weightedNumerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Sum(t => t.Criterion.ScoringWeight);
+            int score = 0;
+            if (denominator > 0)
+                score = (int)(Math.Truncate((float)numerator / (float)denominator * (float)100));
+            int weightedScore = 0;
+            if (weightedDenominator > 0)
+                weightedScore = (int)(Math.Truncate((float)weightedNumerator / (float)weightedDenominator * (float)100));
+            int criticalFailureCount = resultList.Where(t => t.IsScoring && t.IsCritical && t.EvalFailed).Count();
+
+            return new PIQIAuditDataAttributeAuditScoringData(score, weightedScore, criticalFailureCount, numerator, denominator);
+        }
+
+        private PIQIAuditDataAttributeAuditAssessmentItem Audit_AddAttributeAudit_AssessmentItem(EvaluationResult result, string effect)
+        {
+            var reason = result.EvalPassed ? ""
+                : result.EvalSkipped
+                    ? result.Reason ?? RefData.GetSAM(result.SkipSamMnemonic ?? "")?.FailName ?? RefData.GetSAM(result.SkipSamMnemonic ?? "")?.Name
+                    : result.Reason ?? (result.FailSamMnemonic == result.Criterion.SAMMnemonic ?
+                        (result.Criterion.FailureNameOverride ?? result.Criterion.SamNameOverride ?? RefData.GetSAM(result.FailSamMnemonic ?? "")?.FailName ?? RefData.GetSAM(result.FailSamMnemonic ?? "")?.Name)
+                        : (RefData.GetSAM(result.FailSamMnemonic ?? "")?.FailName ?? RefData.GetSAM(result.FailSamMnemonic ?? "")?.Name));
+
+            return new PIQIAuditDataAttributeAuditAssessmentItem(
+                result.EntityMnemonic,
+                result.EntityName,
+                result.SamDisplayName,
+                effect,
+                result.EvalSkipped ? "Skipped" : (result.EvalPassed ? "Passed" : "Failed"),
+                reason
+            );
+        }
+
+        #endregion
 
         #endregion
 
@@ -407,5 +418,6 @@ namespace PIQI.Components.Models
         }
 
         #endregion
+
     }
 }

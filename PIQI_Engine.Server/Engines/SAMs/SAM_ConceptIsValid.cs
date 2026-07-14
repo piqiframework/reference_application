@@ -62,6 +62,10 @@ namespace PIQI_Engine.Server.Engines.SAMs
                 if (data is not CodeableConcept codeableConcept)
                     throw new Exception("CodeableConceptIsValidConcept expects a CodeableConcept value.");
 
+                // Verify at least one complete coding exists
+                if (!codeableConcept.CodingList.Any(c => c.IsComplete == true)) 
+                    passed = false;
+
                 // Call FHIR server if not called already
                 if (!codeableConcept.FHIRServerCalled)
                     await _SAMService.LookupCodeAsync(codeableConcept);

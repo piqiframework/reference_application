@@ -49,11 +49,11 @@ namespace PIQI_Engine.Server.Engines.SAMs
         {
             PIQISAMResponse result = new();
             bool passed = false;
-
+             
             try
             {
                 // Set the message model item
-                EvaluationItem evaluationItem = (EvaluationItem)request.EvaluationObject;
+                EvaluationItem evaluationItem = (EvaluationItem)request.EvaluationObject; 
                 MessageModelItem item = evaluationItem?.MessageItem;
 
                 // Clean is true if there are no child evaluations that failed

@@ -47,7 +47,7 @@ namespace PIQI.Components.Models
         /// <summary>
         /// The date and time when the SAM was last modified.
         /// </summary>
-        public string? ModifiedDateTime { get; set; }
+        public string? LastModifiedDate { get; set; }
 
         /// <summary>
         /// Optional mnemonic indicating the execution type.

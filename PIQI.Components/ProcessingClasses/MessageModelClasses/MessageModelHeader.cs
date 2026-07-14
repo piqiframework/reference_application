@@ -4,7 +4,7 @@ using PIQI.Components.Services;
 namespace PIQI.Components.Models
 {
     /// <summary>
-    /// Represents the header portion of a message, including metadata such as provider, data source, and transaction date.
+    /// Represents the header portion of a message, including metadata such as contributor, data source, and transaction date.
     /// </summary>
     public class MessageModelHeader
     {
@@ -16,9 +16,9 @@ namespace PIQI.Components.Models
         public MessageModelHeaderString EntityModelMnemonicData { get; set; }
 
         /// <summary>
-        /// The provider name information.
+        /// The contributor name information.
         /// </summary>
-        public MessageModelHeaderString ProviderNameData { get; set; }
+        public MessageModelHeaderString ContributorNameData { get; set; }
 
         /// <summary>
         /// The data source name information.
@@ -41,9 +41,9 @@ namespace PIQI.Components.Models
         public string EntityModelMnemonic => EntityModelMnemonicData.Value;
 
         /// <summary>
-        /// Gets the provider name value.
+        /// Gets the contributor name value.
         /// </summary>
-        public string ProviderName => ProviderNameData.Value;
+        public string ContributorName => ContributorNameData.Value;
 
         /// <summary>
         /// Gets the data source name value.
@@ -77,15 +77,15 @@ namespace PIQI.Components.Models
         /// </summary>
         /// <param name="pToken">The JSON token containing header data.</param>
         /// <param name="EntityModelMnemonic">Optional override for entity model mnemonic.</param>
-        /// <param name="dataProviderID">Optional override for provider name.</param>
+        /// <param name="contributorID">Optional override for contributor name.</param>
         /// <param name="dataSourceID">Optional override for data source name.</param>
         /// <param name="messageID">Optional override for client message ID.</param>
-        public MessageModelHeader(JToken pToken, string? EntityModelMnemonic, string? dataProviderID, string? dataSourceID, string? messageID)
+        public MessageModelHeader(JToken pToken, string? EntityModelMnemonic, string? contributorID, string? dataSourceID, string? messageID)
         {
             Initialize();
 
             EntityModelMnemonicData.OriginalValue = Utility.GetJSONString(pToken, "EntityModel") ?? EntityModelMnemonic;
-            ProviderNameData.OriginalValue = dataProviderID ?? Utility.GetJSONString(pToken, "DataProviderID");
+            ContributorNameData.OriginalValue = contributorID ?? Utility.GetJSONString(pToken, "ContributorID");
             DataSourceNameData.OriginalValue = dataSourceID ?? Utility.GetJSONString(pToken, "DataSourceID");
             ClientMessageIDData.OriginalValue = messageID ?? Utility.GetJSONString(pToken, "MessageID");
             TransactionDateData.OriginalValue = Utility.ObjNullableDateTime(Utility.GetJSONString(pToken, "TransactionDate"));
@@ -97,7 +97,7 @@ namespace PIQI.Components.Models
         private void Initialize()
         {
             EntityModelMnemonicData = new MessageModelHeaderString();
-            ProviderNameData = new MessageModelHeaderString();
+            ContributorNameData = new MessageModelHeaderString();
             DataSourceNameData = new MessageModelHeaderString();
             ClientMessageIDData = new MessageModelHeaderString();
             TransactionDateData = new MessageModelHeaderDate();

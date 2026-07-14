@@ -111,8 +111,8 @@ namespace PIQI.Components.Models
 
                 JToken token = JToken.Parse(MessageText);
 
-                Header = new MessageModelHeader(token, piqiRequest.PIQIModelMnemonic, piqiRequest.DataProviderID, piqiRequest.DataSourceID, piqiRequest.MessageID);
-                if (Header.ProviderName == null) throw new Exception("Provider is missing.");
+                Header = new MessageModelHeader(token, piqiRequest.PIQIModelMnemonic, piqiRequest.ContributorID, piqiRequest.DataSourceID, piqiRequest.MessageID);
+                if (Header.ContributorName == null) throw new Exception("Contributor is missing.");
                 if (Header.DataSourceName == null) throw new Exception("Data Source is missing.");
                 if (Header.ClientMessageID == null) throw new Exception("Message ID is missing.");
             }

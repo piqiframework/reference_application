@@ -1,4 +1,7 @@
-﻿namespace PIQI.Components.Models
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace PIQI.Components.Models
 {
     /// <summary>
     /// Represents a criterion used to evaluate an entity, including scoring, parameters, and conditional logic.
@@ -23,6 +26,8 @@
         /// <summary>
         /// The effect of the criterion on scoring.
         /// </summary>
+        [JsonProperty(PropertyName = "ScoringEffect")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public ScoringEffectEnum ScoringEffect { get; set; }
 
         /// <summary>

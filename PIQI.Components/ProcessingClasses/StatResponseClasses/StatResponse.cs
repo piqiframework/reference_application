@@ -266,7 +266,7 @@
             IncrementTotal(evaluationResult);
 
             // If the failure is informational, log it in the informationalDict
-            if (!evaluationResult.IsScoring)
+            if (evaluationResult.Criterion.ScoringEffect == ScoringEffectEnum.Informational)
             {
                 StatResponseInformational informational = GetInformational(evaluationResult);
                 if (informational == null)

@@ -29,6 +29,11 @@
         public string SAMName { get; set; }
 
         /// <summary>
+        /// The sequence or the informational criterion in the evaluation rubric.
+        /// </summary>
+        public int Sequence { get; set; }
+
+        /// <summary>
         /// Unique key combining entity and SAM mnemonics.
         /// </summary>
         public string Key { get; set; }
@@ -87,6 +92,7 @@
             EntityName = evaluationResult.EntityName;
             SAMMnemonic = evaluationResult.SamMnemonic;
             SAMName = evaluationResult.SamDisplayName;
+            Sequence = evaluationResult.Criterion.Sequence;
             Key = Key = $"{evaluationResult.EntityMnemonic}|{evaluationResult.SamMnemonic}";
             IsCritical = evaluationResult.IsCritical;
             Weight = evaluationResult.Criterion.ScoringWeight;

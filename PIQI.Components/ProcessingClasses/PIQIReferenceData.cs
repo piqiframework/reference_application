@@ -154,7 +154,7 @@
         /// </summary>
         /// <param name="codeSystemIdentifier">The code system identifier.</param>
         /// <returns>The <see cref="CodeSystem"/> if found; otherwise, null.</returns>
-        public CodeSystem GetCodeSystem(string codeSystemIdentifier)
+        public CodeSystem? GetCodeSystem(string codeSystemIdentifier)
         {
             return CodeSystemList.FirstOrDefault(cs =>
                 cs.Name?.Equals(codeSystemIdentifier) == true ||

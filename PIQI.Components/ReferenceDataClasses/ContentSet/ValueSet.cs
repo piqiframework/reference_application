@@ -29,9 +29,9 @@
         public string Mnemonic { get; set; } = null!;
 
         /// <summary>
-        /// Gets or sets a description of the value set.
+        /// Gets or sets a data class to be used as a context for the value set, ie. the value set will only be used against members of the specified data class.
         /// </summary>
-        public string? Description { get; set; }
+        public string? DataClassContext { get; set; }
 
         /// <summary>
         /// Gets or sets the FHIR URI associated with this value set.

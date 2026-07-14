@@ -54,6 +54,16 @@
         public bool IsScoring => Criterion.ScoringEffect == ScoringEffectEnum.Scoring;
 
         /// <summary>
+        /// Gets a value indicating whether this evaluation result is based on a informational criterion.
+        /// </summary>
+        public bool IsInformational => Criterion.ScoringEffect == ScoringEffectEnum.Informational;
+
+        /// <summary>
+        /// Gets a value indicating whether this evaluation result is based on a plausibility criterion.
+        /// </summary>
+        public bool IsPlausibility => Criterion.ScoringEffect == ScoringEffectEnum.Plausibility;
+
+        /// <summary>
         /// Gets a value indicating whether this evaluation result is considered critical.
         /// </summary>
         public bool IsCritical => Criterion.CriticalityIndicator;

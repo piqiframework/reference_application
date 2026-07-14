@@ -33,7 +33,7 @@ namespace PIQI.Components.Models
         /// <summary>
         /// Optional audited message related to the API call.
         /// </summary>
-        public string? AuditedMessage { get; set; }
+        public PIQIAuditResponse? AuditedMessage { get; set; }
 
         #endregion
 

@@ -65,8 +65,16 @@ namespace PIQI.Components.Models
             // Process text node
             if (jToken.SelectToken("text") == null && jToken.SelectToken("codings") == null)
             {
-                // If no structured object, use the node value as text
-                Text = jToken.Value<string>();
+                // If we didn't receive a structured object, just grab the value of the node and treat it as the text property
+                if (jToken.First != null)
+                    Text = jToken.First().ToString();
+                else
+                    Text = jToken.ToString();
+                if (Text != null)
+                {
+                    Text = Text.Replace("\r", "");
+                    Text = Text.Replace("\n", "");
+                }
             }
             else
             {
