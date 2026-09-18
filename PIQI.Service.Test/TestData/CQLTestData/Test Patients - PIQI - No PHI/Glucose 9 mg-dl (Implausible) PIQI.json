@@ -1,0 +1,108 @@
+{
+    "formatID": "FHIR JSON",
+    "messageID": "patient.2026.09.09",
+    "patient": {
+        "demographics": {
+            "patientIdentifier": "ID Exists",
+            "firstName": "ID Exists",
+            "middleName": "ID Exists",
+            "lastName": "ID Exists",
+            "telecom": "ID Exists",
+            "currentAddress": "ID Exists",
+            "birthSex": {
+                "codings": [
+                    {
+                        "system": "http://hl7.org/fhir/administrative-gender",
+                        "code": "female",
+                        "display": "Female"
+                    }
+                ],
+                "text": "Female"
+            },
+            "birthDate": "1970-01-01",
+            "ethnicity": {
+                "codings": [
+                    {
+                        "system": "urn:oid:2.16.840.1.113883.6.238",
+                        "code": "2186-5"
+                    }
+                ],
+                "text": "Not Hispanic or Latino"
+            },
+            "primaryLanguage": {
+                "codings": [
+                    {
+                        "system": "urn:ietf:bcp:47",
+                        "code": "en",
+                        "display": "English"
+                    }
+                ],
+                "text": "en"
+            },
+            "race": {
+                "codings": [
+                ],
+                "text": "hawaiian"
+            }
+        },
+        "labResults": [
+            {
+                "performedTest": {
+                    "codings": [
+                        {
+                            "system": "http://loinc.org",
+                            "code": "2345-7"
+                        }
+                    ],
+                    "text": "Glucose Ser/Plas MCnc Pt Qn"
+                },
+                "labCategory": {
+                    "codings": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                            "code": "laboratory",
+                            "display": "Laboratory"
+                        }
+                    ],
+                    "text": "laboratory"
+                },
+                "performedDateTime": "2026-09-03T00:00:00+00:00",
+                "resultStatus": {
+                    "codings": [
+                        {
+                            "system": "http://hl7.org/fhir/ValueSet/observation-status",
+                            "code": "preliminary",
+                            "display": "preliminary"
+                        }
+                    ],
+                    "text": "preliminary"
+                },
+                "resultValue": {
+                    "type": {
+                        "text": "PQ"
+                    },
+                    "text": 9
+                },
+                "resultUnit": {
+                    "codings": [
+                        {
+                            "system": "http://unitsofmeasure.org",
+                            "code": "mg/dl",
+                            "display": "mg/dl"
+                        }
+                    ],
+                    "text": "mg/dl"
+                }
+            }
+        ],
+        "practitioners": [
+            {
+                "practitionerAddress": "Anytown, Alabama, US",
+                "practitionerTelecom": "practitioner@AnytownHealth.com",
+                "practitionerStatus": {
+                    "text": "active"
+                }
+            }
+        ]
+    }
+}

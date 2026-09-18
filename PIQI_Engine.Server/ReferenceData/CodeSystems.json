@@ -1,24 +1,13 @@
 {
   "codeSystemLibrary": [
     {
-      "name": "FHIR - Languages (BCP-47)",
-      "mnemonic": "BCP_47",
-      "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.3.2",
-        "bcp47",
-        "urn:ietf:bcp:47",
-        "BCP_47",
-        "ietf:bcp:47"
-      ]
-    },
-    {
       "name": "CPT",
       "mnemonic": "AMA_CPT",
       "codeSystemIdentifiers": [
         "2.16.840.1.113883.6.12",
-        "urn:oid:2.16.840.1.113883.6.12",
         "SYM_AMA_CPT",
         "C4",
+        "urn:oid:2.16.840.1.113883.6.12",
         "http://www.ama-assn.org/go/cpt"
       ]
     },
@@ -27,6 +16,16 @@
       "mnemonic": "AMA_CPTMOD",
       "codeSystemIdentifiers": [
         "SYM_AMA_CPTMOD"
+      ]
+    },
+    {
+      "name": "FHIR - Languages (BCP-47)",
+      "mnemonic": "BCP_47",
+      "codeSystemIdentifiers": [
+        "2.16.840.1.113883.4.642.3.20",
+        "SYM_FHIR_LANGUAGES4",
+        "bcp47",
+        "urn:ietf:bcp:47"
       ]
     },
     {
@@ -64,9 +63,9 @@
         "2.16.840.1.113883.12.292",
         "urn:oid:2.16.840.1.113883.12.292",
         "http://hl7.org/fhir/sid/cvx",
+        "CVX",
         "https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx",
-        "SYM_CDC_CVX",
-        "CVX"
+        "SYM_CDC_CVX"
       ]
     },
     {
@@ -80,9 +79,9 @@
       "name": "CDC - Race and Ethnicity",
       "mnemonic": "CDC_RE",
       "codeSystemIdentifiers": [
-        "Race & Ethnicity - CDC",
-        "Race and Ethnicity - CDC",
         "2.16.840.1.113883.6.238",
+        "Race and Ethnicity - CDC",
+        "Race & Ethnicity - CDC",
         "SYM_CDC_RE",
         "urn:oid:2.16.840.1.113883.6.238",
         "urn:uuid:Race%20&%20Ethnicity%20-%20CDC",
@@ -115,7 +114,10 @@
       "name": "FDA - National Drug Code Directory Packages",
       "mnemonic": "FDA_PACK",
       "codeSystemIdentifiers": [
-        "SYM_FDA_PACK"
+        "2.16.840.1.113883.6.69",
+        "SYM_FDA_PACK",
+        "urn:oid:2.16.840.1.113883.6.69",
+        "http://hl7.org/fhir/sid/ndc"
       ]
     },
     {
@@ -147,20 +149,20 @@
         "SYM_FHIR_CLAIM_USE",
         "2.16.840.1.113883.4.642.3.544",
         "urn:oid:2.16.840.1.113883.4.642.4.545",
-        "http://hl7.org/fhir/ValueSet/claim-use",
-        "2.16.840.1.113883.4.642.4.545"
+        "2.16.840.1.113883.4.642.4.545",
+        "http://hl7.org/fhir/ValueSet/claim-use"
       ]
     },
     {
-      "name": "FHIR - Structure Definition Use Codes \/ Keywords",
+      "name": "FHIR - Structure Definition Use Codes / Keywords",
       "mnemonic": "FHIR_DEFINITION_USE",
       "codeSystemIdentifiers": [
         "2.16.840.1.113883.4.642.4.1191",
         "http://hl7.org/fhir/ValueSet/definition-use",
-        "2.16.840.1.113883.4.642.3.1190",
         "urn:oid:2.16.840.1.113883.4.642.4.1191",
-        "urn:oid:2.16.840.1.113883.4.642.3.1190",
+        "2.16.840.1.113883.4.642.3.1190",
         "SYM_FHIR_DEFINITION_USE",
+        "urn:oid:2.16.840.1.113883.4.642.3.1190",
         "http://terminology.hl7.org/CodeSystem/definition-use"
       ]
     },
@@ -168,8 +170,8 @@
       "name": "FHIR - Special arrangements",
       "mnemonic": "FHIR_ENCOUNTER_SPECIAL_ARRANGEMENTS",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.3.253",
         "2.16.840.1.113883.4.642.3.253",
+        "urn:oid:2.16.840.1.113883.4.642.3.253",
         "http://terminology.hl7.org/CodeSystem/encounter-special-arrangements",
         "2.16.840.1.113883.4.642.4.1090",
         "SYM_FHIR_ENCOUNTER_SPECIAL_ARRANGEMENTS",
@@ -182,23 +184,23 @@
       "mnemonic": "FHIR_HTTP_OPERATIONS",
       "codeSystemIdentifiers": [
         "urn:oid:2.16.840.1.113883.4.642.3.716",
-        "2.16.840.1.113883.4.642.4.717",
-        "http://hl7.org/fhir/http-operations",
         "urn:oid:2.16.840.1.113883.4.642.4.717",
+        "2.16.840.1.113883.4.642.4.717",
         "http://hl7.org/fhir/ValueSet/http-operations",
-        "SYM_FHIR_HTTP_OPERATIONS",
-        "2.16.840.1.113883.4.642.3.716"
+        "2.16.840.1.113883.4.642.3.716",
+        "http://hl7.org/fhir/http-operations",
+        "SYM_FHIR_HTTP_OPERATIONS"
       ]
     },
     {
       "name": "FHIR - StructureMapContextType",
       "mnemonic": "FHIR_MAP_CONTEXT_TYPE",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.4.680",
         "2.16.840.1.113883.4.642.3.679",
         "http://hl7.org/fhir/ValueSet/map-context-type",
-        "SYM_FHIR_MAP_CONTEXT_TYPE",
         "http://hl7.org/fhir/map-context-type",
+        "SYM_FHIR_MAP_CONTEXT_TYPE",
+        "urn:oid:2.16.840.1.113883.4.642.4.680",
         "2.16.840.1.113883.4.642.4.680",
         "urn:oid:2.16.840.1.113883.4.642.3.679"
       ]
@@ -207,12 +209,12 @@
       "name": "FHIR - StructureMapGroupTypeMode",
       "mnemonic": "FHIR_MAP_GROUP_TYPE_MODE",
       "codeSystemIdentifiers": [
-        "http://hl7.org/fhir/map-group-type-mode",
         "urn:oid:2.16.840.1.113883.4.642.4.688",
+        "http://hl7.org/fhir/map-group-type-mode",
         "http://hl7.org/fhir/ValueSet/map-group-type-mode",
         "SYM_FHIR_MAP_GROUP_TYPE_MODE",
-        "2.16.840.1.113883.4.642.3.687",
         "urn:oid:2.16.840.1.113883.4.642.3.687",
+        "2.16.840.1.113883.4.642.3.687",
         "2.16.840.1.113883.4.642.4.688"
       ]
     },
@@ -220,11 +222,11 @@
       "name": "FHIR - StructureMapInputMode",
       "mnemonic": "FHIR_MAP_INPUT_MODE",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.4.678",
         "urn:oid:2.16.840.1.113883.4.642.3.677",
+        "2.16.840.1.113883.4.642.4.678",
         "http://hl7.org/fhir/ValueSet/map-input-mode",
-        "http://hl7.org/fhir/map-input-mode",
         "2.16.840.1.113883.4.642.3.677",
+        "http://hl7.org/fhir/map-input-mode",
         "urn:oid:2.16.840.1.113883.4.642.4.678",
         "SYM_FHIR_MAP_INPUT_MODE"
       ]
@@ -233,13 +235,13 @@
       "name": "FHIR - StructureMapModelMode",
       "mnemonic": "FHIR_MAP_MODEL_MODE",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.4.676",
         "http://hl7.org/fhir/ValueSet/map-model-mode",
         "2.16.840.1.113883.4.642.3.675",
+        "2.16.840.1.113883.4.642.4.676",
         "urn:oid:2.16.840.1.113883.4.642.4.676",
-        "SYM_FHIR_MAP_MODEL_MODE",
+        "http://hl7.org/fhir/map-model-mode",
         "urn:oid:2.16.840.1.113883.4.642.3.675",
-        "http://hl7.org/fhir/map-model-mode"
+        "SYM_FHIR_MAP_MODEL_MODE"
       ]
     },
     {
@@ -251,18 +253,18 @@
         "urn:oid:2.16.840.1.113883.4.642.4.684",
         "http://hl7.org/fhir/map-source-list-mode",
         "2.16.840.1.113883.4.642.3.683",
-        "http://hl7.org/fhir/ValueSet/map-source-list-mode",
-        "SYM_FHIR_MAP_SOURCE_LIST_MODE"
+        "SYM_FHIR_MAP_SOURCE_LIST_MODE",
+        "http://hl7.org/fhir/ValueSet/map-source-list-mode"
       ]
     },
     {
       "name": "FHIR - StructureMapTargetListMode",
       "mnemonic": "FHIR_MAP_TARGET_LIST_MODE",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.4.686",
-        "http://hl7.org/fhir/ValueSet/map-target-list-mode",
         "urn:oid:2.16.840.1.113883.4.642.3.685",
+        "urn:oid:2.16.840.1.113883.4.642.4.686",
         "2.16.840.1.113883.4.642.3.685",
+        "http://hl7.org/fhir/ValueSet/map-target-list-mode",
         "2.16.840.1.113883.4.642.4.686",
         "SYM_FHIR_MAP_TARGET_LIST_MODE",
         "http://hl7.org/fhir/map-target-list-mode"
@@ -275,8 +277,8 @@
         "2.16.840.1.113883.4.642.3.681",
         "http://hl7.org/fhir/map-transform",
         "urn:oid:2.16.840.1.113883.4.642.4.682",
-        "http://hl7.org/fhir/ValueSet/map-transform",
         "SYM_FHIR_MAP_TRANSFORM",
+        "http://hl7.org/fhir/ValueSet/map-transform",
         "2.16.840.1.113883.4.642.4.682",
         "urn:oid:2.16.840.1.113883.4.642.3.681"
       ]
@@ -312,8 +314,8 @@
         "SYM_FHIR_RECOMMENDATION_STRENGTH",
         "http://terminology.hl7.org/CodeSystem/recommendation-strength",
         "urn:oid:2.16.840.1.113883.4.642.4.1268",
-        "urn:oid:2.16.840.1.113883.4.642.3.1021",
         "http://hl7.org/fhir/ValueSet/recommendation-strength",
+        "urn:oid:2.16.840.1.113883.4.642.3.1021",
         "2.16.840.1.113883.4.642.3.1021"
       ]
     },
@@ -334,12 +336,12 @@
       "name": "FHIR - TestReportParticipantType",
       "mnemonic": "FHIR_REPORT_PARTICIPANT_TYPE",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.3.722",
         "urn:oid:2.16.840.1.113883.4.642.4.723",
+        "2.16.840.1.113883.4.642.3.722",
         "SYM_FHIR_REPORT_PARTICIPANT_TYPE",
         "urn:oid:2.16.840.1.113883.4.642.3.722",
-        "http://hl7.org/fhir/ValueSet/report-participant-type",
         "2.16.840.1.113883.4.642.4.723",
+        "http://hl7.org/fhir/ValueSet/report-participant-type",
         "http://hl7.org/fhir/report-participant-type"
       ]
     },
@@ -348,12 +350,12 @@
       "mnemonic": "FHIR_REPORT_RESULT_CODES",
       "codeSystemIdentifiers": [
         "SYM_FHIR_REPORT_RESULT_CODES",
-        "urn:oid:2.16.840.1.113883.4.642.3.718",
         "urn:oid:2.16.840.1.113883.4.642.4.719",
+        "urn:oid:2.16.840.1.113883.4.642.3.718",
         "http://hl7.org/fhir/report-result-codes",
-        "2.16.840.1.113883.4.642.3.718",
         "2.16.840.1.113883.4.642.4.719",
-        "http://hl7.org/fhir/ValueSet/report-result-codes"
+        "http://hl7.org/fhir/ValueSet/report-result-codes",
+        "2.16.840.1.113883.4.642.3.718"
       ]
     },
     {
@@ -364,9 +366,9 @@
         "2.16.840.1.113883.4.642.4.725",
         "http://hl7.org/fhir/report-status-codes",
         "urn:oid:2.16.840.1.113883.4.642.4.725",
+        "urn:oid:2.16.840.1.113883.4.642.3.724",
         "http://hl7.org/fhir/ValueSet/report-status-codes",
-        "SYM_FHIR_REPORT_STATUS_CODES",
-        "urn:oid:2.16.840.1.113883.4.642.3.724"
+        "SYM_FHIR_REPORT_STATUS_CODES"
       ]
     },
     {
@@ -391,8 +393,8 @@
         "2.16.840.1.113883.4.642.4.636",
         "2.16.840.1.113883.4.642.3.635",
         "urn:oid:2.16.840.1.113883.4.642.3.635",
-        "http://hl7.org/fhir/ValueSet/search-xpath-usage",
-        "http://hl7.org/fhir/search-xpath-usage"
+        "http://hl7.org/fhir/search-xpath-usage",
+        "http://hl7.org/fhir/ValueSet/search-xpath-usage"
       ]
     },
     {
@@ -412,9 +414,9 @@
       "name": "FHIR - ServiceProvisionConditions",
       "mnemonic": "FHIR_SERVICE_PROVISION_CONDITIONS",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.4.1143",
-        "2.16.840.1.113883.4.642.4.1143",
         "2.16.840.1.113883.4.642.3.514",
+        "2.16.840.1.113883.4.642.4.1143",
+        "urn:oid:2.16.840.1.113883.4.642.4.1143",
         "urn:oid:2.16.840.1.113883.4.642.3.514",
         "SYM_FHIR_SERVICE_PROVISION_CONDITIONS",
         "http://hl7.org/fhir/ValueSet/service-provision-conditions",
@@ -428,10 +430,10 @@
         "urn:oid:2.16.840.1.113883.4.642.3.518",
         "urn:oid:2.16.840.1.113883.4.642.4.1145",
         "http://hl7.org/fhir/ValueSet/service-type",
-        "http://terminology.hl7.org/CodeSystem/service-type",
         "2.16.840.1.113883.4.642.4.1145",
+        "2.16.840.1.113883.4.642.3.518",
         "SYM_FHIR_SERVICE_TYPE",
-        "2.16.840.1.113883.4.642.3.518"
+        "http://terminology.hl7.org/CodeSystem/service-type"
       ]
     },
     {
@@ -442,8 +444,8 @@
         "2.16.840.1.113883.4.642.3.542",
         "SYM_FHIR_SERVICE_USCLS",
         "http://terminology.hl7.org/CodeSystem/ex-USCLS",
-        "2.16.840.1.113883.4.642.4.1153",
         "urn:oid:2.16.840.1.113883.4.642.4.1153",
+        "2.16.840.1.113883.4.642.4.1153",
         "urn:oid:2.16.840.1.113883.4.642.3.542"
       ]
     },
@@ -451,11 +453,11 @@
       "name": "FHIR - SlotStatus",
       "mnemonic": "FHIR_SLOTSTATUS",
       "codeSystemIdentifiers": [
-        "http://hl7.org/fhir/slotstatus",
         "2.16.840.1.113883.4.642.3.482",
+        "http://hl7.org/fhir/slotstatus",
         "urn:oid:2.16.840.1.113883.4.642.3.482",
-        "http://hl7.org/fhir/ValueSet/slotstatus",
         "urn:oid:2.16.840.1.113883.4.642.4.483",
+        "http://hl7.org/fhir/ValueSet/slotstatus",
         "2.16.840.1.113883.4.642.4.483",
         "SYM_FHIR_SLOTSTATUS"
       ]
@@ -467,23 +469,23 @@
         "urn:oid:2.16.840.1.113883.4.642.3.1018",
         "SYM_FHIR_SMART_CAPABILITIES",
         "2.16.840.1.113883.4.642.3.1018",
-        "http://terminology.hl7.org/CodeSystem/smart-capabilities",
-        "2.16.840.1.113883.4.642.4.1265",
         "http://hl7.org/fhir/ValueSet/smart-capabilities",
-        "urn:oid:2.16.840.1.113883.4.642.4.1265"
+        "urn:oid:2.16.840.1.113883.4.642.4.1265",
+        "2.16.840.1.113883.4.642.4.1265",
+        "http://terminology.hl7.org/CodeSystem/smart-capabilities"
       ]
     },
     {
       "name": "FHIR - SortDirection",
       "mnemonic": "FHIR_SORT_DIRECTION",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.4.980",
-        "2.16.840.1.113883.4.642.3.979",
         "SYM_FHIR_SORT_DIRECTION",
+        "2.16.840.1.113883.4.642.3.979",
         "http://hl7.org/fhir/ValueSet/sort-direction",
+        "urn:oid:2.16.840.1.113883.4.642.4.980",
+        "2.16.840.1.113883.4.642.4.980",
         "urn:oid:2.16.840.1.113883.4.642.3.979",
-        "http://hl7.org/fhir/sort-direction",
-        "2.16.840.1.113883.4.642.4.980"
+        "http://hl7.org/fhir/sort-direction"
       ]
     },
     {
@@ -495,8 +497,8 @@
         "2.16.840.1.113883.4.642.4.1027",
         "2.16.840.1.113883.4.642.3.1026",
         "http://hl7.org/fhir/spdx-license",
-        "SYM_FHIR_SPDX_LICENSE",
-        "http://hl7.org/fhir/ValueSet/spdx-license"
+        "http://hl7.org/fhir/ValueSet/spdx-license",
+        "SYM_FHIR_SPDX_LICENSE"
       ]
     },
     {
@@ -516,11 +518,11 @@
       "name": "FHIR - SpecimenContainedPreference",
       "mnemonic": "FHIR_SPECIMEN_CONTAINED_PREFERENCE",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.4.853",
-        "2.16.840.1.113883.4.642.3.852",
-        "urn:oid:2.16.840.1.113883.4.642.3.852",
-        "urn:oid:2.16.840.1.113883.4.642.4.853",
         "SYM_FHIR_SPECIMEN_CONTAINED_PREFERENCE",
+        "2.16.840.1.113883.4.642.4.853",
+        "urn:oid:2.16.840.1.113883.4.642.3.852",
+        "2.16.840.1.113883.4.642.3.852",
+        "urn:oid:2.16.840.1.113883.4.642.4.853",
         "http://hl7.org/fhir/specimen-contained-preference",
         "http://hl7.org/fhir/ValueSet/specimen-contained-preference"
       ]
@@ -542,8 +544,8 @@
       "name": "FHIR - StandardsStatus",
       "mnemonic": "FHIR_STANDARDS_STATUS",
       "codeSystemIdentifiers": [
-        "http://hl7.org/fhir/ValueSet/standards-status",
         "http://terminology.hl7.org/CodeSystem/standards-status",
+        "http://hl7.org/fhir/ValueSet/standards-status",
         "urn:oid:2.16.840.1.113883.4.642.3.1365",
         "SYM_FHIR_STANDARDS_STATUS",
         "urn:oid:2.16.840.1.113883.4.642.4.1366",
@@ -558,22 +560,22 @@
         "http://hl7.org/fhir/strand-type",
         "urn:oid:2.16.840.1.113883.4.642.4.986",
         "2.16.840.1.113883.4.642.3.985",
-        "http://hl7.org/fhir/ValueSet/strand-type",
-        "2.16.840.1.113883.4.642.4.986",
         "SYM_FHIR_STRAND_TYPE",
-        "urn:oid:2.16.840.1.113883.4.642.3.985"
+        "urn:oid:2.16.840.1.113883.4.642.3.985",
+        "http://hl7.org/fhir/ValueSet/strand-type",
+        "2.16.840.1.113883.4.642.4.986"
       ]
     },
     {
       "name": "FHIR - StructureDefinitionKind",
       "mnemonic": "FHIR_STRUCTURE_DEFINITION_KIND",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.3.668",
+        "urn:oid:2.16.840.1.113883.4.642.3.668",
         "http://hl7.org/fhir/ValueSet/structure-definition-kind",
         "urn:oid:2.16.840.1.113883.4.642.4.669",
         "http://hl7.org/fhir/structure-definition-kind",
-        "urn:oid:2.16.840.1.113883.4.642.3.668",
         "2.16.840.1.113883.4.642.4.669",
+        "2.16.840.1.113883.4.642.3.668",
         "SYM_FHIR_STRUCTURE_DEFINITION_KIND"
       ]
     },
@@ -610,10 +612,10 @@
         "SYM_FHIR_SUBSCRIPTION_CHANNEL_TYPE",
         "http://hl7.org/fhir/ValueSet/subscription-channel-type",
         "urn:oid:2.16.840.1.113883.4.642.4.501",
-        "2.16.840.1.113883.4.642.4.501",
         "urn:oid:2.16.840.1.113883.4.642.3.500",
         "2.16.840.1.113883.4.642.3.500",
-        "http://hl7.org/fhir/subscription-channel-type"
+        "http://hl7.org/fhir/subscription-channel-type",
+        "2.16.840.1.113883.4.642.4.501"
       ]
     },
     {
@@ -625,18 +627,18 @@
         "urn:oid:2.16.840.1.113883.4.642.3.502",
         "http://hl7.org/fhir/ValueSet/subscription-status",
         "urn:oid:2.16.840.1.113883.4.642.4.503",
-        "SYM_FHIR_SUBSCRIPTION_STATUS",
-        "2.16.840.1.113883.4.642.3.502"
+        "2.16.840.1.113883.4.642.3.502",
+        "SYM_FHIR_SUBSCRIPTION_STATUS"
       ]
     },
     {
       "name": "FHIR - SubscriptionTag",
       "mnemonic": "FHIR_SUBSCRIPTION_TAG",
       "codeSystemIdentifiers": [
-        "SYM_FHIR_SUBSCRIPTION_TAG",
         "http://hl7.org/fhir/ValueSet/subscription-tag",
         "urn:oid:2.16.840.1.113883.4.642.3.504",
         "http://terminology.hl7.org/CodeSystem/subscription-tag",
+        "SYM_FHIR_SUBSCRIPTION_TAG",
         "2.16.840.1.113883.4.642.4.1141",
         "urn:oid:2.16.840.1.113883.4.642.4.1141",
         "2.16.840.1.113883.4.642.3.504"
@@ -646,11 +648,11 @@
       "name": "FHIR - Substance Category Codes",
       "mnemonic": "FHIR_SUBSTANCE_CATEGORY",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.3.476",
         "urn:oid:2.16.840.1.113883.4.642.3.476",
+        "2.16.840.1.113883.4.642.3.476",
         "http://terminology.hl7.org/CodeSystem/substance-category",
-        "SYM_FHIR_SUBSTANCE_CATEGORY",
         "http://hl7.org/fhir/ValueSet/substance-category",
+        "SYM_FHIR_SUBSTANCE_CATEGORY",
         "2.16.840.1.113883.4.642.4.1138",
         "urn:oid:2.16.840.1.113883.4.642.4.1138"
       ]
@@ -659,12 +661,12 @@
       "name": "FHIR - SupplyDeliveryStatus",
       "mnemonic": "FHIR_SUPPLYDELIVERY_STATUS",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.4.701",
         "2.16.840.1.113883.4.642.4.701",
+        "urn:oid:2.16.840.1.113883.4.642.4.701",
         "http://hl7.org/fhir/supplydelivery-status",
         "http://hl7.org/fhir/ValueSet/supplydelivery-status",
-        "SYM_FHIR_SUPPLYDELIVERY_STATUS",
         "urn:oid:2.16.840.1.113883.4.642.3.700",
+        "SYM_FHIR_SUPPLYDELIVERY_STATUS",
         "2.16.840.1.113883.4.642.3.700"
       ]
     },
@@ -713,11 +715,11 @@
       "codeSystemIdentifiers": [
         "http://hl7.org/fhir/supplyrequest-status",
         "urn:oid:2.16.840.1.113883.4.642.3.695",
-        "2.16.840.1.113883.4.642.3.695",
-        "urn:oid:2.16.840.1.113883.4.642.4.696",
-        "SYM_FHIR_SUPPLYREQUEST_STATUS",
+        "http://hl7.org/fhir/ValueSet/supplyrequest-status",
         "2.16.840.1.113883.4.642.4.696",
-        "http://hl7.org/fhir/ValueSet/supplyrequest-status"
+        "SYM_FHIR_SUPPLYREQUEST_STATUS",
+        "2.16.840.1.113883.4.642.3.695",
+        "urn:oid:2.16.840.1.113883.4.642.4.696"
       ]
     },
     {
@@ -729,8 +731,8 @@
         "2.16.840.1.113883.4.642.4.1154",
         "urn:oid:2.16.840.1.113883.4.642.4.1154",
         "urn:oid:2.16.840.1.113883.4.642.3.546",
-        "http://terminology.hl7.org/CodeSystem/FDI-surface",
-        "SYM_FHIR_SURFACE"
+        "SYM_FHIR_SURFACE",
+        "http://terminology.hl7.org/CodeSystem/FDI-surface"
       ]
     },
     {
@@ -738,12 +740,12 @@
       "mnemonic": "FHIR_SYNTHESIS_TYPE",
       "codeSystemIdentifiers": [
         "SYM_FHIR_SYNTHESIS_TYPE",
-        "2.16.840.1.113883.4.642.4.1348",
         "http://hl7.org/fhir/ValueSet/synthesis-type",
+        "2.16.840.1.113883.4.642.4.1348",
         "urn:oid:2.16.840.1.113883.4.642.3.1347",
         "http://terminology.hl7.org/CodeSystem/synthesis-type",
-        "2.16.840.1.113883.4.642.3.1347",
-        "urn:oid:2.16.840.1.113883.4.642.4.1348"
+        "urn:oid:2.16.840.1.113883.4.642.4.1348",
+        "2.16.840.1.113883.4.642.3.1347"
       ]
     },
     {
@@ -751,12 +753,12 @@
       "mnemonic": "FHIR_TASK_CODE",
       "codeSystemIdentifiers": [
         "2.16.840.1.113883.4.642.3.1396",
-        "http://hl7.org/fhir/CodeSystem/task-code",
-        "SYM_FHIR_TASK_CODE",
-        "2.16.840.1.113883.4.642.4.1397",
+        "http://hl7.org/fhir/ValueSet/task-code",
         "urn:oid:2.16.840.1.113883.4.642.3.1396",
         "urn:oid:2.16.840.1.113883.4.642.4.1397",
-        "http://hl7.org/fhir/ValueSet/task-code"
+        "SYM_FHIR_TASK_CODE",
+        "2.16.840.1.113883.4.642.4.1397",
+        "http://hl7.org/fhir/CodeSystem/task-code"
       ]
     },
     {
@@ -765,34 +767,34 @@
       "codeSystemIdentifiers": [
         "http://hl7.org/fhir/task-intent",
         "urn:oid:2.16.840.1.113883.4.642.4.1241",
-        "SYM_FHIR_TASK_INTENT",
-        "2.16.840.1.113883.4.642.4.1241"
+        "2.16.840.1.113883.4.642.4.1241",
+        "SYM_FHIR_TASK_INTENT"
       ]
     },
     {
       "name": "FHIR - TaskStatus",
       "mnemonic": "FHIR_TASK_STATUS",
       "codeSystemIdentifiers": [
-        "SYM_FHIR_TASK_STATUS",
-        "http://hl7.org/fhir/ValueSet/task-status",
-        "http://hl7.org/fhir/task-status",
         "urn:oid:2.16.840.1.113883.4.642.3.790",
-        "2.16.840.1.113883.4.642.4.791",
+        "urn:oid:2.16.840.1.113883.4.642.4.791",
         "2.16.840.1.113883.4.642.3.790",
-        "urn:oid:2.16.840.1.113883.4.642.4.791"
+        "2.16.840.1.113883.4.642.4.791",
+        "http://hl7.org/fhir/ValueSet/task-status",
+        "SYM_FHIR_TASK_STATUS",
+        "http://hl7.org/fhir/task-status"
       ]
     },
     {
       "name": "FHIR - Teeth Codes",
       "mnemonic": "FHIR_TEETH",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.4.551",
         "urn:oid:2.16.840.1.113883.4.642.3.550",
+        "2.16.840.1.113883.4.642.4.551",
         "2.16.840.1.113883.4.642.3.550",
+        "SYM_FHIR_TEETH",
         "http://hl7.org/fhir/ValueSet/teeth",
         "urn:oid:2.16.840.1.113883.4.642.4.551",
-        "http://hl7.org/fhir/ex-fdi",
-        "SYM_FHIR_TEETH"
+        "http://hl7.org/fhir/ex-fdi"
       ]
     },
     {
@@ -804,8 +806,8 @@
         "2.16.840.1.113883.4.642.4.1195",
         "http://hl7.org/fhir/ValueSet/testscript-operation-codes",
         "urn:oid:2.16.840.1.113883.4.642.4.1195",
-        "2.16.840.1.113883.4.642.3.704",
-        "http://terminology.hl7.org/CodeSystem/testscript-operation-codes"
+        "http://terminology.hl7.org/CodeSystem/testscript-operation-codes",
+        "2.16.840.1.113883.4.642.3.704"
       ]
     },
     {
@@ -830,8 +832,8 @@
         "urn:oid:2.16.840.1.113883.4.642.3.712",
         "http://terminology.hl7.org/CodeSystem/testscript-profile-origin-types",
         "2.16.840.1.113883.4.642.3.712",
-        "2.16.840.1.113883.4.642.4.1196",
-        "http://hl7.org/fhir/ValueSet/testscript-profile-origin-types"
+        "http://hl7.org/fhir/ValueSet/testscript-profile-origin-types",
+        "2.16.840.1.113883.4.642.4.1196"
       ]
     },
     {
@@ -866,11 +868,11 @@
       "codeSystemIdentifiers": [
         "2.16.840.1.113883.4.642.4.674",
         "SYM_FHIR_TYPE_DERIVATION_RULE",
-        "http://hl7.org/fhir/ValueSet/type-derivation-rule",
-        "http://hl7.org/fhir/type-derivation-rule",
         "urn:oid:2.16.840.1.113883.4.642.3.673",
         "2.16.840.1.113883.4.642.3.673",
-        "urn:oid:2.16.840.1.113883.4.642.4.674"
+        "urn:oid:2.16.840.1.113883.4.642.4.674",
+        "http://hl7.org/fhir/ValueSet/type-derivation-rule",
+        "http://hl7.org/fhir/type-derivation-rule"
       ]
     },
     {
@@ -944,18 +946,15 @@
       "name": "FHIR US Core Vaccine National Drug Codes (NDC)",
       "mnemonic": "FHIR_US_CORE_VACCINE_NDC_3_1_1",
       "codeSystemIdentifiers": [
-        "SYM_FHIR_US_CORE_VACCINE_NDC_3_1_1",
-        "http://hl7.org/fhir/sid/ndc",
-        "urn:oid:2.16.840.1.113883.6.69",
-        "2.16.840.1.113883.6.69"
+        "SYM_FHIR_US_CORE_VACCINE_NDC_3_1_1"
       ]
     },
     {
       "name": "FHIR - UsageContextType",
       "mnemonic": "FHIR_USAGE_CONTEXT_TYPE",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.3.101",
         "2.16.840.1.113883.4.642.3.101",
+        "urn:oid:2.16.840.1.113883.4.642.3.101",
         "http://hl7.org/fhir/ValueSet/usage-context-type",
         "urn:oid:2.16.840.1.113883.4.642.4.1068",
         "SYM_FHIR_USAGE_CONTEXT_TYPE",
@@ -986,8 +985,8 @@
         "http://terminology.hl7.org/CodeSystem/verificationresult-communication-method",
         "http://hl7.org/fhir/ValueSet/verificationresult-communication-method",
         "urn:oid:2.16.840.1.113883.4.642.4.1402",
-        "2.16.840.1.113883.4.642.4.1402",
-        "2.16.840.1.113883.4.642.3.1401"
+        "2.16.840.1.113883.4.642.3.1401",
+        "2.16.840.1.113883.4.642.4.1402"
       ]
     },
     {
@@ -995,9 +994,9 @@
       "mnemonic": "FHIR_VERIFICATIONRESULT_STATUS",
       "codeSystemIdentifiers": [
         "http://hl7.org/fhir/ValueSet/verificationresult-status",
-        "urn:oid:2.16.840.1.113883.4.642.1.885",
         "2.16.840.1.113883.4.642.1.885",
         "SYM_FHIR_VERIFICATIONRESULT_STATUS",
+        "urn:oid:2.16.840.1.113883.4.642.1.885",
         "http://hl7.org/fhir/CodeSystem/status",
         "urn:oid:2.16.840.1.113883.4.642.3.884",
         "2.16.840.1.113883.4.642.3.884"
@@ -1011,9 +1010,9 @@
         "SYM_FHIR_VERIFICATIONRESULT_VALIDATION_PROCESS",
         "2.16.840.1.113883.4.642.1.889",
         "urn:oid:2.16.840.1.113883.4.642.1.889",
-        "2.16.840.1.113883.4.642.3.888",
+        "http://hl7.org/fhir/ValueSet/verificationresult-validation-process",
         "http://terminology.hl7.org/CodeSystem/validation-process",
-        "http://hl7.org/fhir/ValueSet/verificationresult-validation-process"
+        "2.16.840.1.113883.4.642.3.888"
       ]
     },
     {
@@ -1049,10 +1048,10 @@
         "2.16.840.1.113883.4.642.3.662",
         "http://hl7.org/fhir/ValueSet/vision-base-codes",
         "urn:oid:2.16.840.1.113883.4.642.3.662",
-        "http://hl7.org/fhir/vision-base-codes",
         "2.16.840.1.113883.4.642.4.663",
-        "SYM_FHIR_VISION_BASE_CODES",
-        "urn:oid:2.16.840.1.113883.4.642.4.663"
+        "http://hl7.org/fhir/vision-base-codes",
+        "urn:oid:2.16.840.1.113883.4.642.4.663",
+        "SYM_FHIR_VISION_BASE_CODES"
       ]
     },
     {
@@ -1073,9 +1072,9 @@
       "mnemonic": "FHIR_VS_ACCOUNT_TYPE",
       "codeSystemIdentifiers": [
         "SYM_FHIR_VS_ACCOUNT_TYPE",
-        "2.16.840.1.113883.4.642.3.728",
+        "http://hl7.org/fhir/ValueSet/account-type",
         "urn:oid:2.16.840.1.113883.4.642.3.728",
-        "http://hl7.org/fhir/ValueSet/account-type"
+        "2.16.840.1.113883.4.642.3.728"
       ]
     },
     {
@@ -1112,8 +1111,8 @@
       "name": "FHIR VS - Bodystructure Location Qualifier",
       "mnemonic": "FHIR_VS_BODYSTRUCTURE_RELATIVE_LOCATION",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.3.140",
         "http://hl7.org/fhir/ValueSet/bodystructure-relative-location",
+        "2.16.840.1.113883.4.642.3.140",
         "urn:oid:2.16.840.1.113883.4.642.3.140",
         "SYM_FHIR_VS_BODYSTRUCTURE_RELATIVE_LOCATION"
       ]
@@ -1122,9 +1121,9 @@
       "name": "FHIR VS - Facility Type Code Value Set",
       "mnemonic": "FHIR_VS_C80_FACILITYCODES",
       "codeSystemIdentifiers": [
+        "http://hl7.org/fhir/ValueSet/c80-facilitycodes",
         "SYM_FHIR_VS_C80_FACILITYCODES",
         "2.16.840.1.113883.3.88.12.80.67",
-        "http://hl7.org/fhir/ValueSet/c80-facilitycodes",
         "urn:oid:2.16.840.1.113883.3.88.12.80.67"
       ]
     },
@@ -1142,8 +1141,8 @@
       "name": "FHIR VS - Care Plan Activity Outcome",
       "mnemonic": "FHIR_VS_CARE_PLAN_ACTIVITY_OUTCOME",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.3.149",
         "SYM_FHIR_VS_CARE_PLAN_ACTIVITY_OUTCOME",
+        "urn:oid:2.16.840.1.113883.4.642.3.149",
         "2.16.840.1.113883.4.642.3.149",
         "http://hl7.org/fhir/ValueSet/care-plan-activity-outcome"
       ]
@@ -1162,10 +1161,10 @@
       "name": "FHIR VS - Care Plan Intent",
       "mnemonic": "FHIR_VS_CARE_PLAN_INTENT",
       "codeSystemIdentifiers": [
-        "http://hl7.org/fhir/ValueSet/care-plan-intent",
         "SYM_FHIR_VS_CARE_PLAN_INTENT",
-        "urn:oid:2.16.840.1.113883.4.642.3.150",
-        "2.16.840.1.113883.4.642.3.150"
+        "http://hl7.org/fhir/ValueSet/care-plan-intent",
+        "2.16.840.1.113883.4.642.3.150",
+        "urn:oid:2.16.840.1.113883.4.642.3.150"
       ]
     },
     {
@@ -1182,20 +1181,20 @@
       "name": "FHIR VS - Clinical Impression Status",
       "mnemonic": "FHIR_VS_CLINICALIMPRESSION_STATUS",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.3.1046",
         "http://hl7.org/fhir/ValueSet/clinicalimpression-status",
+        "urn:oid:2.16.840.1.113883.4.642.3.1046",
         "SYM_FHIR_VS_CLINICALIMPRESSION_STATUS",
         "2.16.840.1.113883.4.642.3.1046"
       ]
     },
     {
-      "name": "FHIR VS - Condition\/Diagnosis Severity",
+      "name": "FHIR VS - Condition/Diagnosis Severity",
       "mnemonic": "FHIR_VS_CONDITION_SEVERITY",
       "codeSystemIdentifiers": [
         "http://hl7.org/fhir/ValueSet/condition-severity",
         "SYM_FHIR_VS_CONDITION_SEVERITY",
-        "urn:oid:2.16.840.1.113883.4.642.3.168",
-        "2.16.840.1.113883.4.642.3.168"
+        "2.16.840.1.113883.4.642.3.168",
+        "urn:oid:2.16.840.1.113883.4.642.3.168"
       ]
     },
     {
@@ -1213,8 +1212,8 @@
       "mnemonic": "FHIR_VS_CONDITION_STAGE_TYPE",
       "codeSystemIdentifiers": [
         "2.16.840.1.113883.4.642.3.171",
-        "http://hl7.org/fhir/ValueSet/condition-stage-type",
         "SYM_FHIR_VS_CONDITION_STAGE_TYPE",
+        "http://hl7.org/fhir/ValueSet/condition-stage-type",
         "urn:oid:2.16.840.1.113883.4.642.3.171"
       ]
     },
@@ -1272,8 +1271,8 @@
       "name": "FHIR VS - Diet Codes",
       "mnemonic": "FHIR_VS_DIET_TYPE",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.3.385",
         "urn:oid:2.16.840.1.113883.4.642.3.385",
+        "2.16.840.1.113883.4.642.3.385",
         "SYM_FHIR_VS_DIET_TYPE",
         "http://hl7.org/fhir/ValueSet/diet-type"
       ]
@@ -1282,8 +1281,8 @@
       "name": "FHIR VS - Common UCUM Codes for Distance",
       "mnemonic": "FHIR_VS_DISTANCE_UNITS",
       "codeSystemIdentifiers": [
-        "urn:oid:2.16.840.1.113883.4.642.3.62",
         "2.16.840.1.113883.4.642.3.62",
+        "urn:oid:2.16.840.1.113883.4.642.3.62",
         "SYM_FHIR_VS_DISTANCE_UNITS",
         "http://hl7.org/fhir/ValueSet/distance-units"
       ]
@@ -1312,10 +1311,10 @@
       "name": "FHIR VS - Enteral Route Codes",
       "mnemonic": "FHIR_VS_ENTERAL_ROUTE",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.3.394",
-        "SYM_FHIR_VS_ENTERAL_ROUTE",
         "urn:oid:2.16.840.1.113883.4.642.3.394",
-        "http://hl7.org/fhir/ValueSet/enteral-route"
+        "http://hl7.org/fhir/ValueSet/enteral-route",
+        "2.16.840.1.113883.4.642.3.394",
+        "SYM_FHIR_VS_ENTERAL_ROUTE"
       ]
     },
     {
@@ -1332,8 +1331,8 @@
       "name": "FHIR VS - Codes for Immunization Site of Administration",
       "mnemonic": "FHIR_VS_IMMUNIZATION_SITE",
       "codeSystemIdentifiers": [
-        "http://hl7.org/fhir/ValueSet/immunization-site",
         "urn:oid:2.16.840.1.113883.4.642.3.288",
+        "http://hl7.org/fhir/ValueSet/immunization-site",
         "SYM_FHIR_VS_IMMUNIZATION_SITE",
         "2.16.840.1.113883.4.642.3.288"
       ]
@@ -1342,10 +1341,10 @@
       "name": "FHIR VS - Body Length Units",
       "mnemonic": "FHIR_VS_UCUM_BODYLENGTH",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.4.642.3.958",
-        "http://hl7.org/fhir/ValueSet/ucum-bodylength",
+        "SYM_FHIR_VS_UCUM_BODYLENGTH",
         "urn:oid:2.16.840.1.113883.4.642.3.958",
-        "SYM_FHIR_VS_UCUM_BODYLENGTH"
+        "http://hl7.org/fhir/ValueSet/ucum-bodylength",
+        "2.16.840.1.113883.4.642.3.958"
       ]
     },
     {
@@ -1394,7 +1393,11 @@
       "name": "HCPCS Codes",
       "mnemonic": "HCPCS_CODES",
       "codeSystemIdentifiers": [
+        "urn:oid:2.16.840.1.113883.6.14",
+        "http://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
         "SYM_HCPCS_CODES",
+        "http://terminology.hl7.org/CodeSystem/HCPCS",
+        "https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
         "HCPCS Level II"
       ]
     },
@@ -1575,8 +1578,8 @@
         "AdministrativeGender",
         "http://hl7.org/fhir/us/core/CodeSystem/birthsex",
         "SYM_HL7_ADMINGNDR",
-        "http://hl7.org/fhir/administrative-gender",
-        "HL7 AdministrativeGender"
+        "HL7 AdministrativeGender",
+        "http://hl7.org/fhir/administrative-gender"
       ]
     },
     {
@@ -2160,8 +2163,8 @@
       "name": "HL7 Languages Valueset",
       "mnemonic": "HL7_LANGUAGES_VALUESET",
       "codeSystemIdentifiers": [
-        "HL7_LANGUAGES_VALUESET",
-        "http://hl7.org/fhir/ValueSet/languages"
+        "http://hl7.org/fhir/ValueSet/languages",
+        "HL7_LANGUAGES_VALUESET"
       ]
     },
     {
@@ -2238,10 +2241,10 @@
       "name": "HL7 - Marital Status",
       "mnemonic": "HL7_MS",
       "codeSystemIdentifiers": [
-        "SYM_HL7_MS",
-        "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
-        "2.16.840.1.113883.5.2",
         "urn:oid:2.16.840.1.113883.5.2",
+        "SYM_HL7_MS",
+        "2.16.840.1.113883.5.2",
+        "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
         "http://hl7.org/fhir/v3/MaritalStatus"
       ]
     },
@@ -2948,18 +2951,32 @@
       "name": "NCI Thesaurus",
       "mnemonic": "NCI_THESAURUS",
       "codeSystemIdentifiers": [
-        "SYM_NCI_THESAURUS"
+        "SYM_NCI_THESAURUS",
+        "http://ncithesaurus-stage.nci.nih.gov"
       ]
     },
     {
       "name": "RxNorm",
       "mnemonic": "NLM_RXN",
       "codeSystemIdentifiers": [
-        "RXNORM",
         "urn:oid:2.16.840.1.113883.6.88",
+        "RXNORM",
         "2.16.840.1.113883.6.88",
-        "SYM_NLM_RXN",
-        "http://www.nlm.nih.gov/research/umls/rxnorm"
+        "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "SYM_NLM_RXN"
+      ]
+    },
+    {
+      "name": "NUCC - Health Care Provider Taxonomy",
+      "mnemonic": "NUCC_HEALTH_CARE_PROVIDER_TAXONOMY",
+      "FhirUri": "http://nucc.org/provider-taxonomy",
+      "codeSystemIdentifiers": [
+        "2.16.840.1.113883.6.101",
+        "2.16.840.1.113883.11.19465",
+        "PHVS_ProviderCodes_NUCC",
+        "NUCC",
+        "SYM_NUCC_TAX",
+        "http://nucc.org/provider-taxonomy"
       ]
     },
     {
@@ -2970,15 +2987,14 @@
       ]
     },
     {
-      "name": "LOINC",
-      "mnemonic": "REGEN_LOINC",
+      "name": "RadLex",
+      "mnemonic": "RADLEX",
+      "FhirUri": "http://radlex.org",
       "codeSystemIdentifiers": [
-        "http://loinc.org",
-        "LN",
-        "urn:oid:2.16.840.1.113883.6.1",
-        "LNC",
-        "2.16.840.1.113883.6.1",
-        "SYM_REGEN_LOINC"
+        "http://radlex.org",
+        "SYM_RSNA_RADLEX",
+        "RADLEX",
+        "2.16.840.1.113883.6.256"
       ]
     },
     {
@@ -2999,31 +3015,38 @@
       "name": "SNOMED CT US Edition",
       "mnemonic": "SNO_INT_USEXT",
       "codeSystemIdentifiers": [
+        "SNOMEDCT",
         "http://snomed.info/sct/731000124108",
         "SNOMED",
+        "SNO",
         "SCT",
-        "SNOMEDCT",
         "SNM",
         "SYM_SNO_INT_USEXT",
         "SN",
         "urn:oid:2.16.840.1.113883.6.96",
-        "http://snomed.info/sct",
         "2.16.840.1.113883.6.96",
-        "SNO"
+        "http://snomed.info/sct"
       ]
     },
     {
-      "name": "Test01",
-      "mnemonic": "TEST01",
+      "name": "LOINC",
+      "mnemonic": "SYM_REGEN_LOINC",
       "codeSystemIdentifiers": [
-        "TestAlias02"
+        "http://loinc.org",
+        "LN",
+        "LOINC",
+        "urn:oid:2.16.840.1.113883.6.1",
+        "LNC",
+        "2.16.840.1.113883.6.1",
+        "SYM_REGEN_LOINC"
       ]
     },
     {
       "name": "UCUM - the Unified Codes for Units of Measures",
       "mnemonic": "UCUM",
       "codeSystemIdentifiers": [
-        "SYM_UCUM"
+        "SYM_UCUM",
+        "http://unitsofmeasure.org"
       ]
     },
     {
@@ -3060,19 +3083,19 @@
       "name": "ICD-10-CM",
       "mnemonic": "WHO_ICD10CM_FULL",
       "codeSystemIdentifiers": [
-        "https://www.cms.gov/medicare/icd-10/2022-icd-10-cm ",
         "ICD10",
+        "https://www.cms.gov/medicare/icd-10/2022-icd-10-cm ",
         "2.16.840.1.113883.6.3",
-        "urn:oid:2.16.840.1.113883.6.3",
         "ICD10-CM",
         "2.16.840.1.113883.6.90",
         "urn:oid:2.16.840.1.113883.6.90",
+        "urn:oid:2.16.840.1.113883.6.3",
         "ICD10CM",
-        "I10C",
         "I10",
+        "I10C",
+        "http://hl7.org/fhir/sid/icd-10",
         "http://hl7.org/fhir/sid/icd-10-cm",
-        "SYM_WHO_ICD10CM_FULL",
-        "http://hl7.org/fhir/sid/icd-10"
+        "SYM_WHO_ICD10CM_FULL"
       ]
     },
     {
@@ -3083,8 +3106,8 @@
         "http://www.icd10data.com/icd10pcs",
         "I10PCS",
         "http://hl7.org/fhir/sid/icd-10-pcs",
-        "SYM_WHO_ICD10PCS_FULL",
         "2.16.840.1.113883.6.4",
+        "SYM_WHO_ICD10PCS_FULL",
         "ICD10PCS",
         "urn:oid:2.16.840.1.113883.6.4"
       ]
@@ -3093,15 +3116,15 @@
       "name": "ICD-9-CM Diagnosis",
       "mnemonic": "WHO_ICD9CMD31",
       "codeSystemIdentifiers": [
-        "2.16.840.1.113883.6.104",
-        "2.16.840.1.113883.6.103",
+        "urn:oid:2.16.840.1.113883.6.103",
+        "http://hl7.org/fhir/sid/icd-9-cm/diagosis",
         "I9",
         "ICD9",
         "SYM_WHO_ICD9CMD31",
         "urn:oid:2.16.840.1.113883.6.104",
         "http://hl7.org/fhir/sid/icd-9-cm",
-        "http://hl7.org/fhir/sid/icd-9-cm/diagosis",
-        "urn:oid:2.16.840.1.113883.6.103"
+        "2.16.840.1.113883.6.104",
+        "2.16.840.1.113883.6.103"
       ]
     },
     {

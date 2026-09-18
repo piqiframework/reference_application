@@ -55,7 +55,7 @@
                 Root = new Entity(model.RootEntityName, model.RootEntityMnemonic);
                 if (Root == null) return;
 
-                EntityList = new List<Entity>();
+                EntityList = new List<Entity>{ Root };
 
                 // Build hierarchy starting from root
                 foreach (Entity classEntity in model.DataClasses)
@@ -96,6 +96,7 @@
             {
                 Entity? classEntity = null;
                 Entity? elementEntity = null;
+                EntityList.Add(parentEntity);
 
                 if (parentEntity?.Children != null)
                 {

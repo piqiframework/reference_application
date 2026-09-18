@@ -1,0 +1,24 @@
+{
+  "EvaluationProfileLibrary": [
+    {
+      "name": "USCDI v3",
+      "mnemonic": "USCDI_V3",
+      "filePath": "TestData/Evaluations/USCDI_V3.json"
+    },
+    {
+      "name": "USCDI v2",
+      "mnemonic": "USCDI_V2",
+      "filePath": "TestData/Evaluations/USCDI_V2.json"
+    },
+    {
+      "name": "USCDI v3.1",
+      "mnemonic": "USCDI_V31",
+      "filePath": "TestData/Evaluations/USCDI_V31.json"
+    },
+    {
+      "name": "CQL Library Test",
+      "mnemonic": "CQL_LIBRARY_TEST",
+      "filePath": "TestData/Evaluations/CQL_LIBRARY_TEST.json"
+    }
+  ]
+}

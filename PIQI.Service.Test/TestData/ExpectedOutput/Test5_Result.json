@@ -1,13 +1,10 @@
 {
   "succeeded": true,
-  "errorMessage": null,
-  "elapsedTimeInMS": 20076,
   "scoringData": {
     "contributorID": "TestProvider",
     "dataSourceID": "TestSource",
     "messageID": "Msg005",
     "evaluationRubric": "USCDI v3",
-    "processDate": "2026-07-14T06:35:30.0225321-04:00",
     "messageResults": {
       "denominator": 444,
       "numerator": 309,
@@ -30,7 +27,7 @@
         "weightedPIQIScore": 54
       },
       {
-        "dataClassName": "Care Plans",
+        "dataClassName": "Care Plan",
         "instanceCount": 0,
         "denominator": 0,
         "numerator": 0,
@@ -234,7 +231,7 @@
         "evaluationList": []
       },
       {
-        "dataClassName": "Care Plans",
+        "dataClassName": "Care Plan",
         "evaluationList": []
       },
       {
@@ -327,7 +324,7 @@
     "entityModelMnemonic": "PAT_CLINICAL_V1",
     "contributorID": "TestProvider",
     "dataSourceID": "TestSource",
-    "messageID": "Msg001",
+    "messageID": "Msg005",
     "audit": {
       "messageNumerator": 309,
       "messageDenominator": 444,
@@ -1798,7 +1795,7 @@
           ]
         },
         {
-          "className": "carePlans",
+          "className": "carePlan",
           "elements": null
         },
         {
@@ -6995,11 +6992,6 @@
                   "attributeAudit": null
                 },
                 {
-                  "attributeName": "encounterStartDate",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
                   "attributeName": "encounterStatus",
                   "data": null,
                   "attributeAudit": null
@@ -7190,11 +7182,6 @@
                   "attributeAudit": null
                 },
                 {
-                  "attributeName": "encounterStartDate",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
                   "attributeName": "encounterStatus",
                   "data": null,
                   "attributeAudit": null
@@ -7374,11 +7361,6 @@
                 },
                 {
                   "attributeName": "encounterReason",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "encounterStartDate",
                   "data": null,
                   "attributeAudit": null
                 },
@@ -7563,11 +7545,6 @@
                 },
                 {
                   "attributeName": "encounterReason",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "encounterStartDate",
                   "data": null,
                   "attributeAudit": null
                 },
@@ -7762,11 +7739,6 @@
                   "attributeAudit": null
                 },
                 {
-                  "attributeName": "encounterStartDate",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
                   "attributeName": "encounterStatus",
                   "data": null,
                   "attributeAudit": null
@@ -7953,11 +7925,6 @@
                 },
                 {
                   "attributeName": "encounterReason",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "encounterStartDate",
                   "data": null,
                   "attributeAudit": null
                 },
@@ -8152,11 +8119,6 @@
                   "attributeAudit": null
                 },
                 {
-                  "attributeName": "encounterStartDate",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
                   "attributeName": "encounterStatus",
                   "data": null,
                   "attributeAudit": null
@@ -8343,11 +8305,6 @@
                 },
                 {
                   "attributeName": "encounterReason",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "encounterStartDate",
                   "data": null,
                   "attributeAudit": null
                 },
@@ -8542,11 +8499,6 @@
                   "attributeAudit": null
                 },
                 {
-                  "attributeName": "encounterStartDate",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
                   "attributeName": "encounterStatus",
                   "data": null,
                   "attributeAudit": null
@@ -8737,11 +8689,6 @@
                   "attributeAudit": null
                 },
                 {
-                  "attributeName": "encounterStartDate",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
                   "attributeName": "encounterStatus",
                   "data": null,
                   "attributeAudit": null
@@ -8928,11 +8875,6 @@
                 },
                 {
                   "attributeName": "encounterReason",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "encounterStartDate",
                   "data": null,
                   "attributeAudit": null
                 },

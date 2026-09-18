@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using PIQI.Components.CustomExceptionClasses;
 using PIQI.Components.Services;
 
 namespace PIQI.Components.Models
@@ -112,9 +113,9 @@ namespace PIQI.Components.Models
                 JToken token = JToken.Parse(MessageText);
 
                 Header = new MessageModelHeader(token, piqiRequest.PIQIModelMnemonic, piqiRequest.ContributorID, piqiRequest.DataSourceID, piqiRequest.MessageID);
-                if (Header.ContributorName == null) throw new Exception("Contributor is missing.");
-                if (Header.DataSourceName == null) throw new Exception("Data Source is missing.");
-                if (Header.ClientMessageID == null) throw new Exception("Message ID is missing.");
+                if (Header.ContributorName == null) throw new CustomPIQIException(400, "INVALID_REQUEST_HEADER", "Contributor is missing.");
+                if (Header.DataSourceName == null) throw new CustomPIQIException(400, "INVALID_REQUEST_HEADER", "Da   ta Source is missing.");
+                if (Header.ClientMessageID == null) throw new CustomPIQIException(400, "INVALID_REQUEST_HEADER", "Message ID is missing.");
             }
             catch
             {
@@ -141,17 +142,18 @@ namespace PIQI.Components.Models
             {
                 if (referenceData != null) RefData = referenceData;
                 string? rootName = RootEntityName;
-                if (DataTypeList == null) throw new Exception("DataTypeList not initialized");
-                if (EntityModel == null) throw new Exception("Entity model not loaded");
-                if (rootName == null) throw new Exception("Root not loaded");
-                if (MessageText == null) throw new Exception("Message text is missing");
-                if (!HasHeader) throw new Exception("Header not loaded");
+                if (DataTypeList == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "DataTypeList not initialized");
+                if (EntityModel == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Entity model not loaded");
+                if (rootName == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Root not loaded");
+                if (MessageText == null) throw new CustomPIQIException(400, "INVALID_PATIENT_MESSAGE", "Message text is missing");
+                if (!HasHeader) throw new CustomPIQIException(400, "INVALID_REQUEST_HEADER", "Header not loaded");
 
                 JToken token = JToken.Parse(MessageText);
                 JToken rootToken = Utility.GetJSONToken(token, rootName);
-                if (rootToken == null) throw new Exception("Root token not found");
+                if (rootToken == null) throw new CustomPIQIException(400, "INVALID_PATIENT_MESSAGE", "Root token not found");
 
                 RootItem = new MessageModelItem(EntityModel.Root, null, null, EntityModel.Root.Mnemonic, EntityItemTypeEnum.Root);
+                RootItem.MessageText = MessageText;
 
                 ProcessClasses(rootToken);
             }
@@ -182,6 +184,7 @@ namespace PIQI.Components.Models
                     // Create the class item
                     string key = $"{RootItem.Mnemonic}|{classEntity.Mnemonic}";
                     MessageModelItem classItem = new MessageModelItem(classEntity, RootItem, classEntity, key, EntityItemTypeEnum.Class);
+                    classItem.MessageText = jProperty.ToString();
 
                     // Add to root and dict
                     RootItem.AddChildItem(classItem);
@@ -216,6 +219,7 @@ namespace PIQI.Components.Models
                 // Create the element item
                 string key = $"{RootItem.Mnemonic}|{classItem.Mnemonic}|{elementEntity.Mnemonic}.{sequence}";
                 MessageModelItem elementItem = new MessageModelItem(elementEntity, classItem, classItem.Entity, key, EntityItemTypeEnum.Element);
+                elementItem.MessageText = jToken.ToString();
 
                 // Add to class and dictionary
                 classItem.AddChildItem(elementItem, $"{elementEntity.Mnemonic}.{sequence}");
@@ -239,6 +243,7 @@ namespace PIQI.Components.Models
             // Create the element item
             string key = $"{RootItem.Mnemonic}|{classItem.Mnemonic}|{elementEntity.Mnemonic}.1";
             MessageModelItem elementItem = new MessageModelItem(elementEntity, classItem, classItem.Entity, key, EntityItemTypeEnum.Element);
+            elementItem.MessageText = propertyToken.ToString();
 
             // Add to class and dictionary
             classItem.AddChildItem(elementItem, $"{elementEntity.Mnemonic}.1");

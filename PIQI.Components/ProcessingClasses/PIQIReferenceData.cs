@@ -41,6 +41,9 @@
         /// </summary>
         public List<EvaluationCriterion> CriteriaList { get; set; }
 
+        //public List<CQLLibrary> CQLLibraryList { get; set; }
+        public List<CQLItem> CQLList { get; set; }
+
         /// <summary>
         /// List of data types used by entities.
         /// </summary>
@@ -85,6 +88,7 @@
             CodeSystemList = new List<CodeSystem>();
             SAMList = new List<SAM>();
             CriteriaList = new List<EvaluationCriterion>();
+            CQLList = new List<CQLItem>();
             DataTypeList = new List<DataType>();
             ValueList = new List<ValueList>();
             ValueSetList = new List<ValueSet>();
@@ -143,8 +147,34 @@
             foreach (var classEntity in EntityModel.Root.Children)
             {
                 var elementEntity = classEntity.Children?.FirstOrDefault();
+                if (elementEntity != null && elementEntity.Mnemonic.Equals(mnemonic))
+                    return classEntity;
+
                 var attributeEntity = elementEntity?.Children?.FirstOrDefault(e => e.Mnemonic?.Equals(mnemonic) == true);
                 if (attributeEntity != null) return classEntity;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Gets an entity Class name by entity mnemonic.
+        /// Returns the class in the model rather than the attribute entity with type class. This is useful for getting the proper class name.
+        /// </summary>
+        /// <param name="mnemonic">The attribute entity mnemonic.</param>
+        /// <returns>The <see cref="Entity"/> if found; otherwise, null.</returns>
+        public Entity? GetEntityUpperClass(string mnemonic)
+        {
+            if (EntityModel.Root.Children == null) return null;
+            var dataClass = EntityModel.Root.Children?.FirstOrDefault(c => c.Mnemonic.Equals(mnemonic));
+            if (dataClass != null) return EntityModel?.EntityList.FirstOrDefault(e => e.Mnemonic?.Equals(dataClass.Mnemonic) == true && e.EntityType == null);
+            foreach (var classEntity in EntityModel.Root.Children)
+            {
+                var elementEntity = classEntity.Children?.FirstOrDefault();
+                if (elementEntity != null && elementEntity.Mnemonic.Equals(mnemonic))
+                    return EntityModel?.EntityList.FirstOrDefault(e => e.Mnemonic?.Equals(classEntity.Mnemonic) == true && e.EntityType == null);
+
+                var attributeEntity = elementEntity?.Children?.FirstOrDefault(e => e.Mnemonic?.Equals(mnemonic) == true);
+                if (attributeEntity != null) return EntityModel?.EntityList.FirstOrDefault(e => e.Mnemonic?.Equals(classEntity.Mnemonic) == true && e.EntityType == null);
             }
             return null;
         }
@@ -162,6 +192,11 @@
                 cs.FhirUri?.Equals(codeSystemIdentifier) == true ||
                 cs.CodeSystemIdentifiers?.Any(csi => csi?.Equals(codeSystemIdentifier) == true) == true
             );
+        }
+
+        public CQLItem? GetCQL(string cqlMnemonic)
+        {
+            return CQLList.FirstOrDefault(i => i.Mnemonic.Equals(cqlMnemonic));
         }
 
         /// <summary>

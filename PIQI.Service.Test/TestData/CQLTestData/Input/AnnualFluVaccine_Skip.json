@@ -1,0 +1,27 @@
+{
+  "patient": {
+    "demographics": {
+      "patientIdentifier": "PAT-003",
+      "birthDate": "2013-06-20T00:00:00Z",
+      "deathDate": "2025-01-10T00:00:00Z",
+      "deceased": {
+        "codings": [],
+        "text": "true"
+      }
+    },
+    "conditions": [],
+    "labResults": [],
+    "immunizations": [],
+    "vitalSigns": [],
+    "allergies": [],
+    "clinicalDocuments": [],
+    "diagnosticImaging": [],
+    "encounters": [],
+    "goals": [],
+    "healthAssessments": [],
+    "medicalDevices": [],
+    "medications": [],
+    "procedures": [],
+    "providers": []
+  }
+}

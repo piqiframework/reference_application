@@ -1,0 +1,32 @@
+{
+  "patient": {
+    "demographics": {
+      "patientIdentifier": "PAT-FLU-PASS-001",
+      "birthDate": "1975-06-15T00:00:00Z",
+      "deathDate": null,
+      "deceased": {
+        "codings": [],
+        "text": "false"
+      }
+    },
+    "immunizations": [
+      {
+        "immunization": {
+          "codings": [
+            {
+              "system": "http://hl7.org/fhir/sid/cvx",
+              "code": "141",
+              "display": "Influenza, seasonal, injectable"
+            }
+          ],
+          "text": "Influenza, seasonal, injectable"
+        },
+        "administrationDate": "2024-11-15T00:00:00Z",
+        "immunizationStatus": {
+          "codings": [],
+          "text": "completed"
+        }
+      }
+    ]
+  }
+}

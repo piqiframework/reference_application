@@ -1,0 +1,41 @@
+{
+  "patient": {
+    "demographics": {
+      "patientIdentifier": "PAT-G-DECEASED-DATE",
+      "birthDate": "1955-03-08T00:00:00Z",
+      "deathDate": "2024-07-19T00:00:00Z"
+    },
+    "conditions": [],
+    "labResults": [],
+    "immunizations": [
+      {
+        "immunization": {
+          "codings": [
+            {
+              "system": "http://hl7.org/fhir/sid/cvx",
+              "code": "141",
+              "display": "Influenza, seasonal, injectable"
+            }
+          ],
+          "text": "Flu vaccine"
+        },
+        "administrationDate": "2024-10-01T00:00:00Z",
+        "immunizationStatus": {
+          "codings": [],
+          "text": "completed"
+        }
+      }
+    ],
+    "vitalSigns": [],
+    "allergies": [],
+    "clinicalDocuments": [],
+    "diagnosticImaging": [],
+    "encounters": [],
+    "goals": [],
+    "healthAssessments": [],
+    "medicalDevices": [],
+    "medications": [],
+    "procedures": [],
+    "providers": []
+  }
+}

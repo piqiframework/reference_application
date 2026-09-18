@@ -1,5 +1,11 @@
+using CQLTest.Service;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
+using PIQI.Components.CustomExceptionClasses;
 using PIQI.Components.Models;
 using PIQI.Components.Services;
 using PIQI.Data;
@@ -7,6 +13,7 @@ using PIQI_Engine.Server.Engines;
 using PIQI_Engine.Server.Services;
 using Serilog;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace PIQI_Engine.Server;
 
@@ -18,7 +25,10 @@ public partial class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        });
 
         // Add CORS policy
         builder.Services.AddCors(options =>
@@ -57,6 +67,13 @@ public partial class Program
             client.DefaultRequestHeaders.Add("Accept", "application/fhir+json");
         });
 
+        // CQLServiceClient — calls CQLTest.Service (which owns the Java sidecar)
+        builder.Services.AddHttpClient<CQLServiceClient>(client =>
+        {
+            var baseUrl = builder.Configuration["CqlService:BaseUrl"] ?? "http://localhost:5100";
+            client.BaseAddress = new Uri(baseUrl);
+            client.Timeout = TimeSpan.FromSeconds(60);
+        });
 
         builder.Services.AddDbContext<PIQIDbContext>(options =>
         {
@@ -99,7 +116,7 @@ public partial class Program
             Func<string, SAM> samResolver = mnemonic =>
             {
                 cache.Get<SAM>(mnemonic, out var item);
-                return item?.Value ?? throw new Exception($"SAM not found for mnemonic {mnemonic}");
+                return item?.Value ?? throw new CustomPIQIException(422, "SAM_NOT_FOUND", $"SAM not found for mnemonic {mnemonic}");
             };
 
             samRegistry.LoadFromAssembly(Assembly.GetExecutingAssembly(), samService, samResolver);

@@ -4,7 +4,7 @@
     /// Represents the aggregated results for a class of PIQI SAMs.
     /// Tracks totals, skips, processed counts, passes, fails, and weighted scores for a specific entity type.
     /// </summary>
-    public class StatResponseClass
+    public class StatResponseClass : StatResponseEntity
     {
         #region Properties
 
@@ -24,59 +24,15 @@
         public int ElementCount { get; set; }
 
         /// <summary>
-        /// Total number of critical failures in this class.
-        /// </summary>
-        public int CriticalFailureCount { get; set; }
-
-        /// <summary>
         /// Number of elements that are considered clean (no failures).
         /// </summary>
         public int CleanCount { get; set; }
 
         /// <summary>
-        /// Total number of PIQI SAMs for this class.
+        /// Total number of critical failures in elements of this class 
+        /// (distinct from the entity's critical failures in SAMCriticalFailureCount).
         /// </summary>
-        public int SAMTotalCount { get; set; }
-
-        /// <summary>
-        /// Total number of skipped PIQI SAMs for this class.
-        /// </summary>
-        public int SAMSkipCount { get; set; }
-
-        /// <summary>
-        /// Total number of processed PIQI SAMs for this class.
-        /// </summary>
-        public int SAMProcessedCount { get; set; }
-
-        /// <summary>
-        /// Total number of scoring PIQI SAMs processed.
-        /// </summary>
-        public int SAMScoringProcessedCount { get; set; }
-
-        /// <summary>
-        /// Total number of informational PIQI SAMs processed.
-        /// </summary>
-        public int SAMInfoProcessedCount { get; set; }
-
-        /// <summary>
-        /// Total number of PIQI SAMs that passed.
-        /// </summary>
-        public int SAMPassCount { get; set; }
-
-        /// <summary>
-        /// Total number of PIQI SAMs that failed.
-        /// </summary>
-        public int SAMFailCount { get; set; }
-
-        /// <summary>
-        /// Weighted denominator for scoring calculations.
-        /// </summary>
-        public int SAMWeightedDenominator { get; set; }
-
-        /// <summary>
-        /// Weighted numerator for scoring calculations.
-        /// </summary>
-        public int SAMWeightedNumerator { get; set; }
+        public int CriticalFailureCount { get; set; }
 
         #endregion
 

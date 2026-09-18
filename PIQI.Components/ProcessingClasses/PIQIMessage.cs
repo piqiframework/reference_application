@@ -125,6 +125,7 @@
                 throw;
             }
         }
+        
         public PIQIAuditResult Audit_AddMessageInfo(PIQIStatResponse statResponse)
         {
             try
@@ -146,7 +147,7 @@
                 throw;
             }
         }
-
+         
         #region Root Audit
 
         private PIQIAuditDataRoot Audit_ProcessRoot(EvaluationItem item)
@@ -161,12 +162,106 @@
             if (item.ChildDict.Count > 0)
             {
                 auditDataRoot.Classes = new List<PIQIAuditDataClass>();
-
                 foreach (EvaluationItem child in item.ChildDict.Values)
                     auditDataRoot.Classes.Add(Audit_ProcessClass(child));
+
+                auditDataRoot.RootAudit = Audit_AddRootAudit(item);
             }
 
             return auditDataRoot;
+        }
+
+        private static PIQIAuditDataRootAudit? Audit_AddRootAudit(EvaluationItem rootItem)
+        {
+            // Create the scoring data object, assessment list, and informational assessment list for the root.
+            PIQIAuditDataRootAuditScoringData? scoringData = null;
+            List<PIQIAuditDataRootAuditAssessmentItem>? assessmentItems = null;
+            List<PIQIAuditDataRootAuditAssessmentItem>? informationalItems = null;
+
+            // Get all results for the root, including all class/element/attribute results
+            List<EvaluationResult> resultList = rootItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+            foreach (EvaluationItem classItem in rootItem.ChildDict.Values)
+            {
+                List<EvaluationResult> classResultList = classItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+                if (classResultList.Count > 0)
+                    resultList.AddRange(classResultList);
+
+                foreach (EvaluationItem elementItem in classItem.ChildDict.Values)
+                {
+                    List<EvaluationResult> elementResultList = elementItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+                    if (elementResultList.Count > 0)
+                        resultList.AddRange(elementResultList);
+
+                    foreach (EvaluationItem attrItem in elementItem.ChildDict.Values)
+                    {
+                        List<EvaluationResult> attrResultList = attrItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+                        if (attrResultList.Count > 0)
+                            resultList.AddRange(attrResultList);
+                    }
+                }
+            }
+
+            // Data score is based on existence of root results, including all class/element/attribute results
+            if (resultList.Count > 0)
+            {
+                // Calculate scoring 
+                int denominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Count();
+                int weightedDenominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Sum(t => t.Criterion.ScoringWeight);
+                int numerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Count();
+                int weightedNumerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Sum(t => t.Criterion.ScoringWeight);
+                int score = 0;
+                if (denominator > 0)
+                    score = (int)Math.Truncate((float)numerator / (float)denominator * (float)100);
+                int weightedScore = 0;
+                if (weightedDenominator > 0)
+                    weightedScore = (int)Math.Truncate((float)weightedNumerator / (float)weightedDenominator * (float)100);
+                int criticalFailureCount = resultList.Where(t => t.IsScoring && t.IsCritical && t.EvalFailed).Count();
+
+                scoringData = new PIQIAuditDataRootAuditScoringData(score, weightedScore, criticalFailureCount, numerator, denominator);
+            }
+
+            // Scoring and Informational assessments
+            foreach (EvaluationResult result in rootItem.CriteriaResultDict.Values.Where(t => t.IsScoring == true).OrderBy(t => t.SamDisplayName))
+            {
+                if (assessmentItems == null)
+                    assessmentItems = new List<PIQIAuditDataRootAuditAssessmentItem>();
+
+                assessmentItems.Add(Audit_AddRootAudit_AssessmentItem(result, "Scoring"));
+            }
+            foreach (EvaluationResult result in rootItem.CriteriaResultDict.Values.Where(t => t.IsInformational == true).OrderBy(t => t.SamDisplayName))
+            {
+                if (informationalItems == null)
+                    informationalItems = new List<PIQIAuditDataRootAuditAssessmentItem>();
+
+                informationalItems.Add(Audit_AddRootAudit_AssessmentItem(result, "Informational"));
+            }
+
+            // Create the Audit and scoringData nodes, if there's anything to report.
+            if (scoringData != null || assessmentItems != null || informationalItems != null)
+            {
+                if (scoringData == null) // Only happens if we have informational only items on the root
+                    scoringData = new PIQIAuditDataRootAuditScoringData(0, 0, 0, 0, 0);
+
+                PIQIAuditDataRootAudit auditDataRootAudit = new PIQIAuditDataRootAudit(scoringData);
+                auditDataRootAudit.AssessmentItems = assessmentItems;
+                auditDataRootAudit.InformationalItems = informationalItems;
+
+                return auditDataRootAudit;
+            }
+
+            return null;
+        }
+        
+        private static PIQIAuditDataRootAuditAssessmentItem Audit_AddRootAudit_AssessmentItem(EvaluationResult result, string effect)
+        {
+            return new PIQIAuditDataRootAuditAssessmentItem(
+                result.EntityMnemonic,
+                result.EntityName,
+                result.SamDisplayName,
+                effect,
+                result.EvalSkipped ? "Skipped" : (result.EvalPassed ? "Passed" : "Failed"),
+                result.Reason ?? ""
+            );
         }
 
         #endregion
@@ -187,9 +282,97 @@
                 auditDataClass.Elements = new List<PIQIAuditDataElement>();
                 foreach (EvaluationItem child in item.ChildDict.Values)
                     auditDataClass.Elements.Add(Audit_ProcessElement(child));
+
+                auditDataClass.ClassAudit = Audit_AddClassAudit(item);
             }
 
             return auditDataClass;
+        }
+
+        private static PIQIAuditDataClassAudit? Audit_AddClassAudit(EvaluationItem classItem)
+        {
+            // Create the scoring data object, assessment list, and informational assessment list for this class.
+            PIQIAuditDataClassAuditScoringData? scoringData = null;
+            List<PIQIAuditDataClassAuditAssessmentItem>? assessmentItems = null;
+            List<PIQIAuditDataClassAuditAssessmentItem>? informationalItems = null;
+
+            // Get all results for this class, including all element/attribute results
+            List<EvaluationResult> resultList = classItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+            foreach (EvaluationItem elementItem in classItem.ChildDict.Values)
+            {
+                List<EvaluationResult> elementResultList = elementItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+                if (elementResultList.Count > 0)
+                    resultList.AddRange(elementResultList);
+
+                foreach (EvaluationItem attrItem in elementItem.ChildDict.Values)
+                {
+                    List<EvaluationResult> attrResultList = attrItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
+                    if (attrResultList.Count > 0)
+                        resultList.AddRange(attrResultList);
+                }
+            }
+
+            // Data score is based on existence of class results, including all element/attribute results
+            if (resultList.Count > 0)
+            {
+                // Calculate scoring 
+                int denominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Count();
+                int weightedDenominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Sum(t => t.Criterion.ScoringWeight);
+                int numerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Count();
+                int weightedNumerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Sum(t => t.Criterion.ScoringWeight);
+                int score = 0;
+                if (denominator > 0)
+                    score = (int)Math.Truncate((float)numerator / (float)denominator * (float)100);
+                int weightedScore = 0;
+                if (weightedDenominator > 0)
+                    weightedScore = (int)Math.Truncate((float)weightedNumerator / (float)weightedDenominator * (float)100);
+                int criticalFailureCount = resultList.Where(t => t.IsScoring && t.IsCritical && t.EvalFailed).Count();
+
+                scoringData = new PIQIAuditDataClassAuditScoringData(score, weightedScore, criticalFailureCount, numerator, denominator);
+            }
+
+            // Scoring and Informational assessments
+            foreach (EvaluationResult result in classItem.CriteriaResultDict.Values.Where(t => t.IsScoring == true).OrderBy(t => t.SamDisplayName))
+            {
+                if (assessmentItems == null)
+                    assessmentItems = new List<PIQIAuditDataClassAuditAssessmentItem>();
+
+                assessmentItems.Add(Audit_AddClassAudit_AssessmentItem(result, "Scoring"));
+            }
+            foreach (EvaluationResult result in classItem.CriteriaResultDict.Values.Where(t => t.IsInformational == true).OrderBy(t => t.SamDisplayName))
+            {
+                if (informationalItems == null)
+                    informationalItems = new List<PIQIAuditDataClassAuditAssessmentItem>();
+
+                informationalItems.Add(Audit_AddClassAudit_AssessmentItem(result, "Informational"));
+            }
+
+            // Create the Audit and scoringData nodes, if there's anything to report.
+            if (scoringData != null || assessmentItems != null || informationalItems != null)
+            {
+                if (scoringData == null) // Only happens if we have informational only items on this class
+                    scoringData = new PIQIAuditDataClassAuditScoringData(0, 0, 0, 0, 0);
+
+                PIQIAuditDataClassAudit auditDataClassAudit = new PIQIAuditDataClassAudit(scoringData);
+                auditDataClassAudit.AssessmentItems = assessmentItems;
+                auditDataClassAudit.InformationalItems = informationalItems;
+
+                return auditDataClassAudit;
+            }
+
+            return null;
+        }
+
+        private static PIQIAuditDataClassAuditAssessmentItem Audit_AddClassAudit_AssessmentItem(EvaluationResult result, string effect)
+        {
+            return new PIQIAuditDataClassAuditAssessmentItem(
+                result.EntityMnemonic,
+                result.EntityName,
+                result.SamDisplayName,
+                effect,
+                result.EvalSkipped ? "Skipped" : (result.EvalPassed ? "Passed" : "Failed"),
+                result.Reason ?? ""
+            );
         }
 
         #endregion
@@ -219,6 +402,11 @@
 
         private static PIQIAuditDataElementAudit? Audit_AddElementAudit(EvaluationItem elementItem)
         {
+            // Create the scoring data object, assessment list, and informational assessment list for this element.
+            PIQIAuditDataElementAuditScoringData? scoringData = null;
+            List<PIQIAuditDataElementAuditAssessmentItem>? assessmentItems = null;
+            List<PIQIAuditDataElementAuditAssessmentItem>? informationalItems = null;
+
             // Get all results for this element, including all attribute results
             List<EvaluationResult> resultList = elementItem.CriteriaResultDict.Values.Where(t => t.IsScoring).ToList();
             foreach (EvaluationItem attrItem in elementItem.ChildDict.Values)
@@ -228,27 +416,67 @@
                     resultList.AddRange(attrResultList);
             }
 
-            // Exit condition - no results to audit
-            if (resultList.Count < 1)
-                return null;
+            // Data score is based on existence of class results, including all attribute results
+            if (resultList.Count > 0)
+            {
+                // Calculate scoring 
+                int denominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Count();
+                int weightedDenominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Sum(t => t.Criterion.ScoringWeight);
+                int numerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Count();
+                int weightedNumerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Sum(t => t.Criterion.ScoringWeight);
+                int score = 0;
+                if (denominator > 0)
+                    score = (int)Math.Truncate((float)numerator / (float)denominator * (float)100);
+                int weightedScore = 0;
+                if (weightedDenominator > 0)
+                    weightedScore = (int)Math.Truncate((float)weightedNumerator / (float)weightedDenominator * (float)100);
+                int criticalFailureCount = resultList.Where(t => t.IsScoring && t.IsCritical && t.EvalFailed).Count();
 
-            // Calculate scoring 
-            int denominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Count();
-            int weightedDenominator = resultList.Where(t => t.IsScoring && !t.EvalSkipped).Sum(t => t.Criterion.ScoringWeight);
-            int numerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Count();
-            int weightedNumerator = resultList.Where(t => t.IsScoring && t.EvalPassed).Sum(t => t.Criterion.ScoringWeight);
-            int score = 0;
-            if (denominator > 0)
-                score = (int)Math.Truncate((float)numerator / (float)denominator * (float)100);
-            int weightedScore = 0;
-            if (weightedDenominator > 0)
-                weightedScore = (int)Math.Truncate((float)weightedNumerator / (float)weightedDenominator * (float)100);
-            int criticalFailureCount = resultList.Where(t => t.IsScoring && t.IsCritical && t.EvalFailed).Count();
+                scoringData = new PIQIAuditDataElementAuditScoringData(score, weightedScore, criticalFailureCount, numerator, denominator);
+            }
 
-            // Create the Audit and scoringData nodes
-            PIQIAuditDataElementAudit auditDataElementAudit = new PIQIAuditDataElementAudit(score, weightedScore, criticalFailureCount, numerator, denominator);
+            // Scoring and Informational assessments
+            foreach (EvaluationResult result in elementItem.CriteriaResultDict.Values.Where(t => t.IsScoring == true).OrderBy(t => t.SamDisplayName))
+            {
+                if (assessmentItems == null)
+                    assessmentItems = new List<PIQIAuditDataElementAuditAssessmentItem>();
 
-            return auditDataElementAudit;
+                assessmentItems.Add(Audit_AddElementAudit_AssessmentItem(result, "Scoring"));
+            }
+            foreach (EvaluationResult result in elementItem.CriteriaResultDict.Values.Where(t => t.IsInformational == true).OrderBy(t => t.SamDisplayName))
+            {
+                if (informationalItems == null)
+                    informationalItems = new List<PIQIAuditDataElementAuditAssessmentItem>();
+
+                informationalItems.Add(Audit_AddElementAudit_AssessmentItem(result, "Informational"));
+            }
+
+            // Create the Audit and scoringData nodes, if there's anything to report.
+            if (scoringData != null || assessmentItems != null || informationalItems != null)
+            {
+                if (scoringData == null) // Only happens if we have informational only items on this element
+                    scoringData = new PIQIAuditDataElementAuditScoringData(0, 0, 0, 0, 0);
+
+                PIQIAuditDataElementAudit auditDataElementAudit = new PIQIAuditDataElementAudit(scoringData);
+                auditDataElementAudit.AssessmentItems = assessmentItems;
+                auditDataElementAudit.InformationalItems = informationalItems;
+
+                return auditDataElementAudit;
+            }
+
+            return null;
+        }
+
+        private static PIQIAuditDataElementAuditAssessmentItem Audit_AddElementAudit_AssessmentItem(EvaluationResult result, string effect)
+        {
+            return new PIQIAuditDataElementAuditAssessmentItem(
+                result.EntityMnemonic,
+                result.EntityName,
+                result.SamDisplayName,
+                effect,
+                result.EvalSkipped ? "Skipped" : (result.EvalPassed ? "Passed" : "Failed"),
+                result.Reason ?? ""
+            );
         }
 
         #endregion
@@ -334,6 +562,7 @@
         {
             return new PIQIAuditDataAttributeData_Text(item.Text);
         }
+       
         private PIQIAuditDataAttributeAudit? Audit_AddAttributeAudit(EvaluationItem data)
         {
             PIQIAuditDataAttributeAuditScoringData scoringData = Audit_AddAttributeAudit_ScoringData(data);

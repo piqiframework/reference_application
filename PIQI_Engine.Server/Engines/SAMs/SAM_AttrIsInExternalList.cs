@@ -1,6 +1,9 @@
-﻿using PIQI.Components.SAMs;
+﻿using Azure;
+using Azure.Core;
 using PIQI.Components.Models;
+using PIQI.Components.SAMs;
 using PIQI.Components.Services;
+using System.Xml.Linq;
 
 namespace PIQI_Engine.Server.Engines.SAMs
 {
@@ -59,38 +62,21 @@ namespace PIQI_Engine.Server.Engines.SAMs
             {
                 // Set the message model item
                 EvaluationItem evaluationItem = (EvaluationItem)request.EvaluationObject;
+                if (evaluationItem.ItemType != EntityItemTypeEnum.Attribute) throw new Exception($"Sam [{this.SAMObject.Name}] incorrectly bound to non-attribute entity");
+
+                // Message item should be populated - dependent SAM should have caught if it's not
                 MessageModelItem item = evaluationItem?.MessageItem;
+                if (item == null) return result.Fail("Attribute not populated");
 
-                List<string> valueTextList = new List<string>();
-                if (item.MessageData is CodeableConcept)
-                {
-                    // Get all codes from complete codings
-                    CodeableConcept concept = (CodeableConcept)item.MessageData;
-                    if (concept.HasCodedItems)
-                    {
-                        foreach (Coding coding in concept.CodingList.Where(t => t.IsComplete))
-                            valueTextList.Add(coding.CodeValue);
-                    }
+                // Get value text
+                BaseText data = (BaseText)item.MessageData;
+                if (data == null || data.Text == null) return result.Fail("Attribute not populated");
+                string valueText = data.Text;
 
-                    // Fail condition: no data
-                    if (valueTextList.Count < 1) return result.Fail("Attribute contained no complete codings");
-                }
-                else
-                {
-                    // Get the text value
-                    BaseText data = (BaseText)item.MessageData;
-                    if (!string.IsNullOrEmpty(data.Text))
-                        valueTextList.Add(data.Text);
-
-                    // Fail condition: no data
-                    if (valueTextList.Count < 1) return result.Fail("Attribute was unpopulated");
-                }
-
-                // Get the ValueListMnemonic parameter
+                // Get set mnemonic
                 if (request.ParmList == null) throw new Exception("Parameter list was not supplied");
-                Tuple<string, string> arg1 = request.ParmList.Where(t => t.Item1 == "EXTERNAL_LIST_MNEMONIC").FirstOrDefault();
-                if (arg1 == null) throw new Exception("[External List Mnemonic] parameter not found");
-                string setMnemonic = arg1.Item2;
+                string setMnemonic = request.GetParameterValue("EXTERNAL_LIST_MNEMONIC");
+                if (string.IsNullOrEmpty(setMnemonic)) throw new Exception("Parameter [External List Mnemonic] was not supplied");
 
                 // Verify _SAMService.ReferenceData is not null
                 if (_SAMService.Message.RefData == null || _SAMService?.Message?.RefData?.ValueList == null) throw new Exception("Missing or invalid reference data for SAM_AttrIsInExternalList");
@@ -103,18 +89,11 @@ namespace PIQI_Engine.Server.Engines.SAMs
                 ValueList value = _SAMService.Message.RefData.ValueList
                     .FirstOrDefault(v => v.Mnemonic.Equals(setMnemonic, StringComparison.OrdinalIgnoreCase));
 
-                foreach (string valueText in valueTextList)
-                {
-                    if (value.CodeList.Any(c =>
-                            c.DataCode.Equals(valueText, StringComparison.OrdinalIgnoreCase) ||
-                            c.DataText.Equals(valueText, StringComparison.OrdinalIgnoreCase)
-                        )
-                    )
-                    {
-                        passed = true;
-                        break;
-                    }
-                }
+                if (value.CodeList.Any(c =>
+                    c.DataCode.Equals(valueText, StringComparison.OrdinalIgnoreCase) ||
+                    c.DataText.Equals(valueText, StringComparison.OrdinalIgnoreCase))
+                )
+                    passed = true;
 
                 // Update result
                 result.Done(passed);

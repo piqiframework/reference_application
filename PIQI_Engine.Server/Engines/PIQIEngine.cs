@@ -1,4 +1,5 @@
-﻿using PIQI.Components.Models;
+﻿using PIQI.Components.CustomExceptionClasses;
+using PIQI.Components.Models;
 using PIQI.Components.SAMs;
 using PIQI.Components.Services;
 using PIQI_Engine.Server.Services;
@@ -99,16 +100,16 @@ namespace PIQI_Engine.Server.Engines
 
                 // Load the message header
                 MessageModel headerResult = MessageModelBuilder.LoadHeader(piqiRequest);  
-                if (headerResult == null) throw new Exception("Failed to parse message header.");
+                if (headerResult == null) throw new CustomPIQIException(400, "INVALID_REQUEST_HEADER", "Failed to parse message header.");
                 message.MessageModel = headerResult;
 
                 //Load reference data: Code system dictionary, Sam list, Entity list, Entity Type list, Criteria list, Value list, and Data Type list
                 PIQIReferenceData refDataResult = _ReferenceDataEngine.LoadRefData(piqiRequest.EvaluationRubricMnemonic, evaluation);
-                if (refDataResult == null) throw new Exception("Failed to load reference data.");
+                if (refDataResult == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load reference data.");
                 message.RefData = refDataResult;
 
                 if (evaluation != null && message.RefData.EvaluationRubric.Mnemonic != null) piqiRequest.EvaluationRubricMnemonic = message.RefData.EvaluationRubric.Mnemonic;
-
+                  
                 // Explicitly set Data Type List, Entity Model, and root information to be used when loading messageData content
                 message.MessageModel.DataTypeList = refDataResult.DataTypeList;
                 message.MessageModel.EntityModel = refDataResult.EntityModel;
@@ -116,7 +117,7 @@ namespace PIQI_Engine.Server.Engines
 
                 // Get evaluation rubric from evaluation mnemonic and apply it to the message
                 EvaluationRubric evaluationRubric = message.RefData.EvaluationRubric;
-                if (evaluationRubric == null) throw new Exception("evaluation rubric mnemonic invalid.");
+                if (evaluationRubric == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Evaluation rubric mnemonic invalid or cannot be resolved.");
 
                 // Validate the input entity model version mnemonic against the evaluation 
                 ValidateEntityModelVersionMnemonic(evaluationRubric, piqiRequest.PIQIModelMnemonic);
@@ -128,7 +129,7 @@ namespace PIQI_Engine.Server.Engines
                 // Set the message to be used in the SAMs (needed for reference data)
                 _SAMService.Message = message; 
 
-                // Process the message
+                // Process the  
                 await ProcessMessageAsync(message);
 
                 // Generate stats
@@ -147,13 +148,19 @@ namespace PIQI_Engine.Server.Engines
 
                 stopwatch.Stop();
                 // Set result succeeded
-                result.Succeed(formattedStatResponse, stopwatch);
+                result.Succeed(formattedStatResponse, stopwatch); 
+            }
+            catch (CustomPIQIException ex)
+            {
+                // Log then throw error
+                _Logger.LogError(ex, "PiqiRequestAsync: " + ex.Message);
+                throw;
             }
             catch (Exception ex)
             {
-                // Fail result with exception message
+                // Log then throw error
                 _Logger.LogError(ex, "PiqiRequestAsync: " + ex.Message);
-                result.Fail(ex);
+                throw;
             }
             return result;
         }
@@ -166,7 +173,7 @@ namespace PIQI_Engine.Server.Engines
         {
             try
             {
-                if (messagePIQIModelMnemonic == null || string.IsNullOrWhiteSpace(messagePIQIModelMnemonic)) throw new Exception("Missing model version mnemonic.");
+                if (messagePIQIModelMnemonic == null || string.IsNullOrWhiteSpace(messagePIQIModelMnemonic)) throw new CustomPIQIException(400, "INVALID_REQUEST", "Missing model version mnemonic.");
                 var pattern = @"^(.*?)_V(\d+)(?:_(.*))?$";
                 string? messageModelMnemonic, messageVersion, messageExtension = null;
                 string? evaluationModelMnemonic, evaluationVersion, evaluationExtension = null;
@@ -179,7 +186,7 @@ namespace PIQI_Engine.Server.Engines
                     messageVersion = messageMatch.Groups[2].Value; // "123"
                     messageExtension = messageMatch.Groups[3].Success ? messageMatch.Groups[3].Value : null; // optional
                 }
-                else throw new Exception("Invalid message model.");
+                else throw new CustomPIQIException(422, "INVALID_MESSAGE_MODEL", "Model referenced in message is invalid or missing.");
 
                 // Split the evaluation model mnemonic into parts
                 var evalMatch = Regex.Match(evaluationRubric.Model.Mnemonic ?? "", pattern);
@@ -189,11 +196,11 @@ namespace PIQI_Engine.Server.Engines
                     evaluationVersion = evalMatch.Groups[2].Value; // "123"
                     evaluationExtension = evalMatch.Groups[3].Success ? evalMatch.Groups[3].Value : null; // optional
                 }
-                else throw new Exception("Invalid evaluation model.");
+                else throw new CustomPIQIException(422, "INVALID_EVALUATION_MODEL", "Model referenced in evaluation is invalid or missing.");
 
                 // Verify the models match
                 if (!messageModelMnemonic.Equals(evaluationModelMnemonic, StringComparison.OrdinalIgnoreCase))
-                    throw new Exception("Message model mnemonic does not match the evaluation rubric.");
+                    throw new CustomPIQIException(422, "MODEL_MISMATCH", $"PIQIModelMnemonic '{messageModelMnemonic}' does not match the model bound to rubric '{evaluationRubric.Model.Mnemonic}'.");
             }
             catch
             {
@@ -326,7 +333,7 @@ namespace PIQI_Engine.Server.Engines
                 // Get SAM from evaluation criterion
                 SAM? criteriaSAM = message.RefData.GetSAM(evaluationCriterion.SAMMnemonic);
                 if (criteriaSAM == null)
-                    throw new Exception($"Criteria SAM{(evaluationCriterion.SAMMnemonic != null ? " (" + evaluationCriterion.SAMMnemonic + ")" : "")} missing from SAM reference list or invalid.");
+                    throw new CustomPIQIException(422, "SAM_NOT_FOUND", $"Criteria SAM{(evaluationCriterion.SAMMnemonic != null ? " (" + evaluationCriterion.SAMMnemonic + ")" : "")} missing from SAM reference list or invalid.");
 
                 // Create the evaluation result from the sam, criterion, and evaluation item
                 EvaluationResult evaluationResult = message.EvaluationManager.CreateEvalResult(evaluationItem, evaluationCriterion, criteriaSAM, false, false);
@@ -334,7 +341,7 @@ namespace PIQI_Engine.Server.Engines
                 // Check if evaluation in the evaluation criteria is valid, skip if not
                 SAM? evalValidSam = message.RefData.GetSAM("EVAL_ISVALID");
                 if (evalValidSam == null)
-                    throw new Exception($"Evaluation validity SAM (EVAL_ISVALID missing) from SAM reference list or invalid.");
+                    throw new CustomPIQIException(422, "SAM_NOT_FOUND", $"Evaluation validity SAM (EVAL_ISVALID) missing from SAM reference list or invalid.");
 
                 if (!EvalIsValid(evaluationCriterion, criteriaSAM))
                 {
@@ -348,7 +355,7 @@ namespace PIQI_Engine.Server.Engines
                     // Get SAM from evaluation criterion
                     SAM? conditionalCriteriaSAM = message.RefData.GetSAM(evaluationCriterion.ConditionalSAM);
                     if (conditionalCriteriaSAM == null)
-                        throw new Exception($"Conditional SAM{(evaluationCriterion.ConditionalSAM != null ? " (" + evaluationCriterion.ConditionalSAM + ")" : "")} missing from SAM reference list or invalid.");
+                        throw new CustomPIQIException(422, "SAM_NOT_FOUND", $"Conditional SAM{(evaluationCriterion.ConditionalSAM != null ? " (" + evaluationCriterion.ConditionalSAM + ")" : "")} missing from SAM reference list or invalid.");
 
                     // Create the conditional evaluation result
                     EvaluationResult conditionalEvaluationResult = new EvaluationResult(evaluationItem, evaluationCriterion, conditionalCriteriaSAM, true, false);
@@ -382,7 +389,7 @@ namespace PIQI_Engine.Server.Engines
         {
             try
             {
-                if (evaluationResult == null) throw new Exception("Invalid evaluation result item.");
+                if (evaluationResult == null) throw new CustomPIQIException(500, "INVALID_RESULT_ITEM", "Invalid evaluation result item.");
                 // Stack of SAMs used to process the prerequisite SAMs in order
                 Stack<SAM> dependencySAMStack = new Stack<SAM>();
                 var dependencySAMMnemonic = initalSAMMnemonic;
@@ -392,7 +399,7 @@ namespace PIQI_Engine.Server.Engines
                 {
                     // Get the SAM matching the prerequisite mnemonic and add it to the stack of SAMS
                     SAM dependencySAM = message.RefData.GetSAM(dependencySAMMnemonic);
-                    if (dependencySAM == null) throw new Exception($"Dependency SAM {dependencySAMMnemonic} not found.");
+                    if (dependencySAM == null) throw new CustomPIQIException(422, "SAM_NOT_FOUND", $"Dependency SAM {dependencySAMMnemonic} not found.");
 
                     // Push the Dependency sam onto the stack to process later
                     dependencySAMStack.Push(dependencySAM);
@@ -426,7 +433,7 @@ namespace PIQI_Engine.Server.Engines
 
                     // If we're using value data, ensure the appropriate data is loaded  
                     if (!string.IsNullOrEmpty(dataMnemonic) && message.RefData.GetValueList(dataMnemonic) == null)
-                        throw new Exception("Failed to load value data for [" + dataMnemonic + "]");
+                        throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load value data for [" + dataMnemonic + "]");
 
                     // Get the executable SAM
                     ISAMWorker samWorker = _samRegistry.CreateWorker(processingSAM.Mnemonic, processingSAM, _SAMService);
@@ -463,7 +470,7 @@ namespace PIQI_Engine.Server.Engines
 
                     // Validate that we ran successfully
                     if (samResult == null || samResult.ResultState == SAMResultStateEnum.ERRORED)
-                        throw new Exception($"{processingSAM.Mnemonic} failed to process {(samResult != null ? ": " + samResult?.ErrorMessage : "")}");
+                        throw new CustomPIQIException(500, "SAM_FAILURE", $"{processingSAM.Mnemonic} failed to process{(samResult != null ? ": " + samResult?.ErrorMessage : ".")}");
 
                     // Fail the criteria SAM if it or one of its dependencies fails
                     if (samResult.Failed)
@@ -506,7 +513,7 @@ namespace PIQI_Engine.Server.Engines
                         // If there are no parameters in the criterion, the evaluation is invalid
                         if (evaluationCriterion.SAMParameters != null)
                         {
-                            EvaluationCriteriaParameter? evaluationCriteriaParameter = evaluationCriterion.SAMParameters.FirstOrDefault(ecsp => ecsp.ParameterName == samParameter.Name);
+                            EvaluationCriteriaParameter? evaluationCriteriaParameter = evaluationCriterion.SAMParameters.FirstOrDefault(ecsp => ecsp.SamParameterMnemonic == samParameter.Mnemonic);
                             if (evaluationCriteriaParameter == null || string.IsNullOrEmpty(evaluationCriteriaParameter.ParameterValue)) passed = false;
                         }
                         else passed = false;

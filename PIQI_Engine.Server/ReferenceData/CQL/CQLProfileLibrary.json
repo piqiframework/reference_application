@@ -1,0 +1,19 @@
+{
+  "CQLProfileLibrary": [
+    {
+      "name": "Plausibility - Female Birth Sex and Male Condition",
+      "mnemonic": "PLAUSIBILITY_FEMALE_BIRTH_SEX_AND_MALE_CONDITION",
+      "filePath": "ReferenceData/CQL/Plausibility - Female Birth Sex and Male Condition.cql"
+    },
+    {
+      "name": "Plausibility - Male Birth Sex and Female Condition",
+      "mnemonic": "PLAUSIBILITY_MALE_BIRTH_SEX_AND_FEMALE_CONDITION",
+      "filePath": "ReferenceData/CQL/Plausibility - Male Birth Sex and Female Condition.cql"
+    },
+    {
+      "name": "Plausibility - Lab Results with Expected SNOMED CT Result Values",
+      "mnemonic": "LAB_RESULTS_WITH_EXPECTED_SNOMED_CT_RESULT_VALUES",
+      "filePath": "ReferenceData/CQL/Plausibility - Lab Results with Expected SNOMED CT Result Values.cql"
+    }
+  ]
+}

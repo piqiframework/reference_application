@@ -1,21 +1,18 @@
 {
   "succeeded": true,
-  "errorMessage": null,
-  "elapsedTimeInMS": 904,
   "scoringData": {
     "contributorID": "TestProvider",
     "dataSourceID": "TestSource",
     "messageID": "Msg003",
     "evaluationRubric": "USCDI v3",
-    "processDate": "2026-07-14T06:50:32.589634-04:00",
     "messageResults": {
       "denominator": 14,
-      "numerator": 9,
-      "piqiScore": 64,
+      "numerator": 6,
+      "piqiScore": 42,
       "criticalFailureCount": 0,
       "weightedDenominator": 14,
-      "weightedNumerator": 9,
-      "weightedPIQIScore": 64
+      "weightedNumerator": 6,
+      "weightedPIQIScore": 42
     },
     "dataClassResults": [
       {
@@ -30,7 +27,7 @@
         "weightedPIQIScore": 0
       },
       {
-        "dataClassName": "Care Plans",
+        "dataClassName": "Care Plan",
         "instanceCount": 0,
         "denominator": 0,
         "numerator": 0,
@@ -110,12 +107,12 @@
         "dataClassName": "Encounters",
         "instanceCount": 1,
         "denominator": 5,
-        "numerator": 2,
-        "piqiScore": 40,
+        "numerator": 1,
+        "piqiScore": 20,
         "criticalFailureCount": 0,
         "weightedDenominator": 5,
-        "weightedNumerator": 2,
-        "weightedPIQIScore": 40
+        "weightedNumerator": 1,
+        "weightedPIQIScore": 20
       },
       {
         "dataClassName": "Goals",
@@ -132,12 +129,12 @@
         "dataClassName": "Health Assessments",
         "instanceCount": 1,
         "denominator": 2,
-        "numerator": 2,
-        "piqiScore": 100,
+        "numerator": 1,
+        "piqiScore": 50,
         "criticalFailureCount": 0,
         "weightedDenominator": 2,
-        "weightedNumerator": 2,
-        "weightedPIQIScore": 100
+        "weightedNumerator": 1,
+        "weightedPIQIScore": 50
       },
       {
         "dataClassName": "Immunizations",
@@ -198,12 +195,12 @@
         "dataClassName": "Procedures",
         "instanceCount": 1,
         "denominator": 3,
-        "numerator": 2,
-        "piqiScore": 66,
+        "numerator": 1,
+        "piqiScore": 33,
         "criticalFailureCount": 0,
         "weightedDenominator": 3,
-        "weightedNumerator": 2,
-        "weightedPIQIScore": 66
+        "weightedNumerator": 1,
+        "weightedPIQIScore": 33
       },
       {
         "dataClassName": "Provenance",
@@ -234,7 +231,7 @@
         "evaluationList": []
       },
       {
-        "dataClassName": "Care Plans",
+        "dataClassName": "Care Plan",
         "evaluationList": []
       },
       {
@@ -314,12 +311,12 @@
     "dataSourceID": "TestSource",
     "messageID": "Msg003",
     "audit": {
-      "messageNumerator": 9,
+      "messageNumerator": 6,
       "messageDenominator": 14,
-      "messageScore": 64,
-      "messageNumeratorWeighted": 9,
+      "messageScore": 42,
+      "messageNumeratorWeighted": 6,
       "messageDenominatorWeighted": 14,
-      "messageScoreWeighted": 64,
+      "messageScoreWeighted": 42,
       "messageCriticalFailureCount": 0
     },
     "root": {
@@ -330,7 +327,7 @@
           "elements": null
         },
         {
-          "className": "carePlans",
+          "className": "carePlan",
           "elements": null
         },
         {
@@ -586,10 +583,10 @@
                   },
                   "attributeAudit": {
                     "scoringData": {
-                      "attributeScore": 100,
-                      "attributeScoreWeighted": 100,
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
                       "attributeCriticalFailureCount": 0,
-                      "attributeNumerator": 1,
+                      "attributeNumerator": 0,
                       "attributeDenominator": 1
                     },
                     "assessmentItems": [
@@ -598,8 +595,8 @@
                         "attributeName": "encounterDateTime",
                         "assessment": "Encounter date is in the past",
                         "effect": "Scoring",
-                        "status": "Passed",
-                        "reason": ""
+                        "status": "Failed",
+                        "reason": "Encounter date is in not the past"
                       }
                     ],
                     "informationalItems": null
@@ -698,11 +695,6 @@
                   "attributeAudit": null
                 },
                 {
-                  "attributeName": "encounterStartDate",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
                   "attributeName": "encounterStatus",
                   "data": null,
                   "attributeAudit": null
@@ -737,10 +729,10 @@
                 }
               ],
               "elementAudit": {
-                "elementScore": 40,
-                "elementScoreWeighted": 40,
+                "elementScore": 20,
+                "elementScoreWeighted": 20,
                 "elementCriticalFailureCount": 0,
-                "elementNumerator": 2,
+                "elementNumerator": 1,
                 "elementDenominator": 5
               }
             }
@@ -807,10 +799,10 @@
                   },
                   "attributeAudit": {
                     "scoringData": {
-                      "attributeScore": 100,
-                      "attributeScoreWeighted": 100,
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
                       "attributeCriticalFailureCount": 0,
-                      "attributeNumerator": 1,
+                      "attributeNumerator": 0,
                       "attributeDenominator": 1
                     },
                     "assessmentItems": [
@@ -819,8 +811,8 @@
                         "attributeName": "effectiveDate",
                         "assessment": "Health Status assessment date is date in past",
                         "effect": "Scoring",
-                        "status": "Passed",
-                        "reason": ""
+                        "status": "Failed",
+                        "reason": "Health Status assessment date is not date in past"
                       }
                     ],
                     "informationalItems": null
@@ -865,10 +857,10 @@
                 }
               ],
               "elementAudit": {
-                "elementScore": 100,
-                "elementScoreWeighted": 100,
+                "elementScore": 50,
+                "elementScoreWeighted": 50,
                 "elementCriticalFailureCount": 0,
-                "elementNumerator": 2,
+                "elementNumerator": 1,
                 "elementDenominator": 2
               }
             }
@@ -951,10 +943,10 @@
                   },
                   "attributeAudit": {
                     "scoringData": {
-                      "attributeScore": 100,
-                      "attributeScoreWeighted": 100,
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
                       "attributeCriticalFailureCount": 0,
-                      "attributeNumerator": 1,
+                      "attributeNumerator": 0,
                       "attributeDenominator": 1
                     },
                     "assessmentItems": [
@@ -963,8 +955,8 @@
                         "attributeName": "procedureDateTime",
                         "assessment": "Procedure date is valid",
                         "effect": "Scoring",
-                        "status": "Passed",
-                        "reason": ""
+                        "status": "Failed",
+                        "reason": "Procedure date is invalid"
                       }
                     ],
                     "informationalItems": null
@@ -996,10 +988,10 @@
                 }
               ],
               "elementAudit": {
-                "elementScore": 66,
-                "elementScoreWeighted": 66,
+                "elementScore": 33,
+                "elementScoreWeighted": 33,
                 "elementCriticalFailureCount": 0,
-                "elementNumerator": 2,
+                "elementNumerator": 1,
                 "elementDenominator": 3
               }
             }

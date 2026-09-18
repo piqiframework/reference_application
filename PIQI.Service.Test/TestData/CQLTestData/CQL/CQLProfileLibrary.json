@@ -1,0 +1,15 @@
+{
+  "CQLProfileLibrary": [
+    {
+      "name": "Annual Flu Vaccine Mapped",
+      "mnemonic": "AnnualFluVaccineMapped",
+      "filePath": "ReferenceData/CQL/AnnualFluVaccineMapped.cql",
+      "fieldMappingFilePath": "ReferenceData/CQL/AnnualFluVaccineMapping.json"
+    },
+    {
+      "name": "Annual Flu Vaccine Unmapped",
+      "mnemonic": "AnnualFluVaccineUnmapped",
+      "filePath": "ReferenceData/CQL/AnnualFluVaccineUnmapped.cql"
+    }
+  ]
+}

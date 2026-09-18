@@ -1,5 +1,6 @@
 ﻿using PIQI.Components.Models;
 using PIQI.Components.Services;
+using CQLTest.Service;
 
 namespace PIQI.Components.SAMs
 {
@@ -35,6 +36,7 @@ namespace PIQI.Components.SAMs
         /// <param name="samService">
         /// An implementation of <see cref="SAMService"/> used to access reference data and make FHIR API calls.
         /// </param>
+
         protected SAMBase(SAM sam, SAMService samService)
         {
             SAMObject = sam;

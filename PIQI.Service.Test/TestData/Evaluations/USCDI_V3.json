@@ -1,6 +1,7 @@
 {
-  "name": "USCDI v3 Aligned",
+  "name": "USCDI v3",
   "mnemonic": "USCDI_V3",
+  "tenantUid": "00000000-0000-0000-0000-000000000000",
   "description": "USCDI 3",
   "version": null,
   "authorityName": "USCDI",

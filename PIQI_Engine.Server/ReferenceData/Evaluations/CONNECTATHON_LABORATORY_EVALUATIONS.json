@@ -1,0 +1,165 @@
+{
+  "name": "Connectathon - Laboratory Evaluations",
+  "mnemonic": "CONNECTATHON_LABORATORY_EVALUATIONS",
+  "tenantUid": "00000000-0000-0000-0000-000000000000",
+  "description": "This is a sample rubric for the purpose of testing export and import of a rubric. It contains 6 laboratory evaluations.",
+  "version": 20260911,
+  "authorityName": "USCDI",
+  "model": {
+    "name": "Patient Clinical Model 1.0",
+    "mnemonic": "PAT_CLINICAL_V1",
+    "version": 1
+  },
+  "source": {
+    "name": "PIQI Alliance",
+    "mnemonic": "PIQI.ALLIANCE"
+  },
+  "criteria": [
+    {
+      "sequence": 1,
+      "description": "",
+      "entity": "LAB_TEST",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "Lab Test code is in LOINC",
+      "failureNameOverride": "Lab Test code is not in LOINC",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": true,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SYM_REGEN_LOINC",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 2,
+      "description": "",
+      "entity": "LAB_RESVALUE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "Lab Qualitative Result code is in SNOMED CT",
+      "failureNameOverride": "Lab Qualitative Result code is not in SNOMED CT",
+      "conditionalSam": "OBSERVATIONVALUE_ISQUALITATIVE",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": [
+        {
+          "samParameterMnemonic": "VALID_ATTRIBUTE_LIST",
+          "parameterValue": "CD,CE,CWE",
+          "parameterValueTypeName": "Simple List (CSV)",
+          "parameterName": "Valid Attribute List"
+        }
+      ]
+    },
+    {
+      "sequence": 3,
+      "description": "",
+      "entity": "LAB_RESUOM",
+      "samMnemonic": "ATTR_INEXTERNALLIST",
+      "samNameOverride": "Lab Result Unit is in UCUM",
+      "failureNameOverride": "Lab Result Unit is not in UCUM",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "EXTERNAL_LIST_MNEMONIC",
+          "parameterValue": "UCUM",
+          "parameterValueTypeName": "Content Set",
+          "parameterName": "External List  Mnemonic"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 4,
+      "description": "",
+      "entity": "LAB_SPECTYPE",
+      "samMnemonic": "CONCEPT_ISVALIDMEMBER",
+      "samNameOverride": "Lab Specimen Type code is in SNOMED CT",
+      "failureNameOverride": "Lab Specimen Type code is not in SNOMED CT",
+      "conditionalSam": "ATTR_ISPOPULATED",
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CODE_SYSTEM_CSV",
+          "parameterValue": "SNO_INT_USEXT",
+          "parameterValueTypeName": "Code System",
+          "parameterName": "Code System CSV"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 5,
+      "description": "",
+      "entity": "LAB_PERFDT",
+      "samMnemonic": "ATTR_ISPASTDATE",
+      "samNameOverride": "Lab Test Performed Date is valid past date",
+      "failureNameOverride": "Lab Test Performed Date is not valid past date",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 6,
+      "description": "",
+      "entity": "LAB_RSTAT",
+      "samMnemonic": "ATTR_ISPOPULATED",
+      "samNameOverride": "Lab Result Status is populated",
+      "failureNameOverride": "Lab Result Status is not populated",
+      "conditionalSam": null,
+      "scoringEffect": "Scoring",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 7,
+      "description": null,
+      "entity": "PATIENT",
+      "samMnemonic": "CQL_CIM_EVALUATOR",
+      "samNameOverride": "LOINC Qualitative Lab Result has Valid SNOMED CT Result Value",
+      "failureNameOverride": "LOINC Qualitative Lab Result does not have Valid SNOMED CT Result Value",
+      "conditionalSam": null,
+      "scoringEffect": "Plausibility",
+      "scoringWeight": 1,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValue": "LAB_RESULTS_WITH_EXPECTED_SNOMED_CT_RESULT_VALUES",
+          "parameterValueTypeName": "CQL Library",
+          "parameterName": "CQL Library"
+        },
+        {
+          "samParameterMnemonic": "MEASUREMENT_PERIOD",
+          "parameterValue": "1900-01-01|2100-12-31",
+          "parameterValueTypeName": "Simple Value",
+          "parameterName": "Measurement Period"
+        }
+      ],
+      "conditionalSamParameters": []
+    }
+  ]
+}

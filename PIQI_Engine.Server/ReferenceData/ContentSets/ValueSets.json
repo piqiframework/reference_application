@@ -1,4 +1,3911 @@
 {
   "ValueSetLibrary": [
+    {
+      "Name": "20 to 42 Plus Weeks Gestation",
+      "Mnemonic": "20_TO_42_PLUS_WEEKS_GESTATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "37 to 42 Plus Weeks Gestation",
+      "Mnemonic": "37_TO_42_PLUS_WEEKS_GESTATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "A1C Lab Test",
+      "Mnemonic": "A1C_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "A1C_LAB_TEST"
+      //"FhirUri": "522f6fca-40c5-4858-8a24-95ab35c913f6"
+    },
+    {
+      "Name": "Abnormal Presentation",
+      "Mnemonic": "ABNORMAL_PRESENTATION",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Abnormal Weight Loss and Malnutrition",
+      "Mnemonic": "ABNORMAL_WEIGHT_LOSS_AND_MALNUTRITION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "ACE Inhibitor or ARB or ARNI",
+      "Mnemonic": "ACE_INHIBITOR_OR_ARB_OR_ARNI",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "ACE Inhibitor or ARB or ARNI Ingredient",
+      "Mnemonic": "ACE_INHIBITOR_OR_ARB_OR_ARNI_INGREDIENT",
+      "DataClassContext": "ALG",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Active Bleeding Excluding Menses or Bleeding Diathesis",
+      "Mnemonic": "ACTIVE_BLEEDING_EXCLUDING_MENSES_OR_BLEEDING_DIATHESIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Active Tuberculosis for Urology Care",
+      "Mnemonic": "ACTIVE_TUBERCULOSIS_FOR_UROLOGY_CARE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute and Subacute Iridocyclitis",
+      "Mnemonic": "ACUTE_AND_SUBACUTE_IRIDOCYCLITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute Heart Failure",
+      "Mnemonic": "ACUTE_HEART_FAILURE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute Myocardial Infarction",
+      "Mnemonic": "ACUTE_MYOCARDIAL_INFARCTION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute or Persistent Asthma",
+      "Mnemonic": "ACUTE_OR_PERSISTENT_ASTHMA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute Peptic Ulcer",
+      "Mnemonic": "ACUTE_PEPTIC_ULCER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute Pharyngitis",
+      "Mnemonic": "ACUTE_PHARYNGITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute Renal Failure",
+      "Mnemonic": "ACUTE_RENAL_FAILURE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute Respiratory Distress Syndrome",
+      "Mnemonic": "ACUTE_RESPIRATORY_DISTRESS_SYNDROME",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute Respiratory Failure",
+      "Mnemonic": "ACUTE_RESPIRATORY_FAILURE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Acute Tonsillitis",
+      "Mnemonic": "ACUTE_TONSILLITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Adolescent Depression Medications",
+      "Mnemonic": "ADOLESCENT_DEPRESSION_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Adult Depression Medications",
+      "Mnemonic": "ADULT_DEPRESSION_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Advanced Illness",
+      "Mnemonic": "ADVANCED_ILLNESS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Air and Thrombotic Embolism",
+      "Mnemonic": "AIR_AND_THROMBOTIC_EMBOLISM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Albumin lab test",
+      "Mnemonic": "ALBUMIN_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Alcohol Withdrawal",
+      "Mnemonic": "ALCOHOL_WITHDRAWAL",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Allergy to ACE Inhibitor or ARB",
+      "Mnemonic": "ALLERGY_TO_ACE_INHIBITOR_OR_ARB",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Allergy to Beta Blocker Therapy",
+      "Mnemonic": "ALLERGY_TO_BETA_BLOCKER_THERAPY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Allergy to thrombolytics",
+      "Mnemonic": "ALLERGY_TO_THROMBOLYTICS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Amblyopia",
+      "Mnemonic": "AMBLYOPIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ambulatory",
+      "Mnemonic": "AMBULATORY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Amenorrhea",
+      "Mnemonic": "AMENORRHEA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Amniotic Fluid Embolism",
+      "Mnemonic": "AMNIOTIC_FLUID_EMBOLISM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Anaphylactic Reaction to DTaP Vaccine",
+      "Mnemonic": "ANAPHYLACTIC_REACTION_TO_DTAP_VACCINE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Androgen deprivation therapy for Urology Care",
+      "Mnemonic": "ANDROGEN_DEPRIVATION_THERAPY_FOR_UROLOGY_CARE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Anemia",
+      "Mnemonic": "ANEMIA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Anesthesia Requiring Monitored Care",
+      "Mnemonic": "ANESTHESIA_REQUIRING_MONITORED_CARE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ankylosing Spondylitis",
+      "Mnemonic": "ANKYLOSING_SPONDYLITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Annual Wellness Visit",
+      "Mnemonic": "ANNUAL_WELLNESS_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Antibiotic Medications for Pharyngitis",
+      "Mnemonic": "ANTIBIOTIC_MEDICATIONS_FOR_PHARYNGITIS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Antibiotic Medications for Upper Respiratory Infection",
+      "Mnemonic": "ANTIBIOTIC_MEDICATIONS_FOR_UPPER_RESPIRATORY_INFECTION",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Anticoagulant Therapy",
+      "Mnemonic": "ANTICOAGULANT_THERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Anticoagulants for All Indications",
+      "Mnemonic": "ANTICOAGULANTS_FOR_ALL_INDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Antidepressant Medication",
+      "Mnemonic": "ANTIDEPRESSANT_MEDICATION",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Antidepressants",
+      "Mnemonic": "ANTIDEPRESSANTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Antihypertensives",
+      "Mnemonic": "ANTIHYPERTENSIVES",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Antithrombotic Therapy for Ischemic Stroke",
+      "Mnemonic": "ANTITHROMBOTIC_THERAPY_FOR_ISCHEMIC_STROKE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Aortic Aneurysm",
+      "Mnemonic": "AORTIC_ANEURYSM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Aortic Dissection or Ruptured Aortic Aneurysm",
+      "Mnemonic": "AORTIC_DISSECTION_OR_RUPTURED_AORTIC_ANEURYSM",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Application of Graduated Compression Stockings",
+      "Mnemonic": "APPLICATION_OF_GRADUATED_COMPRESSION_STOCKINGS",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Application of Intermittent Pneumatic Compression Devices",
+      "Mnemonic": "APPLICATION_OF_INTERMITTENT_PNEUMATIC_COMPRESSION_DEVICES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Application of Venous Foot Pumps",
+      "Mnemonic": "APPLICATION_OF_VENOUS_FOOT_PUMPS",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Aromatase Inhibitors",
+      "Mnemonic": "AROMATASE_INHIBITORS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Arrhythmia",
+      "Mnemonic": "ARRHYTHMIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Arterial Blood pH",
+      "Mnemonic": "ARTERIAL_BLOOD_PH",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "ASA physical status class",
+      "Mnemonic": "ASA_PHYSICAL_STATUS_CLASS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Aspartate transaminase lab test",
+      "Mnemonic": "ASPARTATE_TRANSAMINASE_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Asthma",
+      "Mnemonic": "ASTHMA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Atherosclerosis and Peripheral Arterial Disease",
+      "Mnemonic": "ATHEROSCLEROSIS_AND_PERIPHERAL_ARTERIAL_DISEASE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Atomoxetine",
+      "Mnemonic": "ATOMOXETINE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Atrial Ablation",
+      "Mnemonic": "ATRIAL_ABLATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Atrial Fibrillation or Flutter",
+      "Mnemonic": "ATRIAL_FIBRILLATION_OR_FLUTTER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Atrioventricular Block",
+      "Mnemonic": "ATRIOVENTRICULAR_BLOCK",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Audiology Visit",
+      "Mnemonic": "AUDIOLOGY_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Autoimmune Disease",
+      "Mnemonic": "AUTOIMMUNE_DISEASE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bariatric Surgery",
+      "Mnemonic": "BARIATRIC_SURGERY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "BCG Bacillus Calmette Guerin for Urology Care",
+      "Mnemonic": "BCG_BACILLUS_CALMETTE_GUERIN_FOR_UROLOGY_CARE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Behavioral Health Follow up Visit",
+      "Mnemonic": "BEHAVIORAL_HEALTH_FOLLOW_UP_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Behavioral\/Neuropsych Assessment",
+      "Mnemonic": "BEHAVIORAL\/NEUROPSYCH_ASSESSMENT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Benzodiazepine Withdrawal",
+      "Mnemonic": "BENZODIAZEPINE_WITHDRAWAL",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Best Corrected Visual Acuity Exam Using Snellen Chart",
+      "Mnemonic": "BEST_CORRECTED_VISUAL_ACUITY_EXAM_USING_SNELLEN_CHART",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Beta Blocker Therapy",
+      "Mnemonic": "BETA_BLOCKER_THERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Beta Blocker Therapy for LVSD",
+      "Mnemonic": "BETA_BLOCKER_THERAPY_FOR_LVSD",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Beta Blocker Therapy Ingredient",
+      "Mnemonic": "BETA_BLOCKER_THERAPY_INGREDIENT",
+      "DataClassContext": "ALG",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bicarbonate Lab Test",
+      "Mnemonic": "BICARBONATE_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bilateral Mastectomy",
+      "Mnemonic": "BILATERAL_MASTECTOMY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bilateral Oophorectomy",
+      "Mnemonic": "BILATERAL_OOPHORECTOMY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bilirubin lab test",
+      "Mnemonic": "BILIRUBIN_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bipolar Disorder",
+      "Mnemonic": "BIPOLAR_DISORDER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bladder Cancer for Urology Care",
+      "Mnemonic": "BLADDER_CANCER_FOR_UROLOGY_CARE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bleeding Disorder",
+      "Mnemonic": "BLEEDING_DISORDER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Blood Transfusion",
+      "Mnemonic": "BLOOD_TRANSFUSION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Blood urea nitrogen lab test",
+      "Mnemonic": "BLOOD_UREA_NITROGEN_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "BMI percentile",
+      "Mnemonic": "BMI_PERCENTILE",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Body Temperature",
+      "Mnemonic": "BODY_TEMPERATURE",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Body Weight",
+      "Mnemonic": "BODY_WEIGHT",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bone Marrow Transplant",
+      "Mnemonic": "BONE_MARROW_TRANSPLANT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Bone Scan",
+      "Mnemonic": "BONE_SCAN",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "BP Any",
+      "Mnemonic": "BP_ANY",
+      "DataClassContext": "VIT",
+      "FhirUri": "BP_ANY"
+      //"FhirUri": "d90b121d-a528-481d-9a37-885de9f5ce28"
+    },
+    {
+      "Name": "BP Diastolic",
+      "Mnemonic": "BP_DIASTOLIC",
+      "DataClassContext": "VIT",
+      "FhirUri": "BP_DIASTOLIC"
+      //"FhirUri": "d24974f0-9244-45ee-a3ff-58ca892e94ba"
+    },
+    {
+      "Name": "BP Systolic",
+      "Mnemonic": "BP_SYSTOLIC",
+      "DataClassContext": "VIT",
+      "FhirUri": "BP_SYSTOLIC"
+      //"FhirUri": "f5aab51a-41b7-4f6f-bb90-3ee36c94168e"
+    },
+    {
+      "Name": "Bradycardia",
+      "Mnemonic": "BRADYCARDIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Breast Cancer Screening",
+      "Mnemonic": "BREAST_CANCER_SCREENING",
+      "DataClassContext": "PRC",
+      "FhirUri": "BREAST_CANCER_SCREENING"
+      //"FhirUri": "3ab0dfd0-7bf0-4806-b6e3-644c44964859"
+    },
+    {
+      "Name": "Breastfeeding",
+      "Mnemonic": "BREASTFEEDING",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Burn Confined to Eye and Adnexa",
+      "Mnemonic": "BURN_CONFINED_TO_EYE_AND_ADNEXA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "BV new value set new marts",
+      "Mnemonic": "BV_NEW_VALUE_SET_NEW_MARTS",
+      "DataClassContext": "ALG",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "CABG or PCI Procedure",
+      "Mnemonic": "CABG_OR_PCI_PROCEDURE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "CABG Surgeries",
+      "Mnemonic": "CABG_SURGERIES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cancer",
+      "Mnemonic": "CANCER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cancer Related Pain",
+      "Mnemonic": "CANCER_RELATED_PAIN",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Carbon Dioxide Partial Pressure in Arterial Blood",
+      "Mnemonic": "CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_ARTERIAL_BLOOD",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cardiac Arrest Ventricular Fibrillation",
+      "Mnemonic": "CARDIAC_ARREST_VENTRICULAR_FIBRILLATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cardiac Disease",
+      "Mnemonic": "CARDIAC_DISEASE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cardiac Pacer",
+      "Mnemonic": "CARDIAC_PACER",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cardiac Pacer in Situ",
+      "Mnemonic": "CARDIAC_PACER_IN_SITU",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cardiac Surgery",
+      "Mnemonic": "CARDIAC_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cardiopulmonary Arrest",
+      "Mnemonic": "CARDIOPULMONARY_ARREST",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Care Services in Long Term Residential Facility",
+      "Mnemonic": "CARE_SERVICES_IN_LONG_TERM_RESIDENTIAL_FACILITY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Carotid Intervention",
+      "Mnemonic": "CAROTID_INTERVENTION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cataract Congenital",
+      "Mnemonic": "CATARACT_CONGENITAL",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cataract Mature or Hypermature",
+      "Mnemonic": "CATARACT_MATURE_OR_HYPERMATURE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cataract Posterior Polar",
+      "Mnemonic": "CATARACT_POSTERIOR_POLAR",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cataract Secondary to Ocular Disorders",
+      "Mnemonic": "CATARACT_SECONDARY_TO_OCULAR_DISORDERS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cataract Surgery",
+      "Mnemonic": "CATARACT_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Central Corneal Ulcer",
+      "Mnemonic": "CENTRAL_CORNEAL_ULCER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Central Nervous System Depressants",
+      "Mnemonic": "CENTRAL_NERVOUS_SYSTEM_DEPRESSANTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cerebral Vascular Lesion",
+      "Mnemonic": "CEREBRAL_VASCULAR_LESION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cerebrovascular Disease Stroke or TIA",
+      "Mnemonic": "CEREBROVASCULAR_DISEASE_STROKE_OR_TIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Certain Types of Iridocyclitis",
+      "Mnemonic": "CERTAIN_TYPES_OF_IRIDOCYCLITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cesarean Birth",
+      "Mnemonic": "CESAREAN_BIRTH",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Chemotherapy",
+      "Mnemonic": "CHEMOTHERAPY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Chemotherapy Administration",
+      "Mnemonic": "CHEMOTHERAPY_ADMINISTRATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Chemotherapy Agents for Advanced Cancer",
+      "Mnemonic": "CHEMOTHERAPY_AGENTS_FOR_ADVANCED_CANCER",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Child Influenza Vaccine",
+      "Mnemonic": "CHILD_INFLUENZA_VACCINE",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Child Influenza Vaccine Administered",
+      "Mnemonic": "CHILD_INFLUENZA_VACCINE_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Chlamydia Screening",
+      "Mnemonic": "CHLAMYDIA_SCREENING",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Choroidal Degenerations",
+      "Mnemonic": "CHOROIDAL_DEGENERATIONS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Choroidal Detachment",
+      "Mnemonic": "CHOROIDAL_DETACHMENT",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Choroidal Hemorrhage and Rupture",
+      "Mnemonic": "CHOROIDAL_HEMORRHAGE_AND_RUPTURE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Chronic Iridocyclitis",
+      "Mnemonic": "CHRONIC_IRIDOCYCLITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Chronic Kidney Disease, Stage 5",
+      "Mnemonic": "CHRONIC_KIDNEY_DISEASE,_STAGE_5",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Chronic Liver Disease",
+      "Mnemonic": "CHRONIC_LIVER_DISEASE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Chronic Malnutrition",
+      "Mnemonic": "CHRONIC_MALNUTRITION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Clinical Oral Evaluation",
+      "Mnemonic": "CLINICAL_ORAL_EVALUATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Clonidine",
+      "Mnemonic": "CLONIDINE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Closed Head and Facial Trauma",
+      "Mnemonic": "CLOSED_HEAD_AND_FACIAL_TRAUMA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cloudy Cornea",
+      "Mnemonic": "CLOUDY_CORNEA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Coagulation Disorders",
+      "Mnemonic": "COAGULATION_DISORDERS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cognitive Assessment",
+      "Mnemonic": "COGNITIVE_ASSESSMENT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Colonoscopy",
+      "Mnemonic": "COLONOSCOPY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Comfort Measures",
+      "Mnemonic": "COMFORT_MEASURES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Comorbid Conditions for Respiratory Conditions",
+      "Mnemonic": "COMORBID_CONDITIONS_FOR_RESPIRATORY_CONDITIONS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Competing Conditions for Respiratory Conditions",
+      "Mnemonic": "COMPETING_CONDITIONS_FOR_RESPIRATORY_CONDITIONS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Complications of Pregnancy, Childbirth and the Puerperium",
+      "Mnemonic": "COMPLICATIONS_OF_PREGNANCY,_CHILDBIRTH_AND_THE_PUERPERIUM",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Congenital or Acquired Absence of Cervix",
+      "Mnemonic": "CONGENITAL_OR_ACQUIRED_ABSENCE_OF_CERVIX",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Consultant Report",
+      "Mnemonic": "CONSULTANT_REPORT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Contact or Office Visit",
+      "Mnemonic": "CONTACT_OR_OFFICE_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Contraceptive Medications",
+      "Mnemonic": "CONTRACEPTIVE_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Conversion of Cardiac Rhythm",
+      "Mnemonic": "CONVERSION_OF_CARDIAC_RHYTHM",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Corneal Edema",
+      "Mnemonic": "CORNEAL_EDEMA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Coronary Artery Disease No MI",
+      "Mnemonic": "CORONARY_ARTERY_DISEASE_NO_MI",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Counseling for Nutrition",
+      "Mnemonic": "COUNSELING_FOR_NUTRITION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Counseling for Physical Activity",
+      "Mnemonic": "COUNSELING_FOR_PHYSICAL_ACTIVITY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "COVID 19",
+      "Mnemonic": "COVID_19",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "COVID 19 Confirmed",
+      "Mnemonic": "COVID_19_CONFIRMED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Creatinine Lab Test",
+      "Mnemonic": "CREATININE_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Creatinine Mass Per Volume",
+      "Mnemonic": "CREATININE_MASS_PER_VOLUME",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "CT Colonography",
+      "Mnemonic": "CT_COLONOGRAPHY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cup to Disc Ratio",
+      "Mnemonic": "CUP_TO_DISC_RATIO",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cushings Syndrome",
+      "Mnemonic": "CUSHINGS_SYNDROME",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Cystectomy for Urology Care",
+      "Mnemonic": "CYSTECTOMY_FOR_UROLOGY_CARE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Degeneration of Macula and Posterior Pole",
+      "Mnemonic": "DEGENERATION_OF_MACULA_AND_POSTERIOR_POLE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Degenerative Disorders of Globe",
+      "Mnemonic": "DEGENERATIVE_DISORDERS_OF_GLOBE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Degenerative Neurological Disorder",
+      "Mnemonic": "DEGENERATIVE_NEUROLOGICAL_DISORDER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Delirium or Dementia and Other Psychoses",
+      "Mnemonic": "DELIRIUM_OR_DEMENTIA_AND_OTHER_PSYCHOSES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Delivery of Singleton",
+      "Mnemonic": "DELIVERY_OF_SINGLETON",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Delivery Procedures",
+      "Mnemonic": "DELIVERY_PROCEDURES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dementia and Mental Degenerations",
+      "Mnemonic": "DEMENTIA_AND_MENTAL_DEGENERATIONS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dementia and Related Intracranial Pathologies",
+      "Mnemonic": "DEMENTIA_AND_RELATED_INTRACRANIAL_PATHOLOGIES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dementia Medications",
+      "Mnemonic": "DEMENTIA_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dental Caries",
+      "Mnemonic": "DENTAL_CARIES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Depression",
+      "Mnemonic": "DEPRESSION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Desiccated Thyroid Medications",
+      "Mnemonic": "DESICCATED_THYROID_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Detoxification Visit",
+      "Mnemonic": "DETOXIFICATION_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care",
+      "Mnemonic": "DEXA_DUAL_ENERGY_XRAY_ABSORPTIOMETRY,_BONE_DENSITY_FOR_UROLOGY_CARE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dexmethylphenidate",
+      "Mnemonic": "DEXMETHYLPHENIDATE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dextroamphetamine",
+      "Mnemonic": "DEXTROAMPHETAMINE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Diabetes",
+      "Mnemonic": "DIABETES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Diabetic Macular Edema",
+      "Mnemonic": "DIABETIC_MACULAR_EDEMA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Diabetic Retinopathy",
+      "Mnemonic": "DIABETIC_RETINOPATHY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Diagnoses Used to Indicate Sexual Activity",
+      "Mnemonic": "DIAGNOSES_USED_TO_INDICATE_SEXUAL_ACTIVITY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Diagnosis of Hypertension",
+      "Mnemonic": "DIAGNOSIS_OF_HYPERTENSION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Diagnostic Studies During Pregnancy",
+      "Mnemonic": "DIAGNOSTIC_STUDIES_DURING_PREGNANCY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dialysis Services",
+      "Mnemonic": "DIALYSIS_SERVICES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dietary Recommendations",
+      "Mnemonic": "DIETARY_RECOMMENDATIONS",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Digoxin Medications",
+      "Mnemonic": "DIGOXIN_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dipyridamole Medications",
+      "Mnemonic": "DIPYRIDAMOLE_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Direct Thrombin Inhibitor",
+      "Mnemonic": "DIRECT_THROMBIN_INHIBITOR",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Discharge Services Hospital Inpatient",
+      "Mnemonic": "DISCHARGE_SERVICES_HOSPITAL_INPATIENT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Discharge Services Hospital Inpatient Same Day Discharge",
+      "Mnemonic": "DISCHARGE_SERVICES_HOSPITAL_INPATIENT_SAME_DAY_DISCHARGE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Discharge Services Nursing Facility",
+      "Mnemonic": "DISCHARGE_SERVICES_NURSING_FACILITY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Discharge To Acute Care Facility",
+      "Mnemonic": "DISCHARGE_TO_ACUTE_CARE_FACILITY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Discharged to Health Care Facility for Hospice Care",
+      "Mnemonic": "DISCHARGED_TO_HEALTH_CARE_FACILITY_FOR_HOSPICE_CARE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Discharged to Home for Hospice Care",
+      "Mnemonic": "DISCHARGED_TO_HOME_FOR_HOSPICE_CARE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Disorders of Cornea Including Corneal Opacity",
+      "Mnemonic": "DISORDERS_OF_CORNEA_INCLUDING_CORNEAL_OPACITY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Disorders of Optic Chiasm",
+      "Mnemonic": "DISORDERS_OF_OPTIC_CHIASM",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Disorders of the Immune System",
+      "Mnemonic": "DISORDERS_OF_THE_IMMUNE_SYSTEM",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Disorders of Visual Cortex",
+      "Mnemonic": "DISORDERS_OF_VISUAL_CORTEX",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Disseminated Chorioretinitis and Disseminated Retinochoroiditis",
+      "Mnemonic": "DISSEMINATED_CHORIORETINITIS_AND_DISSEMINATED_RETINOCHOROIDITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Disseminated Intravascular Coagulation",
+      "Mnemonic": "DISSEMINATED_INTRAVASCULAR_COAGULATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Diuretics",
+      "Mnemonic": "DIURETICS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Double Mastectomy Procedure",
+      "Mnemonic": "DOUBLE_MASTECTOMY_PROC",
+      "DataClassContext": "PRC",
+      "FhirUri": "DOUBLE_MASTECTOMY_PROCEDURE"
+      //"FhirUri": "e323fc1e-eebe-4362-b33b-5a9fc7dc6446"
+    },
+    {
+      "Name": "Doxepin Medications",
+      "Mnemonic": "DOXEPIN_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "DTaP Vaccine",
+      "Mnemonic": "DTAP_VACCINE",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "DTaP Vaccine Administered",
+      "Mnemonic": "DTAP_VACCINE_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "DXA (Dual energy Xray Absorptiometry) Scan",
+      "Mnemonic": "DXA_(DUAL_ENERGY_XRAY_ABSORPTIOMETRY)_SCAN",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Dysthymia",
+      "Mnemonic": "DYSTHYMIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Eating Disorders",
+      "Mnemonic": "EATING_DISORDERS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Eclampsia",
+      "Mnemonic": "ECLAMPSIA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Economic Housing Instability",
+      "Mnemonic": "ECONOMIC_HOUSING_INSTABILITY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "ED Visit and OB Triage",
+      "Mnemonic": "ED_VISIT_AND_OB_TRIAGE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ehlers Danlos Syndrome",
+      "Mnemonic": "EHLERS_DANLOS_SYNDROME",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ejection Fraction",
+      "Mnemonic": "EJECTION_FRACTION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Elective Inpatient Encounter",
+      "Mnemonic": "ELECTIVE_INPATIENT_ENCOUNTER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Emergency Department Evaluation and Management Visit",
+      "Mnemonic": "EMERGENCY_DEPARTMENT_EVALUATION_AND_MANAGEMENT_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Emergency Department Visit",
+      "Mnemonic": "EMERGENCY_DEPARTMENT_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Encephalitis Due to Diphtheria, Tetanus or Pertussis Vaccine",
+      "Mnemonic": "ENCEPHALITIS_DUE_TO_DIPHTHERIA,_TETANUS_OR_PERTUSSIS_VACCINE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Encounter Inpatient",
+      "Mnemonic": "ENCOUNTER_INPATIENT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Encounter to Document Medications",
+      "Mnemonic": "ENCOUNTER_TO_DOCUMENT_MEDICATIONS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Encounter to Evaluate BMI",
+      "Mnemonic": "ENCOUNTER_TO_EVALUATE_BMI",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Encounter to Screen for Blood Pressure",
+      "Mnemonic": "ENCOUNTER_TO_SCREEN_FOR_BLOOD_PRESSURE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Encounter to Screen for Depression",
+      "Mnemonic": "ENCOUNTER_TO_SCREEN_FOR_DEPRESSION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "End Stage Renal Disease",
+      "Mnemonic": "END_STAGE_RENAL_DISEASE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Endotracheal Intubation",
+      "Mnemonic": "ENDOTRACHEAL_INTUBATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Epilepsy",
+      "Mnemonic": "EPILEPSY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "ESRD Monthly Outpatient Services",
+      "Mnemonic": "ESRD_MONTHLY_OUTPATIENT_SERVICES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Essential Hypertension",
+      "Mnemonic": "ESSENTIAL_HYPERTENSION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Estimated Gestational Age at Delivery",
+      "Mnemonic": "ESTIMATED_GESTATIONAL_AGE_AT_DELIVERY",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Estimated Glomerular Filtration Rate",
+      "Mnemonic": "ESTIMATED_GLOMERULAR_FILTRATION_RATE",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ethnicity",
+      "Mnemonic": "ETHNICITY",
+      "DataClassContext": "DEM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Evidence of Bilateral Oophorectomy",
+      "Mnemonic": "EVIDENCE_OF_BILATERAL_OOPHORECTOMY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Face-to-Face Interaction",
+      "Mnemonic": "FACE-TO-FACE_INTERACTION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Falls Screening",
+      "Mnemonic": "FALLS_SCREENING",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Familial Hypercholesterolemia",
+      "Mnemonic": "FAMILIAL_HYPERCHOLESTEROLEMIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Fecal Occult Blood Test (FOBT)",
+      "Mnemonic": "FECAL_OCCULT_BLOOD_TEST_(FOBT)",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Fibrinolytic Therapy",
+      "Mnemonic": "FIBRINOLYTIC_THERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Finding of Elevated Blood Pressure or Hypertension",
+      "Mnemonic": "FINDING_OF_ELEVATED_BLOOD_PRESSURE_OR_HYPERTENSION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Flexible Sigmoidoscopy",
+      "Mnemonic": "FLEXIBLE_SIGMOIDOSCOPY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Fluoride Varnish Application for Children",
+      "Mnemonic": "FLUORIDE_VARNISH_APPLICATION_FOR_CHILDREN",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Focal Chorioretinitis and Focal Retinochoroiditis",
+      "Mnemonic": "FOCAL_CHORIORETINITIS_AND_FOCAL_RETINOCHOROIDITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Follow Up for Above Normal BMI",
+      "Mnemonic": "FOLLOW_UP_FOR_ABOVE_NORMAL_BMI",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Follow Up for Adolescent Depression",
+      "Mnemonic": "FOLLOW_UP_FOR_ADOLESCENT_DEPRESSION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Follow Up for Adult Depression",
+      "Mnemonic": "FOLLOW_UP_FOR_ADULT_DEPRESSION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Follow Up for Below Normal BMI",
+      "Mnemonic": "FOLLOW_UP_FOR_BELOW_NORMAL_BMI",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Follow Up Within 4 Weeks",
+      "Mnemonic": "FOLLOW_UP_WITHIN_4_WEEKS",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Follow Up Within 6 Months",
+      "Mnemonic": "FOLLOW_UP_WITHIN_6_MONTHS",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Frailty Device",
+      "Mnemonic": "FRAILTY_DEVICE",
+      "DataClassContext": "DEV",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Frailty Diagnosis",
+      "Mnemonic": "FRAILTY_DIAGNOSIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Frailty Encounter",
+      "Mnemonic": "FRAILTY_ENCOUNTER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Frailty Symptom",
+      "Mnemonic": "FRAILTY_SYMPTOM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Gastric Bypass Surgery",
+      "Mnemonic": "GASTRIC_BYPASS_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Gastrointestinal Disease",
+      "Mnemonic": "GASTROINTESTINAL_DISEASE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "General and Neuraxial Anesthesia",
+      "Mnemonic": "GENERAL_AND_NEURAXIAL_ANESTHESIA",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "General or Neuraxial Anesthesia",
+      "Mnemonic": "GENERAL_OR_NEURAXIAL_ANESTHESIA",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "General Surgery",
+      "Mnemonic": "GENERAL_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Generalized Anxiety Disorder",
+      "Mnemonic": "GENERALIZED_ANXIETY_DISORDER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Genital Herpes",
+      "Mnemonic": "GENITAL_HERPES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Gestational Diabetes",
+      "Mnemonic": "GESTATIONAL_DIABETES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Glaucoma",
+      "Mnemonic": "GLAUCOMA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Glaucoma Associated with Congenital Anomalies and Dystrophies and Systemic Syndromes",
+      "Mnemonic": "GLAUCOMA_ASSOCIATED_WITH_CONGENITAL_ANOMALIES_AND_DYSTROPHIES_AND_SYSTEMIC_SYNDROMES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Glucocorticoids (oral only)",
+      "Mnemonic": "GLUCOCORTICOIDS_(ORAL_ONLY)",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Glucose Lab Test",
+      "Mnemonic": "GLUCOSE_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Glucose Lab Test Mass Per Volume",
+      "Mnemonic": "GLUCOSE_LAB_TEST_MASS_PER_VOLUME",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Glycoprotein IIb IIIa Inhibitors",
+      "Mnemonic": "GLYCOPROTEIN_IIB_IIIA_INHIBITORS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Gonorrhea Screening",
+      "Mnemonic": "GONORRHEA_SCREENING",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Graduated compression stockings",
+      "Mnemonic": "GRADUATED_COMPRESSION_STOCKINGS",
+      "DataClassContext": "DEV",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Group A Streptococcus Test",
+      "Mnemonic": "GROUP_A_STREPTOCOCCUS_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Group Psychotherapy",
+      "Mnemonic": "GROUP_PSYCHOTHERAPY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Guanfacine Medications",
+      "Mnemonic": "GUANFACINE_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Gynecological Surgery",
+      "Mnemonic": "GYNECOLOGICAL_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "HbA1c Laboratory Test",
+      "Mnemonic": "HBA1C_LABORATORY_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Head, Neck, and Thoracic Surgeries with High Risk Airway Compromise",
+      "Mnemonic": "HEAD,_NECK,_AND_THORACIC_SURGERIES_WITH_HIGH_RISK_AIRWAY_COMPROMISE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Heart Failure",
+      "Mnemonic": "HEART_FAILURE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Heart Failure Cardiac Arrest Related to Procedure or Surgery",
+      "Mnemonic": "HEART_FAILURE_CARDIAC_ARREST_RELATED_TO_PROCEDURE_OR_SURGERY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Heart Rate 2025",
+      "Mnemonic": "HEART_RATE_2025",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Heart Rate 2026",
+      "Mnemonic": "HEART_RATE_2026",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Heart Transplant",
+      "Mnemonic": "HEART_TRANSPLANT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Heart Transplant Complications",
+      "Mnemonic": "HEART_TRANSPLANT_COMPLICATIONS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Height",
+      "Mnemonic": "HEIGHT",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hematocrit Lab Test",
+      "Mnemonic": "HEMATOCRIT_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hemoglobin lab test",
+      "Mnemonic": "HEMOGLOBIN_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hemorrhagic Stroke",
+      "Mnemonic": "HEMORRHAGIC_STROKE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hepatitis A",
+      "Mnemonic": "HEPATITIS_A",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hepatitis A Vaccine",
+      "Mnemonic": "HEPATITIS_A_VACCINE",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hepatitis A Vaccine Administered",
+      "Mnemonic": "HEPATITIS_A_VACCINE_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hepatitis B",
+      "Mnemonic": "HEPATITIS_B",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hepatitis B Vaccine",
+      "Mnemonic": "HEPATITIS_B_VACCINE",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hepatitis B Vaccine Administered",
+      "Mnemonic": "HEPATITIS_B_VACCINE_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hereditary Choroidal Dystrophies",
+      "Mnemonic": "HEREDITARY_CHOROIDAL_DYSTROPHIES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hereditary Corneal Dystrophies",
+      "Mnemonic": "HEREDITARY_CORNEAL_DYSTROPHIES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hereditary Retinal Dystrophies",
+      "Mnemonic": "HEREDITARY_RETINAL_DYSTROPHIES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hib Vaccine (3 dose schedule)",
+      "Mnemonic": "HIB_VACCINE_(3_DOSE_SCHEDULE)",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hib Vaccine (3 dose schedule) Administered",
+      "Mnemonic": "HIB_VACCINE_(3_DOSE_SCHEDULE)_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hib Vaccine (4 dose schedule)",
+      "Mnemonic": "HIB_VACCINE_(4_DOSE_SCHEDULE)",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hib Vaccine (4 dose schedule) Administered",
+      "Mnemonic": "HIB_VACCINE_(4_DOSE_SCHEDULE)_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "High Intensity Statin Therapy",
+      "Mnemonic": "HIGH_INTENSITY_STATIN_THERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "High Risk Diagnosis for AKI",
+      "Mnemonic": "HIGH_RISK_DIAGNOSIS_FOR_AKI",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "High Risk Procedures for AKI",
+      "Mnemonic": "HIGH_RISK_PROCEDURES_FOR_AKI",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hip Fracture Surgery",
+      "Mnemonic": "HIP_FRACTURE_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hip Replacement Surgery",
+      "Mnemonic": "HIP_REPLACEMENT_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "History of Atrial Ablation",
+      "Mnemonic": "HISTORY_OF_ATRIAL_ABLATION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "History of bilateral mastectomy",
+      "Mnemonic": "HISTORY_OF_BILATERAL_MASTECTOMY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "History of hip fracture in parent",
+      "Mnemonic": "HISTORY_OF_HIP_FRACTURE_IN_PARENT",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "HIV",
+      "Mnemonic": "HIV",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "HIV in Pregnancy Childbirth and Puerperium",
+      "Mnemonic": "HIV_IN_PREGNANCY_CHILDBIRTH_AND_PUERPERIUM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "HIV Lab Tests",
+      "Mnemonic": "HIV_LAB_TESTS",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "HIV Viral Load",
+      "Mnemonic": "HIV_VIRAL_LOAD",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Home Healthcare Services",
+      "Mnemonic": "HOME_HEALTHCARE_SERVICES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hospice Care Ambulatory",
+      "Mnemonic": "HOSPICE_CARE_AMBULATORY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hospice Care Referral or Admission",
+      "Mnemonic": "HOSPICE_CARE_REFERRAL_OR_ADMISSION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hospice Diagnosis",
+      "Mnemonic": "HOSPICE_DIAGNOSIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hospice Encounter",
+      "Mnemonic": "HOSPICE_ENCOUNTER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hospital Based Dialysis Services",
+      "Mnemonic": "HOSPITAL_BASED_DIALYSIS_SERVICES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hospital Dietitian Referral",
+      "Mnemonic": "HOSPITAL_DIETITIAN_REFERRAL",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hospital Services for Urology",
+      "Mnemonic": "HOSPITAL_SERVICES_FOR_UROLOGY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "HPV Test",
+      "Mnemonic": "HPV_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hyperparathyroidism",
+      "Mnemonic": "HYPERPARATHYROIDISM",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hypertension",
+      "Mnemonic": "HYPERTENSION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hyperthyroidism",
+      "Mnemonic": "HYPERTHYROIDISM",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hypoglycemics Severe Hypoglycemia",
+      "Mnemonic": "HYPOGLYCEMICS_SEVERE_HYPOGLYCEMIA",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hypoglycemics Treatment Medications",
+      "Mnemonic": "HYPOGLYCEMICS_TREATMENT_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hypotension",
+      "Mnemonic": "HYPOTENSION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hypotony of Eye",
+      "Mnemonic": "HYPOTONY_OF_EYE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hysterectomy",
+      "Mnemonic": "HYSTERECTOMY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Hysterectomy with No Residual Cervix",
+      "Mnemonic": "HYSTERECTOMY_WITH_NO_RESIDUAL_CERVIX",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Immunocompromised Conditions",
+      "Mnemonic": "IMMUNOCOMPROMISED_CONDITIONS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Immunosuppressive Drugs for Urology Care",
+      "Mnemonic": "IMMUNOSUPPRESSIVE_DRUGS_FOR_UROLOGY_CARE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Inactivated Polio Vaccine (IPV)",
+      "Mnemonic": "INACTIVATED_POLIO_VACCINE_(IPV)",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Inactivated Polio Vaccine (IPV) Administered",
+      "Mnemonic": "INACTIVATED_POLIO_VACCINE_(IPV)_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Influenza Virus LAIV Vaccine",
+      "Mnemonic": "INFLUENZA_VIRUS_LAIV_VACCINE",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Influenza Virus LAIV Vaccine Administered",
+      "Mnemonic": "INFLUENZA_VIRUS_LAIV_VACCINE_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Initial Hospital Inpatient Visit",
+      "Mnemonic": "INITIAL_HOSPITAL_INPATIENT_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Initial Myocardial Infarction",
+      "Mnemonic": "INITIAL_MYOCARDIAL_INFARCTION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Injectable Factor Xa Inhibitor for VTE Prophylaxis",
+      "Mnemonic": "INJECTABLE_FACTOR_XA_INHIBITOR_FOR_VTE_PROPHYLAXIS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Injury to Optic Nerve and Pathways",
+      "Mnemonic": "INJURY_TO_OPTIC_NERVE_AND_PATHWAYS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Inpatient Falls",
+      "Mnemonic": "INPATIENT_FALLS",
+      "DataClassContext": "ALG",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "INR",
+      "Mnemonic": "INR",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Insertion or Replacement of Mechanical Circulatory Assist Device",
+      "Mnemonic": "INSERTION_OR_REPLACEMENT_OF_MECHANICAL_CIRCULATORY_ASSIST_DEVICE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intensive Care Unit",
+      "Mnemonic": "INTENSIVE_CARE_UNIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intermittent pneumatic compression devices",
+      "Mnemonic": "INTERMITTENT_PNEUMATIC_COMPRESSION_DEVICES",
+      "DataClassContext": "DEV",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intolerance to ACE Inhibitor or ARB",
+      "Mnemonic": "INTOLERANCE_TO_ACE_INHIBITOR_OR_ARB",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intolerance to Beta Blocker Therapy",
+      "Mnemonic": "INTOLERANCE_TO_BETA_BLOCKER_THERAPY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intracranial Neurosurgery",
+      "Mnemonic": "INTRACRANIAL_NEUROSURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intracranial or Intraspinal surgery",
+      "Mnemonic": "INTRACRANIAL_OR_INTRASPINAL_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intravenous or Intraarterial Thrombolytic tPA Therapy",
+      "Mnemonic": "INTRAVENOUS_OR_INTRAARTERIAL_THROMBOLYTIC_TPA_THERAPY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intravenous or Intraarterial Thrombolytic tPA Therapy Prior to Arrival",
+      "Mnemonic": "INTRAVENOUS_OR_INTRAARTERIAL_THROMBOLYTIC_TPA_THERAPY_PRIOR_TO_ARRIVAL",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intravenous route",
+      "Mnemonic": "INTRAVENOUS_ROUTE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intubation",
+      "Mnemonic": "INTUBATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Intussusception",
+      "Mnemonic": "INTUSSUSCEPTION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ischemic Heart Disease or Related Diagnoses",
+      "Mnemonic": "ISCHEMIC_HEART_DISEASE_OR_RELATED_DIAGNOSES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ischemic Stroke",
+      "Mnemonic": "ISCHEMIC_STROKE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Isotretinoin",
+      "Mnemonic": "ISOTRETINOIN",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Kidney Transplant",
+      "Mnemonic": "KIDNEY_TRANSPLANT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Kidney Transplant Recipient",
+      "Mnemonic": "KIDNEY_TRANSPLANT_RECIPIENT",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Knee Replacement Surgery",
+      "Mnemonic": "KNEE_REPLACEMENT_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Lab Tests During Pregnancy",
+      "Mnemonic": "LAB_TESTS_DURING_PREGNANCY",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Lab Tests for Sexually Transmitted Infections",
+      "Mnemonic": "LAB_TESTS_FOR_SEXUALLY_TRANSMITTED_INFECTIONS",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Laboratory Tests for Hypertension",
+      "Mnemonic": "LABORATORY_TESTS_FOR_HYPERTENSION",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "LDL Cholesterol",
+      "Mnemonic": "LDL_CHOLESTEROL",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Left Against Medical Advice",
+      "Mnemonic": "LEFT_AGAINST_MEDICAL_ADVICE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Left Ventricular Assist Device Complications",
+      "Mnemonic": "LEFT_VENTRICULAR_ASSIST_DEVICE_COMPLICATIONS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Left Ventricular Assist Device Placement",
+      "Mnemonic": "LEFT_VENTRICULAR_ASSIST_DEVICE_PLACEMENT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Leukemia or Lymphoma",
+      "Mnemonic": "LEUKEMIA_OR_LYMPHOMA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Leukocyte count lab test",
+      "Mnemonic": "LEUKOCYTE_COUNT_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Level of Severity of Retinopathy Findings",
+      "Mnemonic": "LEVEL_OF_SEVERITY_OF_RETINOPATHY_FINDINGS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Lifestyle Recommendation",
+      "Mnemonic": "LIFESTYLE_RECOMMENDATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Lisdexamfetamine",
+      "Mnemonic": "LISDEXAMFETAMINE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Liver Disease",
+      "Mnemonic": "LIVER_DISEASE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Liver Disease Moderate to Severe",
+      "Mnemonic": "LIVER_DISEASE_MODERATE_TO_SEVERE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Long Term Anticoagulant Use",
+      "Mnemonic": "LONG_TERM_ANTICOAGULANT_USE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Low Dose Unfractionated Heparin for VTE Prophylaxis",
+      "Mnemonic": "LOW_DOSE_UNFRACTIONATED_HEPARIN_FOR_VTE_PROPHYLAXIS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Low Intensity Statin Therapy",
+      "Mnemonic": "LOW_INTENSITY_STATIN_THERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Low Molecular Weight Heparin for VTE Prophylaxis",
+      "Mnemonic": "LOW_MOLECULAR_WEIGHT_HEPARIN_FOR_VTE_PROPHYLAXIS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Low Risk",
+      "Mnemonic": "LOW_RISK",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Lower Body Fractures Excluding Ankle and Foot",
+      "Mnemonic": "LOWER_BODY_FRACTURES_EXCLUDING_ANKLE_AND_FOOT",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Lupus",
+      "Mnemonic": "LUPUS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Macular Edema Findings Present",
+      "Mnemonic": "MACULAR_EDEMA_FINDINGS_PRESENT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Macular Exam",
+      "Mnemonic": "MACULAR_EXAM",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Macular Scar of Posterior Polar",
+      "Mnemonic": "MACULAR_SCAR_OF_POSTERIOR_POLAR",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Major Depression",
+      "Mnemonic": "MAJOR_DEPRESSION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Major Depression Including Remission",
+      "Mnemonic": "MAJOR_DEPRESSION_INCLUDING_REMISSION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Major Depressive Disorder Active",
+      "Mnemonic": "MAJOR_DEPRESSIVE_DISORDER_ACTIVE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Major Injuries",
+      "Mnemonic": "MAJOR_INJURIES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Major Surgical Procedure",
+      "Mnemonic": "MAJOR_SURGICAL_PROCEDURE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Major Transplant",
+      "Mnemonic": "MAJOR_TRANSPLANT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malabsorption Syndromes",
+      "Mnemonic": "MALABSORPTION_SYNDROMES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malignant Bone Disease",
+      "Mnemonic": "MALIGNANT_BONE_DISEASE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malignant Intracranial Neoplasm Group",
+      "Mnemonic": "MALIGNANT_INTRACRANIAL_NEOPLASM_GROUP",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malignant Neoplasm of Colon",
+      "Mnemonic": "MALIGNANT_NEOPLASM_OF_COLON",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malignant Neoplasm of Lymphatic and Hematopoietic Tissue",
+      "Mnemonic": "MALIGNANT_NEOPLASM_OF_LYMPHATIC_AND_HEMATOPOIETIC_TISSUE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malignant Neoplasms of Lower and Unspecified Limbs",
+      "Mnemonic": "MALIGNANT_NEOPLASMS_OF_LOWER_AND_UNSPECIFIED_LIMBS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malnutrition Diagnosis",
+      "Mnemonic": "MALNUTRITION_DIAGNOSIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malnutrition Risk Screening",
+      "Mnemonic": "MALNUTRITION_RISK_SCREENING",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malnutrition Screening Finding of At Risk Result",
+      "Mnemonic": "MALNUTRITION_SCREENING_FINDING_OF_AT_RISK_RESULT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Malnutrition Screening Finding of Not At Risk Result",
+      "Mnemonic": "MALNUTRITION_SCREENING_FINDING_OF_NOT_AT_RISK_RESULT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mammography",
+      "Mnemonic": "MAMMOGRAPHY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Marfan's Syndrome",
+      "Mnemonic": "MARFAN'S_SYNDROME",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Measles",
+      "Mnemonic": "MEASLES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Measles, Mumps and Rubella (MMR) Vaccine",
+      "Mnemonic": "MEASLES,_MUMPS_AND_RUBELLA_(MMR)_VACCINE",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Measles, Mumps and Rubella (MMR) Vaccine Administered",
+      "Mnemonic": "MEASLES,_MUMPS_AND_RUBELLA_(MMR)_VACCINE_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mechanical Complications Excluding Upper Body",
+      "Mnemonic": "MECHANICAL_COMPLICATIONS_EXCLUDING_UPPER_BODY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mechanical Ventilation",
+      "Mnemonic": "MECHANICAL_VENTILATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Medical Disability Exam",
+      "Mnemonic": "MEDICAL_DISABILITY_EXAM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Medical Reason",
+      "Mnemonic": "MEDICAL_REASON",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Medical Reason For Not Providing Treatment",
+      "Mnemonic": "MEDICAL_REASON_FOR_NOT_PROVIDING_TREATMENT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Medicare Advantage Payer",
+      "Mnemonic": "MEDICARE_ADVANTAGE_PAYER",
+      "DataClassContext": "DEM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Medicare FFS Payer",
+      "Mnemonic": "MEDICARE_FFS_PAYER",
+      "DataClassContext": "DEM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Medications for Above Normal BMI",
+      "Mnemonic": "MEDICATIONS_FOR_ABOVE_NORMAL_BMI",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Medications for Below Normal BMI",
+      "Mnemonic": "MEDICATIONS_FOR_BELOW_NORMAL_BMI",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Medications for Opioid Use Disorder (MOUD)",
+      "Mnemonic": "MEDICATIONS_FOR_OPIOID_USE_DISORDER_(MOUD)",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Megestrol Medications",
+      "Mnemonic": "MEGESTROL_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mental Behavioral and Neurodevelopmental Disorders",
+      "Mnemonic": "MENTAL_BEHAVIORAL_AND_NEURODEVELOPMENTAL_DISORDERS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mental Health Diagnoses",
+      "Mnemonic": "MENTAL_HEALTH_DIAGNOSES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mental Health Disorder",
+      "Mnemonic": "MENTAL_HEALTH_DISORDER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Meperidine Medications",
+      "Mnemonic": "MEPERIDINE_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Meprobamate Medications",
+      "Mnemonic": "MEPROBAMATE_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Methylphenidate",
+      "Mnemonic": "METHYLPHENIDATE",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mild or Moderate Preeclampsia",
+      "Mnemonic": "MILD_OR_MODERATE_PREECLAMPSIA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mixed histology urothelial cell carcinoma for Urology Care",
+      "Mnemonic": "MIXED_HISTOLOGY_UROTHELIAL_CELL_CARCINOMA_FOR_UROLOGY_CARE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Moderate Injuries",
+      "Mnemonic": "MODERATE_INJURIES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Moderate Intensity Statin Therapy",
+      "Mnemonic": "MODERATE_INTENSITY_STATIN_THERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Moderate or Severe",
+      "Mnemonic": "MODERATE_OR_SEVERE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Moderate or Severe LVSD",
+      "Mnemonic": "MODERATE_OR_SEVERE_LVSD",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Morbid Obesity",
+      "Mnemonic": "MORBID_OBESITY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Morbid or Severe Obesity",
+      "Mnemonic": "MORBID_OR_SEVERE_OBESITY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Morgagnian Cataract",
+      "Mnemonic": "MORGAGNIAN_CATARACT",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Multiple Myeloma",
+      "Mnemonic": "MULTIPLE_MYELOMA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Multiple Pregnancy",
+      "Mnemonic": "MULTIPLE_PREGNANCY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Mumps",
+      "Mnemonic": "MUMPS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Myocardial Infarction",
+      "Mnemonic": "MYOCARDIAL_INFARCTION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Narcolepsy",
+      "Mnemonic": "NARCOLEPSY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Neurologic impairment",
+      "Mnemonic": "NEUROLOGIC_IMPAIRMENT",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Neurologic Movement and Related Disorders",
+      "Mnemonic": "NEUROLOGIC_MOVEMENT_AND_RELATED_DISORDERS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Neuromuscular Disease",
+      "Mnemonic": "NEUROMUSCULAR_DISEASE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Neuromuscular Disorder",
+      "Mnemonic": "NEUROMUSCULAR_DISORDER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nifedipine Medications",
+      "Mnemonic": "NIFEDIPINE_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Non Invasive Oxygen Therapy",
+      "Mnemonic": "NON_INVASIVE_OXYGEN_THERAPY",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Non Invasive Oxygen Therapy by Nasal Cannula or Mask",
+      "Mnemonic": "NON_INVASIVE_OXYGEN_THERAPY_BY_NASAL_CANNULA_OR_MASK",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nonelective Inpatient Encounter",
+      "Mnemonic": "NONELECTIVE_INPATIENT_ENCOUNTER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Not Present On Admission or Documentation Insufficient to Determine",
+      "Mnemonic": "NOT_PRESENT_ON_ADMISSION_OR_DOCUMENTATION_INSUFFICIENT_TO_DETERMINE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nursing Facility Visit",
+      "Mnemonic": "NURSING_FACILITY_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nutrition Assessment",
+      "Mnemonic": "NUTRITION_ASSESSMENT",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nutrition Assessment Status Finding of Moderately Malnourished",
+      "Mnemonic": "NUTRITION_ASSESSMENT_STATUS_FINDING_OF_MODERATELY_MALNOURISHED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nutrition Assessment Status Finding of Severely Malnourished",
+      "Mnemonic": "NUTRITION_ASSESSMENT_STATUS_FINDING_OF_SEVERELY_MALNOURISHED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nutrition Assessment Status Finding of Well Nourished or Not Malnourished or Mildly Malnourished",
+      "Mnemonic": "NUTRITION_ASSESSMENT_STATUS_FINDING_OF_WELL_NOURISHED_OR_NOT_MALNOURISHED_OR_MILDLY_MALNOURISHED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nutrition Care Plan",
+      "Mnemonic": "NUTRITION_CARE_PLAN",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nutrition Services",
+      "Mnemonic": "NUTRITION_SERVICES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Nystagmus and Other Irregular Eye Movements",
+      "Mnemonic": "NYSTAGMUS_AND_OTHER_IRREGULAR_EYE_MOVEMENTS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Obesity",
+      "Mnemonic": "OBESITY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Observation Services",
+      "Mnemonic": "OBSERVATION_SERVICES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Obstetrical or Pregnancy Related Conditions",
+      "Mnemonic": "OBSTETRICAL_OR_PREGNANCY_RELATED_CONDITIONS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Obstetrics VTE",
+      "Mnemonic": "OBSTETRICS_VTE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Occupational Therapy Evaluation",
+      "Mnemonic": "OCCUPATIONAL_THERAPY_EVALUATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Office Visit",
+      "Mnemonic": "OFFICE_VISIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "ONC Administrative Sex",
+      "Mnemonic": "ONC_ADMINISTRATIVE_SEX",
+      "DataClassContext": "DEM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Open Wound of Eyeball",
+      "Mnemonic": "OPEN_WOUND_OF_EYEBALL",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ophthalmological Services",
+      "Mnemonic": "OPHTHALMOLOGICAL_SERVICES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Opioid Antagonist",
+      "Mnemonic": "OPIOID_ANTAGONIST",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Opioid Medication Assisted Treatment (MAT)",
+      "Mnemonic": "OPIOID_MEDICATION_ASSISTED_TREATMENT_(MAT)",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Opioid Use Disorder",
+      "Mnemonic": "OPIOID_USE_DISORDER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Opioids",
+      "Mnemonic": "OPIOIDS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Opioids, All",
+      "Mnemonic": "OPIOIDS,_ALL",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Optic Atrophy",
+      "Mnemonic": "OPTIC_ATROPHY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Optic Disc Exam for Structural Abnormalities",
+      "Mnemonic": "OPTIC_DISC_EXAM_FOR_STRUCTURAL_ABNORMALITIES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Optic Neuritis",
+      "Mnemonic": "OPTIC_NEURITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Oral Anticoagulant Medications",
+      "Mnemonic": "ORAL_ANTICOAGULANT_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment",
+      "Mnemonic": "ORAL_FACTOR_XA_INHIBITOR_FOR_VTE_PROPHYLAXIS_OR_VTE_TREATMENT",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Osteogenesis Imperfecta",
+      "Mnemonic": "OSTEOGENESIS_IMPERFECTA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Osteopenia",
+      "Mnemonic": "OSTEOPENIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Osteoporosis",
+      "Mnemonic": "OSTEOPOROSIS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Osteoporosis With Current Fracture",
+      "Mnemonic": "OSTEOPOROSIS_WITH_CURRENT_FRACTURE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Osteoporosis Without Current Fracture",
+      "Mnemonic": "OSTEOPOROSIS_WITHOUT_CURRENT_FRACTURE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Other and Unspecified Forms of Chorioretinitis and Retinochoroiditis",
+      "Mnemonic": "OTHER_AND_UNSPECIFIED_FORMS_OF_CHORIORETINITIS_AND_RETINOCHOROIDITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Other Background Retinopathy and Retinal Vascular Changes",
+      "Mnemonic": "OTHER_BACKGROUND_RETINOPATHY_AND_RETINAL_VASCULAR_CHANGES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Other Disorders of Optic Nerve",
+      "Mnemonic": "OTHER_DISORDERS_OF_OPTIC_NERVE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Other Endophthalmitis",
+      "Mnemonic": "OTHER_ENDOPHTHALMITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Other Proliferative Retinopathy",
+      "Mnemonic": "OTHER_PROLIFERATIVE_RETINOPATHY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Outpatient Consultation",
+      "Mnemonic": "OUTPATIENT_CONSULTATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Outpatient Encounters for Preventive Care",
+      "Mnemonic": "OUTPATIENT_ENCOUNTERS_FOR_PREVENTIVE_CARE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Outpatient Surgery Service",
+      "Mnemonic": "OUTPATIENT_SURGERY_SERVICE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Overweight or Obese",
+      "Mnemonic": "OVERWEIGHT_OR_OBESE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Oxygen Partial Pressure in Arterial Blood",
+      "Mnemonic": "OXYGEN_PARTIAL_PRESSURE_IN_ARTERIAL_BLOOD",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Oxygen Saturation by Pulse Oximetry",
+      "Mnemonic": "OXYGEN_SATURATION_BY_PULSE_OXIMETRY",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pain Warranting Further Investigation for Prostate Cancer",
+      "Mnemonic": "PAIN_WARRANTING_FURTHER_INVESTIGATION_FOR_PROSTATE_CANCER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Palliative Care Diagnosis",
+      "Mnemonic": "PALLIATIVE_CARE_DIAGNOSIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Palliative Care Encounter",
+      "Mnemonic": "PALLIATIVE_CARE_ENCOUNTER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Palliative Care Intervention",
+      "Mnemonic": "PALLIATIVE_CARE_INTERVENTION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Palliative or Hospice Care",
+      "Mnemonic": "PALLIATIVE_OR_HOSPICE_CARE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pap Test",
+      "Mnemonic": "PAP_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Partial Arthroplasty of Hip",
+      "Mnemonic": "PARTIAL_ARTHROPLASTY_OF_HIP",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pathologic Myopia",
+      "Mnemonic": "PATHOLOGIC_MYOPIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Patient Declined",
+      "Mnemonic": "PATIENT_DECLINED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Patient Expired",
+      "Mnemonic": "PATIENT_EXPIRED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Patient Provider Interaction",
+      "Mnemonic": "PATIENT_PROVIDER_INTERACTION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Patient Reason",
+      "Mnemonic": "PATIENT_REASON",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Patient Reason for ACE Inhibitor or ARB Decline",
+      "Mnemonic": "PATIENT_REASON_FOR_ACE_INHIBITOR_OR_ARB_DECLINE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Patient Refusal",
+      "Mnemonic": "PATIENT_REFUSAL",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Payer Type",
+      "Mnemonic": "PAYER_TYPE",
+      "DataClassContext": "DEM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "PCI",
+      "Mnemonic": "PCI",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Percutaneous Coronary Intervention",
+      "Mnemonic": "PERCUTANEOUS_CORONARY_INTERVENTION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Peripheral Neuropathy",
+      "Mnemonic": "PERIPHERAL_NEUROPATHY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Personality Disorder Emotionally Labile",
+      "Mnemonic": "PERSONALITY_DISORDER_EMOTIONALLY_LABILE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pervasive Developmental Disorder",
+      "Mnemonic": "PERVASIVE_DEVELOPMENTAL_DISORDER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pharmacologic Therapy for Hypertension",
+      "Mnemonic": "PHARMACOLOGIC_THERAPY_FOR_HYPERTENSION",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pharmacological Contraindications For Antithrombotic Therapy",
+      "Mnemonic": "PHARMACOLOGICAL_CONTRAINDICATIONS_FOR_ANTITHROMBOTIC_THERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "PHQ 9 and PHQ 9M Tools",
+      "Mnemonic": "PHQ_9_AND_PHQ_9M_TOOLS",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Physical Therapy Evaluation",
+      "Mnemonic": "PHYSICAL_THERAPY_EVALUATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Placenta Accreta",
+      "Mnemonic": "PLACENTA_ACCRETA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Placenta Accreta Spectrum Previa or Vasa Previa",
+      "Mnemonic": "PLACENTA_ACCRETA_SPECTRUM_PREVIA_OR_VASA_PREVIA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Placenta Increta or Percreta",
+      "Mnemonic": "PLACENTA_INCRETA_OR_PERCRETA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Placenta Previa",
+      "Mnemonic": "PLACENTA_PREVIA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Placental Abruption",
+      "Mnemonic": "PLACENTAL_ABRUPTION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Platelet Count Lab Test",
+      "Mnemonic": "PLATELET_COUNT_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pneumococcal Conjugate Vaccine",
+      "Mnemonic": "PNEUMOCOCCAL_CONJUGATE_VACCINE",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pneumococcal Conjugate Vaccine Administered",
+      "Mnemonic": "PNEUMOCOCCAL_CONJUGATE_VACCINE_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Posterior Lenticonus",
+      "Mnemonic": "POSTERIOR_LENTICONUS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potassium Lab Test",
+      "Mnemonic": "POTASSIUM_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Antidepressants for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIDEPRESSANTS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Antihistamines for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIHISTAMINES_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Antiinfectives for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIINFECTIVES_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Antiparkinsonian Agents for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIPARKINSONIAN_AGENTS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Antipsychotics for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIPSYCHOTICS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Barbiturates for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_BARBITURATES_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Benzodiazepines for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_BENZODIAZEPINES_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Estrogens for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ESTROGENS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Gastrointestinal Antispasmodics for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_GASTROINTESTINAL_ANTISPASMODICS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Nonbenzodiazepine Hypnotics for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_NONBENZODIAZEPINE_HYPNOTICS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Pain Medications for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_PAIN_MEDICATIONS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Skeletal Muscle Relaxants for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_SKELETAL_MUSCLE_RELAXANTS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Potentially Harmful Sulfonylureas for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_SULFONYLUREAS_FOR_OLDER_ADULTS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Preexisting Diabetes",
+      "Mnemonic": "PREEXISTING_DIABETES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pregnancy",
+      "Mnemonic": "PREGNANCY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pregnancy Test",
+      "Mnemonic": "PREGNANCY_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pregnant State",
+      "Mnemonic": "PREGNANT_STATE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Premature Menopause",
+      "Mnemonic": "PREMATURE_MENOPAUSE",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Present on Admission is No or Unable To Determine",
+      "Mnemonic": "PRESENT_ON_ADMISSION_IS_NO_OR_UNABLE_TO_DETERMINE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Present On Admission is Yes or Exempt",
+      "Mnemonic": "PRESENT_ON_ADMISSION_IS_YES_OR_EXEMPT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Present on Admission or Clinically Undetermined",
+      "Mnemonic": "PRESENT_ON_ADMISSION_OR_CLINICALLY_UNDETERMINED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pressure Injury Deep Tissue",
+      "Mnemonic": "PRESSURE_INJURY_DEEP_TISSUE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pressure Injury Deep Tissue Diagnoses",
+      "Mnemonic": "PRESSURE_INJURY_DEEP_TISSUE_DIAGNOSES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pressure Injury Stage 2, 3, 4 or Unstageable",
+      "Mnemonic": "PRESSURE_INJURY_STAGE_2,_3,_4_OR_UNSTAGEABLE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pressure Injury Stage 2, 3, 4, or Unstageable Diagnoses",
+      "Mnemonic": "PRESSURE_INJURY_STAGE_2,_3,_4,_OR_UNSTAGEABLE_DIAGNOSES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Preterm Birth",
+      "Mnemonic": "PRETERM_BIRTH",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Preventive Care Services Established Office Visit, 18 and Up",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES_ESTABLISHED_OFFICE_VISIT,_18_AND_UP",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Preventive Care Services Group Counseling",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES_GROUP_COUNSELING",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Preventive Care Services Individual Counseling",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES_INDIVIDUAL_COUNSELING",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Preventive Care Services Initial Office Visit, 18 and Up",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES_INITIAL_OFFICE_VISIT,_18_AND_UP",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Preventive Care Services, Initial Office Visit, 0 to 17",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES,_INITIAL_OFFICE_VISIT,_0_TO_17",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Preventive Care, Established Office Visit, 0 to 17",
+      "Mnemonic": "PREVENTIVE_CARE,_ESTABLISHED_OFFICE_VISIT,_0_TO_17",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Previous Cesarean",
+      "Mnemonic": "PREVIOUS_CESAREAN",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Primary Open Angle Glaucoma",
+      "Mnemonic": "PRIMARY_OPEN_ANGLE_GLAUCOMA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Primary THA Procedure",
+      "Mnemonic": "PRIMARY_THA_PROCEDURE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Prior Penetrating Keratoplasty",
+      "Mnemonic": "PRIOR_PENETRATING_KERATOPLASTY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Procedural Hospital Locations",
+      "Mnemonic": "PROCEDURAL_HOSPITAL_LOCATIONS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Procedures Used to Indicate Sexual Activity",
+      "Mnemonic": "PROCEDURES_USED_TO_INDICATE_SEXUAL_ACTIVITY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Prostate Cancer",
+      "Mnemonic": "PROSTATE_CANCER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Prostate Cancer Treatment",
+      "Mnemonic": "PROSTATE_CANCER_TREATMENT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Prostate Specific Antigen Test",
+      "Mnemonic": "PROSTATE_SPECIFIC_ANTIGEN_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Psoriatic Arthritis",
+      "Mnemonic": "PSORIATIC_ARTHRITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Psych Visit Diagnostic Evaluation",
+      "Mnemonic": "PSYCH_VISIT_DIAGNOSTIC_EVALUATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Psych Visit for Family Psychotherapy",
+      "Mnemonic": "PSYCH_VISIT_FOR_FAMILY_PSYCHOTHERAPY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Psych Visit Psychotherapy",
+      "Mnemonic": "PSYCH_VISIT_PSYCHOTHERAPY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Psychoanalysis",
+      "Mnemonic": "PSYCHOANALYSIS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Psychotherapy and Pharmacologic Management",
+      "Mnemonic": "PSYCHOTHERAPY_AND_PHARMACOLOGIC_MANAGEMENT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Puerperal Cerebrovascular Disorder",
+      "Mnemonic": "PUERPERAL_CEREBROVASCULAR_DISORDER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pulmonary Edema",
+      "Mnemonic": "PULMONARY_EDEMA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Pulmonary Hypertension",
+      "Mnemonic": "PULMONARY_HYPERTENSION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Purulent Endophthalmitis",
+      "Mnemonic": "PURULENT_ENDOPHTHALMITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Race",
+      "Mnemonic": "RACE",
+      "DataClassContext": "DEM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Radiation Treatment Management",
+      "Mnemonic": "RADIATION_TREATMENT_MANAGEMENT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Recommendation to Increase Physical Activity",
+      "Mnemonic": "RECOMMENDATION_TO_INCREASE_PHYSICAL_ACTIVITY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Referral",
+      "Mnemonic": "REFERRAL",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Referral for Adolescent Depression",
+      "Mnemonic": "REFERRAL_FOR_ADOLESCENT_DEPRESSION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Referral for Adult Depression",
+      "Mnemonic": "REFERRAL_FOR_ADULT_DEPRESSION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Referral or Counseling for Alcohol Consumption",
+      "Mnemonic": "REFERRAL_OR_COUNSELING_FOR_ALCOHOL_CONSUMPTION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Referral to Primary Care or Alternate Provider",
+      "Mnemonic": "REFERRAL_TO_PRIMARY_CARE_OR_ALTERNATE_PROVIDER",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Referrals Where Weight Assessment May Occur",
+      "Mnemonic": "REFERRALS_WHERE_WEIGHT_ASSESSMENT_MAY_OCCUR",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "REM Sleep Behavior Disorder",
+      "Mnemonic": "REM_SLEEP_BEHAVIOR_DISORDER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Removal, Revision and Supplement Procedures of the Lower Body and Spine",
+      "Mnemonic": "REMOVAL,_REVISION_AND_SUPPLEMENT_PROCEDURES_OF_THE_LOWER_BODY_AND_SPINE",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Renal Disease",
+      "Mnemonic": "RENAL_DISEASE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Respiratory Conditions Related to COVID 19",
+      "Mnemonic": "RESPIRATORY_CONDITIONS_RELATED_TO_COVID_19",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Respiratory Rate",
+      "Mnemonic": "RESPIRATORY_RATE",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Respiratory Support Procedures Related to COVID 19",
+      "Mnemonic": "RESPIRATORY_SUPPORT_PROCEDURES_RELATED_TO_COVID_19",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Retinal Detachment with Retinal Defect",
+      "Mnemonic": "RETINAL_DETACHMENT_WITH_RETINAL_DEFECT",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Retinal or Dilated Eye Exam",
+      "Mnemonic": "RETINAL_OR_DILATED_EYE_EXAM",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Retinal Vascular Occlusion",
+      "Mnemonic": "RETINAL_VASCULAR_OCCLUSION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Retrolental Fibroplasias",
+      "Mnemonic": "RETROLENTAL_FIBROPLASIAS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Rhabdomyolysis",
+      "Mnemonic": "RHABDOMYOLYSIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Rheumatoid Arthritis",
+      "Mnemonic": "RHEUMATOID_ARTHRITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Rivaroxaban for VTE Prophylaxis",
+      "Mnemonic": "RIVAROXABAN_FOR_VTE_PROPHYLAXIS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Rotavirus Vaccine (2 dose schedule) Administered",
+      "Mnemonic": "ROTAVIRUS_VACCINE_(2_DOSE_SCHEDULE)_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Rotavirus Vaccine (3 dose schedule)",
+      "Mnemonic": "ROTAVIRUS_VACCINE_(3_DOSE_SCHEDULE)",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Rotavirus Vaccine (3 dose schedule) Administered",
+      "Mnemonic": "ROTAVIRUS_VACCINE_(3_DOSE_SCHEDULE)_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Routes of Administration for Opioid Antagonists",
+      "Mnemonic": "ROUTES_OF_ADMINISTRATION_FOR_OPIOID_ANTAGONISTS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Rubella",
+      "Mnemonic": "RUBELLA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Salvage Therapy",
+      "Mnemonic": "SALVAGE_THERAPY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Schedule II, III and IV Opioid Medications",
+      "Mnemonic": "SCHEDULE_II,_III_AND_IV_OPIOID_MEDICATIONS",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Schedule IV Benzodiazepines",
+      "Mnemonic": "SCHEDULE_IV_BENZODIAZEPINES",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Schizophrenia",
+      "Mnemonic": "SCHIZOPHRENIA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Schizophrenia or Psychotic Disorder",
+      "Mnemonic": "SCHIZOPHRENIA_OR_PSYCHOTIC_DISORDER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Scleritis",
+      "Mnemonic": "SCLERITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "sDNA FIT Test",
+      "Mnemonic": "SDNA_FIT_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Seizure Disorder",
+      "Mnemonic": "SEIZURE_DISORDER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Separation of Retinal Layers",
+      "Mnemonic": "SEPARATION_OF_RETINAL_LAYERS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Sepsis",
+      "Mnemonic": "SEPSIS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Severe Anesthesia Complications",
+      "Mnemonic": "SEVERE_ANESTHESIA_COMPLICATIONS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Severe Combined Immunodeficiency",
+      "Mnemonic": "SEVERE_COMBINED_IMMUNODEFICIENCY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Severe Maternal Morbidity Diagnoses",
+      "Mnemonic": "SEVERE_MATERNAL_MORBIDITY_DIAGNOSES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Severe Maternal Morbidity Procedures",
+      "Mnemonic": "SEVERE_MATERNAL_MORBIDITY_PROCEDURES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Severe Preeclampsia",
+      "Mnemonic": "SEVERE_PREECLAMPSIA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Shock",
+      "Mnemonic": "SHOCK",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Sickle Cell Disease with and without Crisis",
+      "Mnemonic": "SICKLE_CELL_DISEASE_WITH_AND_WITHOUT_CRISIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Sickle Cell Disease with Crisis",
+      "Mnemonic": "SICKLE_CELL_DISEASE_WITH_CRISIS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Smoking status",
+      "Mnemonic": "SMOKING_STATUS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Sodium Lab Test",
+      "Mnemonic": "SODIUM_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Speech and Hearing Evaluation",
+      "Mnemonic": "SPEECH_AND_HEARING_EVALUATION",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Stable and Unstable Angina",
+      "Mnemonic": "STABLE_AND_UNSTABLE_ANGINA",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Standardized Pain Assessment Tool",
+      "Mnemonic": "STANDARDIZED_PAIN_ASSESSMENT_TOOL",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Standardized Tools Score for Assessment of Cognition",
+      "Mnemonic": "STANDARDIZED_TOOLS_SCORE_FOR_ASSESSMENT_OF_COGNITION",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Statin Allergen",
+      "Mnemonic": "STATIN_ALLERGEN",
+      "DataClassContext": "ALG",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Statin Associated Muscle Symptoms",
+      "Mnemonic": "STATIN_ASSOCIATED_MUSCLE_SYMPTOMS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Status Post Left Mastectomy",
+      "Mnemonic": "STATUS_POST_LEFT_MASTECTOMY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Status Post Right Mastectomy",
+      "Mnemonic": "STATUS_POST_RIGHT_MASTECTOMY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "STEMI",
+      "Mnemonic": "STEMI",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Stroke",
+      "Mnemonic": "STROKE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Subcutaneous route",
+      "Mnemonic": "SUBCUTANEOUS_ROUTE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Substance Abuse",
+      "Mnemonic": "SUBSTANCE_ABUSE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Substance Use Disorder",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Substance Use Disorder Long Acting Medication",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_LONG_ACTING_MEDICATION",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Substance Use Disorder Long Acting Medication Administration",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_LONG_ACTING_MEDICATION_ADMINISTRATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Substance Use Disorder Short Acting Medication",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_SHORT_ACTING_MEDICATION",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Substance Use Disorder Short Acting Medication Administration",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_SHORT_ACTING_MEDICATION_ADMINISTRATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Substance Use Disorder Treatment",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_TREATMENT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Suicide Attempt",
+      "Mnemonic": "SUICIDE_ATTEMPT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Syphilis Tests",
+      "Mnemonic": "SYPHILIS_TESTS",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Systolic Blood Pressure",
+      "Mnemonic": "SYSTOLIC_BLOOD_PRESSURE",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Telephone Visits",
+      "Mnemonic": "TELEPHONE_VISITS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Thrombolytic medications",
+      "Mnemonic": "THROMBOLYTIC_MEDICATIONS",
+      "DataClassContext": "ALG",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Thrombolytic tPA Therapy",
+      "Mnemonic": "THROMBOLYTIC_TPA_THERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Thrombolytics Adverse Event",
+      "Mnemonic": "THROMBOLYTICS_ADVERSE_EVENT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Thyrotoxicosis",
+      "Mnemonic": "THYROTOXICOSIS",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Tobacco Non User",
+      "Mnemonic": "TOBACCO_NON_USER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Tobacco Use Cessation Counseling",
+      "Mnemonic": "TOBACCO_USE_CESSATION_COUNSELING",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Tobacco Use Cessation Pharmacotherapy",
+      "Mnemonic": "TOBACCO_USE_CESSATION_PHARMACOTHERAPY",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Tobacco Use Screening",
+      "Mnemonic": "TOBACCO_USE_SCREENING",
+      "DataClassContext": "HA",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Tobacco User",
+      "Mnemonic": "TOBACCO_USER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Total Colectomy",
+      "Mnemonic": "TOTAL_COLECTOMY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Tracheostomy",
+      "Mnemonic": "TRACHEOSTOMY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Tracheostomy Diagnoses",
+      "Mnemonic": "TRACHEOSTOMY_DIAGNOSES",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Tracheostomy Procedures",
+      "Mnemonic": "TRACHEOSTOMY_PROCEDURES",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Traumatic Cataract",
+      "Mnemonic": "TRAUMATIC_CATARACT",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Type 1 Diabetes",
+      "Mnemonic": "TYPE_1_DIABETES",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Unavailability of Bacillus Calmette Guerin for urology care",
+      "Mnemonic": "UNAVAILABILITY_OF_BACILLUS_CALMETTE_GUERIN_FOR_UROLOGY_CARE",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Underweight",
+      "Mnemonic": "UNDERWEIGHT",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Unfractionated Heparin",
+      "Mnemonic": "UNFRACTIONATED_HEPARIN",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Unilateral Mastectomy Left",
+      "Mnemonic": "UNILATERAL_MASTECTOMY_LEFT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Unilateral Mastectomy Right",
+      "Mnemonic": "UNILATERAL_MASTECTOMY_RIGHT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Unilateral Mastectomy, Unspecified Laterality",
+      "Mnemonic": "UNILATERAL_MASTECTOMY,_UNSPECIFIED_LATERALITY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Unilateral Oophorectomy Left",
+      "Mnemonic": "UNILATERAL_OOPHORECTOMY_LEFT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Unilateral Oophorectomy Right",
+      "Mnemonic": "UNILATERAL_OOPHORECTOMY_RIGHT",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Unilateral Oophorectomy, Unspecified Laterality",
+      "Mnemonic": "UNILATERAL_OOPHORECTOMY,_UNSPECIFIED_LATERALITY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Upper Respiratory Infection",
+      "Mnemonic": "UPPER_RESPIRATORY_INFECTION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Urinary retention",
+      "Mnemonic": "URINARY_RETENTION",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Urine Albumin Creatinine Ratio",
+      "Mnemonic": "URINE_ALBUMIN_CREATININE_RATIO",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Urological Surgery",
+      "Mnemonic": "UROLOGICAL_SURGERY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Uveitis",
+      "Mnemonic": "UVEITIS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Varicella Zoster",
+      "Mnemonic": "VARICELLA_ZOSTER",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Varicella Zoster Vaccine (VZV)",
+      "Mnemonic": "VARICELLA_ZOSTER_VACCINE_(VZV)",
+      "DataClassContext": "IMM",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Varicella Zoster Vaccine (VZV) Administered",
+      "Mnemonic": "VARICELLA_ZOSTER_VACCINE_(VZV)_ADMINISTERED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Vascular Disorders of Iris and Ciliary Body",
+      "Mnemonic": "VASCULAR_DISORDERS_OF_IRIS_AND_CILIARY_BODY",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Venous foot pumps",
+      "Mnemonic": "VENOUS_FOOT_PUMPS",
+      "DataClassContext": "DEV",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Venous Thromboembolism",
+      "Mnemonic": "VENOUS_THROMBOEMBOLISM",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Venous Thromboembolism in Pregnancy",
+      "Mnemonic": "VENOUS_THROMBOEMBOLISM_IN_PREGNANCY",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Ventilation",
+      "Mnemonic": "VENTILATION",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Virtual Encounter",
+      "Mnemonic": "VIRTUAL_ENCOUNTER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Visual Acuity 20\/40 or Better",
+      "Mnemonic": "VISUAL_ACUITY_20\/40_OR_BETTER",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Visual Field Defects",
+      "Mnemonic": "VISUAL_FIELD_DEFECTS",
+      "DataClassContext": "CND",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Warfarin",
+      "Mnemonic": "WARFARIN",
+      "DataClassContext": "MED",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Weight",
+      "Mnemonic": "WEIGHT",
+      "DataClassContext": "VIT",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "Weight Reduction Recommended",
+      "Mnemonic": "WEIGHT_REDUCTION_RECOMMENDED",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "White Blood Cells Count Lab Test",
+      "Mnemonic": "WHITE_BLOOD_CELLS_COUNT_LAB_TEST",
+      "DataClassContext": "LAB",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    },
+    {
+      "Name": "XRay Study",
+      "Mnemonic": "XRAY_STUDY",
+      "DataClassContext": "PRC",
+      "FhirUri": "2.16.840.1.113883.3.3616.120.132"
+    }
   ]
 }

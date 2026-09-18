@@ -25,14 +25,14 @@
     {
       "mnemonic": "ATTR_INEXTERNALLIST",
       "name": "Attribute Is In External List",
-      "FailName": "not in code list",
+      "FailName": "Attribute is not in external list",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "conditionalSAMMnemonic": "ATTR_ISPOPULATED",
-      "HDQTDimensionMnemonic": "CONF_INVMBR",
+      "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-05-16T22:36:24.080",
-      "lastModifiedDate": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2026-06-12T11:51:01.633",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -49,7 +49,7 @@
     {
       "mnemonic": "ATTR_INLIST",
       "name": "Attribute Is In List",
-      "FailName": "not in value list",
+      "FailName": "Attribute text is not in value list",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "conditionalSAMMnemonic": "ATTR_ISPOPULATED",
@@ -72,14 +72,14 @@
     },
     {
       "mnemonic": "ATTR_IS_AFTER_MODEL_START",
-      "name": "Attribute Is After Model Start",
-      "FailName": "Attr Before Model Start",
+      "name": "Attribute Is Date After Model Start",
+      "FailName": "Date is before model start",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISDATE",
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-07T20:00:10.457",
-      "lastModifiedDate": "2025-10-07T20:00:10.457",
+      "lastModifiedDate": "2026-06-12T11:07:20.097",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -87,14 +87,14 @@
     },
     {
       "mnemonic": "ATTR_IS_BEFORE_MODEL_END",
-      "name": "Attribute Is Before Model End",
-      "FailName": "Attr After Model End",
+      "name": "Attribute is Date Before Model End",
+      "FailName": "Date is after model end date",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISDATE",
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-07T20:02:25.657",
-      "lastModifiedDate": "2025-10-07T20:02:25.657",
+      "lastModifiedDate": "2026-06-12T11:07:50.020",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -103,7 +103,7 @@
     {
       "mnemonic": "ATTR_ISCODED",
       "name": "Attribute Is Coded",
-      "FailName": "invalid coded entity",
+      "FailName": "Simple attribute is not a codeable concept",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -118,13 +118,13 @@
     {
       "mnemonic": "ATTR_ISDATE",
       "name": "Attribute Is Date",
-      "FailName": "invalid date",
+      "FailName": "Attribute is an invalid date and time",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:40:48.187",
-      "lastModifiedDate": "2026-04-27T19:55:03.227",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -148,7 +148,7 @@
     {
       "mnemonic": "ATTR_ISDECIMAL",
       "name": "Attribute Is Decimal",
-      "FailName": "invalid decimal",
+      "FailName": "Simple attribute is not a valid decimal value",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -178,7 +178,7 @@
     {
       "mnemonic": "ATTR_ISINTEGER",
       "name": "Attribute Is Integer",
-      "FailName": "invalid integer",
+      "FailName": "Simple attribute is not a valid integer",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -193,7 +193,7 @@
     {
       "mnemonic": "ATTR_ISNEGATIVENUMBER",
       "name": "Attribute Is Negative Number",
-      "FailName": "invalid negative integer",
+      "FailName": "Simple attribute is not a valid negative integer",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISINTEGER",
       "HDQTDimensionMnemonic": "ACC_INVVAL",
@@ -208,7 +208,7 @@
     {
       "mnemonic": "ATTR_ISNUMERIC",
       "name": "Attribute Is Numeric",
-      "FailName": "invalid number",
+      "FailName": "Simple attribute is not a number",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -223,7 +223,7 @@
     {
       "mnemonic": "ATTR_ISPASTDATE",
       "name": "Attribute Is Past Date",
-      "FailName": "invalid past date",
+      "FailName": "Attribute is not a past date and time",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISDATE",
       "HDQTDimensionMnemonic": "ACC_INVVAL",
@@ -238,7 +238,7 @@
     {
       "mnemonic": "ATTR_ISPOPULATED",
       "name": "Attribute Is Populated",
-      "FailName": "unpopulated",
+      "FailName": "Attribute is unpopulated",
       "inputType": "ATR",
       "HDQTDimensionMnemonic": "AV_UNPOP",
       "executionTypeMnemonic": "STANDALONE",
@@ -252,7 +252,7 @@
     {
       "mnemonic": "ATTR_ISPOSITIVENUMBER",
       "name": "Attribute Is Positive Number",
-      "FailName": "invalid positive integer",
+      "FailName": "Simple attribute is not a valid positive integer",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISINTEGER",
       "HDQTDimensionMnemonic": "ACC_INVVAL",
@@ -282,7 +282,7 @@
     {
       "mnemonic": "ATTR_ISTIMESTAMP",
       "name": "Attribute Is TimeStamp",
-      "FailName": "invalid date time",
+      "FailName": "Attribute is an invalid date and time",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -297,7 +297,7 @@
     {
       "mnemonic": "ATTR_ISTIMESTAMPTZ",
       "name": "Attribute Is TimeStamp with TimeZone",
-      "FailName": "invalid date time",
+      "FailName": "Attribute is an invalid date and time",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISTIMESTAMP",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -312,7 +312,7 @@
     {
       "mnemonic": "ATTR_MATCHESREGEX",
       "name": "Attribute Matches Regex",
-      "FailName": "regex mismatch",
+      "FailName": "Simple attribute does not match regular expression",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -350,6 +350,7 @@
     {
       "mnemonic": "ATTRIBUTE_IS_FORMATTED_AS_NPI",
       "name": "Attribute Is Formatted As NPI",
+      "FailName": "Attribute value is not valid NPI format or is missing Luhn check digit",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -367,10 +368,10 @@
       "FailName": "Attribute not in all external lists",
       "inputType": "ATR",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
-      "HDQTDimensionMnemonic": "CONF_INVMBR",
+      "HDQTDimensionMnemonic": "ACC_INVVAL",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2026-01-27T20:59:43.027",
-      "lastModifiedDate": "2026-01-27T20:59:43.027",
+      "lastModifiedDate": "2026-06-12T11:51:20.823",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -471,13 +472,13 @@
     {
       "mnemonic": "CONCEPT_HASCODE",
       "name": "Codeable Concept has Code",
-      "FailName": "code unpopulated",
+      "FailName": "Code is unpopulated",
       "inputType": "CC",
       "prerequisiteSAMMnemonic": "CONCEPT_HASDISPLAY",
-      "HDQTDimensionMnemonic": "AV_UNPOP",
+      "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-04-03T19:30:27.457",
-      "lastModifiedDate": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2026-06-12T11:50:16.740",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -486,13 +487,13 @@
     {
       "mnemonic": "CONCEPT_HASCODESYSTEM",
       "name": "Codeable Concept has Code System",
-      "FailName": "system unpopulated",
+      "FailName": "System is unpopulated",
       "inputType": "CC",
       "prerequisiteSAMMnemonic": "CONCEPT_HASCODE",
-      "HDQTDimensionMnemonic": "AV_UNPOP",
+      "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-04-03T19:29:53.303",
-      "lastModifiedDate": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2026-06-12T11:50:27.550",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -501,13 +502,13 @@
     {
       "mnemonic": "CONCEPT_HASDISPLAY",
       "name": "Codeable Concept has Display",
-      "FailName": "display unpopulated",
+      "FailName": "Display is unpopulated",
       "inputType": "CC",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
-      "HDQTDimensionMnemonic": "AV_UNPOP",
+      "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-04-03T19:30:27.457",
-      "lastModifiedDate": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2026-06-12T11:50:37.873",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -529,9 +530,31 @@
       }
     },
     {
+      "mnemonic": "CONCEPT_INVALUESET",
+      "name": "Codeable Concept in Value set",
+      "FailName": "Codeable Concept not in Value set",
+      "inputType": "CC",
+      "HDQTDimensionMnemonic": "PLAUS_SITU",
+      "executionTypeMnemonic": "STANDALONE",
+      "createdDateTime": "2026-06-25T17:15:44.440",
+      "lastModifiedDate": "2026-07-23T20:16:44.430",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Value Set Mnemonic",
+          "Mnemonic": "VALUE_SET_MNEMONIC",
+          "parameterValueTypeName": "Value Set",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
       "mnemonic": "CONCEPT_ISACTIVE",
       "name": "Codeable Concept is Active",
-      "FailName": "inactive concept",
+      "FailName": "Codeable concept is not an active concept",
       "inputType": "CC",
       "prerequisiteSAMMnemonic": "CONCEPT_ISVALID",
       "HDQTDimensionMnemonic": "CONF_OBSOL",
@@ -544,9 +567,32 @@
       }
     },
     {
+      "mnemonic": "CONCEPT_ISCOMPATIBLE",
+      "name": "Codeable Concept is Compatible",
+      "FailName": "concept is not compatible",
+      "inputType": "CC",
+      "prerequisiteSAMMnemonic": "CONCEPT_ISCOMPLETE",
+      "HDQTDimensionMnemonic": "CONF_INCOMP",
+      "executionTypeMnemonic": "STANDALONE",
+      "createdDateTime": "2026-07-16T21:20:02.110",
+      "lastModifiedDate": "2026-07-17T16:11:48.477",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Code System CSV",
+          "Mnemonic": "CODE_SYSTEM_CSV",
+          "parameterValueTypeName": "Code System",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
       "mnemonic": "CONCEPT_ISCOMPLETE",
       "name": "Codeable Concept is Complete",
-      "FailName": "incomplete",
+      "FailName": "Codeable concept is not complete",
       "inputType": "CC",
       "prerequisiteSAMMnemonic": "CONCEPT_HASCODESYSTEM",
       "HDQTDimensionMnemonic": "AV_INCOMP",
@@ -561,6 +607,7 @@
     {
       "mnemonic": "CONCEPT_ISCONSISTENT",
       "name": "Codeable Concept is Semantically Consistent",
+      "FailName": "Codeable concept attributes it not semantically consistent with text value",
       "inputType": "CC",
       "prerequisiteSAMMnemonic": "CONCEPT_ISVALID",
       "conditionalSAMMnemonic": "ATTR_ISCODED",
@@ -576,7 +623,7 @@
     {
       "mnemonic": "CONCEPT_ISVALID",
       "name": "Codeable Concept is Valid Concept",
-      "FailName": "invalid concept",
+      "FailName": "Codeable concept is not a valid concept",
       "inputType": "CC",
       "prerequisiteSAMMnemonic": "CONCEPT_HASRECOGNIZEDCODESYSTEM",
       "conditionalSAMMnemonic": "ATTR_ISCODED",
@@ -592,14 +639,14 @@
     {
       "mnemonic": "CONCEPT_ISVALIDMEMBER",
       "name": "Codeable Concept is Valid Member",
-      "FailName": "incompatible concept",
+      "FailName": "concept is not a valid member of compatible code system(s)",
       "inputType": "CC",
       "prerequisiteSAMMnemonic": "CONCEPT_ISVALID",
       "conditionalSAMMnemonic": "ATTR_ISCODED",
       "HDQTDimensionMnemonic": "CONF_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2024-03-17T14:39:21.247",
-      "lastModifiedDate": "2025-03-24T10:47:05.323",
+      "lastModifiedDate": "2026-07-16T21:26:43.833",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -614,13 +661,337 @@
       ]
     },
     {
+      "mnemonic": "CQL_ACIF_EVALUATOR",
+      "name": "Accuracy - Invalid Format CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "ACC_INVFMT",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-09-08T19:30:45.537",
+      "lastModifiedDate": "2026-09-08T20:02:11.827",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_ACIG_EVALUATOR",
+      "name": "Accuracy - Invalid Grouping  CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "ACC_INVGRP",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-09-08T19:00:05.050",
+      "lastModifiedDate": "2026-09-08T19:56:27.293",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        },
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_ACIV_EVALUATOR",
+      "name": "Accuracy - Invalid Value CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "ACC_INVVAL",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-09-08T19:29:05.740",
+      "lastModifiedDate": "2026-09-08T19:56:12.050",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_AVI_EVALUATOR",
+      "name": "Availability - Incomplete CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "AV_INCOMP",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-09-08T19:49:24.807",
+      "lastModifiedDate": "2026-09-08T19:50:08.500",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_AVM_EVALUATOR",
+      "name": "Availability - Missing CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "AV_MISS",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-09-08T19:52:11.720",
+      "lastModifiedDate": "2026-09-08T19:52:52.083",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_AVU_EVALUATOR",
+      "name": "Availability - Unpopulated CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "AV_UNPOP",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-09-08T19:50:56.510",
+      "lastModifiedDate": "2026-09-08T19:51:31.930",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        },
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_CIM_EVALUATOR",
+      "name": "Conformity - Invalid Member CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "CONF_INVMBR",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-09-08T18:56:52.800",
+      "lastModifiedDate": "2026-09-08T18:58:30.043",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        },
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_CO_EVALUATOR",
+      "name": "Conformity -  Obsolete CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "CONF_OBSOL",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-09-08T18:17:40.913",
+      "lastModifiedDate": "2026-09-08T18:55:17.693",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_EVALUATOR",
+      "name": "Conformity - Incompatible CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "CONF_INCOMP",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-05-13T14:55:18.713",
+      "lastModifiedDate": "2026-08-27T09:52:33.763",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library Mnemonic",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_PCI_EVALUATOR",
+      "name": "Plausibility - Clinically Implausible CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "PLAUS_CLIN",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-05-13T14:55:18.713",
+      "lastModifiedDate": "2026-08-27T09:52:46.330",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_PSI_EVALUATOR",
+      "name": "Plausibility - Situationally Implausible CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "PLAUS_SITU",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-05-13T14:55:18.713",
+      "lastModifiedDate": "2026-08-27T09:52:55.410",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
+      "mnemonic": "CQL_PTI_EVALUATOR",
+      "name": "Plausibility - Temporally Implausible CQL Evaluator",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "PLAUS_TEMP",
+      "executionTypeMnemonic": "PCQL",
+      "createdDateTime": "2026-05-13T14:55:18.713",
+      "lastModifiedDate": "2026-08-27T09:53:04.970",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Measurement Period",
+          "Mnemonic": "MEASUREMENT_PERIOD",
+          "parameterValueTypeName": "Simple Value",
+          "isOptional": "true"
+        },
+        {
+          "name": "CQL Library",
+          "Mnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValueTypeName": "CQL Library",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
       "mnemonic": "CUSTOM_EXTERNAL_ASSESSMENT",
       "name": "Custom External Assessment",
       "FailName": "Custom assessment failed",
       "HDQTDimensionMnemonic": "PLAUS_CLIN",
       "executionTypeMnemonic": "WEB_SERVICE",
       "createdDateTime": "2025-09-04T14:30:28.780",
-      "lastModifiedDate": "2026-04-24T16:09:55.543",
+      "lastModifiedDate": "2025-09-04T14:30:28.780",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -707,6 +1078,7 @@
     {
       "mnemonic": "ELEMENT_DURATION_IS_PLAUSIBLE",
       "name": "Element Duration Is Plausible",
+      "FailName": "Element duration is longer than threshold",
       "inputType": "ELM",
       "HDQTDimensionMnemonic": "PLAUS_TEMP",
       "executionTypeMnemonic": "STANDALONE",
@@ -795,7 +1167,7 @@
     {
       "mnemonic": "ELEMENT_HAS_VALUE",
       "name": "Element Has Value",
-      "FailName": "Element missingvalue",
+      "FailName": "value missing",
       "inputType": "ELM",
       "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
@@ -897,6 +1269,34 @@
       ]
     },
     {
+      "mnemonic": "ELEMENT_OCCURS_BEFORE_ATTR",
+      "name": "Model: Timing - element occurs before date attribute",
+      "FailName": "Model: Timing - element occurs after date attribute",
+      "inputType": "ROOT",
+      "HDQTDimensionMnemonic": "PLAUS_TEMP",
+      "executionTypeMnemonic": "STANDALONE",
+      "createdDateTime": "2025-09-29T20:46:18.273",
+      "lastModifiedDate": "2025-09-29T16:47:19.520",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      },
+      "parameters": [
+        {
+          "name": "Attribute Mnemonic",
+          "Mnemonic": "ATTRIBUTE_MNEMONIC",
+          "parameterValueTypeName": "Model Attribute",
+          "isOptional": "false"
+        },
+        {
+          "name": "Element Value Set",
+          "Mnemonic": "ELEMENT_VALUE_SET",
+          "parameterValueTypeName": "Value Set",
+          "isOptional": "false"
+        }
+      ]
+    },
+    {
       "mnemonic": "ELEMENT_PRIM_CONCEPT_IN_VALUESET",
       "name": "Element primary concept In value set",
       "FailName": "Element primary concept not In value set",
@@ -943,6 +1343,7 @@
     {
       "mnemonic": "ELEMENT_UOM_IS_PLAUSIBLE",
       "name": "Element UOM Is Plausible",
+      "FailName": "Primary unit not plausible for primary concept",
       "inputType": "ELM",
       "HDQTDimensionMnemonic": "PLAUS_CLIN",
       "executionTypeMnemonic": "STANDALONE",
@@ -969,12 +1370,18 @@
       "HDQTDimensionMnemonic": "PLAUS_CLIN",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-10-09T14:35:33.370",
-      "lastModifiedDate": "2025-10-09T14:35:33.370",
+      "lastModifiedDate": "2026-07-22T20:39:20.293",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
       },
       "parameters": [
+        {
+          "name": "Concept UOM Value Range",
+          "Mnemonic": "CONCEPT_UOM_VALUE_RANGE",
+          "parameterValueTypeName": "Content Set",
+          "isOptional": "false"
+        },
         {
           "name": "Primary Concept ValueSet",
           "Mnemonic": "PRIMARY_CONCEPT_VALUESET",
@@ -1013,7 +1420,21 @@
       "HDQTDimensionMnemonic": "AV_INCOMP",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-01-23T19:42:46.977",
-      "lastModifiedDate": "2026-04-24T19:44:02",
+      "lastModifiedDate": "2025-03-24T10:47:05.323",
+      "Source": {
+        "Name": "PIQI Alliance",
+        "Mnemonic": "PIQI.ALLIANCE"
+      }
+    },
+    {
+      "mnemonic": "LABRESULT_UNITISPLAUSIBLE",
+      "name": "Lab Result Unit Matches Test",
+      "FailName": "unit does not match test",
+      "inputType": "OBSVAL",
+      "HDQTDimensionMnemonic": "PLAUS_SITU",
+      "executionTypeMnemonic": "STANDALONE",
+      "createdDateTime": "2025-09-04T21:51:25.940",
+      "lastModifiedDate": "2026-08-11T20:53:43.693",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1056,7 +1477,7 @@
       "HDQTDimensionMnemonic": "ACC_INVFMT",
       "executionTypeMnemonic": "STANDALONE",
       "createdDateTime": "2025-02-26T15:48:09.783",
-      "lastModifiedDate": "2025-03-24T10:47:56.737",
+      "lastModifiedDate": "2026-06-01T17:14:33.173",
       "Source": {
         "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
@@ -1065,7 +1486,7 @@
         {
           "name": "Valid Attribute List",
           "Mnemonic": "VALID_ATTRIBUTE_LIST",
-          "parameterValueTypeName": "Model Attribute",
+          "parameterValueTypeName": "Simple List (CSV)",
           "isOptional": "true"
         }
       ]
@@ -1073,6 +1494,7 @@
     {
       "mnemonic": "OBSERVATIONVALUE_MATCHESTYPE",
       "name": "Observation Value Matches Type",
+      "FailName": "Observation value does not match observation type",
       "inputType": "OBSVAL",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVVAL",
@@ -1110,6 +1532,7 @@
     {
       "mnemonic": "RANGEVALUE_ISCOMPLETE",
       "name": "Range Value Is Complete",
+      "FailName": "Range value is not in value list",
       "inputType": "RV",
       "HDQTDimensionMnemonic": "ACC_INVGRP",
       "executionTypeMnemonic": "STANDALONE",
@@ -1123,7 +1546,7 @@
     {
       "mnemonic": "RANGEVALUE_ISVALID",
       "name": "Range Value Is Valid",
-      "FailName": "invalid ref range",
+      "FailName": "Range values are not valid",
       "inputType": "RV",
       "prerequisiteSAMMnemonic": "ATTR_ISPOPULATED",
       "HDQTDimensionMnemonic": "ACC_INVFMT",
@@ -1131,14 +1554,14 @@
       "createdDateTime": "2024-03-17T14:53:09.457",
       "lastModifiedDate": "2025-03-24T10:47:05.323",
       "Source": {
-        "Name": "PIQI Alliance", 
+        "Name": "PIQI Alliance",
         "Mnemonic": "PIQI.ALLIANCE"
       }
     },
     {
       "mnemonic": "VALUESET_DETECTION",
       "name": "ValueSet Detection",
-      "FailName": "not a thing",
+      "FailName": "value set is not detected",
       "inputType": "ROOT",
       "HDQTDimensionMnemonic": "AV_UNPOP",
       "executionTypeMnemonic": "STANDALONE",

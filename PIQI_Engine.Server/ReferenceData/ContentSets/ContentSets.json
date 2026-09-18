@@ -1,19 +1,3476 @@
 {
-    "ContentSetLibrary": [
-        {
-            "ContentSetTypeMnemonic": "TEXT",
-            "Mnemonic": "UCUM",
-            "Name": "UCUM"
-        },
-        {
-            "ContentSetTypeMnemonic": "PRIMARYCONCEPT_UOM",
-            "Mnemonic": "PC_UOM",
-            "Name": "PrimaryConcept UOM"
-        },
-        {
-            "ContentSetTypeMnemonic": "PRIMARYCONCEPT_UOM_VALUE_RANGE",
-            "Mnemonic": "PC_UOM_VALUE_RANGE",
-            "Name": "PrimaryConcept UOM Value Range"
-        }
-    ]
+  "ContentSetLibrary": [
+    {
+      "Name": "Connie Race\/Ethnicity Set",
+      "Mnemonic": "CONNIE_RE",
+      "ContentSetTypeMnemonic": "TEXT"
+    },
+    {
+      "Name": "Lab Result Status",
+      "Mnemonic": "LAB_RESULT_STATUS",
+      "ContentSetTypeMnemonic": "TEXT"
+    },
+    {
+      "Name": "Connie Language Set",
+      "Mnemonic": "CONNIE_LANG",
+      "ContentSetTypeMnemonic": "TEXT"
+    },
+    {
+      "Name": "CDC - Race Ethnicity Flat",
+      "Mnemonic": "CDC_RACE_ETHNICITY_FLAT",
+      "ContentSetTypeMnemonic": "TEXT",
+      "ModelMnemonic": "CDC_RE"
+    },
+    {
+      "Name": "UCUM",
+      "Mnemonic": "UCUM",
+      "ContentSetTypeMnemonic": "TEXT"
+    },
+    {
+      "Name": "PrimaryConcept UOM",
+      "Mnemonic": "PC_UOM",
+      "ContentSetTypeMnemonic": "PRIMARYCONCEPT_UOM"
+    },
+    {
+      "Name": "NCQA - Implausible Blood Pressure",
+      "Mnemonic": "NCQA_IMPLAUSIBLE_BLOOD_PRESSURE",
+      "ContentSetTypeMnemonic": "PRIMARYCONCEPT_UOM_VALUE_RANGE"
+    },
+    {
+      "Name": "PrimaryConcept UOM Value Range",
+      "Mnemonic": "PC_UOM_VALUE_RANGE",
+      "ContentSetTypeMnemonic": "PRIMARYCONCEPT_UOM_VALUE_RANGE"
+    },
+    {
+      "Name": "Psychoanalysis",
+      "Mnemonic": "PSYCHOANALYSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cardiac Arrest Ventricular Fibrillation",
+      "Mnemonic": "CARDIAC_ARREST_VENTRICULAR_FIBRILLATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "XRay Study",
+      "Mnemonic": "XRAY_STUDY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Office Visit",
+      "Mnemonic": "OFFICE_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dysthymia",
+      "Mnemonic": "DYSTHYMIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Heart Rate 2026",
+      "Mnemonic": "HEART_RATE_2026",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "CABG Surgeries",
+      "Mnemonic": "CABG_SURGERIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Generalized Anxiety Disorder",
+      "Mnemonic": "GENERALIZED_ANXIETY_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Status Post Right Mastectomy",
+      "Mnemonic": "STATUS_POST_RIGHT_MASTECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hypertension",
+      "Mnemonic": "HYPERTENSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Opioids, All",
+      "Mnemonic": "OPIOIDS,_ALL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Psoriatic Arthritis",
+      "Mnemonic": "PSORIATIC_ARTHRITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Medical Reason",
+      "Mnemonic": "MEDICAL_REASON",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hib Vaccine (3 dose schedule)",
+      "Mnemonic": "HIB_VACCINE_(3_DOSE_SCHEDULE)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Major Injuries",
+      "Mnemonic": "MAJOR_INJURIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Thyrotoxicosis",
+      "Mnemonic": "THYROTOXICOSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intensive Care Unit",
+      "Mnemonic": "INTENSIVE_CARE_UNIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Atrial Fibrillation or Flutter",
+      "Mnemonic": "ATRIAL_FIBRILLATION_OR_FLUTTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Follow Up for Below Normal BMI",
+      "Mnemonic": "FOLLOW_UP_FOR_BELOW_NORMAL_BMI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Anticoagulants for All Indications",
+      "Mnemonic": "ANTICOAGULANTS_FOR_ALL_INDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ankylosing Spondylitis",
+      "Mnemonic": "ANKYLOSING_SPONDYLITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bicarbonate Lab Test",
+      "Mnemonic": "BICARBONATE_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Immunocompromised Conditions",
+      "Mnemonic": "IMMUNOCOMPROMISED_CONDITIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Group Psychotherapy",
+      "Mnemonic": "GROUP_PSYCHOTHERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Respiratory Rate",
+      "Mnemonic": "RESPIRATORY_RATE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "NCQA-Mammography",
+      "Mnemonic": "NCQA_MAMMOGRAPHY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Aortic Dissection or Ruptured Aortic Aneurysm",
+      "Mnemonic": "AORTIC_DISSECTION_OR_RUPTURED_AORTIC_ANEURYSM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Outpatient Surgery Service",
+      "Mnemonic": "OUTPATIENT_SURGERY_SERVICE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Choroidal Detachment",
+      "Mnemonic": "CHOROIDAL_DETACHMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Contraceptive Medications",
+      "Mnemonic": "CONTRACEPTIVE_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Arterial Blood pH",
+      "Mnemonic": "ARTERIAL_BLOOD_PH",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Benzodiazepine Withdrawal",
+      "Mnemonic": "BENZODIAZEPINE_WITHDRAWAL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "20 to 42 Plus Weeks Gestation",
+      "Mnemonic": "20_TO_42_PLUS_WEEKS_GESTATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Occupational Therapy Evaluation",
+      "Mnemonic": "OCCUPATIONAL_THERAPY_EVALUATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pulmonary Hypertension",
+      "Mnemonic": "PULMONARY_HYPERTENSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "HIV Lab Tests",
+      "Mnemonic": "HIV_LAB_TESTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Placenta Previa",
+      "Mnemonic": "PLACENTA_PREVIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Frailty Diagnosis",
+      "Mnemonic": "FRAILTY_DIAGNOSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Measles, Mumps and Rubella (MMR) Vaccine",
+      "Mnemonic": "MEASLES,_MUMPS_AND_RUBELLA_(MMR)_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Optic Neuritis",
+      "Mnemonic": "OPTIC_NEURITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bilateral Oophorectomy",
+      "Mnemonic": "BILATERAL_OOPHORECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hib Vaccine (3 dose schedule) Administered",
+      "Mnemonic": "HIB_VACCINE_(3_DOSE_SCHEDULE)_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hyperparathyroidism",
+      "Mnemonic": "HYPERPARATHYROIDISM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute Myocardial Infarction",
+      "Mnemonic": "ACUTE_MYOCARDIAL_INFARCTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Preexisting Diabetes",
+      "Mnemonic": "PREEXISTING_DIABETES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Varicella Zoster Vaccine (VZV)",
+      "Mnemonic": "VARICELLA_ZOSTER_VACCINE_(VZV)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hospital Dietitian Referral",
+      "Mnemonic": "HOSPITAL_DIETITIAN_REFERRAL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Rotavirus Vaccine (3 dose schedule) Administered",
+      "Mnemonic": "ROTAVIRUS_VACCINE_(3_DOSE_SCHEDULE)_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mechanical Complications Excluding Upper Body",
+      "Mnemonic": "MECHANICAL_COMPLICATIONS_EXCLUDING_UPPER_BODY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Palliative or Hospice Care",
+      "Mnemonic": "PALLIATIVE_OR_HOSPICE_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "PCI",
+      "Mnemonic": "PCI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Preterm Birth",
+      "Mnemonic": "PRETERM_BIRTH",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hematocrit Lab Test",
+      "Mnemonic": "HEMATOCRIT_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Follow Up Within 4 Weeks",
+      "Mnemonic": "FOLLOW_UP_WITHIN_4_WEEKS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Retrolental Fibroplasias",
+      "Mnemonic": "RETROLENTAL_FIBROPLASIAS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Kidney Transplant",
+      "Mnemonic": "KIDNEY_TRANSPLANT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Blood Transfusion",
+      "Mnemonic": "BLOOD_TRANSFUSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nursing Facility Visit",
+      "Mnemonic": "NURSING_FACILITY_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hip Fracture Surgery",
+      "Mnemonic": "HIP_FRACTURE_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "HIV",
+      "Mnemonic": "HIV",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intravenous or Intraarterial Thrombolytic tPA Therapy",
+      "Mnemonic": "INTRAVENOUS_OR_INTRAARTERIAL_THROMBOLYTIC_TPA_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Substance Use Disorder",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Audiology Visit",
+      "Mnemonic": "AUDIOLOGY_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Discharge Services Nursing Facility",
+      "Mnemonic": "DISCHARGE_SERVICES_NURSING_FACILITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Application of Venous Foot Pumps",
+      "Mnemonic": "APPLICATION_OF_VENOUS_FOOT_PUMPS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Speech and Hearing Evaluation",
+      "Mnemonic": "SPEECH_AND_HEARING_EVALUATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Procedures Used to Indicate Sexual Activity",
+      "Mnemonic": "PROCEDURES_USED_TO_INDICATE_SEXUAL_ACTIVITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Rotavirus Vaccine (3 dose schedule)",
+      "Mnemonic": "ROTAVIRUS_VACCINE_(3_DOSE_SCHEDULE)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Referral",
+      "Mnemonic": "REFERRAL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Allergy to thrombolytics",
+      "Mnemonic": "ALLERGY_TO_THROMBOLYTICS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Shock",
+      "Mnemonic": "SHOCK",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intravenous route",
+      "Mnemonic": "INTRAVENOUS_ROUTE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cerebrovascular Disease Stroke or TIA",
+      "Mnemonic": "CEREBROVASCULAR_DISEASE_STROKE_OR_TIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Disorders of Cornea Including Corneal Opacity",
+      "Mnemonic": "DISORDERS_OF_CORNEA_INCLUDING_CORNEAL_OPACITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Chemotherapy",
+      "Mnemonic": "CHEMOTHERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Chronic Kidney Disease, Stage 5",
+      "Mnemonic": "CHRONIC_KIDNEY_DISEASE,_STAGE_5",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Previous Cesarean",
+      "Mnemonic": "PREVIOUS_CESAREAN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pressure Injury Stage 2, 3, 4, or Unstageable Diagnoses",
+      "Mnemonic": "PRESSURE_INJURY_STAGE_2,_3,_4,_OR_UNSTAGEABLE_DIAGNOSES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Direct Thrombin Inhibitor",
+      "Mnemonic": "DIRECT_THROMBIN_INHIBITOR",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Urinary retention",
+      "Mnemonic": "URINARY_RETENTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Schizophrenia or Psychotic Disorder",
+      "Mnemonic": "SCHIZOPHRENIA_OR_PSYCHOTIC_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "High Risk Procedures for AKI",
+      "Mnemonic": "HIGH_RISK_PROCEDURES_FOR_AKI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hepatitis B",
+      "Mnemonic": "HEPATITIS_B",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Suicide Attempt",
+      "Mnemonic": "SUICIDE_ATTEMPT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dialysis Services",
+      "Mnemonic": "DIALYSIS_SERVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Endotracheal Intubation",
+      "Mnemonic": "ENDOTRACHEAL_INTUBATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hepatitis A",
+      "Mnemonic": "HEPATITIS_A",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Application of Intermittent Pneumatic Compression Devices",
+      "Mnemonic": "APPLICATION_OF_INTERMITTENT_PNEUMATIC_COMPRESSION_DEVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "BMI percentile",
+      "Mnemonic": "BMI_PERCENTILE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Low Intensity Statin Therapy",
+      "Mnemonic": "LOW_INTENSITY_STATIN_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hemoglobin lab test",
+      "Mnemonic": "HEMOGLOBIN_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Carbon Dioxide Partial Pressure in Arterial Blood",
+      "Mnemonic": "CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_ARTERIAL_BLOOD",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nutrition Assessment Status Finding of Moderately Malnourished",
+      "Mnemonic": "NUTRITION_ASSESSMENT_STATUS_FINDING_OF_MODERATELY_MALNOURISHED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Contact or Office Visit",
+      "Mnemonic": "CONTACT_OR_OFFICE_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Glucose Lab Test Mass Per Volume",
+      "Mnemonic": "GLUCOSE_LAB_TEST_MASS_PER_VOLUME",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Non Invasive Oxygen Therapy",
+      "Mnemonic": "NON_INVASIVE_OXYGEN_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Body Weight",
+      "Mnemonic": "BODY_WEIGHT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cerebral Vascular Lesion",
+      "Mnemonic": "CEREBRAL_VASCULAR_LESION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Clonidine",
+      "Mnemonic": "CLONIDINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Visual Field Defects",
+      "Mnemonic": "VISUAL_FIELD_DEFECTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Heart Transplant",
+      "Mnemonic": "HEART_TRANSPLANT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Abnormal Presentation",
+      "Mnemonic": "ABNORMAL_PRESENTATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Tobacco Non User",
+      "Mnemonic": "TOBACCO_NON_USER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Underweight",
+      "Mnemonic": "UNDERWEIGHT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Lab Tests for Sexually Transmitted Infections",
+      "Mnemonic": "LAB_TESTS_FOR_SEXUALLY_TRANSMITTED_INFECTIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Atherosclerosis and Peripheral Arterial Disease",
+      "Mnemonic": "ATHEROSCLEROSIS_AND_PERIPHERAL_ARTERIAL_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pervasive Developmental Disorder",
+      "Mnemonic": "PERVASIVE_DEVELOPMENTAL_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Antihypertensives",
+      "Mnemonic": "ANTIHYPERTENSIVES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Lupus",
+      "Mnemonic": "LUPUS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Partial Arthroplasty of Hip",
+      "Mnemonic": "PARTIAL_ARTHROPLASTY_OF_HIP",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Referral or Counseling for Alcohol Consumption",
+      "Mnemonic": "REFERRAL_OR_COUNSELING_FOR_ALCOHOL_CONSUMPTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "COVID 19 Confirmed",
+      "Mnemonic": "COVID_19_CONFIRMED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "BP Diastolic",
+      "Mnemonic": "BP_DIASTOLIC",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Antibiotic Medications for Pharyngitis",
+      "Mnemonic": "ANTIBIOTIC_MEDICATIONS_FOR_PHARYNGITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Primary THA Procedure",
+      "Mnemonic": "PRIMARY_THA_PROCEDURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Allergy to Beta Blocker Therapy",
+      "Mnemonic": "ALLERGY_TO_BETA_BLOCKER_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Genital Herpes",
+      "Mnemonic": "GENITAL_HERPES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Essential Hypertension",
+      "Mnemonic": "ESSENTIAL_HYPERTENSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Desiccated Thyroid Medications",
+      "Mnemonic": "DESICCATED_THYROID_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Central Corneal Ulcer",
+      "Mnemonic": "CENTRAL_CORNEAL_ULCER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Insertion or Replacement of Mechanical Circulatory Assist Device",
+      "Mnemonic": "INSERTION_OR_REPLACEMENT_OF_MECHANICAL_CIRCULATORY_ASSIST_DEVICE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Comorbid Conditions for Respiratory Conditions",
+      "Mnemonic": "COMORBID_CONDITIONS_FOR_RESPIRATORY_CONDITIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Diagnoses Used to Indicate Sexual Activity",
+      "Mnemonic": "DIAGNOSES_USED_TO_INDICATE_SEXUAL_ACTIVITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Standardized Pain Assessment Tool",
+      "Mnemonic": "STANDARDIZED_PAIN_ASSESSMENT_TOOL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "CT Colonography",
+      "Mnemonic": "CT_COLONOGRAPHY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "A1C Lab Test",
+      "Mnemonic": "A1C_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Neuromuscular Disease",
+      "Mnemonic": "NEUROMUSCULAR_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "BP Any",
+      "Mnemonic": "BP_ANY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Beta Blocker Therapy",
+      "Mnemonic": "BETA_BLOCKER_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Other and Unspecified Forms of Chorioretinitis and Retinochoroiditis",
+      "Mnemonic": "OTHER_AND_UNSPECIFIED_FORMS_OF_CHORIORETINITIS_AND_RETINOCHOROIDITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intermittent pneumatic compression devices",
+      "Mnemonic": "INTERMITTENT_PNEUMATIC_COMPRESSION_DEVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "HIV Viral Load",
+      "Mnemonic": "HIV_VIRAL_LOAD",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Heart Failure Cardiac Arrest Related to Procedure or Surgery",
+      "Mnemonic": "HEART_FAILURE_CARDIAC_ARREST_RELATED_TO_PROCEDURE_OR_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Syphilis Tests",
+      "Mnemonic": "SYPHILIS_TESTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Lifestyle Recommendation",
+      "Mnemonic": "LIFESTYLE_RECOMMENDATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Meperidine Medications",
+      "Mnemonic": "MEPERIDINE_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Patient Refusal",
+      "Mnemonic": "PATIENT_REFUSAL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mechanical Ventilation",
+      "Mnemonic": "MECHANICAL_VENTILATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nutrition Care Plan",
+      "Mnemonic": "NUTRITION_CARE_PLAN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Comfort Measures",
+      "Mnemonic": "COMFORT_MEASURES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malignant Bone Disease",
+      "Mnemonic": "MALIGNANT_BONE_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ambulatory",
+      "Mnemonic": "AMBULATORY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intravenous or Intraarterial Thrombolytic tPA Therapy Prior to Arrival",
+      "Mnemonic": "INTRAVENOUS_OR_INTRAARTERIAL_THROMBOLYTIC_TPA_THERAPY_PRIOR_TO_ARRIVAL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Follow Up for Above Normal BMI",
+      "Mnemonic": "FOLLOW_UP_FOR_ABOVE_NORMAL_BMI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "ESRD Monthly Outpatient Services",
+      "Mnemonic": "ESRD_MONTHLY_OUTPATIENT_SERVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Unavailability of Bacillus Calmette Guerin for urology care",
+      "Mnemonic": "UNAVAILABILITY_OF_BACILLUS_CALMETTE_GUERIN_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Outpatient Encounters for Preventive Care",
+      "Mnemonic": "OUTPATIENT_ENCOUNTERS_FOR_PREVENTIVE_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Severe Maternal Morbidity Diagnoses",
+      "Mnemonic": "SEVERE_MATERNAL_MORBIDITY_DIAGNOSES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Level of Severity of Retinopathy Findings",
+      "Mnemonic": "LEVEL_OF_SEVERITY_OF_RETINOPATHY_FINDINGS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bleeding Disorder",
+      "Mnemonic": "BLEEDING_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Benzodiazepines for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_BENZODIAZEPINES_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Severe Maternal Morbidity Procedures",
+      "Mnemonic": "SEVERE_MATERNAL_MORBIDITY_PROCEDURES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute Heart Failure",
+      "Mnemonic": "ACUTE_HEART_FAILURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Uveitis",
+      "Mnemonic": "UVEITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hip Replacement Surgery",
+      "Mnemonic": "HIP_REPLACEMENT_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "INR",
+      "Mnemonic": "INR",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dementia Medications",
+      "Mnemonic": "DEMENTIA_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Outpatient Consultation",
+      "Mnemonic": "OUTPATIENT_CONSULTATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Obesity",
+      "Mnemonic": "OBESITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Status Post Left Mastectomy",
+      "Mnemonic": "STATUS_POST_LEFT_MASTECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Aspartate transaminase lab test",
+      "Mnemonic": "ASPARTATE_TRANSAMINASE_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Subcutaneous route",
+      "Mnemonic": "SUBCUTANEOUS_ROUTE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "ONC Administrative Sex",
+      "Mnemonic": "ONC_ADMINISTRATIVE_SEX",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Medical Reason For Not Providing Treatment",
+      "Mnemonic": "MEDICAL_REASON_FOR_NOT_PROVIDING_TREATMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "History of bilateral mastectomy",
+      "Mnemonic": "HISTORY_OF_BILATERAL_MASTECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hospice Diagnosis",
+      "Mnemonic": "HOSPICE_DIAGNOSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cardiac Pacer",
+      "Mnemonic": "CARDIAC_PACER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Initial Hospital Inpatient Visit",
+      "Mnemonic": "INITIAL_HOSPITAL_INPATIENT_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Colonoscopy",
+      "Mnemonic": "COLONOSCOPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pregnancy Test",
+      "Mnemonic": "PREGNANCY_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dental Caries",
+      "Mnemonic": "DENTAL_CARIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Focal Chorioretinitis and Focal Retinochoroiditis",
+      "Mnemonic": "FOCAL_CHORIORETINITIS_AND_FOCAL_RETINOCHOROIDITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Elective Inpatient Encounter",
+      "Mnemonic": "ELECTIVE_INPATIENT_ENCOUNTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dementia and Mental Degenerations",
+      "Mnemonic": "DEMENTIA_AND_MENTAL_DEGENERATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Tobacco Use Screening",
+      "Mnemonic": "TOBACCO_USE_SCREENING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Double Mastectomy Procedure",
+      "Mnemonic": "DOUBLE_MASTECTOMY_PROC",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Opioid Medication Assisted Treatment (MAT)",
+      "Mnemonic": "OPIOID_MEDICATION_ASSISTED_TREATMENT_(MAT)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Moderate or Severe LVSD",
+      "Mnemonic": "MODERATE_OR_SEVERE_LVSD",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Heart Failure",
+      "Mnemonic": "HEART_FAILURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Measles, Mumps and Rubella (MMR) Vaccine Administered",
+      "Mnemonic": "MEASLES,_MUMPS_AND_RUBELLA_(MMR)_VACCINE_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Estimated Glomerular Filtration Rate",
+      "Mnemonic": "ESTIMATED_GLOMERULAR_FILTRATION_RATE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Encounter Inpatient",
+      "Mnemonic": "ENCOUNTER_INPATIENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "HIV in Pregnancy Childbirth and Puerperium",
+      "Mnemonic": "HIV_IN_PREGNANCY_CHILDBIRTH_AND_PUERPERIUM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pain Warranting Further Investigation for Prostate Cancer",
+      "Mnemonic": "PAIN_WARRANTING_FURTHER_INVESTIGATION_FOR_PROSTATE_CANCER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "ACE Inhibitor or ARB or ARNI",
+      "Mnemonic": "ACE_INHIBITOR_OR_ARB_OR_ARNI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Chronic Malnutrition",
+      "Mnemonic": "CHRONIC_MALNUTRITION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute Peptic Ulcer",
+      "Mnemonic": "ACUTE_PEPTIC_ULCER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Inactivated Polio Vaccine (IPV) Administered",
+      "Mnemonic": "INACTIVATED_POLIO_VACCINE_(IPV)_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Purulent Endophthalmitis",
+      "Mnemonic": "PURULENT_ENDOPHTHALMITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Adolescent Depression Medications",
+      "Mnemonic": "ADOLESCENT_DEPRESSION_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intracranial or Intraspinal surgery",
+      "Mnemonic": "INTRACRANIAL_OR_INTRASPINAL_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Unilateral Oophorectomy, Unspecified Laterality",
+      "Mnemonic": "UNILATERAL_OOPHORECTOMY,_UNSPECIFIED_LATERALITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Body Temperature",
+      "Mnemonic": "BODY_TEMPERATURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Prostate Specific Antigen Test",
+      "Mnemonic": "PROSTATE_SPECIFIC_ANTIGEN_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Behavioral Health Follow up Visit",
+      "Mnemonic": "BEHAVIORAL_HEALTH_FOLLOW_UP_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Routes of Administration for Opioid Antagonists",
+      "Mnemonic": "ROUTES_OF_ADMINISTRATION_FOR_OPIOID_ANTAGONISTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Multiple Myeloma",
+      "Mnemonic": "MULTIPLE_MYELOMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Other Proliferative Retinopathy",
+      "Mnemonic": "OTHER_PROLIFERATIVE_RETINOPATHY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Gastrointestinal Disease",
+      "Mnemonic": "GASTROINTESTINAL_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Breast Cancer Screening",
+      "Mnemonic": "BREAST_CANCER_SCREENING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Choroidal Degenerations",
+      "Mnemonic": "CHOROIDAL_DEGENERATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Knee Replacement Surgery",
+      "Mnemonic": "KNEE_REPLACEMENT_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Allergy to ACE Inhibitor or ARB",
+      "Mnemonic": "ALLERGY_TO_ACE_INHIBITOR_OR_ARB",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Home Healthcare Services",
+      "Mnemonic": "HOME_HEALTHCARE_SERVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Myocardial Infarction",
+      "Mnemonic": "MYOCARDIAL_INFARCTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "COVID 19",
+      "Mnemonic": "COVID_19",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cataract Posterior Polar",
+      "Mnemonic": "CATARACT_POSTERIOR_POLAR",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Osteoporosis With Current Fracture",
+      "Mnemonic": "OSTEOPOROSIS_WITH_CURRENT_FRACTURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Medications for Below Normal BMI",
+      "Mnemonic": "MEDICATIONS_FOR_BELOW_NORMAL_BMI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Renal Disease",
+      "Mnemonic": "RENAL_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Height",
+      "Mnemonic": "HEIGHT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Frailty Symptom",
+      "Mnemonic": "FRAILTY_SYMPTOM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Low Molecular Weight Heparin for VTE Prophylaxis",
+      "Mnemonic": "LOW_MOLECULAR_WEIGHT_HEPARIN_FOR_VTE_PROPHYLAXIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Salvage Therapy",
+      "Mnemonic": "SALVAGE_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potassium Lab Test",
+      "Mnemonic": "POTASSIUM_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intolerance to ACE Inhibitor or ARB",
+      "Mnemonic": "INTOLERANCE_TO_ACE_INHIBITOR_OR_ARB",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hepatitis B Vaccine Administered",
+      "Mnemonic": "HEPATITIS_B_VACCINE_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Air and Thrombotic Embolism",
+      "Mnemonic": "AIR_AND_THROMBOTIC_EMBOLISM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Beta Blocker Therapy Ingredient",
+      "Mnemonic": "BETA_BLOCKER_THERAPY_INGREDIENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Anesthesia Requiring Monitored Care",
+      "Mnemonic": "ANESTHESIA_REQUIRING_MONITORED_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Scleritis",
+      "Mnemonic": "SCLERITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "ED Visit and OB Triage",
+      "Mnemonic": "ED_VISIT_AND_OB_TRIAGE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Congenital or Acquired Absence of Cervix",
+      "Mnemonic": "CONGENITAL_OR_ACQUIRED_ABSENCE_OF_CERVIX",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Anaphylactic Reaction to DTaP Vaccine",
+      "Mnemonic": "ANAPHYLACTIC_REACTION_TO_DTAP_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Pain Medications for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_PAIN_MEDICATIONS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Severe Anesthesia Complications",
+      "Mnemonic": "SEVERE_ANESTHESIA_COMPLICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Disorders of Visual Cortex",
+      "Mnemonic": "DISORDERS_OF_VISUAL_CORTEX",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Severe Preeclampsia",
+      "Mnemonic": "SEVERE_PREECLAMPSIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Active Bleeding Excluding Menses or Bleeding Diathesis",
+      "Mnemonic": "ACTIVE_BLEEDING_EXCLUDING_MENSES_OR_BLEEDING_DIATHESIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Obstetrics VTE",
+      "Mnemonic": "OBSTETRICS_VTE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Disseminated Intravascular Coagulation",
+      "Mnemonic": "DISSEMINATED_INTRAVASCULAR_COAGULATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Advanced Illness",
+      "Mnemonic": "ADVANCED_ILLNESS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Venous Thromboembolism in Pregnancy",
+      "Mnemonic": "VENOUS_THROMBOEMBOLISM_IN_PREGNANCY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hospital Based Dialysis Services",
+      "Mnemonic": "HOSPITAL_BASED_DIALYSIS_SERVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Follow Up Within 6 Months",
+      "Mnemonic": "FOLLOW_UP_WITHIN_6_MONTHS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Major Depressive Disorder Active",
+      "Mnemonic": "MAJOR_DEPRESSIVE_DISORDER_ACTIVE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ophthalmological Services",
+      "Mnemonic": "OPHTHALMOLOGICAL_SERVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cognitive Assessment",
+      "Mnemonic": "COGNITIVE_ASSESSMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Chemotherapy Agents for Advanced Cancer",
+      "Mnemonic": "CHEMOTHERAPY_AGENTS_FOR_ADVANCED_CANCER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hepatitis A Vaccine Administered",
+      "Mnemonic": "HEPATITIS_A_VACCINE_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Schedule IV Benzodiazepines",
+      "Mnemonic": "SCHEDULE_IV_BENZODIAZEPINES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Competing Conditions for Respiratory Conditions",
+      "Mnemonic": "COMPETING_CONDITIONS_FOR_RESPIRATORY_CONDITIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Gonorrhea Screening",
+      "Mnemonic": "GONORRHEA_SCREENING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Atrial Ablation",
+      "Mnemonic": "ATRIAL_ABLATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nutrition Assessment Status Finding of Severely Malnourished",
+      "Mnemonic": "NUTRITION_ASSESSMENT_STATUS_FINDING_OF_SEVERELY_MALNOURISHED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Closed Head and Facial Trauma",
+      "Mnemonic": "CLOSED_HEAD_AND_FACIAL_TRAUMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Chronic Liver Disease",
+      "Mnemonic": "CHRONIC_LIVER_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Frailty Device",
+      "Mnemonic": "FRAILTY_DEVICE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ischemic Heart Disease or Related Diagnoses",
+      "Mnemonic": "ISCHEMIC_HEART_DISEASE_OR_RELATED_DIAGNOSES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "General and Neuraxial Anesthesia",
+      "Mnemonic": "GENERAL_AND_NEURAXIAL_ANESTHESIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ehlers Danlos Syndrome",
+      "Mnemonic": "EHLERS_DANLOS_SYNDROME",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Unilateral Mastectomy Left",
+      "Mnemonic": "UNILATERAL_MASTECTOMY_LEFT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nystagmus and Other Irregular Eye Movements",
+      "Mnemonic": "NYSTAGMUS_AND_OTHER_IRREGULAR_EYE_MOVEMENTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Emergency Department Visit",
+      "Mnemonic": "EMERGENCY_DEPARTMENT_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Morgagnian Cataract",
+      "Mnemonic": "MORGAGNIAN_CATARACT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Narcolepsy",
+      "Mnemonic": "NARCOLEPSY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nutrition Assessment Status Finding of Well Nourished or Not Malnourished or Mildly Malnourished",
+      "Mnemonic": "NUTRITION_ASSESSMENT_STATUS_FINDING_OF_WELL_NOURISHED_OR_NOT_MALNOURISHED_OR_MILDLY_MALNOURISHED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Psych Visit for Family Psychotherapy",
+      "Mnemonic": "PSYCH_VISIT_FOR_FAMILY_PSYCHOTHERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Left Ventricular Assist Device Complications",
+      "Mnemonic": "LEFT_VENTRICULAR_ASSIST_DEVICE_COMPLICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mammography",
+      "Mnemonic": "MAMMOGRAPHY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malignant Intracranial Neoplasm Group",
+      "Mnemonic": "MALIGNANT_INTRACRANIAL_NEOPLASM_GROUP",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Weight",
+      "Mnemonic": "WEIGHT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Antidepressants for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIDEPRESSANTS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Present on Admission is No or Unable To Determine",
+      "Mnemonic": "PRESENT_ON_ADMISSION_IS_NO_OR_UNABLE_TO_DETERMINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "NCQA-Bilateral Mastectomy",
+      "Mnemonic": "NCQA_BILATERAL_MASTECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Detoxification Visit",
+      "Mnemonic": "DETOXIFICATION_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Telephone Visits",
+      "Mnemonic": "TELEPHONE_VISITS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Macular Exam",
+      "Mnemonic": "MACULAR_EXAM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Warfarin",
+      "Mnemonic": "WARFARIN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Corneal Edema",
+      "Mnemonic": "CORNEAL_EDEMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Diagnosis of Hypertension",
+      "Mnemonic": "DIAGNOSIS_OF_HYPERTENSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Long Term Anticoagulant Use",
+      "Mnemonic": "LONG_TERM_ANTICOAGULANT_USE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pharmacological Contraindications For Antithrombotic Therapy",
+      "Mnemonic": "PHARMACOLOGICAL_CONTRAINDICATIONS_FOR_ANTITHROMBOTIC_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Nonbenzodiazepine Hypnotics for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_NONBENZODIAZEPINE_HYPNOTICS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Low Risk",
+      "Mnemonic": "LOW_RISK",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Antiparkinsonian Agents for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIPARKINSONIAN_AGENTS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cloudy Cornea",
+      "Mnemonic": "CLOUDY_CORNEA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cancer Related Pain",
+      "Mnemonic": "CANCER_RELATED_PAIN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Oxygen Saturation by Pulse Oximetry",
+      "Mnemonic": "OXYGEN_SATURATION_BY_PULSE_OXIMETRY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Gastrointestinal Antispasmodics for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_GASTROINTESTINAL_ANTISPASMODICS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Percutaneous Coronary Intervention",
+      "Mnemonic": "PERCUTANEOUS_CORONARY_INTERVENTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Neurologic Movement and Related Disorders",
+      "Mnemonic": "NEUROLOGIC_MOVEMENT_AND_RELATED_DISORDERS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "History of hip fracture in parent",
+      "Mnemonic": "HISTORY_OF_HIP_FRACTURE_IN_PARENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cesarean Birth",
+      "Mnemonic": "CESAREAN_BIRTH",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Platelet Count Lab Test",
+      "Mnemonic": "PLATELET_COUNT_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Sodium Lab Test",
+      "Mnemonic": "SODIUM_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "End Stage Renal Disease",
+      "Mnemonic": "END_STAGE_RENAL_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malabsorption Syndromes",
+      "Mnemonic": "MALABSORPTION_SYNDROMES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Aromatase Inhibitors",
+      "Mnemonic": "AROMATASE_INHIBITORS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Osteopenia",
+      "Mnemonic": "OSTEOPENIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Varicella Zoster",
+      "Mnemonic": "VARICELLA_ZOSTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hypoglycemics Severe Hypoglycemia",
+      "Mnemonic": "HYPOGLYCEMICS_SEVERE_HYPOGLYCEMIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dexmethylphenidate",
+      "Mnemonic": "DEXMETHYLPHENIDATE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "ewrwer",
+      "Mnemonic": "EWRWER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Severe Combined Immunodeficiency",
+      "Mnemonic": "SEVERE_COMBINED_IMMUNODEFICIENCY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Sickle Cell Disease with Crisis",
+      "Mnemonic": "SICKLE_CELL_DISEASE_WITH_CRISIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "BP Systolic",
+      "Mnemonic": "BP_SYSTOLIC",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute or Persistent Asthma",
+      "Mnemonic": "ACUTE_OR_PERSISTENT_ASTHMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Left Ventricular Assist Device Placement",
+      "Mnemonic": "LEFT_VENTRICULAR_ASSIST_DEVICE_PLACEMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Present On Admission is Yes or Exempt",
+      "Mnemonic": "PRESENT_ON_ADMISSION_IS_YES_OR_EXEMPT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hypoglycemics Treatment Medications",
+      "Mnemonic": "HYPOGLYCEMICS_TREATMENT_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Tobacco Use Cessation Counseling",
+      "Mnemonic": "TOBACCO_USE_CESSATION_COUNSELING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Tracheostomy Diagnoses",
+      "Mnemonic": "TRACHEOSTOMY_DIAGNOSES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Total Colectomy",
+      "Mnemonic": "TOTAL_COLECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Prostate Cancer",
+      "Mnemonic": "PROSTATE_CANCER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "History of Atrial Ablation",
+      "Mnemonic": "HISTORY_OF_ATRIAL_ABLATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Retinal Detachment with Retinal Defect",
+      "Mnemonic": "RETINAL_DETACHMENT_WITH_RETINAL_DEFECT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Encounter to Document Medications",
+      "Mnemonic": "ENCOUNTER_TO_DOCUMENT_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Lisdexamfetamine",
+      "Mnemonic": "LISDEXAMFETAMINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Coronary Artery Disease No MI",
+      "Mnemonic": "CORONARY_ARTERY_DISEASE_NO_MI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Referral to Primary Care or Alternate Provider",
+      "Mnemonic": "REFERRAL_TO_PRIMARY_CARE_OR_ALTERNATE_PROVIDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Unfractionated Heparin",
+      "Mnemonic": "UNFRACTIONATED_HEPARIN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intubation",
+      "Mnemonic": "INTUBATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Diagnostic Studies During Pregnancy",
+      "Mnemonic": "DIAGNOSTIC_STUDIES_DURING_PREGNANCY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Discharge Services Hospital Inpatient Same Day Discharge",
+      "Mnemonic": "DISCHARGE_SERVICES_HOSPITAL_INPATIENT_SAME_DAY_DISCHARGE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Leukocyte count lab test",
+      "Mnemonic": "LEUKOCYTE_COUNT_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Posterior Lenticonus",
+      "Mnemonic": "POSTERIOR_LENTICONUS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Frailty Encounter",
+      "Mnemonic": "FRAILTY_ENCOUNTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Non Invasive Oxygen Therapy by Nasal Cannula or Mask",
+      "Mnemonic": "NON_INVASIVE_OXYGEN_THERAPY_BY_NASAL_CANNULA_OR_MASK",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Standardized Tools Score for Assessment of Cognition",
+      "Mnemonic": "STANDARDIZED_TOOLS_SCORE_FOR_ASSESSMENT_OF_COGNITION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Care Services in Long Term Residential Facility",
+      "Mnemonic": "CARE_SERVICES_IN_LONG_TERM_RESIDENTIAL_FACILITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Immunosuppressive Drugs for Urology Care",
+      "Mnemonic": "IMMUNOSUPPRESSIVE_DRUGS_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Opioid Use Disorder",
+      "Mnemonic": "OPIOID_USE_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "High Risk Diagnosis for AKI",
+      "Mnemonic": "HIGH_RISK_DIAGNOSIS_FOR_AKI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Observation Services",
+      "Mnemonic": "OBSERVATION_SERVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Diabetic Macular Edema",
+      "Mnemonic": "DIABETIC_MACULAR_EDEMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Placenta Accreta",
+      "Mnemonic": "PLACENTA_ACCRETA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cardiopulmonary Arrest",
+      "Mnemonic": "CARDIOPULMONARY_ARREST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Marfan's Syndrome",
+      "Mnemonic": "MARFAN'S_SYNDROME",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cataract Mature or Hypermature",
+      "Mnemonic": "CATARACT_MATURE_OR_HYPERMATURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Albumin lab test",
+      "Mnemonic": "ALBUMIN_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Substance Use Disorder Short Acting Medication Administration",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_SHORT_ACTING_MEDICATION_ADMINISTRATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Megestrol Medications",
+      "Mnemonic": "MEGESTROL_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Major Depression",
+      "Mnemonic": "MAJOR_DEPRESSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Group A Streptococcus Test",
+      "Mnemonic": "GROUP_A_STREPTOCOCCUS_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "37 to 42 Plus Weeks Gestation",
+      "Mnemonic": "37_TO_42_PLUS_WEEKS_GESTATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Digoxin Medications",
+      "Mnemonic": "DIGOXIN_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Present on Admission or Clinically Undetermined",
+      "Mnemonic": "PRESENT_ON_ADMISSION_OR_CLINICALLY_UNDETERMINED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute Pharyngitis",
+      "Mnemonic": "ACUTE_PHARYNGITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hemorrhagic Stroke",
+      "Mnemonic": "HEMORRHAGIC_STROKE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Patient Expired",
+      "Mnemonic": "PATIENT_EXPIRED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Rubella",
+      "Mnemonic": "RUBELLA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Placental Abruption",
+      "Mnemonic": "PLACENTAL_ABRUPTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pressure Injury Deep Tissue",
+      "Mnemonic": "PRESSURE_INJURY_DEEP_TISSUE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "ASA physical status class",
+      "Mnemonic": "ASA_PHYSICAL_STATUS_CLASS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Inpatient Falls",
+      "Mnemonic": "INPATIENT_FALLS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Lab Tests During Pregnancy",
+      "Mnemonic": "LAB_TESTS_DURING_PREGNANCY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Estimated Gestational Age at Delivery",
+      "Mnemonic": "ESTIMATED_GESTATIONAL_AGE_AT_DELIVERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Major Transplant",
+      "Mnemonic": "MAJOR_TRANSPLANT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Schizophrenia",
+      "Mnemonic": "SCHIZOPHRENIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mental Behavioral and Neurodevelopmental Disorders",
+      "Mnemonic": "MENTAL_BEHAVIORAL_AND_NEURODEVELOPMENTAL_DISORDERS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Face-to-Face Interaction",
+      "Mnemonic": "FACE-TO-FACE_INTERACTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Application of Graduated Compression Stockings",
+      "Mnemonic": "APPLICATION_OF_GRADUATED_COMPRESSION_STOCKINGS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Fecal Occult Blood Test (FOBT)",
+      "Mnemonic": "FECAL_OCCULT_BLOOD_TEST_(FOBT)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Atrioventricular Block",
+      "Mnemonic": "ATRIOVENTRICULAR_BLOCK",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Other Endophthalmitis",
+      "Mnemonic": "OTHER_ENDOPHTHALMITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intolerance to Beta Blocker Therapy",
+      "Mnemonic": "INTOLERANCE_TO_BETA_BLOCKER_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Preventive Care Services Individual Counseling",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES_INDIVIDUAL_COUNSELING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Chlamydia Screening",
+      "Mnemonic": "CHLAMYDIA_SCREENING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Psychotherapy and Pharmacologic Management",
+      "Mnemonic": "PSYCHOTHERAPY_AND_PHARMACOLOGIC_MANAGEMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malignant Neoplasm of Colon",
+      "Mnemonic": "MALIGNANT_NEOPLASM_OF_COLON",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dietary Recommendations",
+      "Mnemonic": "DIETARY_RECOMMENDATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Chronic Iridocyclitis",
+      "Mnemonic": "CHRONIC_IRIDOCYCLITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pathologic Myopia",
+      "Mnemonic": "PATHOLOGIC_MYOPIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "LDL Cholesterol",
+      "Mnemonic": "LDL_CHOLESTEROL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pressure Injury Stage 2, 3, 4 or Unstageable",
+      "Mnemonic": "PRESSURE_INJURY_STAGE_2,_3,_4_OR_UNSTAGEABLE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Aortic Aneurysm",
+      "Mnemonic": "AORTIC_ANEURYSM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malignant Neoplasm of Lymphatic and Hematopoietic Tissue",
+      "Mnemonic": "MALIGNANT_NEOPLASM_OF_LYMPHATIC_AND_HEMATOPOIETIC_TISSUE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Glaucoma Associated with Congenital Anomalies and Dystrophies and Systemic Syndromes",
+      "Mnemonic": "GLAUCOMA_ASSOCIATED_WITH_CONGENITAL_ANOMALIES_AND_DYSTROPHIES_AND_SYSTEMIC_SYNDROMES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Morbid Obesity",
+      "Mnemonic": "MORBID_OBESITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "CABG or PCI Procedure",
+      "Mnemonic": "CABG_OR_PCI_PROCEDURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malnutrition Diagnosis",
+      "Mnemonic": "MALNUTRITION_DIAGNOSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Fluoride Varnish Application for Children",
+      "Mnemonic": "FLUORIDE_VARNISH_APPLICATION_FOR_CHILDREN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Lower Body Fractures Excluding Ankle and Foot",
+      "Mnemonic": "LOWER_BODY_FRACTURES_EXCLUDING_ANKLE_AND_FOOT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Amniotic Fluid Embolism",
+      "Mnemonic": "AMNIOTIC_FLUID_EMBOLISM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Carotid Intervention",
+      "Mnemonic": "CAROTID_INTERVENTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Eating Disorders",
+      "Mnemonic": "EATING_DISORDERS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Initial Myocardial Infarction",
+      "Mnemonic": "INITIAL_MYOCARDIAL_INFARCTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malnutrition Screening Finding of Not At Risk Result",
+      "Mnemonic": "MALNUTRITION_SCREENING_FINDING_OF_NOT_AT_RISK_RESULT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nifedipine Medications",
+      "Mnemonic": "NIFEDIPINE_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Adult Depression Medications",
+      "Mnemonic": "ADULT_DEPRESSION_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Antibiotic Medications for Upper Respiratory Infection",
+      "Mnemonic": "ANTIBIOTIC_MEDICATIONS_FOR_UPPER_RESPIRATORY_INFECTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care",
+      "Mnemonic": "DEXA_DUAL_ENERGY_XRAY_ABSORPTIOMETRY,_BONE_DENSITY_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "High Intensity Statin Therapy",
+      "Mnemonic": "HIGH_INTENSITY_STATIN_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pregnant State",
+      "Mnemonic": "PREGNANT_STATE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Central Nervous System Depressants",
+      "Mnemonic": "CENTRAL_NERVOUS_SYSTEM_DEPRESSANTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Referrals Where Weight Assessment May Occur",
+      "Mnemonic": "REFERRALS_WHERE_WEIGHT_ASSESSMENT_MAY_OCCUR",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Macular Edema Findings Present",
+      "Mnemonic": "MACULAR_EDEMA_FINDINGS_PRESENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hospice Care Referral or Admission",
+      "Mnemonic": "HOSPICE_CARE_REFERRAL_OR_ADMISSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Obstetrical or Pregnancy Related Conditions",
+      "Mnemonic": "OBSTETRICAL_OR_PREGNANCY_RELATED_CONDITIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cystectomy for Urology Care",
+      "Mnemonic": "CYSTECTOMY_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Doxepin Medications",
+      "Mnemonic": "DOXEPIN_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Certain Types of Iridocyclitis",
+      "Mnemonic": "CERTAIN_TYPES_OF_IRIDOCYCLITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Recommendation to Increase Physical Activity",
+      "Mnemonic": "RECOMMENDATION_TO_INCREASE_PHYSICAL_ACTIVITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Complications of Pregnancy, Childbirth and the Puerperium",
+      "Mnemonic": "COMPLICATIONS_OF_PREGNANCY,_CHILDBIRTH_AND_THE_PUERPERIUM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Epilepsy",
+      "Mnemonic": "EPILEPSY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Other Disorders of Optic Nerve",
+      "Mnemonic": "OTHER_DISORDERS_OF_OPTIC_NERVE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hib Vaccine (4 dose schedule)",
+      "Mnemonic": "HIB_VACCINE_(4_DOSE_SCHEDULE)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Procedural Hospital Locations",
+      "Mnemonic": "PROCEDURAL_HOSPITAL_LOCATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute Respiratory Distress Syndrome",
+      "Mnemonic": "ACUTE_RESPIRATORY_DISTRESS_SYNDROME",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "NCQA - HBA1C",
+      "Mnemonic": "NCQA_HBA1C",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Sepsis",
+      "Mnemonic": "SEPSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Oxygen Partial Pressure in Arterial Blood",
+      "Mnemonic": "OXYGEN_PARTIAL_PRESSURE_IN_ARTERIAL_BLOOD",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Personality Disorder Emotionally Labile",
+      "Mnemonic": "PERSONALITY_DISORDER_EMOTIONALLY_LABILE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Respiratory Support Procedures Related to COVID 19",
+      "Mnemonic": "RESPIRATORY_SUPPORT_PROCEDURES_RELATED_TO_COVID_19",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hereditary Choroidal Dystrophies",
+      "Mnemonic": "HEREDITARY_CHOROIDAL_DYSTROPHIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bone Scan",
+      "Mnemonic": "BONE_SCAN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Degenerative Disorders of Globe",
+      "Mnemonic": "DEGENERATIVE_DISORDERS_OF_GLOBE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Sulfonylureas for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_SULFONYLUREAS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Moderate Intensity Statin Therapy",
+      "Mnemonic": "MODERATE_INTENSITY_STATIN_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Creatinine Mass Per Volume",
+      "Mnemonic": "CREATININE_MASS_PER_VOLUME",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Best Corrected Visual Acuity Exam Using Snellen Chart",
+      "Mnemonic": "BEST_CORRECTED_VISUAL_ACUITY_EXAM_USING_SNELLEN_CHART",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Schedule II, III and IV Opioid Medications",
+      "Mnemonic": "SCHEDULE_II,_III_AND_IV_OPIOID_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "HPV Test",
+      "Mnemonic": "HPV_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Graduated compression stockings",
+      "Mnemonic": "GRADUATED_COMPRESSION_STOCKINGS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Disorders of Optic Chiasm",
+      "Mnemonic": "DISORDERS_OF_OPTIC_CHIASM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Kidney Transplant Recipient",
+      "Mnemonic": "KIDNEY_TRANSPLANT_RECIPIENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Psych Visit Diagnostic Evaluation",
+      "Mnemonic": "PSYCH_VISIT_DIAGNOSTIC_EVALUATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Inactivated Polio Vaccine (IPV)",
+      "Mnemonic": "INACTIVATED_POLIO_VACCINE_(IPV)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cardiac Pacer in Situ",
+      "Mnemonic": "CARDIAC_PACER_IN_SITU",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Burn Confined to Eye and Adnexa",
+      "Mnemonic": "BURN_CONFINED_TO_EYE_AND_ADNEXA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hysterectomy",
+      "Mnemonic": "HYSTERECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Degenerative Neurological Disorder",
+      "Mnemonic": "DEGENERATIVE_NEUROLOGICAL_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Medications for Opioid Use Disorder (MOUD)",
+      "Mnemonic": "MEDICATIONS_FOR_OPIOID_USE_DISORDER_(MOUD)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Unilateral Oophorectomy Right",
+      "Mnemonic": "UNILATERAL_OOPHORECTOMY_RIGHT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Oral Anticoagulant Medications",
+      "Mnemonic": "ORAL_ANTICOAGULANT_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Injury to Optic Nerve and Pathways",
+      "Mnemonic": "INJURY_TO_OPTIC_NERVE_AND_PATHWAYS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Antihistamines for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIHISTAMINES_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hepatitis B Vaccine",
+      "Mnemonic": "HEPATITIS_B_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Virtual Encounter",
+      "Mnemonic": "VIRTUAL_ENCOUNTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nutrition Services",
+      "Mnemonic": "NUTRITION_SERVICES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mild or Moderate Preeclampsia",
+      "Mnemonic": "MILD_OR_MODERATE_PREECLAMPSIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Traumatic Cataract",
+      "Mnemonic": "TRAUMATIC_CATARACT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "ACE Inhibitor or ARB or ARNI Ingredient",
+      "Mnemonic": "ACE_INHIBITOR_OR_ARB_OR_ARNI_INGREDIENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Substance Use Disorder Treatment",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_TREATMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Delirium or Dementia and Other Psychoses",
+      "Mnemonic": "DELIRIUM_OR_DEMENTIA_AND_OTHER_PSYCHOSES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Laboratory Tests for Hypertension",
+      "Mnemonic": "LABORATORY_TESTS_FOR_HYPERTENSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Prior Penetrating Keratoplasty",
+      "Mnemonic": "PRIOR_PENETRATING_KERATOPLASTY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Anticoagulant Therapy",
+      "Mnemonic": "ANTICOAGULANT_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Glaucoma",
+      "Mnemonic": "GLAUCOMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Stable and Unstable Angina",
+      "Mnemonic": "STABLE_AND_UNSTABLE_ANGINA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Radiation Treatment Management",
+      "Mnemonic": "RADIATION_TREATMENT_MANAGEMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Eclampsia",
+      "Mnemonic": "ECLAMPSIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Removal, Revision and Supplement Procedures of the Lower Body and Spine",
+      "Mnemonic": "REMOVAL,_REVISION_AND_SUPPLEMENT_PROCEDURES_OF_THE_LOWER_BODY_AND_SPINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Medical Disability Exam",
+      "Mnemonic": "MEDICAL_DISABILITY_EXAM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "DTaP Vaccine",
+      "Mnemonic": "DTAP_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Retinal Vascular Occlusion",
+      "Mnemonic": "RETINAL_VASCULAR_OCCLUSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "NCQA - Valid Colorectal Screening Codes",
+      "Mnemonic": "NCQA_VALID_COLORECTAL_SCREENING_CODES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Patient Provider Interaction",
+      "Mnemonic": "PATIENT_PROVIDER_INTERACTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Medicare Advantage Payer",
+      "Mnemonic": "MEDICARE_ADVANTAGE_PAYER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Unilateral Oophorectomy Left",
+      "Mnemonic": "UNILATERAL_OOPHORECTOMY_LEFT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hysterectomy with No Residual Cervix",
+      "Mnemonic": "HYSTERECTOMY_WITH_NO_RESIDUAL_CERVIX",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Palliative Care Encounter",
+      "Mnemonic": "PALLIATIVE_CARE_ENCOUNTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Coagulation Disorders",
+      "Mnemonic": "COAGULATION_DISORDERS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Systolic Blood Pressure",
+      "Mnemonic": "SYSTOLIC_BLOOD_PRESSURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hepatitis A Vaccine",
+      "Mnemonic": "HEPATITIS_A_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Glucocorticoids (oral only)",
+      "Mnemonic": "GLUCOCORTICOIDS_(ORAL_ONLY)",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pneumococcal Conjugate Vaccine Administered",
+      "Mnemonic": "PNEUMOCOCCAL_CONJUGATE_VACCINE_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pneumococcal Conjugate Vaccine",
+      "Mnemonic": "PNEUMOCOCCAL_CONJUGATE_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bilateral Mastectomy",
+      "Mnemonic": "BILATERAL_MASTECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cup to Disc Ratio",
+      "Mnemonic": "CUP_TO_DISC_RATIO",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hypotension",
+      "Mnemonic": "HYPOTENSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Fibrinolytic Therapy",
+      "Mnemonic": "FIBRINOLYTIC_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Low Dose Unfractionated Heparin for VTE Prophylaxis",
+      "Mnemonic": "LOW_DOSE_UNFRACTIONATED_HEPARIN_FOR_VTE_PROPHYLAXIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bone Marrow Transplant",
+      "Mnemonic": "BONE_MARROW_TRANSPLANT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Follow Up for Adolescent Depression",
+      "Mnemonic": "FOLLOW_UP_FOR_ADOLESCENT_DEPRESSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pharmacologic Therapy for Hypertension",
+      "Mnemonic": "PHARMACOLOGIC_THERAPY_FOR_HYPERTENSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Major Surgical Procedure",
+      "Mnemonic": "MAJOR_SURGICAL_PROCEDURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Depression",
+      "Mnemonic": "DEPRESSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Measles",
+      "Mnemonic": "MEASLES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cataract Congenital",
+      "Mnemonic": "CATARACT_CONGENITAL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Referral for Adult Depression",
+      "Mnemonic": "REFERRAL_FOR_ADULT_DEPRESSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "BV new value set new marts",
+      "Mnemonic": "BV_NEW_VALUE_SET_NEW_MARTS",
+      "ContentSetTypeMnemonic": "VALUE_SET",
+      "ModelMnemonic": "PAT_CLINICAL_FDA_DEX"
+    },
+    {
+      "Name": "Neuromuscular Disorder",
+      "Mnemonic": "NEUROMUSCULAR_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Rhabdomyolysis",
+      "Mnemonic": "RHABDOMYOLYSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Disseminated Chorioretinitis and Disseminated Retinochoroiditis",
+      "Mnemonic": "DISSEMINATED_CHORIORETINITIS_AND_DISSEMINATED_RETINOCHOROIDITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cataract Secondary to Ocular Disorders",
+      "Mnemonic": "CATARACT_SECONDARY_TO_OCULAR_DISORDERS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Seizure Disorder",
+      "Mnemonic": "SEIZURE_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pulmonary Edema",
+      "Mnemonic": "PULMONARY_EDEMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Premature Menopause",
+      "Mnemonic": "PREMATURE_MENOPAUSE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Weight Reduction Recommended",
+      "Mnemonic": "WEIGHT_REDUCTION_RECOMMENDED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Gestational Diabetes",
+      "Mnemonic": "GESTATIONAL_DIABETES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Heart Rate 2025",
+      "Mnemonic": "HEART_RATE_2025",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Rivaroxaban for VTE Prophylaxis",
+      "Mnemonic": "RIVAROXABAN_FOR_VTE_PROPHYLAXIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Diabetic Retinopathy",
+      "Mnemonic": "DIABETIC_RETINOPATHY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Stroke",
+      "Mnemonic": "STROKE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Substance Abuse",
+      "Mnemonic": "SUBSTANCE_ABUSE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Annual Wellness Visit",
+      "Mnemonic": "ANNUAL_WELLNESS_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Delivery of Singleton",
+      "Mnemonic": "DELIVERY_OF_SINGLETON",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Osteoporosis",
+      "Mnemonic": "OSTEOPOROSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Open Wound of Eyeball",
+      "Mnemonic": "OPEN_WOUND_OF_EYEBALL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pap Test",
+      "Mnemonic": "PAP_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malignant Neoplasms of Lower and Unspecified Limbs",
+      "Mnemonic": "MALIGNANT_NEOPLASMS_OF_LOWER_AND_UNSPECIFIED_LIMBS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Discharge Services Hospital Inpatient",
+      "Mnemonic": "DISCHARGE_SERVICES_HOSPITAL_INPATIENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cardiac Disease",
+      "Mnemonic": "CARDIAC_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Neurologic impairment",
+      "Mnemonic": "NEUROLOGIC_IMPAIRMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Atomoxetine",
+      "Mnemonic": "ATOMOXETINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Puerperal Cerebrovascular Disorder",
+      "Mnemonic": "PUERPERAL_CEREBROVASCULAR_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mental Health Diagnoses",
+      "Mnemonic": "MENTAL_HEALTH_DIAGNOSES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Separation of Retinal Layers",
+      "Mnemonic": "SEPARATION_OF_RETINAL_LAYERS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hereditary Retinal Dystrophies",
+      "Mnemonic": "HEREDITARY_RETINAL_DYSTROPHIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Diabetes",
+      "Mnemonic": "DIABETES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Medications for Above Normal BMI",
+      "Mnemonic": "MEDICATIONS_FOR_ABOVE_NORMAL_BMI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Tracheostomy Procedures",
+      "Mnemonic": "TRACHEOSTOMY_PROCEDURES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Antithrombotic Therapy for Ischemic Stroke",
+      "Mnemonic": "ANTITHROMBOTIC_THERAPY_FOR_ISCHEMIC_STROKE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Sickle Cell Disease with and without Crisis",
+      "Mnemonic": "SICKLE_CELL_DISEASE_WITH_AND_WITHOUT_CRISIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Statin Allergen",
+      "Mnemonic": "STATIN_ALLERGEN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Multiple Pregnancy",
+      "Mnemonic": "MULTIPLE_PREGNANCY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Discharge To Acute Care Facility",
+      "Mnemonic": "DISCHARGE_TO_ACUTE_CARE_FACILITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Patient Reason for ACE Inhibitor or ARB Decline",
+      "Mnemonic": "PATIENT_REASON_FOR_ACE_INHIBITOR_OR_ARB_DECLINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Referral for Adolescent Depression",
+      "Mnemonic": "REFERRAL_FOR_ADOLESCENT_DEPRESSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Other Background Retinopathy and Retinal Vascular Changes",
+      "Mnemonic": "OTHER_BACKGROUND_RETINOPATHY_AND_RETINAL_VASCULAR_CHANGES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ischemic Stroke",
+      "Mnemonic": "ISCHEMIC_STROKE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Counseling for Nutrition",
+      "Mnemonic": "COUNSELING_FOR_NUTRITION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Meprobamate Medications",
+      "Mnemonic": "MEPROBAMATE_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Autoimmune Disease",
+      "Mnemonic": "AUTOIMMUNE_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Falls Screening",
+      "Mnemonic": "FALLS_SCREENING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Not Present On Admission or Documentation Insufficient to Determine",
+      "Mnemonic": "NOT_PRESENT_ON_ADMISSION_OR_DOCUMENTATION_INSUFFICIENT_TO_DETERMINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Amblyopia",
+      "Mnemonic": "AMBLYOPIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Retinal or Dilated Eye Exam",
+      "Mnemonic": "RETINAL_OR_DILATED_EYE_EXAM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Oral Factor Xa Inhibitor for VTE Prophylaxis or VTE Treatment",
+      "Mnemonic": "ORAL_FACTOR_XA_INHIBITOR_FOR_VTE_PROPHYLAXIS_OR_VTE_TREATMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nutrition Assessment",
+      "Mnemonic": "NUTRITION_ASSESSMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mental Health Disorder",
+      "Mnemonic": "MENTAL_HEALTH_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Substance Use Disorder Short Acting Medication",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_SHORT_ACTING_MEDICATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Glucose Lab Test",
+      "Mnemonic": "GLUCOSE_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute Respiratory Failure",
+      "Mnemonic": "ACUTE_RESPIRATORY_FAILURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Asthma",
+      "Mnemonic": "ASTHMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Optic Atrophy",
+      "Mnemonic": "OPTIC_ATROPHY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Thrombolytic tPA Therapy",
+      "Mnemonic": "THROMBOLYTIC_TPA_THERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Opioid Antagonist",
+      "Mnemonic": "OPIOID_ANTAGONIST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "REM Sleep Behavior Disorder",
+      "Mnemonic": "REM_SLEEP_BEHAVIOR_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "General Surgery",
+      "Mnemonic": "GENERAL_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bariatric Surgery",
+      "Mnemonic": "BARIATRIC_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Child Influenza Vaccine",
+      "Mnemonic": "CHILD_INFLUENZA_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Counseling for Physical Activity",
+      "Mnemonic": "COUNSELING_FOR_PHYSICAL_ACTIVITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "PHQ 9 and PHQ 9M Tools",
+      "Mnemonic": "PHQ_9_AND_PHQ_9M_TOOLS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Optic Disc Exam for Structural Abnormalities",
+      "Mnemonic": "OPTIC_DISC_EXAM_FOR_STRUCTURAL_ABNORMALITIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Left Against Medical Advice",
+      "Mnemonic": "LEFT_AGAINST_MEDICAL_ADVICE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malnutrition Risk Screening",
+      "Mnemonic": "MALNUTRITION_RISK_SCREENING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Liver Disease Moderate to Severe",
+      "Mnemonic": "LIVER_DISEASE_MODERATE_TO_SEVERE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Psych Visit Psychotherapy",
+      "Mnemonic": "PSYCH_VISIT_PSYCHOTHERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hospice Encounter",
+      "Mnemonic": "HOSPICE_ENCOUNTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Influenza Virus LAIV Vaccine",
+      "Mnemonic": "INFLUENZA_VIRUS_LAIV_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Placenta Accreta Spectrum Previa or Vasa Previa",
+      "Mnemonic": "PLACENTA_ACCRETA_SPECTRUM_PREVIA_OR_VASA_PREVIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Leukemia or Lymphoma",
+      "Mnemonic": "LEUKEMIA_OR_LYMPHOMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Patient Declined",
+      "Mnemonic": "PATIENT_DECLINED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Heart Transplant Complications",
+      "Mnemonic": "HEART_TRANSPLANT_COMPLICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Vascular Disorders of Iris and Ciliary Body",
+      "Mnemonic": "VASCULAR_DISORDERS_OF_IRIS_AND_CILIARY_BODY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "General or Neuraxial Anesthesia",
+      "Mnemonic": "GENERAL_OR_NEURAXIAL_ANESTHESIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Primary Open Angle Glaucoma",
+      "Mnemonic": "PRIMARY_OPEN_ANGLE_GLAUCOMA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Palliative Care Intervention",
+      "Mnemonic": "PALLIATIVE_CARE_INTERVENTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Clinical Oral Evaluation",
+      "Mnemonic": "CLINICAL_ORAL_EVALUATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Preventive Care, Established Office Visit, 0 to 17",
+      "Mnemonic": "PREVENTIVE_CARE,_ESTABLISHED_OFFICE_VISIT,_0_TO_17",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Urological Surgery",
+      "Mnemonic": "UROLOGICAL_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hypotony of Eye",
+      "Mnemonic": "HYPOTONY_OF_EYE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Patient Reason",
+      "Mnemonic": "PATIENT_REASON",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Consultant Report",
+      "Mnemonic": "CONSULTANT_REPORT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "HbA1c Laboratory Test",
+      "Mnemonic": "HBA1C_LABORATORY_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Discharged to Health Care Facility for Hospice Care",
+      "Mnemonic": "DISCHARGED_TO_HEALTH_CARE_FACILITY_FOR_HOSPICE_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Visual Acuity 20\/40 or Better",
+      "Mnemonic": "VISUAL_ACUITY_20\/40_OR_BETTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Respiratory Conditions Related to COVID 19",
+      "Mnemonic": "RESPIRATORY_CONDITIONS_RELATED_TO_COVID_19",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Injectable Factor Xa Inhibitor for VTE Prophylaxis",
+      "Mnemonic": "INJECTABLE_FACTOR_XA_INHIBITOR_FOR_VTE_PROPHYLAXIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intracranial Neurosurgery",
+      "Mnemonic": "INTRACRANIAL_NEUROSURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Venous foot pumps",
+      "Mnemonic": "VENOUS_FOOT_PUMPS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Creatinine Lab Test",
+      "Mnemonic": "CREATININE_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute Tonsillitis",
+      "Mnemonic": "ACUTE_TONSILLITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Encounter to Screen for Depression",
+      "Mnemonic": "ENCOUNTER_TO_SCREEN_FOR_DEPRESSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Unilateral Mastectomy, Unspecified Laterality",
+      "Mnemonic": "UNILATERAL_MASTECTOMY,_UNSPECIFIED_LATERALITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Finding of Elevated Blood Pressure or Hypertension",
+      "Mnemonic": "FINDING_OF_ELEVATED_BLOOD_PRESSURE_OR_HYPERTENSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Prostate Cancer Treatment",
+      "Mnemonic": "PROSTATE_CANCER_TREATMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Urine Albumin Creatinine Ratio",
+      "Mnemonic": "URINE_ALBUMIN_CREATININE_RATIO",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Economic Housing Instability",
+      "Mnemonic": "ECONOMIC_HOUSING_INSTABILITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dementia and Related Intracranial Pathologies",
+      "Mnemonic": "DEMENTIA_AND_RELATED_INTRACRANIAL_PATHOLOGIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Influenza Virus LAIV Vaccine Administered",
+      "Mnemonic": "INFLUENZA_VIRUS_LAIV_VACCINE_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "STEMI",
+      "Mnemonic": "STEMI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Familial Hypercholesterolemia",
+      "Mnemonic": "FAMILIAL_HYPERCHOLESTEROLEMIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Overweight or Obese",
+      "Mnemonic": "OVERWEIGHT_OR_OBESE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bilirubin lab test",
+      "Mnemonic": "BILIRUBIN_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Moderate Injuries",
+      "Mnemonic": "MODERATE_INJURIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute Renal Failure",
+      "Mnemonic": "ACUTE_RENAL_FAILURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Anemia",
+      "Mnemonic": "ANEMIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cataract Surgery",
+      "Mnemonic": "CATARACT_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Tracheostomy",
+      "Mnemonic": "TRACHEOSTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Antidepressants",
+      "Mnemonic": "ANTIDEPRESSANTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "White Blood Cells Count Lab Test",
+      "Mnemonic": "WHITE_BLOOD_CELLS_COUNT_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Degeneration of Macula and Posterior Pole",
+      "Mnemonic": "DEGENERATION_OF_MACULA_AND_POSTERIOR_POLE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Thrombolytic medications",
+      "Mnemonic": "THROMBOLYTIC_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Rotavirus Vaccine (2 dose schedule) Administered",
+      "Mnemonic": "ROTAVIRUS_VACCINE_(2_DOSE_SCHEDULE)_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hospice Care Ambulatory",
+      "Mnemonic": "HOSPICE_CARE_AMBULATORY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ejection Fraction",
+      "Mnemonic": "EJECTION_FRACTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ethnicity",
+      "Mnemonic": "ETHNICITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "DTaP Vaccine Administered",
+      "Mnemonic": "DTAP_VACCINE_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Substance Use Disorder Long Acting Medication Administration",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_LONG_ACTING_MEDICATION_ADMINISTRATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Varicella Zoster Vaccine (VZV) Administered",
+      "Mnemonic": "VARICELLA_ZOSTER_VACCINE_(VZV)_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hereditary Corneal Dystrophies",
+      "Mnemonic": "HEREDITARY_CORNEAL_DYSTROPHIES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cardiac Surgery",
+      "Mnemonic": "CARDIAC_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Rheumatoid Arthritis",
+      "Mnemonic": "RHEUMATOID_ARTHRITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cancer",
+      "Mnemonic": "CANCER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Choroidal Hemorrhage and Rupture",
+      "Mnemonic": "CHOROIDAL_HEMORRHAGE_AND_RUPTURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Substance Use Disorder Long Acting Medication",
+      "Mnemonic": "SUBSTANCE_USE_DISORDER_LONG_ACTING_MEDICATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Amenorrhea",
+      "Mnemonic": "AMENORRHEA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Smoking status",
+      "Mnemonic": "SMOKING_STATUS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Palliative Care Diagnosis",
+      "Mnemonic": "PALLIATIVE_CARE_DIAGNOSIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dextroamphetamine",
+      "Mnemonic": "DEXTROAMPHETAMINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Encounter to Evaluate BMI",
+      "Mnemonic": "ENCOUNTER_TO_EVALUATE_BMI",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Evidence of Bilateral Oophorectomy",
+      "Mnemonic": "EVIDENCE_OF_BILATERAL_OOPHORECTOMY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Alcohol Withdrawal",
+      "Mnemonic": "ALCOHOL_WITHDRAWAL",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Androgen deprivation therapy for Urology Care",
+      "Mnemonic": "ANDROGEN_DEPRIVATION_THERAPY_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Osteogenesis Imperfecta",
+      "Mnemonic": "OSTEOGENESIS_IMPERFECTA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Child Influenza Vaccine Administered",
+      "Mnemonic": "CHILD_INFLUENZA_VACCINE_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hyperthyroidism",
+      "Mnemonic": "HYPERTHYROIDISM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Isotretinoin",
+      "Mnemonic": "ISOTRETINOIN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Type 1 Diabetes",
+      "Mnemonic": "TYPE_1_DIABETES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Discharged to Home for Hospice Care",
+      "Mnemonic": "DISCHARGED_TO_HOME_FOR_HOSPICE_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Gynecological Surgery",
+      "Mnemonic": "GYNECOLOGICAL_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Encounter to Screen for Blood Pressure",
+      "Mnemonic": "ENCOUNTER_TO_SCREEN_FOR_BLOOD_PRESSURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Liver Disease",
+      "Mnemonic": "LIVER_DISEASE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Unilateral Mastectomy Right",
+      "Mnemonic": "UNILATERAL_MASTECTOMY_RIGHT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Dipyridamole Medications",
+      "Mnemonic": "DIPYRIDAMOLE_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Gastric Bypass Surgery",
+      "Mnemonic": "GASTRIC_BYPASS_SURGERY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hospital Services for Urology",
+      "Mnemonic": "HOSPITAL_SERVICES_FOR_UROLOGY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Head, Neck, and Thoracic Surgeries with High Risk Airway Compromise",
+      "Mnemonic": "HEAD,_NECK,_AND_THORACIC_SURGERIES_WITH_HIGH_RISK_AIRWAY_COMPROMISE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Preventive Care Services Established Office Visit, 18 and Up",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES_ESTABLISHED_OFFICE_VISIT,_18_AND_UP",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mixed histology urothelial cell carcinoma for Urology Care",
+      "Mnemonic": "MIXED_HISTOLOGY_UROTHELIAL_CELL_CARCINOMA_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Race",
+      "Mnemonic": "RACE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pregnancy",
+      "Mnemonic": "PREGNANCY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Barbiturates for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_BARBITURATES_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Beta Blocker Therapy for LVSD",
+      "Mnemonic": "BETA_BLOCKER_THERAPY_FOR_LVSD",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Moderate or Severe",
+      "Mnemonic": "MODERATE_OR_SEVERE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Statin Associated Muscle Symptoms",
+      "Mnemonic": "STATIN_ASSOCIATED_MUSCLE_SYMPTOMS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Emergency Department Evaluation and Management Visit",
+      "Mnemonic": "EMERGENCY_DEPARTMENT_EVALUATION_AND_MANAGEMENT_VISIT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Venous Thromboembolism",
+      "Mnemonic": "VENOUS_THROMBOEMBOLISM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Medicare FFS Payer",
+      "Mnemonic": "MEDICARE_FFS_PAYER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Chemotherapy Administration",
+      "Mnemonic": "CHEMOTHERAPY_ADMINISTRATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Disorders of the Immune System",
+      "Mnemonic": "DISORDERS_OF_THE_IMMUNE_SYSTEM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Tobacco Use Cessation Pharmacotherapy",
+      "Mnemonic": "TOBACCO_USE_CESSATION_PHARMACOTHERAPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Breastfeeding",
+      "Mnemonic": "BREASTFEEDING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Behavioral\/Neuropsych Assessment",
+      "Mnemonic": "BEHAVIORAL\/NEUROPSYCH_ASSESSMENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "DXA (Dual energy Xray Absorptiometry) Scan",
+      "Mnemonic": "DXA_(DUAL_ENERGY_XRAY_ABSORPTIOMETRY)_SCAN",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Intussusception",
+      "Mnemonic": "INTUSSUSCEPTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Tobacco User",
+      "Mnemonic": "TOBACCO_USER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Estrogens for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ESTROGENS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Blood urea nitrogen lab test",
+      "Mnemonic": "BLOOD_UREA_NITROGEN_LAB_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Antipsychotics for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIPSYCHOTICS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Follow Up for Adult Depression",
+      "Mnemonic": "FOLLOW_UP_FOR_ADULT_DEPRESSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Delivery Procedures",
+      "Mnemonic": "DELIVERY_PROCEDURES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Encephalitis Due to Diphtheria, Tetanus or Pertussis Vaccine",
+      "Mnemonic": "ENCEPHALITIS_DUE_TO_DIPHTHERIA,_TETANUS_OR_PERTUSSIS_VACCINE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bipolar Disorder",
+      "Mnemonic": "BIPOLAR_DISORDER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Morbid or Severe Obesity",
+      "Mnemonic": "MORBID_OR_SEVERE_OBESITY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Acute and Subacute Iridocyclitis",
+      "Mnemonic": "ACUTE_AND_SUBACUTE_IRIDOCYCLITIS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Nonelective Inpatient Encounter",
+      "Mnemonic": "NONELECTIVE_INPATIENT_ENCOUNTER",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Glycoprotein IIb IIIa Inhibitors",
+      "Mnemonic": "GLYCOPROTEIN_IIB_IIIA_INHIBITORS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Antiinfectives for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_ANTIINFECTIVES_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Placenta Increta or Percreta",
+      "Mnemonic": "PLACENTA_INCRETA_OR_PERCRETA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Osteoporosis Without Current Fracture",
+      "Mnemonic": "OSTEOPOROSIS_WITHOUT_CURRENT_FRACTURE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Thrombolytics Adverse Event",
+      "Mnemonic": "THROMBOLYTICS_ADVERSE_EVENT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "BCG Bacillus Calmette Guerin for Urology Care",
+      "Mnemonic": "BCG_BACILLUS_CALMETTE_GUERIN_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Peripheral Neuropathy",
+      "Mnemonic": "PERIPHERAL_NEUROPATHY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Malnutrition Screening Finding of At Risk Result",
+      "Mnemonic": "MALNUTRITION_SCREENING_FINDING_OF_AT_RISK_RESULT",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Major Depression Including Remission",
+      "Mnemonic": "MAJOR_DEPRESSION_INCLUDING_REMISSION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Upper Respiratory Infection",
+      "Mnemonic": "UPPER_RESPIRATORY_INFECTION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bradycardia",
+      "Mnemonic": "BRADYCARDIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Arrhythmia",
+      "Mnemonic": "ARRHYTHMIA",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Methylphenidate",
+      "Mnemonic": "METHYLPHENIDATE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Abnormal Weight Loss and Malnutrition",
+      "Mnemonic": "ABNORMAL_WEIGHT_LOSS_AND_MALNUTRITION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Ventilation",
+      "Mnemonic": "VENTILATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Preventive Care Services Initial Office Visit, 18 and Up",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES_INITIAL_OFFICE_VISIT,_18_AND_UP",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Flexible Sigmoidoscopy",
+      "Mnemonic": "FLEXIBLE_SIGMOIDOSCOPY",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Pressure Injury Deep Tissue Diagnoses",
+      "Mnemonic": "PRESSURE_INJURY_DEEP_TISSUE_DIAGNOSES",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Macular Scar of Posterior Polar",
+      "Mnemonic": "MACULAR_SCAR_OF_POSTERIOR_POLAR",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Preventive Care Services Group Counseling",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES_GROUP_COUNSELING",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Antidepressant Medication",
+      "Mnemonic": "ANTIDEPRESSANT_MEDICATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Guanfacine Medications",
+      "Mnemonic": "GUANFACINE_MEDICATIONS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Diuretics",
+      "Mnemonic": "DIURETICS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Bladder Cancer for Urology Care",
+      "Mnemonic": "BLADDER_CANCER_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "sDNA FIT Test",
+      "Mnemonic": "SDNA_FIT_TEST",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Mumps",
+      "Mnemonic": "MUMPS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Preventive Care Services, Initial Office Visit, 0 to 17",
+      "Mnemonic": "PREVENTIVE_CARE_SERVICES,_INITIAL_OFFICE_VISIT,_0_TO_17",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Opioids",
+      "Mnemonic": "OPIOIDS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Cushings Syndrome",
+      "Mnemonic": "CUSHINGS_SYNDROME",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Hib Vaccine (4 dose schedule) Administered",
+      "Mnemonic": "HIB_VACCINE_(4_DOSE_SCHEDULE)_ADMINISTERED",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Physical Therapy Evaluation",
+      "Mnemonic": "PHYSICAL_THERAPY_EVALUATION",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Potentially Harmful Skeletal Muscle Relaxants for Older Adults",
+      "Mnemonic": "POTENTIALLY_HARMFUL_SKELETAL_MUSCLE_RELAXANTS_FOR_OLDER_ADULTS",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Conversion of Cardiac Rhythm",
+      "Mnemonic": "CONVERSION_OF_CARDIAC_RHYTHM",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Payer Type",
+      "Mnemonic": "PAYER_TYPE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    },
+    {
+      "Name": "Active Tuberculosis for Urology Care",
+      "Mnemonic": "ACTIVE_TUBERCULOSIS_FOR_UROLOGY_CARE",
+      "ContentSetTypeMnemonic": "VALUE_SET"
+    }
+  ]
 }

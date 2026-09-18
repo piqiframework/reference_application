@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns4:modelInfo name="PIQI" version="1.0.0"
+               url="urn:piqi_patient-model:1.0.0"
+               targetQualifier="PIQI"
+               patientClassName="PIQI.Patient"
+               patientClassIdentifier="Patient"
+               patientBirthDatePropertyName="demographics.birthDate"
+               xmlns:ns4="urn:hl7-org:elm-modelinfo:r1"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <!-- ── Shared Types ───────────────────────────────────────────── -->
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Coding" baseType="System.Any" retrievable="false">
+        <ns4:element name="system"  type="System.String"/>
+        <ns4:element name="code"    type="System.String"/>
+        <ns4:element name="display" type="System.String"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.CodeableConcept" baseType="System.Any" retrievable="false">
+        <ns4:element name="codings" type="list&lt;PIQI.Coding&gt;"/>
+        <ns4:element name="text"    type="System.String"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.ObservationValue" baseType="System.Any" retrievable="false">
+		<ns4:element name="codings" type="list&lt;PIQI.Coding&gt;"/>
+		<ns4:element name="type" type="PIQI.CodeableConcept"/>
+        <ns4:element name="text" type="System.String"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.RangeValue" baseType="System.Any" retrievable="false">
+        <ns4:element name="low"  type="System.String"/>
+        <ns4:element name="high" type="System.String"/>
+        <ns4:element name="text" type="System.String"/>
+    </ns4:typeInfo>
+
+    <!-- ── Clinical Classes ───────────────────────────────────────── -->
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Allergy" baseType="System.Any" retrievable="false">
+        <ns4:element name="category"            type="PIQI.CodeableConcept"/>
+		<ns4:element name="clinicalStatus"      type="PIQI.CodeableConcept"/>
+        <ns4:element name="effectiveDate"       type="System.DateTime"/>
+        <ns4:element name="reaction"            type="PIQI.CodeableConcept"/>
+        <ns4:element name="severity"            type="PIQI.CodeableConcept"/>
+        <ns4:element name="substance"           type="PIQI.CodeableConcept"/>
+		<ns4:element name="verificationStatus"  type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+	<ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.CarePlan" baseType="System.Any" retrievable="false">
+		<ns4:element name="effectiveDate"       type="System.DateTime"/>
+		<ns4:element name="planCategory"        type="PIQI.CodeableConcept"/>
+		<ns4:element name="planIntent"          type="PIQI.CodeableConcept"/>
+		<ns4:element name="planNarrative"       type="System.String"/>
+		<ns4:element name="planNarrativeStatus" type="PIQI.CodeableConcept"/>
+		<ns4:element name="planStatus"          type="PIQI.CodeableConcept"/>
+	</ns4:typeInfo>
+
+	<ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.ClinicalDocument" baseType="System.Any" retrievable="false">
+		<ns4:element name="documentAuthorIdentifier"    type="System.String"/>
+		<ns4:element name="documentAuthorName"          type="System.String"/>
+		<ns4:element name="documentCategory"            type="PIQI.CodeableConcept"/>
+		<ns4:element name="documentFormat"              type="PIQI.CodeableConcept"/>
+		<ns4:element name="documentIdentifier"          type="System.String"/>
+		<ns4:element name="documentPeriodEnd"           type="System.DateTime"/>
+		<ns4:element name="documentPeriodStart"         type="System.DateTime"/>
+		<ns4:element name="documentStatus"              type="PIQI.CodeableConcept"/>
+		<ns4:element name="documentTitle"               type="System.String"/>
+		<ns4:element name="documentType"                type="PIQI.CodeableConcept"/>
+		<ns4:element name="effectiveDate"               type="System.DateTime"/>
+		<ns4:element name="hasAttachment"               type="System.Boolean"/>
+	</ns4:typeInfo>
+
+	<ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.ClinicalTest" baseType="System.Any" retrievable="false">
+		<ns4:element name="effectiveDateTime"           type="System.DateTime"/>
+		<ns4:element name="hasAttachment"           type="System.Boolean"/>
+		<ns4:element name="issueDate"               type="System.DateTime"/>
+		<ns4:element name="performerIdentifier"     type="System.String"/>
+		<ns4:element name="performerName"           type="System.String"/>
+		<ns4:element name="resultUnit"              type="PIQI.CodeableConcept"/>
+		<ns4:element name="resultValue"             type="PIQI.ObservationValue"/>
+		<ns4:element name="test"                    type="PIQI.CodeableConcept"/>
+		<ns4:element name="testCategory"            type="PIQI.CodeableConcept"/>
+		<ns4:element name="testDataAbsentReason"    type="PIQI.CodeableConcept"/>
+		<ns4:element name="testPeriodEnd"           type="System.DateTime"/>
+		<ns4:element name="testPeriodStart"         type="System.DateTime"/>
+		<ns4:element name="testStatus"              type="PIQI.CodeableConcept"/>
+	</ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Condition" baseType="System.Any" retrievable="false">
+		<ns4:element name="assertedDate"        type="System.DateTime"/>
+		<ns4:element name="clinicalStatus"      type="PIQI.CodeableConcept"/>
+        <ns4:element name="condition"           type="PIQI.CodeableConcept"/>
+		<ns4:element name="conditionCategory"   type="PIQI.CodeableConcept"/>
+        <ns4:element name="conditionStatus"     type="PIQI.CodeableConcept"/>
+        <ns4:element name="onsetDate"           type="System.DateTime"/>
+		<ns4:element name="recordedDate"        type="System.DateTime"/>
+        <ns4:element name="resolutionDate"      type="System.DateTime"/>
+		<ns4:element name="verificationStatus"  type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+	<ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Coverage" baseType="System.Any" retrievable="false">
+		<ns4:element name="coveragePeriodEnd"       type="System.DateTime"/>
+		<ns4:element name="coveragePeriodStart"     type="System.DateTime"/>
+		<ns4:element name="coverageStatus"          type="PIQI.CodeableConcept"/>
+		<ns4:element name="coverageType"            type="PIQI.CodeableConcept"/>
+		<ns4:element name="groupIdentifier"         type="System.String"/>
+		<ns4:element name="groupName"               type="System.String"/>
+		<ns4:element name="memberIdentifier"        type="System.String"/>
+		<ns4:element name="memberIdentifierType"    type="PIQI.CodeableConcept"/>
+		<ns4:element name="payorIdentifier"         type="System.String"/>
+		<ns4:element name="planIdentifier"          type="System.String"/>
+		<ns4:element name="planName"               type="System.String"/>
+		<ns4:element name="relationship"            type="PIQI.CodeableConcept"/>
+		<ns4:element name="subscriberIdentifier"    type="System.String"/>
+	</ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Demographics" baseType="System.Any" retrievable="false">
+        <ns4:element name="patientIdentifier"   type="System.String"/>
+        <ns4:element name="birthDate"           type="System.DateTime"/>
+        <ns4:element name="birthSex"            type="PIQI.CodeableConcept"/>
+		<ns4:element name="currentAddress"      type="System.String"/>
+        <ns4:element name="deathDate"           type="System.DateTime"/>
+        <ns4:element name="deceased"            type="PIQI.CodeableConcept"/>
+		<ns4:element name="emailAddress"        type="System.String"/>
+        <ns4:element name="ethnicity"           type="PIQI.CodeableConcept"/>
+		<ns4:element name="firstName"           type="System.String"/>
+        <ns4:element name="genderIdentity"      type="PIQI.CodeableConcept"/>
+		<ns4:element name="lastName"            type="System.String"/>
+        <ns4:element name="maritalStatus"       type="PIQI.CodeableConcept"/>
+		<ns4:element name="middleName"          type="System.String"/>
+		<ns4:element name="primaryLanguage"     type="PIQI.CodeableConcept"/>
+        <ns4:element name="race"                type="PIQI.CodeableConcept"/>
+		<ns4:element name="sexualOrientation"   type="PIQI.CodeableConcept"/>
+		<ns4:element name="telecom"             type="System.String"/>
+		<ns4:element name="tribalAffiliation"   type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.DiagnosticImaging" baseType="System.Any" retrievable="false">
+		<ns4:element name="dataAbsentReason"    type="PIQI.CodeableConcept"/>
+        <ns4:element name="hasAttachment"       type="System.Boolean"/>
+		<ns4:element name="interpretation"      type="System.String"/>
+		<ns4:element name="issueDate"           type="System.DateTime"/>
+		<ns4:element name="performerIdentifier" type="System.String"/>
+		<ns4:element name="performerName"       type="System.String"/>
+        <ns4:element name="procedure"           type="PIQI.CodeableConcept"/>
+		<ns4:element name="reportCategory"      type="PIQI.CodeableConcept"/>
+        <ns4:element name="reportDateTime"      type="System.DateTime"/>
+		<ns4:element name="reportPeriodEnd"     type="System.DateTime"/>
+		<ns4:element name="reportPeriodStart"   type="System.DateTime"/>
+		<ns4:element name="reportResultUnit"    type="PIQI.CodeableConcept"/>
+		<ns4:element name="reportResultValue"   type="PIQI.ObservationValue"/>
+		<ns4:element name="reportStatus"        type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Encounter" baseType="System.Any" retrievable="false">
+		<ns4:element name="encounterClass"                  type="PIQI.CodeableConcept"/>
+        <ns4:element name="encounterDateTime"               type="System.DateTime"/>
+        <ns4:element name="encounterDiagnosis"              type="PIQI.CodeableConcept"/>
+        <ns4:element name="encounterDisposition"            type="System.String"/>
+        <ns4:element name="encounterEndDateTime"            type="System.DateTime"/>
+        <ns4:element name="encounterIdentifier"             type="System.String"/>
+		<ns4:element name="encounterIdentifierNamespace"    type="System.String"/>
+        <ns4:element name="encounterLocation"               type="System.String"/>
+        <ns4:element name="encounterReason"                 type="PIQI.CodeableConcept"/>
+        <ns4:element name="encounterStatus"                 type="PIQI.CodeableConcept"/>
+        <ns4:element name="encounterType"                   type="PIQI.CodeableConcept"/>
+        <ns4:element name="encounterStartDate"          type="System.DateTime"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Goal" baseType="System.Any" retrievable="false">
+		<ns4:element name="dueDate" type="System.DateTime"/>
+        <ns4:element name="effectiveDate" type="System.DateTime"/>
+        <ns4:element name="goal"          type="PIQI.CodeableConcept"/>
+        <ns4:element name="goalCategory"  type="PIQI.CodeableConcept"/>
+        <ns4:element name="goalPriority"  type="System.String"/>
+        <ns4:element name="goalStatus"    type="System.String"/>
+        <ns4:element name="startDate"     type="System.DateTime"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.HealthAssessment" baseType="System.Any" retrievable="false">
+        <ns4:element name="assessment"          type="PIQI.CodeableConcept"/>
+		<ns4:element name="assessmentStatus"    type="PIQI.CodeableConcept"/>
+		<ns4:element name="category"            type="PIQI.CodeableConcept"/>
+        <ns4:element name="effectiveDate"       type="System.DateTime"/>
+        <ns4:element name="issueDateTime"      type="System.DateTime"/>
+		<ns4:element name="performerIdentifier" type="System.String"/>
+		<ns4:element name="performerName"       type="System.String"/>
+		<ns4:element name="questionnaireURL"    type="System.String"/>
+        <ns4:element name="resultUnit"          type="PIQI.CodeableConcept"/>
+        <ns4:element name="resultValue"         type="PIQI.ObservationValue"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Immunization" baseType="System.Any" retrievable="false">
+        <ns4:element name="administrationDate"          type="System.DateTime"/>
+        <ns4:element name="expirationDate"              type="System.DateTime"/>
+        <ns4:element name="immunization"                type="PIQI.CodeableConcept"/>
+        <ns4:element name="immunizationStatus"          type="PIQI.CodeableConcept"/>
+		<ns4:element name="immunizationStatusReason"    type="PIQI.CodeableConcept"/>
+        <ns4:element name="lotNumber"                   type="System.String"/>
+		<ns4:element name="primarySource"               type="System.String"/>
+        <ns4:element name="reaction"                    type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.LabResult" baseType="System.Any" retrievable="false">
+        <ns4:element name="interpretation"              type="PIQI.CodeableConcept"/>
+        <ns4:element name="issuedDateTime"              type="System.DateTime"/>
+		<ns4:element name="labCategory"                 type="PIQI.CodeableConcept"/>
+        <ns4:element name="orderedTest"                 type="PIQI.CodeableConcept"/>
+        <ns4:element name="orderDate"                   type="System.DateTime"/>
+        <ns4:element name="performedDateTime"           type="System.DateTime"/>
+		<ns4:element name="performerIdentifier"         type="System.String"/>
+		<ns4:element name="performerName"               type="System.String"/>
+        <ns4:element name="performingSite"             type="System.String"/>
+        <ns4:element name="referenceRange"             type="PIQI.RangeValue"/>
+        <ns4:element name="resultStatus"               type="PIQI.CodeableConcept"/>
+        <ns4:element name="resultUnit"                 type="PIQI.CodeableConcept"/>
+        <ns4:element name="resultValue"                type="PIQI.ObservationValue"/>
+        <ns4:element name="specimenCollectionDateTime" type="System.DateTime"/>
+        <ns4:element name="specimenCondition"          type="PIQI.CodeableConcept"/>
+        <ns4:element name="specimenIdentifier"         type="System.String"/>
+        <ns4:element name="specimenSourceSite"         type="PIQI.CodeableConcept"/>
+        <ns4:element name="specimenType"               type="PIQI.CodeableConcept"/>
+        <ns4:element name="performedTest"                type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.MedicalDevice" baseType="System.Any" retrievable="false">
+		<ns4:element name="carrierHRF"         type="System.String"/>
+		<ns4:element name="deviceID"            type="System.String"/>
+		<ns4:element name="deviceStatus"        type="PIQI.CodeableConcept"/>
+		<ns4:element name="deviceType"          type="PIQI.CodeableConcept"/>
+		<ns4:element name="distinctIdentifier"  type="System.String"/>
+		<ns4:element name="expirationDate"      type="System.DateTime"/>
+		<ns4:element name="implantationDate"    type="System.DateTime"/>
+        <ns4:element name="lotNumber"           type="System.String"/>
+		<ns4:element name="manufactureDate"     type="System.DateTime"/>
+		<ns4:element name="serialNumber"        type="System.String"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Medication" baseType="System.Any" retrievable="false">
+        <ns4:element name="adherence"           type="PIQI.CodeableConcept"/>
+        <ns4:element name="doseAmount"          type="System.String"/>
+        <ns4:element name="doseAmountUnit"      type="PIQI.CodeableConcept"/>
+        <ns4:element name="doseQuantity"        type="System.String"/>
+        <ns4:element name="doseQuantityUnit"    type="PIQI.CodeableConcept"/>
+        <ns4:element name="doseRoute"           type="PIQI.CodeableConcept"/>
+        <ns4:element name="endDate"             type="System.DateTime"/>
+        <ns4:element name="fillStatus"          type="PIQI.CodeableConcept"/>
+        <ns4:element name="indication"          type="PIQI.CodeableConcept"/>
+        <ns4:element name="instructions"        type="System.String"/>
+        <ns4:element name="medication"          type="PIQI.CodeableConcept"/>
+		<ns4:element name="medicationCategory"  type="PIQI.CodeableConcept"/>
+		<ns4:element name="medicationIntent"    type="PIQI.CodeableConcept"/>
+		<ns4:element name="requestStatus"       type="PIQI.CodeableConcept"/>
+		<ns4:element name="startDate"           type="System.DateTime"/>
+		<ns4:element name="statementDate"       type="System.DateTime"/>
+    </ns4:typeInfo>
+
+	<ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Practitioner" baseType="System.Any" retrievable="false">
+		<ns4:element name="practitionerRole"          type="PIQI.CodeableConcept"/>
+		<ns4:element name="practitionerAddress"     type="System.String"/>
+		<ns4:element name="practitionerIdentifier"  type="System.String"/>
+		<ns4:element name="practitionerName"        type="System.String"/>
+		<ns4:element name="practitionerStatus"      type="PIQI.CodeableConcept"/>
+		<ns4:element name="practitionerTelecom"     type="System.String"/>
+	</ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Procedure" baseType="System.Any" retrievable="false">
+        <ns4:element name="procedure"              type="PIQI.CodeableConcept"/>
+        <ns4:element name="procedureDateTime"      type="System.DateTime"/>
+        <ns4:element name="procedureEndDatetime"   type="System.DateTime"/>
+        <ns4:element name="procedurePerformedDate" type="System.DateTime"/>
+        <ns4:element name="procedureReason"        type="PIQI.CodeableConcept"/>
+        <ns4:element name="procedureStartDatetime" type="System.DateTime"/>
+        <ns4:element name="procedureStatus"        type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Provenance" baseType="System.Any" retrievable="false">
+		<ns4:element name="agentIdentifier"             type="System.String"/>
+		<ns4:element name="agentName"                   type="System.String"/>
+		<ns4:element name="agentOrganizationIdentifier" type="System.String"/>
+		<ns4:element name="agentOrganizationName"       type="System.String"/>
+		<ns4:element name="agentType"                   type="PIQI.CodeableConcept"/>
+		<ns4:element name="authorType"                  type="PIQI.CodeableConcept"/>
+		<ns4:element name="recordedDateTime"            type="System.DateTime"/>
+		<ns4:element name="transmitterType"             type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.VitalSign" baseType="System.Any" retrievable="false">
+		<ns4:element name="dataAbsentReason"  type="PIQI.CodeableConcept"/>
+		<ns4:element name="interpretation"    type="PIQI.CodeableConcept"/>
+		<ns4:element name="issuedDateTime"    type="System.DateTime"/>
+		<ns4:element name="performedDateTime" type="System.DateTime"/>
+        <ns4:element name="performingSite"    type="PIQI.CodeableConcept"/>
+        <ns4:element name="referenceRange"    type="PIQI.RangeValue"/>
+        <ns4:element name="resultStatus"      type="PIQI.CodeableConcept"/>
+        <ns4:element name="resultUnit"        type="PIQI.CodeableConcept"/>
+        <ns4:element name="resultValue"       type="PIQI.ObservationValue"/>
+        <ns4:element name="vitalSign"         type="PIQI.CodeableConcept"/>
+		<ns4:element name="vitalSignCategory" type="PIQI.CodeableConcept"/>
+    </ns4:typeInfo>
+
+    <!-- ── Patient (root) ─────────────────────────────────────────── -->
+
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="PIQI.Patient" baseType="System.Any" identifier="Patient" retrievable="true">
+        <ns4:element name="demographics"      type="PIQI.Demographics"/>
+        <ns4:element name="allergies"         type="list&lt;PIQI.Allergy&gt;"/>
+		<ns4:element name="carePlans"         type="list&lt;PIQI.CarePlan&gt;"/>
+        <ns4:element name="clinicalDocuments" type="list&lt;PIQI.ClinicalDocument&gt;"/>
+		<ns4:element name="clinicalTests"     type="list&lt;PIQI.ClinicalTest&gt;"/>
+        <ns4:element name="conditions"        type="list&lt;PIQI.Condition&gt;"/>
+		<ns4:element name="coverage"          type="list&lt;PIQI.Coverage&gt;"/>
+        <ns4:element name="diagnosticImaging" type="list&lt;PIQI.DiagnosticImaging&gt;"/>
+        <ns4:element name="encounters"        type="list&lt;PIQI.Encounter&gt;"/>
+        <ns4:element name="goals"             type="list&lt;PIQI.Goal&gt;"/>
+        <ns4:element name="healthAssessments" type="list&lt;PIQI.HealthAssessment&gt;"/>
+        <ns4:element name="immunizations"     type="list&lt;PIQI.Immunization&gt;"/>
+        <ns4:element name="labResults"        type="list&lt;PIQI.LabResult&gt;"/>
+        <ns4:element name="medicalDevices"    type="list&lt;PIQI.MedicalDevice&gt;"/>
+        <ns4:element name="medications"       type="list&lt;PIQI.Medication&gt;"/>
+        <ns4:element name="procedures"        type="list&lt;PIQI.Procedure&gt;"/>
+		<ns4:element name="provenance"        type="list&lt;PIQI.Provenance&gt;"/>
+        <ns4:element name="practitioners"     type="list&lt;PIQI.Practitioner&gt;"/>
+        <ns4:element name="vitalSigns"        type="list&lt;PIQI.VitalSign&gt;"/>
+    </ns4:typeInfo>
+
+</ns4:modelInfo>

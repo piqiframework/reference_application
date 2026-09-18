@@ -150,6 +150,10 @@ namespace PIQI.Components.Models
         /// </summary>
         public List<PIQIAuditDataClass>? Classes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the root-level audit information for this audit data container.
+        /// </summary>
+        public PIQIAuditDataRootAudit? RootAudit { get; set; }
         #endregion
 
         /// <summary>
@@ -163,31 +167,302 @@ namespace PIQI.Components.Models
     }
 
     /// <summary>
-    /// Represents an audited class within the audit data hierarchy.
+    /// Represents audit details for the root level.
+    /// </summary>
+    public class PIQIAuditDataRootAudit
+    {
+        /// <summary>
+        /// Gets the scoring data associated with the root audit.
+        /// </summary>
+        public PIQIAuditDataRootAuditScoringData ScoringData { get; }
+
+        /// <summary>
+        /// Gets or sets the collection of assessment items for the root audit.
+        /// </summary>
+        public List<PIQIAuditDataRootAuditAssessmentItem>? AssessmentItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets the collection of informational items for the root audit.
+        /// </summary>
+        public List<PIQIAuditDataRootAuditAssessmentItem>? InformationalItems { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataRootAudit"/> class.
+        /// </summary>
+        /// <param name="scoringData">The scoring data.</param>
+        public PIQIAuditDataRootAudit(PIQIAuditDataRootAuditScoringData scoringData)
+        {
+            ScoringData = scoringData;
+        }
+    }
+
+    /// <summary>
+    /// Represents scoring metrics for the root audit.
+    /// </summary>
+    public class PIQIAuditDataRootAuditScoringData
+    {
+        /// <summary>
+        /// Gets or sets the calculated root score.
+        /// </summary>
+        public int RootScore { get; set; }
+
+        /// <summary>
+        /// Gets or sets the weighted root score.
+        /// </summary>
+        public int RootScoreWeighted { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of critical failures at the root level.
+        /// </summary>
+        public int RootCriticalFailureCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total successful checks for the root.
+        /// </summary>
+        public int RootNumerator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total evaluated checks for the root.
+        /// </summary>
+        public int RootDenominator { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataRootAuditScoringData"/> class.
+        /// </summary>
+        /// <param name="rootScore">The calculated root score.</param>
+        /// <param name="rootScoreWeighted">The weighted root score.</param>
+        /// <param name="rootCriticalFailureCount">The number of critical failures.</param>
+        /// <param name="rootNumerator">The total successful checks.</param>
+        /// <param name="rootDenominator">The total evaluated checks.</param>
+        public PIQIAuditDataRootAuditScoringData(int rootScore, int rootScoreWeighted, int rootCriticalFailureCount, int rootNumerator, int rootDenominator)
+        {
+            RootScore = rootScore;
+            RootScoreWeighted = rootScoreWeighted;
+            RootCriticalFailureCount = rootCriticalFailureCount;
+            RootNumerator = rootNumerator;
+            RootDenominator = rootDenominator;
+        }
+    }
+
+    /// <summary>
+    /// Represents an individual assessment item for the root audit.
+    /// Also used by informational items - only those have an effect of "Informational" and not "Scoring".
+    /// </summary>
+    public class PIQIAuditDataRootAuditAssessmentItem
+    {
+        /// <summary>
+        /// Gets the root mnemonic.
+        /// </summary>
+        public string RootMnemonic { get; }
+
+        /// <summary>
+        /// Gets the root name.
+        /// </summary>
+        public string RootName { get; }
+
+        /// <summary>
+        /// Gets the assessment name or type.
+        /// </summary>
+        public string Assessment { get; }
+
+        /// <summary>
+        /// Gets the impact or effect of the assessment result.
+        /// </summary>
+        public string Effect { get; }
+
+        /// <summary>
+        /// Gets the assessment status.
+        /// </summary>
+        public string Status { get; }
+
+        /// <summary>
+        /// Gets the reason associated with the assessment result.
+        /// </summary>
+        public string Reason { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataRootAuditAssessmentItem"/> class.
+        /// </summary>
+        /// <param name="rootMnemonic">The root mnemonic.</param>
+        /// <param name="rootName">The root name.</param>
+        /// <param name="assessment">The assessment name or type.</param>
+        /// <param name="effect">The impact or effect.</param>
+        /// <param name="status">The assessment status.</param>
+        /// <param name="reason">The reason for the result.</param>
+        public PIQIAuditDataRootAuditAssessmentItem(string rootMnemonic, string rootName, string assessment, string effect, string status, string reason)
+        {
+            RootMnemonic = rootMnemonic;
+            RootName = rootName;
+            Assessment = assessment;
+            Effect = effect;
+            Status = status;
+            Reason = reason;
+        }
+    }
+
+    /// <summary>
+    /// Represents audit data for a specific class, including its name, elements, and class-level audit details.
     /// </summary>
     public class PIQIAuditDataClass
     {
         #region Properties
-
         /// <summary>
-        /// Gets the name of the audited class.
+        /// Gets the name of the class associated with this audit data.
         /// </summary>
         public string ClassName { get; }
 
         /// <summary>
-        /// Gets or sets the collection of audited elements within the class.
+        /// Gets or sets the collection of audit data elements for the class.
         /// </summary>
         public List<PIQIAuditDataElement>? Elements { get; set; }
 
+        /// <summary>
+        /// Gets or sets the class-level audit metadata.
+        /// </summary>
+        public PIQIAuditDataClassAudit? ClassAudit { get; set; }
         #endregion
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PIQIAuditDataClass"/> class.
         /// </summary>
-        /// <param name="className">The class name.</param>
+        /// <param name="className">The name of the class associated with this audit data.</param>
         public PIQIAuditDataClass(string className)
         {
             ClassName = className;
+        }
+    }
+
+    /// <summary>
+    /// Represents an audited class within the audit data hierarchy.
+    /// </summary>
+    public class PIQIAuditDataClassAudit
+    {
+        /// <summary>
+        /// Gets the scoring data associated with the class audit.
+        /// </summary>
+        public PIQIAuditDataClassAuditScoringData ScoringData { get; }
+
+        /// <summary>
+        /// Gets or sets the collection of assessment items for the class audit.
+        /// </summary>
+        public List<PIQIAuditDataClassAuditAssessmentItem>? AssessmentItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets the collection of informational items for the class audit.
+        /// </summary>
+        public List<PIQIAuditDataClassAuditAssessmentItem>? InformationalItems { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataClassAudit"/> class.
+        /// </summary>
+        /// <param name="scoringData">The scoring data.</param>
+        public PIQIAuditDataClassAudit(PIQIAuditDataClassAuditScoringData scoringData)
+        {
+            ScoringData = scoringData;
+        }
+    }
+
+    /// <summary>
+    /// Represents scoring metrics for a class audit.
+    /// </summary>
+    public class PIQIAuditDataClassAuditScoringData
+    {
+        /// <summary>
+        /// Gets or sets the calculated class score.
+        /// </summary>
+        public int ClassScore { get; set; }
+
+        /// <summary>
+        /// Gets or sets the weighted class score.
+        /// </summary>
+        public int ClassScoreWeighted { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of critical failures for the class.
+        /// </summary>
+        public int ClassCriticalFailureCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total successful checks for the class.
+        /// </summary>
+        public int ClassNumerator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total evaluated checks for the class.
+        /// </summary>
+        public int ClassDenominator { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataClassAuditScoringData"/> class.
+        /// </summary>
+        /// <param name="classScore">The calculated class score.</param>
+        /// <param name="classScoreWeighted">The weighted class score.</param>
+        /// <param name="classCriticalFailureCount">The number of critical failures.</param>
+        /// <param name="classNumerator">The total successful checks.</param>
+        /// <param name="classDenominator">The total evaluated checks.</param>
+        public PIQIAuditDataClassAuditScoringData(int classScore, int classScoreWeighted, int classCriticalFailureCount, int classNumerator, int classDenominator)
+        {
+            ClassScore = classScore;
+            ClassScoreWeighted = classScoreWeighted;
+            ClassCriticalFailureCount = classCriticalFailureCount;
+            ClassNumerator = classNumerator;
+            ClassDenominator = classDenominator;
+        }
+    }
+
+    /// <summary>
+    /// Represents an individual assessment item for a class audit.
+    /// Also used by informational items - only those have an effect of "Informational" and not "Scoring".
+    /// </summary>
+    public class PIQIAuditDataClassAuditAssessmentItem
+    {
+        /// <summary>
+        /// Gets the class mnemonic.
+        /// </summary>
+        public string ClassMnemonic { get; }
+
+        /// <summary>
+        /// Gets the class name.
+        /// </summary>
+        public string ClassName { get; }
+
+        /// <summary>
+        /// Gets the assessment name or type.
+        /// </summary>
+        public string Assessment { get; }
+
+        /// <summary>
+        /// Gets the impact or effect of the assessment result.
+        /// </summary>
+        public string Effect { get; }
+
+        /// <summary>
+        /// Gets the assessment status.
+        /// </summary>
+        public string Status { get; }
+
+        /// <summary>
+        /// Gets the reason associated with the assessment result.
+        /// </summary>
+        public string Reason { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataClassAuditAssessmentItem"/> class.
+        /// </summary>
+        /// <param name="classMnemonic">The class mnemonic.</param>
+        /// <param name="className">The class name.</param>
+        /// <param name="assessment">The assessment name or type.</param>
+        /// <param name="effect">The impact or effect.</param>
+        /// <param name="status">The assessment status.</param>
+        /// <param name="reason">The reason for the result.</param>
+        public PIQIAuditDataClassAuditAssessmentItem(string classMnemonic, string className, string assessment, string effect, string status, string reason)
+        {
+            ClassMnemonic = classMnemonic;
+            ClassName = className;
+            Assessment = assessment;
+            Effect = effect;
+            Status = status;
+            Reason = reason;
         }
     }
 
@@ -214,6 +489,135 @@ namespace PIQI.Components.Models
         /// Initializes a new instance of the <see cref="PIQIAuditDataElement"/> class.
         /// </summary>
         public PIQIAuditDataElement() { }
+    }
+
+    /// <summary>
+    /// Represents audit details for an element.
+    /// </summary>
+    public class PIQIAuditDataElementAudit
+    {
+        /// <summary>
+        /// Gets the scoring data associated with the element audit.
+        /// </summary>
+        public PIQIAuditDataElementAuditScoringData ScoringData { get; }
+
+        /// <summary>
+        /// Gets or sets the collection of assessment items for the element audit.
+        /// </summary>
+        public List<PIQIAuditDataElementAuditAssessmentItem>? AssessmentItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets the collection of informational items for the element audit.
+        /// </summary>
+        public List<PIQIAuditDataElementAuditAssessmentItem>? InformationalItems { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataElementAudit"/> class.
+        /// </summary>
+        /// <param name="scoringData">The scoring data.</param>
+        public PIQIAuditDataElementAudit(PIQIAuditDataElementAuditScoringData scoringData)
+        {
+            ScoringData = scoringData;
+        }
+    }
+
+    /// <summary>
+    /// Represents audit scoring data for an element.
+    /// </summary>
+    public class PIQIAuditDataElementAuditScoringData
+    {
+        /// <summary>
+        /// Gets the calculated element score.
+        /// </summary>
+        public int ElementScore { get; }
+
+        /// <summary>
+        /// Gets the weighted element score.
+        /// </summary>
+        public int ElementScoreWeighted { get; }
+
+        /// <summary>
+        /// Gets the number of critical failures identified for the element.
+        /// </summary>
+        public int ElementCriticalFailureCount { get; }
+
+        /// <summary>
+        /// Gets the total successful checks for the element.
+        /// </summary>
+        public int ElementNumerator { get; }
+
+        /// <summary>
+        /// Gets the total evaluated checks for the element.
+        /// </summary>
+        public int ElementDenominator { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataElementAuditScoringData"/> class.
+        /// </summary>
+        public PIQIAuditDataElementAuditScoringData(int elementScore, int elementScoreWeighted, int elementCriticalFailureCount, int elementNumerator, int elementDenominator)
+        {
+            ElementScore = elementScore;
+            ElementScoreWeighted = elementScoreWeighted;
+            ElementCriticalFailureCount = elementCriticalFailureCount;
+            ElementNumerator = elementNumerator;
+            ElementDenominator = elementDenominator;
+        }
+    }
+
+    /// <summary>
+    /// Represents an individual assessment item for an element audit.
+    /// Also used by informational items - only those have an effect of "Informational" and not "Scoring".
+    /// </summary>
+    public class PIQIAuditDataElementAuditAssessmentItem
+    {
+        /// <summary>
+        /// Gets the element mnemonic.
+        /// </summary>
+        public string ElementMnemonic { get; }
+
+        /// <summary>
+        /// Gets the element name.
+        /// </summary>
+        public string ElementName { get; }
+
+        /// <summary>
+        /// Gets the assessment name or type.
+        /// </summary>
+        public string Assessment { get; }
+
+        /// <summary>
+        /// Gets the impact or effect of the assessment result.
+        /// </summary>
+        public string Effect { get; }
+
+        /// <summary>
+        /// Gets the assessment status.
+        /// </summary>
+        public string Status { get; }
+
+        /// <summary>
+        /// Gets the reason associated with the assessment result.
+        /// </summary>
+        public string Reason { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PIQIAuditDataElementAuditAssessmentItem"/> class.
+        /// </summary>
+        /// <param name="elementMnemonic">The element mnemonic.</param>
+        /// <param name="elementName">The element name.</param>
+        /// <param name="assessment">The assessment name or type.</param>
+        /// <param name="effect">The impact or effect.</param>
+        /// <param name="status">The assessment status.</param>
+        /// <param name="reason">The reason for the result.</param>
+        public PIQIAuditDataElementAuditAssessmentItem(string elementMnemonic, string elementName, string assessment, string effect, string status, string reason)
+        {
+            ElementMnemonic = elementMnemonic;
+            ElementName = elementName;
+            Assessment = assessment;
+            Effect = effect;
+            Status = status;
+            Reason = reason;
+        }
     }
 
     /// <summary>
@@ -250,48 +654,6 @@ namespace PIQI.Components.Models
         }
     }
 
-    /// <summary>
-    /// Represents audit scoring data for an element.
-    /// </summary>
-    public class PIQIAuditDataElementAudit
-    {
-        /// <summary>
-        /// Gets the calculated element score.
-        /// </summary>
-        public int ElementScore { get; }
-
-        /// <summary>
-        /// Gets the weighted element score.
-        /// </summary>
-        public int ElementScoreWeighted { get; }
-
-        /// <summary>
-        /// Gets the number of critical failures identified for the element.
-        /// </summary>
-        public int ElementCriticalFailureCount { get; }
-
-        /// <summary>
-        /// Gets the total successful checks for the element.
-        /// </summary>
-        public int ElementNumerator { get; }
-
-        /// <summary>
-        /// Gets the total evaluated checks for the element.
-        /// </summary>
-        public int ElementDenominator { get; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PIQIAuditDataElementAudit"/> class.
-        /// </summary>
-        public PIQIAuditDataElementAudit(int elementScore, int elementScoreWeighted, int elementCriticalFailureCount, int elementNumerator, int elementDenominator)
-        {
-            ElementScore = elementScore;
-            ElementScoreWeighted = elementScoreWeighted;
-            ElementCriticalFailureCount = elementCriticalFailureCount;
-            ElementNumerator = elementNumerator;
-            ElementDenominator = elementDenominator;
-        }
-    }
 
     /// <summary>
     /// Represents the base type for all audit attribute data payloads.

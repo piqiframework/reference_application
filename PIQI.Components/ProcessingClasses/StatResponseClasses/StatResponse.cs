@@ -56,6 +56,9 @@
         /// <summary> Number of informational items failed. </summary>
         public int InfoFailCount { get; set; }
 
+        /// <summary> Root level statistical results. </summary>
+        public StatResponseEntity RootResponse { get; set; }
+
         /// <summary> Dictionary of classes with their statistical results, keyed by entity type mnemonic. </summary>
         public Dictionary<string, StatResponseClass> ClassDict { get; set; }
 
@@ -63,7 +66,7 @@
         public Dictionary<string, StatResponseElement> ElementDict { get; set; }
 
         /// <summary> Dictionary of critical failures, keyed by EntityMnemonic|SAMMnemonic|FailSAMMnemonic. </summary>
-        public Dictionary<string, StatResponseCriticalFailure> CritcalFailureDict { get; set; }
+        public Dictionary<string, StatResponseCriticalFailure> CriticalFailureDict { get; set; }
 
         /// <summary> Dictionary of informational results, keyed by EntityMnemonic|SAMMnemonic. </summary>
         public Dictionary<string, StatResponseInformational> InformationalDict { get; set; }
@@ -83,9 +86,10 @@
         /// </summary>
         public StatResponse()
         {
+            RootResponse = new StatResponseEntity();
             ClassDict = new Dictionary<string, StatResponseClass>();
             ElementDict = new Dictionary<string, StatResponseElement>();
-            CritcalFailureDict = new Dictionary<string, StatResponseCriticalFailure>();
+            CriticalFailureDict = new Dictionary<string, StatResponseCriticalFailure>();
             InformationalDict = new Dictionary<string, StatResponseInformational>();
             SkipDict = new Dictionary<string, StatResponseSkip>();
             FailDict = new Dictionary<string, StatResponseFail>();
@@ -115,7 +119,7 @@
         public StatResponseCriticalFailure GetCriticalFailure(EvaluationResult evaluationResult)
         {
             string key = $"{evaluationResult.EntityMnemonic}|{evaluationResult.SamMnemonic}|{evaluationResult.FailSamMnemonic}";
-            return CritcalFailureDict.ContainsKey(key) ? CritcalFailureDict[key] : null;
+            return CriticalFailureDict.ContainsKey(key) ? CriticalFailureDict[key] : null;
         }
 
         /// <summary> Retrieves an informational result by PIQI SAM keys. </summary>
@@ -277,14 +281,19 @@
                 informational.Increment(evaluationResult.EvalResult);
             }
 
-            // Log class records for all scoring PIQI SAMs. This is used for auditing.
-            StatResponseElement piqiElement = GetElement(evaluationResult);
-            if (piqiElement == null)
+            if (evaluationResult.ItemType == EntityItemTypeEnum.Root)
+                RootResponse.Increment(evaluationResult);
+            else
             {
-                piqiElement = new StatResponseElement(evaluationResult);
-                ElementDict.Add(piqiElement.Key, piqiElement);
+                // Log class records for all scoring PIQI SAMs. This is used for auditing.
+                StatResponseElement piqiElement = GetElement(evaluationResult);
+                if (piqiElement == null)
+                {
+                    piqiElement = new StatResponseElement(evaluationResult);
+                    ElementDict.Add(piqiElement.Key, piqiElement);
+                }
+                piqiElement.Increment(evaluationResult);
             }
-            piqiElement.Increment(evaluationResult);
 
             // Check if the PIQI SAM was skipped
             if (evaluationResult.EvalSkipped)
@@ -326,7 +335,7 @@
                         if (criticalFailure == null)
                         {
                             criticalFailure = new StatResponseCriticalFailure(evaluationResult);
-                            CritcalFailureDict.Add(criticalFailure.Key, criticalFailure);
+                            CriticalFailureDict.Add(criticalFailure.Key, criticalFailure);
                         }
                         criticalFailure.Increment(evaluationResult.EvalResult);
                     }

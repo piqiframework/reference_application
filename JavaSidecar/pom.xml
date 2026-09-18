@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.1.0</version>
+	</parent>
+
+	<groupId>com.cqlsidecar</groupId>
+	<artifactId>cql-sidecar</artifactId>
+	<version>1.0.0</version>
+
+	<properties>
+		<java.version>17</java.version>
+		<cql.version>5.2.0</cql.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<!-- CQL engine (provides org.opencds.cqf.cql.engine.* + pulls in elm transitively).
+             This is a Kotlin Multiplatform library as of the org.cqframework 4.x/5.x rewrite.
+             The bare "engine"/"cql-to-elm" coordinates are the multiplatform *common* metadata
+             artifacts; Gradle resolves those to the right platform jar automatically via
+             Gradle Module Metadata, but plain Maven only reads the .pom and has no such
+             variant resolution, so it needs the explicit "-jvm" artifacts below or the classes
+             simply aren't on the classpath (this is what caused the "package ... does not
+             exist" compile errors). -jvm transitively pulls in elm-jvm/cql-jvm/kotlin-stdlib. -->
+		<dependency>
+			<groupId>org.cqframework</groupId>
+			<artifactId>engine-jvm</artifactId>
+			<version>${cql.version}</version>
+		</dependency>
+		<!-- ModelManager + LibraryManager + CQL→ELM translation -->
+		<dependency>
+			<groupId>org.cqframework</groupId>
+			<artifactId>cql-to-elm-jvm</artifactId>
+			<version>${cql.version}</version>
+		</dependency>
+
+		<!-- UCUM (units of measure) service.
+             As of org.cqframework 4.x/5.x, this is needed at BOTH points this service uses
+             LibraryManager: (1) translation time, to validate any quantity literal that carries
+             a unit (e.g. "3 'mg'") - without it, compilation fails with "No UCUM service
+             implementation found"; and (2) evaluation time, since the engine's
+             computeWithConvertedUnits (UnitConversionHelper.kt) pulls the same lazy
+             LibraryManager.ucumService whenever CQL arithmetic mixes quantities with different
+             units (e.g. adding "5 'mg'" and "2 'g'") - without it, that conversion silently
+             returns null instead of converting. This "ucum" artifact is cqframework's own
+             reference implementation (backed by org.fhir:ucum) and self-registers via
+             META-INF/services, so adding it as a plain dependency is enough; no code changes
+             are needed. It's a regular JVM module (not Kotlin Multiplatform), so no "-jvm"
+             suffix is used here. -->
+		<dependency>
+			<groupId>org.cqframework</groupId>
+			<artifactId>ucum</artifactId>
+			<version>${cql.version}</version>
+		</dependency>
+
+		<!-- NOTE: elm-jackson / model-jackson no longer exist under org.cqframework.
+             ELM JSON reading is now org.cqframework.cql.elm.serializing.ElmJsonLibraryReader
+             (built into the elm module) and ModelInfo XML reading is now the top-level
+             org.hl7.elm_modelinfo.r1.serializing.parseModelInfoXml(Source) function
+             (built into the cql module); no separate SPI/Jackson artifact is needed anymore. -->
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+		</dependency>
+
+		<!-- Jackson 2 (com.fasterxml.jackson.*): this codebase (CqlController,
+             FhirR4TerminologyProvider) uses the classic ObjectMapper/JsonNode/TypeReference
+             API. Spring Boot 4's default JSON stack moved to Jackson 3 (tools.jackson.*),
+             so jackson-databind is no longer pulled in transitively by spring-boot-starter-web
+             the way it was under Boot 3.x. Boot 4 still version-manages Jackson 2 for
+             compatibility (see the jackson-2-bom property in spring-boot-dependencies), so no
+             explicit version is needed here; just the dependency declaration itself. -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

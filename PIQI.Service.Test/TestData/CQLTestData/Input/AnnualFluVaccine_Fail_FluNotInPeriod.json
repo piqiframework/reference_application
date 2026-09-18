@@ -1,0 +1,144 @@
+{
+  "patient": {
+    "demographics": {
+      "patientIdentifier": "PAT-004",
+      "birthDate": "1980-08-03T00:00:00Z",
+      "deceased": {
+        "codings": [],
+        "text": "false"
+      }
+    },
+    "conditions": [
+      {
+        "condition": {
+          "codings": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "38341003",
+              "display": "Hypertension"
+            }
+          ],
+          "text": "Hypertension"
+        },
+        "conditionStatus": {
+          "codings": [],
+          "text": "active"
+        },
+        "conditionType": "chronic",
+        "onsetDate": "2021-05-01T00:00:00Z"
+      }
+    ],
+    "labResults": [],
+    "immunizations": [
+      {
+        "immunization": {
+          "codings": [
+            {
+              "system": "http://hl7.org/fhir/sid/cvx",
+              "code": "141",
+              "display": "Influenza, seasonal, injectable"
+            }
+          ],
+          "text": "Flu vaccine"
+        },
+        "administrationDate": "2024-03-15T00:00:00Z",
+        "immunizationStatus": {
+          "codings": [],
+          "text": "completed"
+        }
+      }
+    ],
+    "vitalSigns": [
+      {
+        "vitalSign": {
+          "codings": [
+            {
+              "system": "http://loinc.org",
+              "code": "8480-6",
+              "display": "Systolic blood pressure"
+            }
+          ],
+          "text": "Systolic BP"
+        },
+        "performedDateTime": "2024-11-01T09:00:00Z",
+        "resultValue": {
+          "codings": [],
+          "text": "132",
+          "type": {
+            "codings": [],
+            "text": "numeric"
+          }
+        },
+        "resultUnit": {
+          "codings": [
+            {
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]",
+              "display": "mmHg"
+            }
+          ],
+          "text": "mmHg"
+        },
+        "resultStatus": {
+          "codings": [
+            {
+              "system": "http://hl7.org/fhir/observation-status",
+              "code": "final"
+            }
+          ],
+          "text": "final"
+        }
+      },
+      {
+        "vitalSign": {
+          "codings": [
+            {
+              "system": "http://loinc.org",
+              "code": "8462-4",
+              "display": "Diastolic blood pressure"
+            }
+          ],
+          "text": "Diastolic BP"
+        },
+        "performedDateTime": "2024-11-01T09:00:00Z",
+        "resultValue": {
+          "codings": [],
+          "text": "84",
+          "type": {
+            "codings": [],
+            "text": "numeric"
+          }
+        },
+        "resultUnit": {
+          "codings": [
+            {
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]",
+              "display": "mmHg"
+            }
+          ],
+          "text": "mmHg"
+        },
+        "resultStatus": {
+          "codings": [
+            {
+              "system": "http://hl7.org/fhir/observation-status",
+              "code": "final"
+            }
+          ],
+          "text": "final"
+        }
+      }
+    ],
+    "allergies": [],
+    "clinicalDocuments": [],
+    "diagnosticImaging": [],
+    "encounters": [],
+    "goals": [],
+    "healthAssessments": [],
+    "medicalDevices": [],
+    "medications": [],
+    "procedures": [],
+    "providers": []
+  }
+}

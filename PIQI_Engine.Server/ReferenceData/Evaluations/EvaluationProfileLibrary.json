@@ -1,24 +1,24 @@
 {
   "EvaluationProfileLibrary": [
     {
-      "name": "USCDI v3",
-      "mnemonic": "USCDI_V3",
-      "filePath": "ReferenceData/Evaluations/USCDI_V3.json"
-    },
-    {
-      "name": "USCDI v2",
-      "mnemonic": "USCDI_V2",
-      "filePath": "ReferenceData/Evaluations/USCDI_V2.json"
-    },
-    {
-      "name": "USCDI v3.1",
+      "name": "USCDI v3.1 Aligned Rubric",
       "mnemonic": "USCDI_V31",
       "filePath": "ReferenceData/Evaluations/USCDI_V31.json"
     },
-	{
+    {
       "name": "EOB - CARIN Blue Button  - Inpatient",
       "mnemonic": "EOB_C4BB_INPATIENT",
       "filePath": "ReferenceData/Evaluations/EOB_C4BB_INPATIENT.json"
+    },
+    {
+      "name": "Connectathon - Plausibility Evaluations",
+      "mnemonic": "CONNECTATHON_PLAUSIBILITY_EVALUATIONS",
+      "filePath": "ReferenceData/Evaluations/CONNECTATHON_PLAUSIBILITY_EVALUATIONS.json"
+    },
+    {
+      "name": "Connectathon - Laboratory Evaluations",
+      "mnemonic": "CONNECTATHON_LABORATORY_EVALUATIONS",
+      "filePath": "ReferenceData/Evaluations/CONNECTATHON_LABORATORY_EVALUATIONS.json"
     }
   ]
 }

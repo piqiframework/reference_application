@@ -40,21 +40,26 @@ namespace PIQI.Components.Models
         public ScoreResult MessageResults { get; set; }
 
         /// <summary>
-        /// Class-level score results.
+        /// Root-level score results.
         /// </summary>
-        public List<DataClassScoreResult> DataClassResults { get; set; }
+        public ModelScoreResult ModelResults { get; set; }
+
+        /// <summary>
+        /// Class-level score results.
+        /// </summary> 
+        public List<DataClassScoreResult> DataClassResults { get; set; } 
 
         /// <summary>
         /// Informational results for non-scoring SAMs.
         /// </summary>
         public List<InformationalResult> InformationalResults { get; set; }
 
-        /// <summary>
+        /// <summary>   
         /// Results for plausibility type SAMs.
         /// </summary>
         public List<PlausibilityResult> PlausibilityResults { get; set; }
 
-        #endregion 
+        #endregion  
 
         #region Constructors
 
@@ -78,7 +83,8 @@ namespace PIQI.Components.Models
 
             // Message score
             MessageResults = new ScoreResult(statResponse);
-             
+            ModelResults = new ModelScoreResult(statResponse);
+
             // Create Lists
             DataClassResults = new List<DataClassScoreResult>();
             InformationalResults = new List<InformationalResult>();
@@ -89,7 +95,7 @@ namespace PIQI.Components.Models
         }
         #endregion
 
-        #region Methods
+        #region Methods 
 
         #region Data Class Scoring
         private void Scoring_Data_Class(StatResponse statResponse, PIQIMessage message)
@@ -98,10 +104,13 @@ namespace PIQI.Components.Models
             foreach (EvaluationItem evaluationItem in message.EvaluationManager?.EvaluationItemDict?.Values?.Where(er => er.ItemType == EntityItemTypeEnum.Class) ?? [])
             {
                 StatResponseClass? statClass = statResponse.ClassDict?.Values?.FirstOrDefault(c => c.ClassMnemonic == evaluationItem.ClassEntityMnemonic);
-                DataClassScoreResult dataClassStatResult = new DataClassScoreResult(statClass, evaluationItem.Entity.FieldName ?? evaluationItem.Entity.Name);
+                var className = message.RefData.GetEntityUpperClass(evaluationItem.Entity.Mnemonic)?.Name
+                    ?? evaluationItem.Entity.Name?.Replace(" data class", string.Empty, StringComparison.OrdinalIgnoreCase)
+                    ?? evaluationItem.Entity.FieldName;
+                DataClassScoreResult dataClassStatResult = new DataClassScoreResult(statClass, className);
                 DataClassResults.Add(dataClassStatResult);
 
-                InformationalResult informationalResult = new InformationalResult(statResponse, evaluationItem.Entity);
+                InformationalResult informationalResult = new InformationalResult(statResponse, evaluationItem.Entity, className);
                 InformationalResults.Add(informationalResult);
             }
 
@@ -121,7 +130,6 @@ namespace PIQI.Components.Models
             {
                 // Get the entity associated with the criterion 
                 Entity? entity = message.RefData.GetEntity(criteria.Entity);
-                if (entity == null || entity.EntityType?.EntityTypeValue > EntityDataTypeEnum.ELM) continue;
 
                 // Get the SAM associated with the criterion
                 SAM? sam = message.RefData.GetSAM(criteria.SAMMnemonic);
@@ -137,6 +145,7 @@ namespace PIQI.Components.Models
 
                 // Add this item to the group
                 PlausibilityItem plausibilityItem = new PlausibilityItem(criteria, plausibilityGroupItem.Item1, sam);
+                plausibilityItem.DataClassName = message.RefData.GetEntityUpperClass(criteria.Entity)?.Name;
                 plausibilityGroupItem.Item2.ItemList.Add(plausibilityItem);
                 var key = $"{criteria.Entity}|{criteria.Sequence}";
                 plausibilityItemDict.Add(key, plausibilityItem);
@@ -195,8 +204,7 @@ namespace PIQI.Components.Models
         /// <param name="dataClassName">The name of the data class.</param>
         public DataClassScoreResult(StatResponseClass statResponseClass, string dataClassName)
         {
-            var dataClassNameSpaced = string.IsNullOrEmpty(dataClassName)? dataClassName : Regex.Replace(dataClassName, "([A-Z])", " $1").Trim();
-            DataClassName = char.ToUpper(dataClassNameSpaced[0]) + dataClassNameSpaced.Substring(1);
+            DataClassName = dataClassName;
             InstanceCount = statResponseClass.ElementCount;
 
             // Unweighted score
@@ -213,6 +221,55 @@ namespace PIQI.Components.Models
 
             CriticalFailureCount = statResponseClass.CriticalFailureCount;
         }
+        #endregion
+    }
+
+    /// <summary> 
+    /// Represents the score result for a specific data class.
+    /// </summary>
+    public class ModelScoreResult : ScoreResult
+    {
+        #region Properties
+        /// <summary>
+        /// Number of data class instances processed for this message.
+        /// </summary>
+        public int InstanceCount { get; set; }
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModelScoreResult"/>.
+        ///</summary>
+        public ModelScoreResult() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ModelScoreResult"/> class using the specified statistical method results for model level scoring.
+        /// </summary>
+        /// <param name="modelResponseEntity">The statistical method results used to populate the score values.</param>
+        public ModelScoreResult(StatResponse statResponse)
+        {
+            // Get model level stats
+            var modelResponseEntity = statResponse.RootResponse;
+
+            // Get populated class count from overall stat response
+            InstanceCount = statResponse.ClassDict.Where(c => c.Value.ElementCount > 0).Count();
+
+            // Unweighted score
+            Denominator = modelResponseEntity.SAMScoringProcessedCount;
+            Numerator = modelResponseEntity.SAMPassCount;
+            if (Denominator != 0)
+                PIQIScore = (int)Math.Truncate((float)Numerator / (float)Denominator * 100);
+
+            // Weighted score
+            WeightedDenominator = modelResponseEntity.SAMWeightedDenominator;
+            WeightedNumerator = modelResponseEntity.SAMWeightedNumerator;
+            if (WeightedDenominator != 0)
+                WeightedPIQIScore = (int)Math.Truncate((float)WeightedNumerator / (float)WeightedDenominator * 100);
+
+            CriticalFailureCount = modelResponseEntity.SAMCriticalFailureCount;
+        }
+
+
         #endregion
     }
 
@@ -323,12 +380,9 @@ namespace PIQI.Components.Models
         /// <param name="dataClass">
         /// The data class for which the informational results are being created.
         /// </param>
-        public InformationalResult(StatResponse statResponse, Entity dataClass)
+        public InformationalResult(StatResponse statResponse, Entity dataClass, string className)
         {
-            var dataClassNameSpaced = string.IsNullOrEmpty(dataClass.FieldName) ?
-                (string.IsNullOrEmpty(dataClass.Name) ? dataClass.Name : Regex.Replace(dataClass.FieldName, "([A-Z])", " $1").Trim()) :
-                Regex.Replace(dataClass.FieldName, "([A-Z])", " $1").Trim();
-            DataClassName = char.ToUpper(dataClassNameSpaced[0]) + dataClassNameSpaced.Substring(1);
+            DataClassName = className;
             EvaluationList = new List<InformationalEvaluation>();
 
             Dictionary<string, StatResponseInformational> classInformationalList =
@@ -460,20 +514,30 @@ namespace PIQI.Components.Models
         public string CriteriaOverrideName { get; set; }
 
         /// <summary>
-        /// Gets or sets the sequence number of the evaluation criterion.
+        /// Gets or sets data class name of the entity being evaluated.
         /// </summary>
-        public int CriteriaSequence { get; set; }
+        public string? DataClassName { get; set; }
 
         /// <summary>
         /// Gets or sets the mnemonic identifier for the entity being evaluated.
         /// </summary>
         public string EntityMnemonic { get; set; }
-        
+
         /// <summary>
-        /// Gets or sets the name of the Statistical Analysis Method (SAM) used for this evaluation.
+        /// Gets or sets the name for the entity being evaluated.
+        /// </summary>
+        public string EntityName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the SAM used for this evaluation.
         /// </summary>
         public string SamName { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the mnemonic of the SAM used for this evaluation.
+        /// </summary>
+        public string SamFailName { get; set; }
+
         /// <summary>
         /// Gets or sets the list of parameter name-value pairs used in the SAM evaluation.
         /// </summary>
@@ -523,15 +587,16 @@ namespace PIQI.Components.Models
         public PlausibilityItem(EvaluationCriterion criterion, Entity entity, SAM sam)  
         {
             CriteriaOverrideName = criterion.SamNameOverride;
-            CriteriaSequence = criterion.Sequence;
             EntityMnemonic = entity.Mnemonic;
+            EntityName = entity.Name;
             SamName = sam.Name;
+            SamFailName = criterion.FailureNameOverride ?? sam.FailName;
             if (criterion.SAMParameters != null && criterion.SAMParameters.Count > 0)
             {
                 ParmList = new List<Tuple<string, string>>();
                 foreach (EvaluationCriteriaParameter parameter in criterion.SAMParameters)
                 {
-                    SAMParameter? samParameter = sam.Parameters?.Where(sp => sp.Mnemonic == parameter.SamParameterMnemonic)?.First();
+                    SAMParameter? samParameter = sam.Parameters?.Where(sp => sp.Mnemonic == parameter.SamParameterMnemonic)?.FirstOrDefault();
                     if (samParameter?.Name == null || parameter.ParameterValue == null) continue;
                     ParmList.Add(new Tuple<string, string>(samParameter.Name, parameter.ParameterValue));
                 }

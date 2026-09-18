@@ -10,10 +10,11 @@
     <Configurations>Debug;Release;Development</Configurations>
     <Platforms>AnyCPU</Platforms>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <UserSecretsId>fc7a50da-e8fe-4a2b-84a7-4b6a77858b95</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.7">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -25,11 +26,13 @@
     <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.2.3" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CQLTest.Service\CQL.Service.csproj" />
     <ProjectReference Include="..\PIQI.Components\PIQI.Components.csproj" />
     <ProjectReference Include="..\PIQI.Data\PIQI.Data.csproj" />
   </ItemGroup>

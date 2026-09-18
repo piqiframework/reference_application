@@ -1,0 +1,864 @@
+{
+  "succeeded": true,
+  "errorMessage": null,
+  "elapsedTimeInMS": 1144,
+  "scoringData": {
+    "contributorID": null,
+    "dataSourceID": null,
+    "messageID": "patient.2026.0012apmeobse2026.0.0.0.95015",
+    "channelMnemonic": "ALT_AUDIT",
+    "evaluationRubric": "Plausibility Example",
+    "piqiEndpointUID": null,
+    "processDate": "2026-09-04T19:13:21.0971805-04:00",
+    "messageResults": {
+      "denominator": 0,
+      "numerator": 0,
+      "piqiScore": 0,
+      "criticalFailureCount": 0,
+      "weightedDenominator": 0,
+      "weightedNumerator": 0,
+      "weightedPIQIScore": 0
+    },
+    "dataClassResults": [
+      {
+        "dataClassName": "Allergies",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Care Plans",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Clinical Documents",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Clinical Tests",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Conditions",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Coverage",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Demographics",
+        "instanceCount": 1,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Diagnostic Imaging",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Encounters",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Goals",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Health Assessments",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Immunizations",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Lab Results",
+        "instanceCount": 1,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Medical Devices",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Medications",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Practitioners",
+        "instanceCount": 1,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Procedures",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Provenance",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      },
+      {
+        "dataClassName": "Vital Signs",
+        "instanceCount": 0,
+        "denominator": 0,
+        "numerator": 0,
+        "piqiScore": 0,
+        "criticalFailureCount": 0,
+        "weightedDenominator": 0,
+        "weightedNumerator": 0,
+        "weightedPIQIScore": 0
+      }
+    ],
+    "informationalResults": [
+      {
+        "dataClassName": "Allergies",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Care Plans",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Clinical Documents",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Clinical Tests",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Conditions",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Coverage",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Demographics",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Diagnostic Imaging",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Encounters",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Goals",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Health Assessments",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Immunizations",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Lab Results",
+        "evaluationList": [
+          {
+            "entityName": "Lab Results element",
+            "evaluationName": "Glucose Result Value is Plausible",
+            "instanceCount": 2,
+            "denominator": 1,
+            "numerator": 1
+          }
+        ]
+      },
+      {
+        "dataClassName": "Medical Devices",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Medications",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Practitioners",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Procedures",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Provenance",
+        "evaluationList": []
+      },
+      {
+        "dataClassName": "Vital Signs",
+        "evaluationList": []
+      }
+    ],
+    "plausibilityResults": [
+      {
+        "scope": "Lab Results element",
+        "itemList": [
+          {
+            "criteriaOverrideName": "Glucose Result Value is Plausible",
+            "entityMnemonic": "LAB_ELEMENT",
+            "samName": "Element Value Is Plausible",
+            "parmList": [
+              {
+                "item1": "Concept UOM Value Range",
+                "item2": "PLAUSIBLE_VALUES_GLUCOSE_SER_PLAS_BLD"
+              },
+              {
+                "item1": "Primary Concept ValueSet",
+                "item2": "GLUCOSE_SER_PLAS_BLD"
+              }
+            ],
+            "totalCount": 1,
+            "skippedCount": 0,
+            "evalCount": 1,
+            "passCount": 1,
+            "failCount": 0
+          },
+          {
+            "criteriaOverrideName": "HbA1c Result Value is Plausible",
+            "entityMnemonic": "LAB_ELEMENT",
+            "samName": "Element Value Is Plausible",
+            "parmList": [
+              {
+                "item1": "Concept UOM Value Range",
+                "item2": "PLAUSIBLE_HEMOGLOBIN_A1C"
+              },
+              {
+                "item1": "Primary Concept ValueSet",
+                "item2": "HEMOGLOBIN_A1C_BLOOD"
+              }
+            ],
+            "totalCount": 1,
+            "skippedCount": 1,
+            "evalCount": 0,
+            "passCount": 0,
+            "failCount": 0
+          }
+        ]
+      }
+    ],
+    "detectionResults": [
+      {
+        "valueSetName": "Glucose, Ser/Plas/Bld",
+        "detectionCount": 1
+      }
+    ]
+  },
+  "auditedMessage": {
+    "entityModelMnemonic": "PAT_CLINICAL_V1",
+    "contributorID": null,
+    "dataSourceID": null,
+    "messageID": "patient.2026.0012apmeobse2026.0.0.0.95015",
+    "audit": {
+      "messageNumerator": 0,
+      "messageDenominator": 0,
+      "messageScore": 0,
+      "messageNumeratorWeighted": 0,
+      "messageDenominatorWeighted": 0,
+      "messageScoreWeighted": 0,
+      "messageCriticalFailureCount": 0
+    },
+    "root": {
+      "rootName": "patient",
+      "classes": [
+        {
+          "className": "allergies",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "carePlans",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "clinicalDocuments",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "clinicalTests",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "conditions",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "coverage",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "demographics",
+          "elements": [
+            {
+              "attributes": [
+                {
+                  "attributeName": "birthDate",
+                  "data": {
+                    "$type": "tx",
+                    "text": "1970-01-01"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "birthSex",
+                  "data": {
+                    "$type": "cc",
+                    "codings": [
+                      {
+                        "system": "http://hl7.org/fhir/administrative-gender",
+                        "code": "female",
+                        "display": "Female"
+                      }
+                    ],
+                    "text": "Female"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "currentAddress",
+                  "data": {
+                    "$type": "tx",
+                    "text": "ID Exists"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "deathDate",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "deceased",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "emailAddress",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "ethnicity",
+                  "data": {
+                    "$type": "cc",
+                    "codings": [
+                      {
+                        "system": "urn:oid:2.16.840.1.113883.6.238",
+                        "code": "2186-5",
+                        "display": "Not Hispanic or Latino"
+                      }
+                    ],
+                    "text": "Not Hispanic or Latino"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "firstName",
+                  "data": {
+                    "$type": "tx",
+                    "text": "ID Exists"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "genderIdentity",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "lastName",
+                  "data": {
+                    "$type": "tx",
+                    "text": "ID Exists"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "maritalStatus",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "middleName",
+                  "data": {
+                    "$type": "tx",
+                    "text": "ID Exists"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "patientIdentifier",
+                  "data": {
+                    "$type": "tx",
+                    "text": "ID Exists"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "primaryLanguage",
+                  "data": {
+                    "$type": "cc",
+                    "codings": [
+                      {
+                        "system": "urn:ietf:bcp:47",
+                        "code": "en",
+                        "display": "English"
+                      }
+                    ],
+                    "text": "en"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "race",
+                  "data": {
+                    "$type": "cc",
+                    "codings": null,
+                    "text": "hawaiian"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "sexualOrientation",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "telecom",
+                  "data": {
+                    "$type": "tx",
+                    "text": "ID Exists"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "tribalAffiliation",
+                  "data": null,
+                  "attributeAudit": null
+                }
+              ],
+              "elementAudit": null
+            }
+          ],
+          "classAudit": null
+        },
+        {
+          "className": "diagnosticImaging",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "encounters",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "goals",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "healthAssessments",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "immunizations",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "labResults",
+          "elements": [
+            {
+              "attributes": [
+                {
+                  "attributeName": "interpretation",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "issuedDateTime",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "labCategory",
+                  "data": {
+                    "$type": "cc",
+                    "codings": [
+                      {
+                        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                        "code": "laboratory",
+                        "display": "Laboratory"
+                      }
+                    ],
+                    "text": "laboratory"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "order",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "orderDate",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "performedDateTime",
+                  "data": {
+                    "$type": "tx",
+                    "text": "9/2/2026 8:00:00 PM"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "performedTest",
+                  "data": {
+                    "$type": "cc",
+                    "codings": [
+                      {
+                        "system": "http://loinc.org",
+                        "code": "2345-7",
+                        "display": "Glucose Ser/Plas MCnc Pt Qn"
+                      }
+                    ],
+                    "text": "Glucose Ser/Plas MCnc Pt Qn"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "performerIdentifier",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "performerName",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "performingSite",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "referenceRange",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "resultStatus",
+                  "data": {
+                    "$type": "cc",
+                    "codings": [
+                      {
+                        "system": "http://hl7.org/fhir/ValueSet/observation-status",
+                        "code": "preliminary",
+                        "display": "preliminary"
+                      }
+                    ],
+                    "text": "preliminary"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "resultUnit",
+                  "data": {
+                    "$type": "cc",
+                    "codings": [
+                      {
+                        "system": "http://unitsofmeasure.org",
+                        "code": "mg/dl",
+                        "display": "mg/dl"
+                      }
+                    ],
+                    "text": "%"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "resultValue",
+                  "data": {
+                    "$type": "ov",
+                    "type": {
+                      "codings": null,
+                      "text": "PQ"
+                    },
+                    "text": "9"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "specimenCollectionDateTime",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "specimenCondition",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "specimenIdentifier",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "specimenSourceSite",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "specimenType",
+                  "data": null,
+                  "attributeAudit": null
+                }
+              ],
+              "elementAudit": {
+                "scoringData": {
+                  "elementScore": 0,
+                  "elementScoreWeighted": 0,
+                  "elementCriticalFailureCount": 0,
+                  "elementNumerator": 0,
+                  "elementDenominator": 0
+                },
+                "assessmentItems": null,
+                "informationalItems": [
+                  {
+                    "elementMnemonic": "LAB_ELEMENT",
+                    "elementName": "Lab Results element",
+                    "assessment": "Glucose Result Value is Plausible",
+                    "effect": "Informational",
+                    "status": "Passed",
+                    "reason": ""
+                  },
+                  {
+                    "elementMnemonic": "LAB_ELEMENT",
+                    "elementName": "Lab Results element",
+                    "assessment": "HbA1c Result Value is Plausible",
+                    "effect": "Informational",
+                    "status": "Skipped",
+                    "reason": "PrimaryConcept is not in valueset [HEMOGLOBIN_A1C_BLOOD]"
+                  }
+                ]
+              }
+            }
+          ],
+          "classAudit": null
+        },
+        {
+          "className": "medicalDevices",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "medications",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "practitioners",
+          "elements": [
+            {
+              "attributes": [
+                {
+                  "attributeName": "practitionerAddress",
+                  "data": {
+                    "$type": "tx",
+                    "text": "Boston, Massachusetts, US"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "practitionerIdentifier",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "practitionerName",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "practitionerRole",
+                  "data": null,
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "practitionerStatus",
+                  "data": {
+                    "$type": "cc",
+                    "codings": null,
+                    "text": "active"
+                  },
+                  "attributeAudit": null
+                },
+                {
+                  "attributeName": "practitionerTelecom",
+                  "data": {
+                    "$type": "tx",
+                    "text": "null.null@example.com"
+                  },
+                  "attributeAudit": null
+                }
+              ],
+              "elementAudit": null
+            }
+          ],
+          "classAudit": null
+        },
+        {
+          "className": "procedures",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "provenance",
+          "elements": null,
+          "classAudit": null
+        },
+        {
+          "className": "vitalSigns",
+          "elements": null,
+          "classAudit": null
+        }
+      ],
+      "rootAudit": null
+    }
+  }
+}

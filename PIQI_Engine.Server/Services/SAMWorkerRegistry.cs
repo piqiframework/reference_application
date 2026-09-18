@@ -16,6 +16,27 @@ public class SAMWorkerRegistry
     // Maps mnemonic to a factory that creates an ISAMWorker with dependencies
     private readonly ConcurrentDictionary<string, Func<SAM, SAMService, ISAMWorker>> _workerFactories = new();
 
+    private static IEnumerable<string> GetStaticMnemonics(Type type)
+    {
+        var mnemonics = new HashSet<string>();
+
+        var staticMnemonicsProp = type.GetProperty("StaticMnemonics", BindingFlags.Public | BindingFlags.Static);
+        if (staticMnemonicsProp?.GetValue(null) is IEnumerable<string> staticMnemonics)
+        {
+            foreach (var mnemonic in staticMnemonics)
+            {
+                if (!string.IsNullOrWhiteSpace(mnemonic))
+                    mnemonics.Add(mnemonic);
+            }
+        }
+
+        var staticMnemonicProp = type.GetProperty("StaticMnemonic", BindingFlags.Public | BindingFlags.Static);
+        if (staticMnemonicProp?.GetValue(null) is string staticMnemonic && !string.IsNullOrWhiteSpace(staticMnemonic))
+            mnemonics.Add(staticMnemonic);
+
+        return mnemonics;
+    }
+
     /// <summary>
     /// Registers a worker factory for a specific mnemonic.
     /// </summary>
@@ -38,16 +59,13 @@ public class SAMWorkerRegistry
 
         foreach (var type in samTypes)
         {
-            // Discover the static property "StaticMnemonic"
-            var staticMnemonicProp = type.GetProperty("StaticMnemonic", BindingFlags.Public | BindingFlags.Static);
-            if (staticMnemonicProp == null) continue;
-
-            var mnemonic = staticMnemonicProp.GetValue(null) as string;
-            if (string.IsNullOrWhiteSpace(mnemonic)) continue;
-
-            // Register a factory that creates the worker with dependencies
-            _workerFactories[mnemonic] = (sam, samServiceParam) =>
-                (ISAMWorker)Activator.CreateInstance(type, sam, samServiceParam)!;
+            var mnemonics = GetStaticMnemonics(type);
+            foreach (var mnemonic in mnemonics)
+            {
+                // Register a factory that creates the worker with dependencies
+                _workerFactories[mnemonic] = (sam, samServiceParam) =>
+                    (ISAMWorker)Activator.CreateInstance(type, sam, samServiceParam)!;
+            }
         }
     }
 

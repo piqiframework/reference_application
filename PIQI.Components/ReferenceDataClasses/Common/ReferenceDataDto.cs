@@ -1,18 +1,18 @@
 ﻿namespace PIQI.Components.Models
 {
     /// <summary>
-    /// Represents a reference data item with a label and a value.
+    /// Represents a reference data item with a name and a mnemonic.
     /// </summary>
     public class ReferenceDataDto
     {
         /// <summary>
-        /// The display label for the reference data.
+        /// The display name for the reference data.
         /// </summary>
-        public string Label { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// The value corresponding to the reference data label.
+        /// The mnemonic corresponding to the reference data label.
         /// </summary>
-        public string Value { get; set; }
+        public string Mnemonic { get; set; }
     }
 }

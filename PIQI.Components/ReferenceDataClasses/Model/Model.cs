@@ -13,7 +13,7 @@
         /// <summary>
         /// The version number of the model.
         /// </summary>
-        public double Version { get; set; }
+        public string Version { get; set; } = null!;
 
         /// <summary>
         /// The optional unique mnemonic for the model.

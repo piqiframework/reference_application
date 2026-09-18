@@ -1,6 +1,7 @@
 {
-  "name": "USCDI v2 Aligned",
+  "name": "USCDI v2",
   "mnemonic": "USCDI_V2",
+  "tenantUid": "00000000-0000-0000-0000-000000000000",
   "description": "USCDI 2",
   "version": null,
   "authorityName": "USCDI",
@@ -58,7 +59,7 @@
     },
     {
       "sequence": 3,
-      "description": "",
+      "description": null,
       "entity": "LAB_PERFDT",
       "samMnemonic": "ATTR_ISPASTDATE",
       "samNameOverride": "Performed date is valid",
@@ -72,7 +73,7 @@
     },
     {
       "sequence": 4,
-      "description": "",
+      "description": null,
       "entity": "LAB_RESVALUE",
       "samMnemonic": "ATTR_ISPOPULATED",
       "samNameOverride": "Lab result value is populated",
@@ -107,7 +108,7 @@
     },
     {
       "sequence": 6,
-      "description": "",
+      "description": null,
       "entity": "ALG_SUB",
       "samMnemonic": "CONCEPT_ISVALIDMEMBER",
       "samNameOverride": "Allergy Substance is RxNorm or SNOMED-CT",
@@ -128,7 +129,7 @@
     },
     {
       "sequence": 7,
-      "description": "",
+      "description": null,
       "entity": "ALG_EFFDT",
       "samMnemonic": "ATTR_ISPASTDATE",
       "samNameOverride": "Effective date is valid",
@@ -142,7 +143,7 @@
     },
     {
       "sequence": 8,
-      "description": "",
+      "description": null,
       "entity": "CND_COND",
       "samMnemonic": "CONCEPT_ISVALIDMEMBER",
       "samNameOverride": "Condition is SNOMED-CT or ICD10CM",
@@ -163,7 +164,7 @@
     },
     {
       "sequence": 9,
-      "description": "",
+      "description": null,
       "entity": "CND_ONDT",
       "samMnemonic": "ATTR_ISPASTDATE",
       "samNameOverride": "Condition onset date is valid",
@@ -177,7 +178,7 @@
     },
     {
       "sequence": 10,
-      "description": "",
+      "description": null,
       "entity": "CND_RESDT",
       "samMnemonic": "ATTR_ISPASTDATE",
       "samNameOverride": "Condition resolution date is valid",
@@ -191,7 +192,7 @@
     },
     {
       "sequence": 11,
-      "description": "",
+      "description": null,
       "entity": "DEM_DOB",
       "samMnemonic": "ATTR_ISPASTDATE",
       "samNameOverride": "Date of birth is valid past date",
@@ -205,7 +206,7 @@
     },
     {
       "sequence": 12,
-      "description": "",
+      "description": null,
       "entity": "DEM_SEX",
       "samMnemonic": "CONCEPT_ISVALIDMEMBER",
       "samNameOverride": "Birth sex is conformant",
@@ -226,7 +227,7 @@
     },
     {
       "sequence": 13,
-      "description": "",
+      "description": null,
       "entity": "DEM_ETHN",
       "samMnemonic": "CONCEPT_ISVALIDMEMBER",
       "samNameOverride": "Ethnicity is valid code",
@@ -247,7 +248,7 @@
     },
     {
       "sequence": 14,
-      "description": "",
+      "description": null,
       "entity": "DEM_RACE",
       "samMnemonic": "CONCEPT_ISVALIDMEMBER",
       "samNameOverride": "Race is valid concept",
@@ -268,7 +269,7 @@
     },
     {
       "sequence": 15,
-      "description": "",
+      "description": null,
       "entity": "IMM_ADMDT",
       "samMnemonic": "ATTR_ISPASTDATE",
       "samNameOverride": "Immunization date is valid",
@@ -282,7 +283,7 @@
     },
     {
       "sequence": 16,
-      "description": "",
+      "description": null,
       "entity": "DEM_LANG",
       "samMnemonic": "ATTR_ISPOPULATED",
       "samNameOverride": "Primary language is populated",
@@ -394,7 +395,7 @@
     },
     {
       "sequence": 22,
-      "description": "",
+      "description": null,
       "entity": "VIT_RESUNIT",
       "samMnemonic": "ATTR_INEXTERNALLIST",
       "samNameOverride": "Vital sign result unit is UCUM",
@@ -415,7 +416,7 @@
     },
     {
       "sequence": 23,
-      "description": "",
+      "description": null,
       "entity": "VIT_PERFDT",
       "samMnemonic": "ATTR_ISPASTDATE",
       "samNameOverride": "performed date is valid",

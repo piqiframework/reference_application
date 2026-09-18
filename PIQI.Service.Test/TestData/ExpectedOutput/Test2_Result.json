@@ -1,13 +1,10 @@
 {
   "succeeded": true,
-  "errorMessage": null,
-  "elapsedTimeInMS": 624,
   "scoringData": {
     "contributorID": "TestProvider",
     "dataSourceID": "TestSource",
     "messageID": "Msg002",
     "evaluationRubric": "USCDI v3",
-    "processDate": "2026-07-14T06:49:47.671953-04:00",
     "messageResults": {
       "denominator": 9,
       "numerator": 4,
@@ -30,7 +27,7 @@
         "weightedPIQIScore": 0
       },
       {
-        "dataClassName": "Care Plans",
+        "dataClassName": "Care Plan",
         "instanceCount": 0,
         "denominator": 0,
         "numerator": 0,
@@ -234,7 +231,7 @@
         "evaluationList": []
       },
       {
-        "dataClassName": "Care Plans",
+        "dataClassName": "Care Plan",
         "evaluationList": []
       },
       {
@@ -330,7 +327,7 @@
           "elements": null
         },
         {
-          "className": "carePlans",
+          "className": "carePlan",
           "elements": null
         },
         {
@@ -694,11 +691,6 @@
                 },
                 {
                   "attributeName": "encounterReason",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "encounterStartDate",
                   "data": null,
                   "attributeAudit": null
                 },

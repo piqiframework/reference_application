@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CQLTest.Service\CQL.Service.csproj" />
     <ProjectReference Include="..\PIQI.Data\PIQI.Data.csproj" />
   </ItemGroup>
 

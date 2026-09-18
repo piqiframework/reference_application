@@ -1,0 +1,185 @@
+{
+  "patient": {
+    "demographics": {
+      "patientIdentifier": "PAT-002",
+      "birthDate": "1972-11-30T00:00:00Z",
+      "deceased": {
+        "codings": [],
+        "text": "false"
+      }
+    },
+    "conditions": [
+      {
+        "condition": {
+          "codings": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "44054006",
+              "display": "Diabetes mellitus type 2"
+            }
+          ],
+          "text": "Diabetes mellitus type 2"
+        },
+        "conditionStatus": {
+          "codings": [],
+          "text": "active"
+        },
+        "conditionType": "chronic",
+        "onsetDate": "2019-01-15T00:00:00Z"
+      },
+      {
+        "condition": {
+          "codings": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "38341003",
+              "display": "Hypertension"
+            }
+          ],
+          "text": "Hypertension"
+        },
+        "conditionStatus": {
+          "codings": [],
+          "text": "active"
+        },
+        "conditionType": "chronic",
+        "onsetDate": "2020-03-22T00:00:00Z"
+      }
+    ],
+    "labResults": [
+      {
+        "test": {
+          "codings": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "performedDateTime": "2024-03-10T08:00:00Z",
+        "resultValue": {
+          "codings": [],
+          "text": "10.5",
+          "type": {
+            "codings": [],
+            "text": "numeric"
+          }
+        },
+        "resultUnit": {
+          "codings": [
+            {
+              "system": "http://unitsofmeasure.org",
+              "code": "%",
+              "display": "%"
+            }
+          ],
+          "text": "%"
+        },
+        "resultStatus": {
+          "codings": [
+            {
+              "system": "http://hl7.org/fhir/observation-status",
+              "code": "final"
+            }
+          ],
+          "text": "final"
+        }
+      }
+    ],
+    "immunizations": [],
+    "vitalSigns": [
+      {
+        "vitalSign": {
+          "codings": [
+            {
+              "system": "http://loinc.org",
+              "code": "8480-6",
+              "display": "Systolic blood pressure"
+            }
+          ],
+          "text": "Systolic BP"
+        },
+        "performedDateTime": "2024-05-14T14:00:00Z",
+        "resultValue": {
+          "codings": [],
+          "text": "155",
+          "type": {
+            "codings": [],
+            "text": "numeric"
+          }
+        },
+        "resultUnit": {
+          "codings": [
+            {
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]",
+              "display": "mmHg"
+            }
+          ],
+          "text": "mmHg"
+        },
+        "resultStatus": {
+          "codings": [
+            {
+              "system": "http://hl7.org/fhir/observation-status",
+              "code": "final"
+            }
+          ],
+          "text": "final"
+        }
+      },
+      {
+        "vitalSign": {
+          "codings": [
+            {
+              "system": "http://loinc.org",
+              "code": "8462-4",
+              "display": "Diastolic blood pressure"
+            }
+          ],
+          "text": "Diastolic BP"
+        },
+        "performedDateTime": "2024-05-14T14:00:00Z",
+        "resultValue": {
+          "codings": [],
+          "text": "95",
+          "type": {
+            "codings": [],
+            "text": "numeric"
+          }
+        },
+        "resultUnit": {
+          "codings": [
+            {
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]",
+              "display": "mmHg"
+            }
+          ],
+          "text": "mmHg"
+        },
+        "resultStatus": {
+          "codings": [
+            {
+              "system": "http://hl7.org/fhir/observation-status",
+              "code": "final"
+            }
+          ],
+          "text": "final"
+        }
+      }
+    ],
+    "allergies": [],
+    "clinicalDocuments": [],
+    "diagnosticImaging": [],
+    "encounters": [],
+    "goals": [],
+    "healthAssessments": [],
+    "medicalDevices": [],
+    "medications": [],
+    "procedures": [],
+    "providers": []
+  }
+}

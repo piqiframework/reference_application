@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CQLTest.Service;
+using Microsoft.EntityFrameworkCore;
 using PIQI.Components.Models;
 using PIQI.Data;
 using System.Net;
@@ -31,6 +32,11 @@ namespace PIQI.Components.Services
         public HttpClient Client { get; }
 
         /// <summary>
+        /// Gets the <see cref="CQLServiceClient"/> instance used for CQL evaluation operations.
+        /// </summary>
+        public CQLServiceClient CqlService { get; }
+
+        /// <summary>
         /// Gets or sets the reference data used for PIQI processing.
         /// </summary>
         /// <value>
@@ -56,14 +62,18 @@ namespace PIQI.Components.Services
         /// <param name="dbContext">
         /// The <see cref="PIQIDbContext"/> instance used for database operations.
         /// </param>
+        /// <param name="cqlService">
+        /// The <see cref="CQLServiceClient"/> instance used for CQL evaluation operations.
+        /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Thrown if <paramref name="fhirClientProvider"/> or <paramref name="dbContext"/> is <c>null</c>.
+        /// Thrown if <paramref name="fhirClientProvider"/>, <paramref name="dbContext"/>, or <paramref name="cqlService"/> is <c>null</c>.
         /// </exception>
-        public SAMService(IFHIRClientProvider fhirClientProvider, HttpClient client, PIQIDbContext dbContext)
+        public SAMService(IFHIRClientProvider fhirClientProvider, HttpClient client, PIQIDbContext dbContext, CQLServiceClient cqlService)
         {
             _fhirClientProvider = fhirClientProvider ?? throw new ArgumentNullException(nameof(fhirClientProvider));
             Client = client;
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            CqlService = cqlService ?? throw new ArgumentNullException(nameof(cqlService));
         }
 
         #endregion

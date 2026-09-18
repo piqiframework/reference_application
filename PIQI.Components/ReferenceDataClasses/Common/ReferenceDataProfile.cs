@@ -3,7 +3,7 @@
 namespace PIQI.Components.Models
 {
     /// <summary>
-    /// Represents the root container for evaluation profiles.
+    /// Represents the root container for reference data profiles.
     /// </summary>
     public class ReferenceDataProfileRoot
     {
@@ -18,6 +18,12 @@ namespace PIQI.Components.Models
         /// </summary>
         [JsonProperty("ModelLibrary")]
         public List<ReferenceDataProfile>? ModelProfiles { get; set; }
+
+        /// <summary>
+        /// A collection of CQL library profiles.
+        /// </summary>
+        [JsonProperty("CQLProfileLibrary")]
+        public List<CQLReferenceDataProfile>? CQLProfiles { get; set; }
     }
 
     /// <summary>
@@ -45,6 +51,7 @@ namespace PIQI.Components.Models
         #endregion
 
         #region Constructors
+        public ReferenceDataProfile() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReferenceDataProfile"/> class.
@@ -61,6 +68,41 @@ namespace PIQI.Components.Models
             Mnemonic = mnemonic;
             if (filePath != null)
                 FilePath = filePath;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Represents an individual evaluation profile with basic metadata.
+    /// </summary>
+    public class CQLReferenceDataProfile : ReferenceDataProfile
+    {
+        #region Properties
+        /// <summary>
+        /// The file path where the field mapping is stored.
+        /// </summary>
+        public string? FieldMappingFilePath { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public CQLReferenceDataProfile() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CQLReferenceDataProfile"/> class.
+        /// </summary>
+        /// <param name="name">The display name of the profile.</param>
+        /// <param name="mnemonic">The unique mnemonic identifier associated with the profile.</param>
+        /// <param name="cqlFilePath">The file path where the CQL is stored.</param>
+        /// <param name="fieldMappingFilePath">An optional file path for the field mapping. If not provided, the profile will not be associated with a field mapping file.</param>
+        public CQLReferenceDataProfile(string name, string mnemonic, string cqlFilePath, string? fieldMappingFilePath = null)
+        {
+            Name = name;
+            Mnemonic = mnemonic;
+            FilePath = cqlFilePath;
+            FieldMappingFilePath = fieldMappingFilePath;
         }
 
         #endregion

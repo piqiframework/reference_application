@@ -1,0 +1,110 @@
+{
+    "formatID": "FHIR JSON",
+    "messageID": "patient.2026.09.09",
+    "patient": {
+        "demographics": {
+            "patientIdentifier": "ID Exists",
+            "firstName": "ID Exists",
+            "lastName": "ID Exists",
+            "telecom": "ID Exists",
+            "currentAddress": "ID Exists",
+            "birthSex": {
+                "codings": [
+                    {
+                        "system": "http://hl7.org/fhir/administrative-gender",
+                        "code": "male",
+                        "display": "Male"
+                    }
+                ],
+                "text": "Male"
+            },
+            "birthDate": "1976-12-31",
+            "ethnicity": {
+                "codings": [
+                    {
+                        "system": "urn:oid:2.16.840.1.113883.6.238",
+                        "code": "2186-5"
+                    }
+                ],
+                "text": "Not Hispanic or Latino"
+            },
+            "primaryLanguage": {
+                "codings": [
+                    {
+                        "system": "urn:ietf:bcp:47",
+                        "code": "en",
+                        "display": "English"
+                    }
+                ],
+                "text": "en"
+            },
+            "race": {
+                "codings": [
+                ],
+                "text": "black"
+            }
+        },
+        "conditions": [
+            {
+                "conditionCategory": {
+                    "codings": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                            "code": "encounter-diagnosis"
+                        }
+                    ],
+                    "text": "Problem"
+                },
+                "conditionStatus": {
+                    "codings": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                            "code": "active"
+                        }
+                    ],
+                    "text": "active"
+                },
+                "clinicalStatus": {
+                    "codings": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                            "code": "active"
+                        }
+                    ],
+                    "text": "active"
+                },
+                "verificationStatus": {
+                    "codings": [
+                        {
+                            "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                            "code": "confirmed"
+                        }
+                    ],
+                    "text": "confirmed"
+                },
+                "condition": {
+                    "codings": [
+                        {
+                            "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                            "code": "O00.01"
+                        }
+                    ],
+                    "text": "Abdominal pregnancy with intrauterine pregnancy"
+                },
+                "assertedDate": "2026-09-01T00:00:00+00:00",
+                "recordedDate": "2026-09-01T00:00:00+00:00",
+                "onsetDate": "2026-09-01T00:00:00+00:00",
+                "resolutionDate": "2026-09-01T00:00:00+00:00"
+            }
+        ],
+        "practitioners": [
+            {
+                "practitionerAddress": "Anytown, Alabama, US",
+                "practitionerTelecom": "practitioner@AnytownHealth.com",
+                "practitionerStatus": {
+                    "text": "active"
+                }
+            }
+        ]
+    }
+}

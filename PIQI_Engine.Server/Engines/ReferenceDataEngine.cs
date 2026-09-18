@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using PIQI.Components.CustomExceptionClasses;
 using PIQI.Components.Models;
 using PIQI_Engine.Server.Services;
 using static PIQI_Engine.Server.Services.FileCacheService;
+using CQLTest.Service;
 
 namespace PIQI_Engine.Server.Engines
 {
@@ -40,68 +42,87 @@ namespace PIQI_Engine.Server.Engines
         public ReferenceDataEngine(IConfiguration configuration, ILogger<PIQIEngine> logger, FileCacheService cache)
         {
             _Configuration = configuration;
-            _Logger = logger;
+            _Logger = logger; 
             _Cache = cache;
         }
 
         #region Main
         /// <summary>
-        /// Loads all reference data including code systems, SAMs, evaluation rubrics, data types, value lists, models, and entities.
+        /// Loads all reference data including code systems, SAMs, evaluation rubrics, data types, value lists, value sets, models, entities, and CQL libraries.
+        /// This method orchestrates the loading of all required reference data components for PIQI engine operation.
         /// </summary>
         /// <param name="EvaluationRubricMnemonic">The mnemonic identifier of the evaluation rubric to load.</param>
-        /// <param name="evaluation">Optional file containing evaluation rubric JSON data.</param>
-        /// <returns>A <see cref="PIQIReferenceData"/> containing the loaded reference data.</returns>
+        /// <param name="evaluation">Optional file containing evaluation rubric JSON data. If provided, uses the uploaded rubric instead of cached/configured rubrics.</param>
+        /// <returns>A <see cref="PIQIReferenceData"/> object containing all loaded reference data components.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when any required reference data component fails to load or is missing.</exception>
         public PIQIReferenceData LoadRefData(string EvaluationRubricMnemonic, IFormFile? evaluation)
         {
-            try
+            try 
             {
                 PIQIReferenceData refData = new PIQIReferenceData();
 
                 // Code systems
                 List<CodeSystem>? result1 = LoadCodeSystems(); 
-                if (result1 == null) throw new Exception("Missing or failed to load code systems.");
-                refData.CodeSystemList = result1;
+                if (result1 == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Missing or failed to load code systems.");
+                refData.CodeSystemList = result1; 
 
                 // Sams
                 List<SAM>? result2 = LoadSAMs();
-                if (result2 == null) throw new Exception("Missing or failed to load SAMs.");
+                if (result2 == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Missing or failed to load SAMs.");
                 refData.SAMList = result2;
 
                 // evaluation rubric
                 EvaluationRubric? result3 = LoadEvaluationRubric(EvaluationRubricMnemonic, evaluation);
-                if (result3 == null) throw new Exception($"Missing or failed to load evaluation rubric: {EvaluationRubricMnemonic}.");
+                if (result3 == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", $"Missing or failed to load evaluation rubric: {EvaluationRubricMnemonic}.");
                 refData.EvaluationRubric = result3;
 
                 // Data types
                 List<DataType>? result4 = LoadDataTypeList();
-                if (result4 == null) throw new Exception("Missing or failed to load data type list.");
+                if (result4 == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Missing or failed to load data type list.");
                 refData.DataTypeList = result4;
-
+                 
                 // Value list
                 List<ValueList>? result5 = LoadValueList();
-                if (result5 == null) throw new Exception("Missing or failed to load value list.");
+                if (result5 == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Missing or failed to load value list.");  
                 refData.ValueList = result5;
-
+                 
                 // Value list
-                List<ValueSet>? result6 = LoadValueSetList();
-                if (result6 == null) throw new Exception("Missing or failed to load value set list.");
+                List<ValueSet>? result6 = LoadValueSetList(); 
+                if (result6 == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Missing or failed to load value set list.");   
                 refData.ValueSetList = result6;
 
                 // Models
                 string? evalModelMnemonic = refData.EvaluationRubric?.Model?.Mnemonic;
-                if (evalModelMnemonic == null) throw new Exception("Missing PIQI model mnemonic in evaluation rubric.");
+                if (evalModelMnemonic == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Missing PIQI model mnemonic in evaluation rubric.");
 
                 Model? result8 = LoadModel(evalModelMnemonic);
-                if (result8 == null) throw new Exception($"Missing or failed to load model: {evalModelMnemonic}."); 
+                if (result8 == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", $"Missing or failed to load model: {evalModelMnemonic}."); 
                 refData.Model = result8;
 
                 // Entities
-                if (refData.Model.DataClasses == null) throw new Exception($"Missing or failed to load entities from the model: {evalModelMnemonic}.");
+                if (refData.Model.DataClasses == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", $"Missing or failed to load entities from the model: {evalModelMnemonic}.");
                 refData.EntityModel = new EntityModel(refData.Model);
 
+                // CQL
+                // List of all SAM mnemonics associated with the CQL libraries to be loaded
+                List<string> CQLSAMMnemonics = ["CQL_EVALUATOR", "CQL_ACIG_EVALUATOR", "CQL_AVI_EVALUATOR", "CQL_PCI_EVALUATOR", "CQL_PSI_EVALUATOR", "CQL_PTI_EVALUATOR", "CQL_AVU_EVALUATOR", "CQL_ACIV_EVALUATOR", "CQL_CO_EVALUATOR", "CQL_CIM_EVALUATOR", "CQL_ACIF_EVALUATOR", "CQL_AVM_EVALUATOR"];
+                
+                // All CQL library mnemonics from CQL SAMs in the evaluation criteria 
+                List<string> cqlMnemonics = refData.EvaluationRubric?.Criteria?
+                    .Where(c => CQLSAMMnemonics.Contains(c.SAMMnemonic))
+                    .Select(c => c.SAMParameters?.FirstOrDefault(p =>
+                        !string.IsNullOrEmpty(p.SamParameterMnemonic) &&
+                        p.SamParameterMnemonic.Equals("CQL_LIBRARY_MNEMONIC"))?.ParameterValue)
+                    .Where(v => !string.IsNullOrEmpty(v))
+                    .OfType<string>()
+                    .ToList() ?? [];
+                List<CQLItem>? result9 = LoadCQL(cqlMnemonics);
+                if (result9 == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", $"Missing or failed to load CQL: {cqlMnemonics}.");
+                refData.CQLList = result9;
+                 
                 return refData;
             }
-            catch
+            catch 
             {
                 throw;
             }
@@ -161,9 +182,11 @@ namespace PIQI_Engine.Server.Engines
 
         #region Code Systems
         /// <summary>
-        /// Loads a list of code systems.
+        /// Loads the list of supported code systems from cache or configuration file.
+        /// Uses file-based caching with automatic invalidation when the source file is modified.
         /// </summary>
-        /// <returns>A list of <see cref="CodeSystem"/>containing the supported code systems.</returns>
+        /// <returns>A <see cref="List{CodeSystem}"/> containing all supported code systems, or <c>null</c> if loading fails.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the code systems file is missing or deserialization fails.</exception>
         private List<CodeSystem>? LoadCodeSystems()
         {
             string baseKey = "CODE_SYSTEMS";
@@ -189,7 +212,7 @@ namespace PIQI_Engine.Server.Engines
                         string json = File.ReadAllText(filePath);
 
                         codeSystems = JsonConvert.DeserializeObject<CodeSystemRoot>(json)?.CodeSystemLibrary;
-                        if (codeSystems == null) throw new Exception("Failed to load code systems");
+                        if (codeSystems == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load code systems");
 
                         // Put code systems in cache
                         SetCacheItem<List<CodeSystem>>(codeSystems, baseKey);
@@ -208,11 +231,13 @@ namespace PIQI_Engine.Server.Engines
         #region Models
 
         /// <summary>
-        /// Loads a specific model by mnemonic identifier.
+        /// Loads a specific model by its mnemonic identifier from cache or configuration files.
+        /// Checks cache first, then loads from file system if not cached or if the library file has been modified.
         /// </summary>
-        /// <param name="modelMnemonic">The mnemonic of the model to load.</param>
-        /// <returns>A <see cref="Model"/> containing the requested model.</returns>
-        private Model? LoadModel(string modelMnemonic)
+        /// <param name="modelMnemonic">The unique mnemonic identifier of the model to load.</param>
+        /// <returns>A <see cref="Model"/> object containing the requested model definition, or <c>null</c> if not found.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the model library is not found, model file cannot be read, or deserialization fails.</exception>
+        public Model? LoadModel(string modelMnemonic)
         {
             string baseKey = "MODEL";
             string libraryKey = "MODEL_LIBRARY";
@@ -243,7 +268,7 @@ namespace PIQI_Engine.Server.Engines
                         // Read file and deserialize the JSON to get the list of profiles
                         string profileJson = File.ReadAllText(libraryFilePath);
                         List<ReferenceDataProfile>? modelProfiles = JsonConvert.DeserializeObject<ReferenceDataProfileRoot>(profileJson)?.ModelProfiles;
-                        if (modelProfiles == null) throw new Exception("Failed to load model profiles.");
+                        if (modelProfiles == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load model profiles.");
 
                         // Add updated library to the cache
                         SetCacheItem<List<ReferenceDataProfile>>(modelProfiles, $"{baseKey}|{libraryKey}");
@@ -252,7 +277,7 @@ namespace PIQI_Engine.Server.Engines
                         modelFilePath = modelProfiles.FirstOrDefault(e => e.Mnemonic.Equals(modelMnemonic))?.FilePath;
                     }
 
-                    if (modelFilePath == null || !File.Exists(modelFilePath)) throw new Exception("File for model is invalid or missing.");
+                    if (modelFilePath == null || !File.Exists(modelFilePath)) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "File for model is invalid or missing.");
 
                     // Check if the model has been modified since last cached
                     DateTime modelLastModified = File.GetLastWriteTimeUtc(modelFilePath);
@@ -261,29 +286,191 @@ namespace PIQI_Engine.Server.Engines
                         // Deserialize the file into an model
                         string rubricJson = File.ReadAllText(modelFilePath);
                         model = JsonConvert.DeserializeObject<Model>(rubricJson);
-                        if (model == null) throw new Exception("Failed to load model.");
+                        if (model == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load model.");
                     }
                     // Put the model in the cache
                     SetCacheItem<Model>(model, $"{baseKey}|{modelMnemonic}");
                     return model;
                 }
                 else
-                    throw new Exception("Model library not found.");
+                    throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Model library not found.");
             }
             catch
             {
                 throw;
             }
         }
+
+        /// <summary>
+        /// Loads all available models and returns them as a list of <see cref="ReferenceDataDto"/>.
+        /// </summary>
+        /// <returns>A <see cref="List{ReferenceDataDto}"/> containing all models.</returns>
+        public List<ReferenceDataDto> LoadAllModels()
+        {
+            try
+            {
+                List<ReferenceDataDto> models = new List<ReferenceDataDto>();
+
+                string? filePath = _Configuration["FilePaths:ModelPath"];
+                if (filePath == null || !File.Exists(filePath))
+                    throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Invalid or missing model library file.");
+
+                string json = File.ReadAllText(filePath);
+                List<ReferenceDataProfile>? baseModels = JsonConvert.DeserializeObject<ReferenceDataProfileRoot>(json)?.ModelProfiles;
+                if (baseModels == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load models");
+
+                models = baseModels.Select(model => new ReferenceDataDto
+                {
+                    Name = model.Name,
+                    Mnemonic = model.Mnemonic
+                }).ToList();
+
+                return models;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Imports a model into the cache. 
+        /// </summary>
+        /// <param name="modelName">The display name of the model.</param>
+        /// <param name="modelMnemonic">A unique identifier (mnemonic) for the model.</param>
+        /// <param name="model">The model definition file uploaded as an <see cref="IFormFile"/>.</param>
+        /// <remarks>
+        /// If a model with the same mnemonic already exists in the cache, 
+        /// its definition and metadata are overwritten. Otherwise, a new model profile is added.
+        /// </remarks>
+        /// <exception cref="Exception">
+        /// Thrown if no file is provided or if deserialization of the model fails.
+        /// </exception>
+        public void ImportModel(string modelName, string modelMnemonic, IFormFile modelFile)
+        {
+            string libraryKey = "MODEL_LIBRARY";
+            string baseKey = "MODEL";
+
+            try
+            {
+                // Add model to model cache
+                CacheItem<Model>? modelCacheItem = GetCacheItem<Model>($"{baseKey}|{modelMnemonic}");
+                Model? modelData = null;
+
+                // Get model
+                if (modelFile.Length == 0)
+                    throw new CustomPIQIException(400, "INVALID_INPUT", "File not selected");
+
+                using (var reader = new StreamReader(modelFile.OpenReadStream()))
+                {
+                    string modelJson = reader.ReadToEnd();
+                    modelData = JsonConvert.DeserializeObject<Model>(modelJson);
+                }
+                if (modelData == null) throw new CustomPIQIException(500, "REFERENCE_DATA_NOT_FOUND", "Failed to load model.");
+                SetCacheItem<Model>(modelData, $"{baseKey}|{modelMnemonic}");
+
+
+                // Add the name and mnemonic to the library cache
+                CacheItem<List<ReferenceDataProfile>>? libraryCacheItem = GetCacheItem<List<ReferenceDataProfile>>($"{baseKey}|{libraryKey}");
+                List<ReferenceDataProfile>? library = libraryCacheItem?.Value ?? new List<ReferenceDataProfile>();
+
+                // Merge with all models from the configuration file
+                var allModels = LoadAllModels();
+                foreach (var model in allModels)
+                {
+                    if (!library.Any(l => l.Mnemonic.Equals(model.Mnemonic, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        library.Add(new ReferenceDataProfile(model.Name, model.Mnemonic));
+                    }
+                }
+
+                // Find existing item by mnemonic
+                var existing = allModels.FirstOrDefault(m =>
+                    m.Mnemonic.Equals(modelMnemonic, StringComparison.OrdinalIgnoreCase));
+
+                if (existing != null)
+                {
+                    throw new CustomPIQIException(409, "MODEL_CONFLICT", "Mnemonic + Version already exist with different content");
+                }
+                else
+                {
+                    // Add new profile
+                    library.Add(new ReferenceDataProfile(modelName, modelMnemonic));
+                }
+                SetCacheItem<List<ReferenceDataProfile>>(library, $"{baseKey}|{libraryKey}");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Removes a model from the cache.
+        /// </summary>
+        /// <param name="modelMnemonic">The mnemonic of the model to remove.</param>
+        /// <remarks>
+        /// The method removes both the model definition and its reference in the 
+        /// model library. If no model with the specified mnemonic exists, no action is taken.
+        /// </remarks>
+        /// <exception cref="Exception">
+        /// Thrown if an error occurs while removing the model from the cache.
+        /// </exception>
+        public void RemoveModel(string modelMnemonic)
+        {
+            string libraryKey = "MODEL_LIBRARY";
+            string baseKey = "MODEL";
+
+            try
+            {
+                // Check if the model is in the config file
+                string? filePath = _Configuration["FilePaths:ModelPath"];
+                if (filePath != null && File.Exists(filePath))
+                {
+                    string profileJson = File.ReadAllText(filePath);
+                    List<ReferenceDataProfile>? modelProfilesFromFile = JsonConvert.DeserializeObject<ReferenceDataProfileRoot>(profileJson)?.ModelProfiles;
+                    if (modelProfilesFromFile != null && modelProfilesFromFile.FirstOrDefault(m => m.Mnemonic == modelMnemonic) != null)
+                        throw new CustomPIQIException(405, "NOT_ALLOWED", "Models in the engine configuration file cannot be removed.");
+                }
+
+                // Remove the model
+                RemoveCacheItem($"{baseKey}|{modelMnemonic}");
+
+                // Remove the model from the library cache
+                CacheItem<List<ReferenceDataProfile>>? libraryCacheItem = GetCacheItem<List<ReferenceDataProfile>>($"{baseKey}|{libraryKey}");
+                List<ReferenceDataProfile>? library = libraryCacheItem?.Value ?? new List<ReferenceDataProfile>();
+
+                // Find existing item by mnemonic
+                var existing = library?.FirstOrDefault(l =>
+                    l.Mnemonic.Equals(modelMnemonic, StringComparison.OrdinalIgnoreCase));
+
+                if (existing != null)
+                {
+                    library.Remove(existing);
+                    SetCacheItem<List<ReferenceDataProfile>>(library, $"{baseKey}|{libraryKey}");
+                }
+                else
+                    throw new CustomPIQIException(400, "REFERENCE_DATA_NOT_FOUND", $"Invalid or missing model: {modelMnemonic}");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region Evaluation rubric
 
         /// <summary>
-        /// Loads evaluation rubric by evaluation rubric mnemonic.
+        /// Loads an evaluation rubric by its mnemonic identifier from either an uploaded file or cached/configured sources.
+        /// If an evaluation file is provided, it takes precedence over cached rubrics.
         /// </summary>
-        /// <returns>A <see cref="EvaluationRubric"/> with the matching evaluation rubric mnemonic.</returns>
-        private EvaluationRubric? LoadEvaluationRubric(string evaluationRubricMnemonic, IFormFile? evaluation)
+        /// <param name="evaluationRubricMnemonic">The unique mnemonic identifier of the evaluation rubric to load.</param>
+        /// <param name="evaluation">Optional uploaded evaluation rubric file. If provided, loads from this file instead of cache or configuration.</param>
+        /// <returns>An <see cref="EvaluationRubric"/> object with the specified mnemonic, or <c>null</c> if not found.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the evaluation file is invalid, the rubric cannot be found, or deserialization fails.</exception>
+        public EvaluationRubric? LoadEvaluationRubric(string evaluationRubricMnemonic, IFormFile? evaluation)
         {
             string baseKey = "EVALUATION_RUBRIC";
             string libraryKey = "EVALUATION_RUBRIC_LIBRARY";
@@ -293,13 +480,13 @@ namespace PIQI_Engine.Server.Engines
                 if (evaluation != null)
                 {
                     if (evaluation.Length == 0)
-                        throw new Exception("File not selected");
+                        throw new CustomPIQIException(400, "INVALID_INPUT", "Evaluation file input not invalid or missing.");
 
                     using (var reader = new StreamReader(evaluation.OpenReadStream()))
                     {
                         string rubricJson = reader.ReadToEnd();
                         EvaluationRubric? rubric = JsonConvert.DeserializeObject<EvaluationRubric>(rubricJson);
-                        if (rubric == null) throw new Exception("Failed to load evaluation rubric.");
+                        if (rubric == null) throw new CustomPIQIException(400, "REFERENCE_DATA_NOT_FOUND", "Failed to load evaluation rubric from evaluation input file.");
                         return rubric;
                     }
                 }
@@ -329,7 +516,7 @@ namespace PIQI_Engine.Server.Engines
                             // Read file and deserialize the JSON to get the list of profiles
                             string profileJson = File.ReadAllText(libraryFilePath);
                             library = JsonConvert.DeserializeObject<ReferenceDataProfileRoot>(profileJson)?.EvaluationProfiles;
-                            if (library == null) throw new Exception("Failed to load evaluation profiles.");
+                            if (library == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to resolve evaluation rubric: Failed to load evaluation profiles.");
 
                             // Add updated library to the cache
                             SetCacheItem<List<ReferenceDataProfile>>(library, $"{baseKey}|{libraryKey}");
@@ -347,11 +534,11 @@ namespace PIQI_Engine.Server.Engines
                                 // Deserialize the file into an evaluation rubric
                                 string rubricJson = File.ReadAllText(evaluationFilePath);
                                 evaluationRubric = JsonConvert.DeserializeObject<EvaluationRubric>(rubricJson);
-                                if (evaluationRubric == null) throw new Exception("Failed to load evaluation rubric.");
+                                if (evaluationRubric == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to resolve evaluation rubric: Failed to load evaluation rubric.");
                             }
                         }
                         else if (evaluationRubric == null) 
-                            throw new Exception("File for evaluation rubric is invalid or missing.");
+                            throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to resolve evaluation rubric: File for evaluation rubric is invalid or missing.");
 
                         // Update name to match profile name
                         if (library?.FirstOrDefault(ep => ep.Mnemonic.Equals(evaluationRubricMnemonic))?.Name != null)
@@ -362,7 +549,7 @@ namespace PIQI_Engine.Server.Engines
                         return evaluationRubric;
                     }
                     else
-                        throw new Exception("Evaluation library not found.");
+                        throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to resolve evaluation rubric: Evaluation library not found.");
                 }
             }
             catch
@@ -370,16 +557,200 @@ namespace PIQI_Engine.Server.Engines
                 throw;
             }
         }
-        
+
+        /// <summary>
+        /// Loads all evaluation rubrics available in the system.
+        /// </summary>
+        /// <returns>A <see cref="List{ReferenceDataDto}"/> containing all evaluation rubrics.</returns>
+        public List<ReferenceDataDto> LoadAllEvaluationRubrics()
+        {
+            string baseKey = "EVALUATION_RUBRIC";
+            string libraryKey = "EVALUATION_RUBRIC_LIBRARY";
+
+            try
+            {
+                List<ReferenceDataDto> evaluationProfiles = new List<ReferenceDataDto>();
+
+                // Get evaluations from file
+                string? filePath = _Configuration["FilePaths:EvaluationPath"];
+                if (filePath != null && File.Exists(filePath))
+                {
+                    string profileJson = File.ReadAllText(filePath);
+                    List<ReferenceDataProfile>? evaluationProfilesFromFile = JsonConvert.DeserializeObject<ReferenceDataProfileRoot>(profileJson)?.EvaluationProfiles;
+                    if (evaluationProfilesFromFile != null)
+                    {
+                        var profilesFromFile = evaluationProfilesFromFile.Select(e => new ReferenceDataDto
+                        {
+                            Name = e.Name,
+                            Mnemonic = e.Mnemonic
+                        }).ToList();
+                        evaluationProfiles.AddRange(profilesFromFile);
+                    }
+                }
+
+                // Get evaluations from cache
+                CacheItem<List<ReferenceDataProfile>>? libraryCacheItem = GetCacheItem<List<ReferenceDataProfile>>($"{baseKey}|{libraryKey}");
+                List<ReferenceDataProfile>? library = libraryCacheItem?.Value;
+                if (library != null)
+                {
+                    var profilesFromCache = library.Select(e => new ReferenceDataDto
+                    {
+                        Name = e.Name,
+                        Mnemonic = e.Mnemonic
+                    }).ToList();
+                    evaluationProfiles.AddRange(profilesFromCache);
+
+                }
+
+                var distinctEvaluationProfiles = evaluationProfiles
+                    .GroupBy(e => e.Mnemonic, StringComparer.OrdinalIgnoreCase)
+                    .Select(g => g.First())
+                    .ToList();
+
+                return distinctEvaluationProfiles;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Imports an evaluation rubric into the cache. 
+        /// </summary>
+        /// <param name="evaluationName">The display name of the evaluation rubric.</param>
+        /// <param name="evaluationMnemonic">A unique identifier (mnemonic) for the evaluation rubric.</param>
+        /// <param name="evaluation">The rubric definition file uploaded as an <see cref="IFormFile"/>.</param>
+        /// <remarks>
+        /// If an evaluation rubric with the same mnemonic already exists in the cache, 
+        /// its definition and metadata are overwritten. Otherwise, a new rubric profile is added.
+        /// </remarks>
+        /// <exception cref="CustomPIQIException">
+        /// Thrown if no file is provided or if deserialization of the rubric fails.
+        /// </exception>
+        public void ImportEvaluation(string evaluationName, string evaluationMnemonic, IFormFile evaluation)
+        {
+            string libraryKey = "EVALUATION_RUBRIC_LIBRARY";
+            string baseKey = "EVALUATION_RUBRIC";
+
+            try
+            {
+                // Add evaluation to evaluation cache
+                CacheItem<EvaluationRubric>? evaluationCacheItem = GetCacheItem<EvaluationRubric>($"{baseKey}|{evaluationMnemonic}");
+                EvaluationRubric? evaluationRubric = null;
+
+                // Get evaluation
+                if (evaluation.Length == 0)
+                    throw new CustomPIQIException(400, "INVALID_INPUT", "File not selected");
+
+                using (var reader = new StreamReader(evaluation.OpenReadStream()))
+                {
+                    string rubricJson = reader.ReadToEnd();
+                    evaluationRubric = JsonConvert.DeserializeObject<EvaluationRubric>(rubricJson);
+                }
+                if (evaluationRubric == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load evaluation rubric.");
+                SetCacheItem<EvaluationRubric>(evaluationRubric, $"{baseKey}|{evaluationMnemonic}");
+
+
+                // Add the name and mnemonic to the library cache
+                CacheItem<List<ReferenceDataProfile>>? libraryCacheItem = GetCacheItem<List<ReferenceDataProfile>>($"{baseKey}|{libraryKey}");
+                List<ReferenceDataProfile>? library = libraryCacheItem?.Value ?? new List<ReferenceDataProfile>();
+
+                // Merge with all evaluation rubrics from the configuration file
+                var allEvaluations = LoadAllEvaluationRubrics();
+                foreach (var eval in allEvaluations)
+                {
+                    if (!library.Any(l => l.Mnemonic.Equals(eval.Mnemonic, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        library.Add(new ReferenceDataProfile(eval.Name, eval.Mnemonic));
+                    }
+                }
+
+                // Find existing item by mnemonic
+                var existing = allEvaluations.FirstOrDefault(e =>
+                    e.Mnemonic.Equals(evaluationMnemonic, StringComparison.OrdinalIgnoreCase));
+
+                if (existing != null)
+                {
+                    throw new CustomPIQIException(409, "EVALUATION_CONFLICT", "Mnemonic + Version already exist with different content");
+                }
+                else
+                {
+                    // Add new profile
+                    library.Add(new ReferenceDataProfile(evaluationName, evaluationMnemonic));
+                }
+                SetCacheItem<List<ReferenceDataProfile>>(library, $"{baseKey}|{libraryKey}");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Removes an evaluation rubric from the cache.
+        /// </summary>
+        /// <param name="evaluationMnemonic">The mnemonic of the evaluation rubric to remove.</param>
+        /// <remarks>
+        /// The method removes both the rubric definition and its reference in the 
+        /// rubric library. If no rubric with the specified mnemonic exists, no action is taken.
+        /// </remarks>
+        /// <exception cref="Exception">
+        /// Thrown if an error occurs while removing the rubric from the cache.
+        /// </exception>
+        public void RemoveEvaluation(string evaluationMnemonic)
+        {
+            string libraryKey = "EVALUATION_RUBRIC_LIBRARY";
+            string baseKey = "EVALUATION_RUBRIC";
+
+            try
+            {
+                // Check if the evaluation is in the config file
+                string? filePath = _Configuration["FilePaths:EvaluationPath"];
+                if (filePath != null && File.Exists(filePath))
+                {
+                    string profileJson = File.ReadAllText(filePath);
+                    List<ReferenceDataProfile>? evaluationProfilesFromFile = JsonConvert.DeserializeObject<ReferenceDataProfileRoot>(profileJson)?.EvaluationProfiles;
+                    if (evaluationProfilesFromFile != null && evaluationProfilesFromFile.FirstOrDefault(e => e.Mnemonic == evaluationMnemonic) != null)
+                        throw new CustomPIQIException(405, "NOT_ALLOWED", "Evaluation rubrics in the engine configuration file cannot be removed.");
+                }
+
+                // Remove the evaluation
+                RemoveCacheItem($"{baseKey}|{evaluationMnemonic}");
+
+                // Remove the evaluation from the library cache
+                CacheItem<List<ReferenceDataProfile>>? libraryCacheItem = GetCacheItem<List<ReferenceDataProfile>>($"{baseKey}|{libraryKey}");
+                List<ReferenceDataProfile>? library = libraryCacheItem?.Value ?? new List<ReferenceDataProfile>();
+
+                // Find existing item by mnemonic
+                var existing = library?.FirstOrDefault(l =>
+                    l.Mnemonic.Equals(evaluationMnemonic, StringComparison.OrdinalIgnoreCase));
+
+                if (existing != null)
+                {
+                    library.Remove(existing);
+                    SetCacheItem<List<ReferenceDataProfile>>(library, $"{baseKey}|{libraryKey}");
+                }
+                else
+                    throw new CustomPIQIException(400, "INVALID_INPUT", $"Invalid or missing evaluation: {evaluationMnemonic}");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         #endregion
 
         #region SAMs
 
         /// <summary>
-        /// Loads a list of all supported SAMs.
+        /// Loads the complete list of all supported Semantic Assessment Modules (SAMs) from cache or configuration file.
+        /// Uses file-based caching with automatic invalidation when the source file is modified.
         /// </summary>
-        /// <returns>A list of <see cref="SAM"/> supported.</returns>
-        private List<SAM>? LoadSAMs()
+        /// <returns>A <see cref="List{SAM}"/> containing all supported SAMs, or <c>null</c> if loading fails.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the SAMs file is missing or deserialization fails.</exception>
+        public List<SAM>? LoadSAMs()
         {
             string baseKey = "SAMS";
 
@@ -404,7 +775,7 @@ namespace PIQI_Engine.Server.Engines
                         string json = File.ReadAllText(filePath);
 
                         sams = JsonConvert.DeserializeObject<SAMRoot>(json)?.SAMLibrary;
-                        if (sams == null) throw new Exception("Failed to load SAMs");
+                        if (sams == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load SAMs");
 
                         // Put SAMs in cache
                         SetCacheItem<List<SAM>>(sams, baseKey);
@@ -418,14 +789,154 @@ namespace PIQI_Engine.Server.Engines
                 throw;
             }
         }
+
+        /// <summary>
+        /// Loads a single Semantic Assessment Module (SAM) by its mnemonic identifier.
+        /// Searches the cached SAM library first, then reloads from file if not found or cache is stale.
+        /// </summary>
+        /// <param name="mnemonic">The unique mnemonic identifier of the SAM to load.</param>
+        /// <returns>A <see cref="SAM"/> object with the specified mnemonic.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the SAM library is not found, the specified SAM doesn't exist, or deserialization fails.</exception>
+        public SAM? LoadSAM(string mnemonic)
+        {
+            string baseKey = "SAMs";
+
+            try
+            {
+                // Get from cache
+                CacheItem<List<SAM>>? libraryCacheItem = GetCacheItem<List<SAM>>(baseKey);
+                List<SAM>? library = libraryCacheItem?.Value; 
+
+                // Get file path from configuration file
+                string? libraryFilePath = _Configuration["FilePaths:SAMsPath"];
+                if (libraryFilePath != null && File.Exists(libraryFilePath))
+                {
+                    DateTime libraryLastModified = File.GetLastWriteTimeUtc(libraryFilePath);
+                    // Create/reset list if needed
+                    if (library == null || libraryCacheItem?.LastModified < libraryLastModified)
+                        library = new List<SAM>();
+
+                    // Check if the SAM is in the cache
+                    SAM? sam = library.FirstOrDefault(s => s.Mnemonic.Equals(mnemonic));
+                    if (sam != null) return sam;
+                    else
+                    {
+                        // Read file and deserialize the JSON to get the list of profiles
+                        string samLibraryJson = File.ReadAllText(libraryFilePath);
+                        library = JsonConvert.DeserializeObject<SAMRoot>(samLibraryJson)?.SAMLibrary;
+                        if (library == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to SAM library.");
+
+                        // Add updated library to the cache
+                        SetCacheItem<List<SAM>>(library, baseKey);
+
+                        // Get the SAM with the matching mnemonic 
+                        sam = library.FirstOrDefault(s => s.Mnemonic.Equals(mnemonic));
+                        if (sam != null) return sam;
+                        else throw new CustomPIQIException(400, "INVALID_INPUT", $"Missing or invalid SAM: [{mnemonic}].");
+                    }
+                } 
+                else
+                    throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "SAM library not found.");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion  
+
+        #region CQL Libraries
+        /// <summary>
+        /// Loads multiple Clinical Quality Language (CQL) library items by their mnemonic identifiers.
+        /// Retrieves CQL library definitions and field mappings from cache or configuration files.
+        /// </summary>
+        /// <param name="cqlMnemonics">List of mnemonic identifiers for the CQL libraries to load.</param>
+        /// <returns>A <see cref="List{CQLItem}"/> containing the requested CQL library items with their text and field mappings.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the CQL library file is missing, a requested CQL item is not found, or deserialization fails.</exception>
+        public List<CQLItem>? LoadCQL(List<string> cqlMnemonics)
+        {
+            string baseKey = "CQL";
+            string cqlLibraryKey = "CQL_LIBRARY";
+            List<CQLItem>? cqlItemList = new List<CQLItem>();
+
+            try
+            {
+                // Try to get from cache
+                CacheItem<List<CQLReferenceDataProfile>>? libraryCacheItem = GetCacheItem<List<CQLReferenceDataProfile>>($"{baseKey}|{cqlLibraryKey}");
+                List<CQLReferenceDataProfile>? cqlLibrary = libraryCacheItem?.Value;
+
+                // Get file path from configuration file 
+                string? cqlLibraryFilePath = _Configuration["FilePaths:CQLPath"];
+                string? cqlFilePath = null;
+                if (cqlLibraryFilePath != null && File.Exists(cqlLibraryFilePath))
+                {
+                    DateTime libraryLastModified = File.GetLastWriteTimeUtc(cqlLibraryFilePath);
+                    // Create/reset list if needed
+                    if (cqlLibrary == null || libraryCacheItem?.LastModified < libraryLastModified)
+                    {
+                        // Read profile file and deserialize the JSON to get the list of profiles
+                        string profileJson = File.ReadAllText(cqlLibraryFilePath);
+                        cqlLibrary = JsonConvert.DeserializeObject<ReferenceDataProfileRoot>(profileJson)?.CQLProfiles;
+                        if (cqlLibrary == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", $"Failed to load CQL library.");
+
+                        // Add updated library to the cache
+                        SetCacheItem<List<CQLReferenceDataProfile>>(cqlLibrary, $"{baseKey}|{cqlLibraryKey}");
+                    }
+
+                    foreach (string cqlItemMnemonic in cqlMnemonics)
+                    {
+                        // Try to get from cache
+                        CacheItem<CQLItem>? cqlCacheItem = GetCacheItem<CQLItem>($"{baseKey}|{cqlItemMnemonic}");
+                        CQLItem? cqlItem = cqlCacheItem?.Value;
+
+                        // Get the filepath from the library
+                        CQLReferenceDataProfile? cqlProfile = cqlLibrary.FirstOrDefault(ep => ep.Mnemonic.Equals(cqlItemMnemonic));
+                        cqlFilePath = cqlProfile?.FilePath;
+                        if (cqlProfile == null || cqlFilePath == null || !File.Exists(cqlFilePath)) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", $"File for CQL is invalid or missing: {cqlItemMnemonic}.");
+
+                        // Check if the CQL has been modified since last cached
+                        DateTime cqlLastModified = File.GetLastWriteTimeUtc(cqlFilePath);
+                        if (cqlItem == null || cqlCacheItem?.LastModified < cqlLastModified)
+                        {
+                            // Deserialize the file into a CQL
+                            string cql = File.ReadAllText(cqlFilePath);
+                            FieldMappings? fieldMappings = null;
+                            string? fieldMappingFilePath = cqlProfile?.FieldMappingFilePath;
+                            if (fieldMappingFilePath != null && File.Exists(fieldMappingFilePath))
+                            {
+                                string fieldMappingJson = File.ReadAllText(fieldMappingFilePath);
+                                fieldMappings = JsonConvert.DeserializeObject<FieldMappings>(fieldMappingJson);
+                            }
+                            cqlItem = new CQLItem(cqlProfile, cql, fieldMappings);
+                            if (cqlItem == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", $"Failed to load CQL: {cqlItemMnemonic}.");
+                        }
+
+                        // Put the CQL item in the cache and add it to the return list
+                        SetCacheItem<CQLItem>(cqlItem, $"{baseKey}|{cqlItemMnemonic}");
+                        cqlItemList.Add(cqlItem);
+                    }
+                }
+                else
+                    throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "CQL library not found.");
+
+                return cqlItemList;
+            }
+            catch
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Data Types
 
         /// <summary>
-        /// Loads a list of all supported data types.
+        /// Loads the list of all supported data types from cache or configuration file.
+        /// Uses file-based caching with automatic invalidation when the source file is modified.
         /// </summary>
-        /// <returns>A list of <see cref="DataType"/> supported.</returns>
+        /// <returns>A <see cref="List{DataType}"/> containing all supported data types, or <c>null</c> if loading fails.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the data types file is missing or deserialization fails.</exception>
         private List<DataType>? LoadDataTypeList()
         {
             string baseKey = "DATA_TYPE_LIST";
@@ -451,7 +962,7 @@ namespace PIQI_Engine.Server.Engines
                         string json = File.ReadAllText(filePath);
 
                         dataTypes = JsonConvert.DeserializeObject<DataTypeRoot>(json)?.DataTypeLibrary;
-                        if (dataTypes == null) throw new Exception("Failed to load data types");
+                        if (dataTypes == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load data types");
 
                         // Put in cache
                         SetCacheItem<List<DataType>>(dataTypes, baseKey);
@@ -469,9 +980,12 @@ namespace PIQI_Engine.Server.Engines
 
         #region ValueList
         /// <summary>
-        /// Loads a list of all supported value lists.
+        /// Loads the list of all supported value lists from cache or configuration file.
+        /// Value lists define controlled vocabularies used for validation and data entry.
+        /// Uses file-based caching with automatic invalidation when the source file is modified.
         /// </summary>
-        /// <returns>A list of <see cref="ValueList"/> supported.</returns>
+        /// <returns>A <see cref="List{ValueList}"/> containing all supported value lists, or <c>null</c> if loading fails.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the value list file is missing or deserialization fails.</exception>
         private List<ValueList>? LoadValueList()
         {
             string baseKey = "VALUE_LIST";
@@ -497,7 +1011,7 @@ namespace PIQI_Engine.Server.Engines
                         string json = File.ReadAllText(filePath);
 
                         valueList = JsonConvert.DeserializeObject<ValueListRoot>(json)?.ValueLibrary;
-                        if (valueList == null) throw new Exception("Failed to load value list");
+                        if (valueList == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load value list");
 
                         // Put value list in cache
                         SetCacheItem<List<ValueList>>(valueList, baseKey);
@@ -515,9 +1029,12 @@ namespace PIQI_Engine.Server.Engines
 
         #region ValueSetList
         /// <summary>
-        /// Loads a list of all supported value set lists.
+        /// Loads the list of all supported value sets from cache or configuration file.
+        /// Value sets are collections of coded concepts used for standardized terminology.
+        /// Uses file-based caching with automatic invalidation when the source file is modified.
         /// </summary>
-        /// <returns>A list of<see cref = "ValueSet" /> supported.</returns>
+        /// <returns>A <see cref="List{ValueSet}"/> containing all supported value sets, or <c>null</c> if loading fails.</returns>
+        /// <exception cref="CustomPIQIException">Thrown when the value set list file is missing or deserialization fails.</exception>
         private List<ValueSet>? LoadValueSetList()
         {
             string baseKey = "VALUE_SET_LIST";
@@ -543,7 +1060,7 @@ namespace PIQI_Engine.Server.Engines
                         string json = File.ReadAllText(filePath);
 
                         valueList = JsonConvert.DeserializeObject<ValueSetListRoot>(json)?.ValueSetLibrary;
-                        if (valueList == null) throw new Exception("Failed to load value set list");
+                        if (valueList == null) throw new CustomPIQIException(422, "REFERENCE_DATA_NOT_FOUND", "Failed to load value set list");
 
                         // Put value list in cache
                         SetCacheItem<List<ValueSet>>(valueList, baseKey);

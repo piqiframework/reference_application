@@ -1,0 +1,73 @@
+{
+  "name": "CQL Library Test",
+  "mnemonic": "CQL_LIBRARY_TEST",
+  "tenantUid": "00000000-0000-0000-0000-000000000000",
+  "description": "CQL Library Test",
+  "version": null,
+  "authorityName": null,
+  "model": {
+    "name": "Patient Clinical Model 1.0",
+    "mnemonic": "PAT_CLINICAL_V1",
+    "version": 1
+  },
+  "source": {
+    "name": "PIQI Alliance",
+    "mnemonic": "PIQI.ALLIANCE"
+  },
+  "criteria": [
+    {
+      "sequence": 1,
+      "description": null,
+      "entity": "PATIENT",
+      "samMnemonic": "CQL_EVALUATOR",
+      "samNameOverride": "Annual Flu Vaccine Unmapped",
+      "failureNameOverride": "Annual Flu Vaccine Invalid (Unmapped)",
+      "conditionalSam": null,
+      "scoringEffect": "Plausibility",
+      "scoringWeight": 0,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "MEASUREMENT_PERIOD",
+          "parameterValue": "2026-01-01|2026-12-31",
+          "parameterValueTypeName": "Simple Value",
+          "parameterName": "Measurement Period"
+        },
+        {
+          "samParameterMnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValue": "AnnualFluVaccineUnmapped",
+          "parameterValueTypeName": "CQL Library",
+          "parameterName": "CQL Library Mnemonic"
+        }
+      ],
+      "conditionalSamParameters": []
+    },
+    {
+      "sequence": 2,
+      "description": null,
+      "entity": "PATIENT",
+      "samMnemonic": "CQL_EVALUATOR",
+      "samNameOverride": "Annual Flu Vaccine Mapped",
+      "failureNameOverride": "Annual Flu Vaccine Invalid (Mapped)",
+      "conditionalSam": null,
+      "scoringEffect": "Plausibility",
+      "scoringWeight": 0,
+      "criticalityIndicator": false,
+      "samParameters": [
+        {
+          "samParameterMnemonic": "MEASUREMENT_PERIOD",
+          "parameterValue": "2026-01-01|2026-12-31",
+          "parameterValueTypeName": "Simple Value",
+          "parameterName": "Measurement Period"
+        },
+        {
+          "samParameterMnemonic": "CQL_LIBRARY_MNEMONIC",
+          "parameterValue": "AnnualFluVaccineMapped",
+          "parameterValueTypeName": "CQL Library",
+          "parameterName": "CQL Library Mnemonic"
+        }
+      ],
+      "conditionalSamParameters": []
+    }
+  ]
+}

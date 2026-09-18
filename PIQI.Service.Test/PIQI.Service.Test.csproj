@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -10,13 +10,69 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="TestData\Test1_PIQI.json" />
-    <None Remove="TestData\Test2_PIQI.json" />
-    <None Remove="TestData\Test3_PIQI.json" />
-    <None Remove="TestData\Test4_PIQI.json" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Content Include="TestData\CQLTestData\CQL\AnnualFluVaccineMapped.cql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\CQL\AnnualFluVaccineMapping.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\CQL\AnnualFluVaccineUnmapped.cql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\CQL\CQLProfileLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\Input\AnnualFluVaccine_Skip_Deceased.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\Input\AnnualFluVaccine_Skip_DeathDate.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\Input\AnnualFluVaccine_Skip.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\Input\AnnualFluVaccine_Pass.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\Input\AnnualFluVaccine_Fail.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\Input\AnnualFluVaccine_Fail_FluNotInPeriod.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+	<Content Include="TestData\CQLTestData\ExpectedOutput\AnnualFluVaccine_Pass.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\ExpectedOutput\AnnualFluVaccine_Skip.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\ExpectedOutput\AnnualFluVaccine_Skip_DeathDate.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\ExpectedOutput\AnnualFluVaccine_Skip_Deceased.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\ExpectedOutput\AnnualFluVaccine_Fail.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\CQLTestData\ExpectedOutput\AnnualFluVaccine_Fail_FluNotInPeriod.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Evaluations\EvaluationProfileLibrary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Evaluations\CQL_LIBRARY_TEST.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Evaluations\USCDI_V2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Evaluations\USCDI_V3.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Evaluations\USCDI_V31.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\ExpectedOutput\Test2_Result.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

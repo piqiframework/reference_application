@@ -1,5 +1,6 @@
-﻿using PIQI.Components.SAMs;
+﻿using Azure.Core;
 using PIQI.Components.Models;
+using PIQI.Components.SAMs;
 using PIQI.Components.Services;
 
 namespace PIQI_Engine.Server.Engines.SAMs
@@ -66,18 +67,9 @@ namespace PIQI_Engine.Server.Engines.SAMs
                 // Cast data as observation value
                 Value val = (Value)data;
 
-                // Process required parms
-                // Note: for now if we don't get the required parms we use a hard-coded list. this is a stopgap
-                string valueText = "CE|CWE|CD|ST|FT|TX";
-
-                if (request.ParmList != null)
-                {
-                    Tuple<string, string> arg1 = request.ParmList.Where(t => t.Item1 == "Valid Attribute List").FirstOrDefault();
-                    if (arg1 != null)
-                    {
-                        valueText = arg1.Item2;
-                    }
-                }
+                string valueText = request.GetParameterValue("VALID_ATTRIBUTE_LIST");
+                if (string.IsNullOrEmpty(valueText))
+                    valueText = "CE|CWE|CD|ST|FT|TX";
 
                 // Split param into list
                 List<string> valuesList = Utility.Split(valueText);
