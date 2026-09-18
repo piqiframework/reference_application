@@ -29,7 +29,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg001",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test1_PIQI.json"))
         };
@@ -83,7 +83,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg001",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test1_PIQI.json"))
         };
@@ -145,7 +145,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg002",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test2_PIQI.json"))
         };
@@ -199,7 +199,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg002",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test2_PIQI.json"))
         };
@@ -261,7 +261,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg003",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test3_PIQI.json"))
         };
@@ -315,7 +315,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg003",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test3_PIQI.json"))
         };
@@ -377,7 +377,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg004",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test4_PIQI.json"))
         };
@@ -431,7 +431,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg004",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test4_PIQI.json"))
         };
@@ -493,7 +493,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg005",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test5_PIQI.json"))
         };
@@ -547,7 +547,7 @@ public class PIQIControllerTests : PIQITestBase, IClassFixture<WebApplicationFac
             ContributorID = "TestProvider",
             DataSourceID = "TestSource",
             PIQIModelMnemonic = "PAT_CLINICAL_V1",
-            EvaluationRubricMnemonic = "USCDI_V3",
+            EvaluationRubricMnemonic = "USCDI_V31",
             MessageID = "Msg005",
             MessageData = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData/Input/Test5_PIQI.json"))
         };

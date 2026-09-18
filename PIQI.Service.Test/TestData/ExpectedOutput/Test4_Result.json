@@ -4,15 +4,25 @@
     "contributorID": "TestProvider",
     "dataSourceID": "TestSource",
     "messageID": "Msg004",
-    "evaluationRubric": "USCDI v3",
+    "evaluationRubric": "USCDI v3.1 Aligned Rubric",
     "messageResults": {
-      "denominator": 11,
-      "numerator": 5,
-      "piqiScore": 45,
+      "denominator": 19,
+      "numerator": 7,
+      "piqiScore": 36,
       "criticalFailureCount": 0,
-      "weightedDenominator": 11,
-      "weightedNumerator": 5,
-      "weightedPIQIScore": 45
+      "weightedDenominator": 19,
+      "weightedNumerator": 7,
+      "weightedPIQIScore": 36
+    },
+    "modelResults": {
+      "instanceCount": 3,
+      "denominator": 0,
+      "numerator": 0,
+      "piqiScore": 0,
+      "criticalFailureCount": 0,
+      "weightedDenominator": 0,
+      "weightedNumerator": 0,
+      "weightedPIQIScore": 0
     },
     "dataClassResults": [
       {
@@ -27,7 +37,7 @@
         "weightedPIQIScore": 0
       },
       {
-        "dataClassName": "Care Plan",
+        "dataClassName": "Care Plans",
         "instanceCount": 0,
         "denominator": 0,
         "numerator": 0,
@@ -84,13 +94,13 @@
       {
         "dataClassName": "Demographics",
         "instanceCount": 1,
-        "denominator": 4,
+        "denominator": 11,
         "numerator": 3,
-        "piqiScore": 75,
+        "piqiScore": 27,
         "criticalFailureCount": 0,
-        "weightedDenominator": 4,
+        "weightedDenominator": 11,
         "weightedNumerator": 3,
-        "weightedPIQIScore": 75
+        "weightedPIQIScore": 27
       },
       {
         "dataClassName": "Diagnostic Imaging",
@@ -106,13 +116,13 @@
       {
         "dataClassName": "Encounters",
         "instanceCount": 1,
-        "denominator": 5,
+        "denominator": 4,
         "numerator": 1,
-        "piqiScore": 20,
+        "piqiScore": 25,
         "criticalFailureCount": 0,
-        "weightedDenominator": 5,
+        "weightedDenominator": 4,
         "weightedNumerator": 1,
-        "weightedPIQIScore": 20
+        "weightedPIQIScore": 25
       },
       {
         "dataClassName": "Goals",
@@ -128,13 +138,13 @@
       {
         "dataClassName": "Health Assessments",
         "instanceCount": 1,
-        "denominator": 2,
-        "numerator": 1,
-        "piqiScore": 50,
+        "denominator": 4,
+        "numerator": 3,
+        "piqiScore": 75,
         "criticalFailureCount": 0,
-        "weightedDenominator": 2,
-        "weightedNumerator": 1,
-        "weightedPIQIScore": 50
+        "weightedDenominator": 4,
+        "weightedNumerator": 3,
+        "weightedPIQIScore": 75
       },
       {
         "dataClassName": "Immunizations",
@@ -231,7 +241,7 @@
         "evaluationList": []
       },
       {
-        "dataClassName": "Care Plan",
+        "dataClassName": "Care Plans",
         "evaluationList": []
       },
       {
@@ -311,40 +321,34 @@
     "dataSourceID": "TestSource",
     "messageID": "Msg004",
     "audit": {
-      "messageNumerator": 5,
-      "messageDenominator": 11,
-      "messageScore": 45,
-      "messageNumeratorWeighted": 5,
-      "messageDenominatorWeighted": 11,
-      "messageScoreWeighted": 45,
+      "messageNumerator": 7,
+      "messageDenominator": 19,
+      "messageScore": 36,
+      "messageNumeratorWeighted": 7,
+      "messageDenominatorWeighted": 19,
+      "messageScoreWeighted": 36,
       "messageCriticalFailureCount": 0
     },
     "root": {
       "rootName": "patient",
       "classes": [
         {
-          "className": "allergies",
-          "elements": null
+          "className": "allergies"
         },
         {
-          "className": "carePlan",
-          "elements": null
+          "className": "carePlans"
         },
         {
-          "className": "clinicalDocuments",
-          "elements": null
+          "className": "clinicalDocuments"
         },
         {
-          "className": "clinicalTests",
-          "elements": null
+          "className": "clinicalTests"
         },
         {
-          "className": "conditions",
-          "elements": null
+          "className": "conditions"
         },
         {
-          "className": "coverage",
-          "elements": null
+          "className": "coverage"
         },
         {
           "className": "demographics",
@@ -369,13 +373,12 @@
                       {
                         "attributeMnemonic": "DEM_DOB",
                         "attributeName": "birthDate",
-                        "assessment": "Date of birth is valid past date",
+                        "assessment": "Patient Date of Birth is valid past date",
                         "effect": "Scoring",
                         "status": "Passed",
                         "reason": ""
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
@@ -403,34 +406,82 @@
                       {
                         "attributeMnemonic": "DEM_SEX",
                         "attributeName": "birthSex",
-                        "assessment": "Birth sex is SNOMED-CT",
+                        "assessment": "Patient Birth Sex code is in SNOMED CT",
                         "effect": "Scoring",
                         "status": "Failed",
-                        "reason": "invalid concept"
+                        "reason": "Codeable concept is not a valid concept"
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
                   "attributeName": "currentAddress",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_CURRENTADDRESS",
+                        "attributeName": "currentAddress",
+                        "assessment": "Patient Address is populated",
+                        "effect": "Scoring",
+                        "status": "Failed",
+                        "reason": "Patient Address is not populated"
+                      }
+                    ]
+                  }
                 },
                 {
                   "attributeName": "deathDate",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 0
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_DECDT",
+                        "attributeName": "deathDate",
+                        "assessment": "Patient Date of Death is valid past date",
+                        "effect": "Scoring",
+                        "status": "Skipped",
+                        "reason": "Attribute is unpopulated"
+                      }
+                    ]
+                  }
                 },
                 {
-                  "attributeName": "deceased",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "deceased"
                 },
                 {
                   "attributeName": "emailAddress",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_EMAILADDRESS",
+                        "attributeName": "emailAddress",
+                        "assessment": "Patient Email Address is populated",
+                        "effect": "Scoring",
+                        "status": "Failed",
+                        "reason": "Patient Email Address is not populated"
+                      }
+                    ]
+                  }
                 },
                 {
                   "attributeName": "ethnicity",
@@ -457,49 +508,110 @@
                       {
                         "attributeMnemonic": "DEM_ETHN",
                         "attributeName": "ethnicity",
-                        "assessment": "Ethnicity is valid code",
+                        "assessment": "Patient Ethnicity code is in CDC Race and Ethnicity",
                         "effect": "Scoring",
                         "status": "Passed",
                         "reason": ""
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
                   "attributeName": "firstName",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_FIRSTNAME",
+                        "attributeName": "firstName",
+                        "assessment": "Patient First Name is populated",
+                        "effect": "Scoring",
+                        "status": "Failed",
+                        "reason": "Patient First Name is not populated"
+                      }
+                    ]
+                  }
                 },
                 {
-                  "attributeName": "genderIdentity",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "genderIdentity"
                 },
                 {
                   "attributeName": "lastName",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_LASTNAME",
+                        "attributeName": "lastName",
+                        "assessment": "Patient Last Name is populated",
+                        "effect": "Scoring",
+                        "status": "Failed",
+                        "reason": "Patient Last Name is not populated"
+                      }
+                    ]
+                  }
                 },
                 {
-                  "attributeName": "maritalStatus",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "maritalStatus"
                 },
                 {
-                  "attributeName": "middleName",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "middleName"
                 },
                 {
                   "attributeName": "patientIdentifier",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_PATID",
+                        "attributeName": "patientIdentifier",
+                        "assessment": "Patient ID is populated",
+                        "effect": "Scoring",
+                        "status": "Failed",
+                        "reason": "Patient ID is not populated"
+                      }
+                    ]
+                  }
                 },
                 {
                   "attributeName": "primaryLanguage",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_LANG",
+                        "attributeName": "primaryLanguage",
+                        "assessment": "Patient Primary Language is BCP-47",
+                        "effect": "Scoring",
+                        "status": "Failed",
+                        "reason": "Attribute is unpopulated"
+                      }
+                    ]
+                  }
                 },
                 {
                   "attributeName": "race",
@@ -526,44 +638,85 @@
                       {
                         "attributeMnemonic": "DEM_RACE",
                         "attributeName": "race",
-                        "assessment": "Race is valid concept",
+                        "assessment": "Patient Race code is in CDC Race and Ethnicity",
                         "effect": "Scoring",
                         "status": "Passed",
                         "reason": ""
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
-                  "attributeName": "sexualOrientation",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "sexualOrientation"
                 },
                 {
                   "attributeName": "telecom",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_TELECOM",
+                        "attributeName": "telecom",
+                        "assessment": "Patient Telecom is populated",
+                        "effect": "Scoring",
+                        "status": "Failed",
+                        "reason": "Patient Telecom is not populated"
+                      }
+                    ]
+                  }
                 },
                 {
                   "attributeName": "tribalAffiliation",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 0
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "DEM_TRIBALAFFILIATION",
+                        "attributeName": "tribalAffiliation",
+                        "assessment": "Tribal Affiliation code is in HL7 Tribal Entity US",
+                        "effect": "Scoring",
+                        "status": "Skipped",
+                        "reason": "Attribute is unpopulated"
+                      }
+                    ]
+                  }
                 }
               ],
               "elementAudit": {
-                "elementScore": 75,
-                "elementScoreWeighted": 75,
-                "elementCriticalFailureCount": 0,
-                "elementNumerator": 3,
-                "elementDenominator": 4
+                "scoringData": {
+                  "elementScore": 27,
+                  "elementScoreWeighted": 27,
+                  "elementCriticalFailureCount": 0,
+                  "elementNumerator": 3,
+                  "elementDenominator": 11
+                }
               }
             }
-          ]
+          ],
+          "classAudit": {
+            "scoringData": {
+              "classScore": 27,
+              "classScoreWeighted": 27,
+              "classCriticalFailureCount": 0,
+              "classNumerator": 3,
+              "classDenominator": 11
+            }
+          }
         },
         {
-          "className": "diagnosticImaging",
-          "elements": null
+          "className": "diagnosticImaging"
         },
         {
           "className": "encounters",
@@ -571,9 +724,7 @@
             {
               "attributes": [
                 {
-                  "attributeName": "encounterClass",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "encounterClass"
                 },
                 {
                   "attributeName": "encounterDateTime",
@@ -583,52 +734,48 @@
                   },
                   "attributeAudit": {
                     "scoringData": {
-                      "attributeScore": 0,
-                      "attributeScoreWeighted": 0,
+                      "attributeScore": 100,
+                      "attributeScoreWeighted": 100,
                       "attributeCriticalFailureCount": 0,
-                      "attributeNumerator": 0,
+                      "attributeNumerator": 1,
                       "attributeDenominator": 1
                     },
                     "assessmentItems": [
                       {
                         "attributeMnemonic": "ENC_DATETIME",
                         "attributeName": "encounterDateTime",
-                        "assessment": "Encounter date is in the past",
+                        "assessment": "Encounter Date is valid past date",
                         "effect": "Scoring",
-                        "status": "Failed",
-                        "reason": "Encounter date is in not the past"
+                        "status": "Passed",
+                        "reason": ""
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
                   "attributeName": "encounterDiagnosis",
-                  "data": null,
                   "attributeAudit": {
                     "scoringData": {
                       "attributeScore": 0,
                       "attributeScoreWeighted": 0,
                       "attributeCriticalFailureCount": 0,
                       "attributeNumerator": 0,
-                      "attributeDenominator": 1
+                      "attributeDenominator": 0
                     },
                     "assessmentItems": [
                       {
                         "attributeMnemonic": "ENC_DIAGNOSIS",
                         "attributeName": "encounterDiagnosis",
-                        "assessment": "Diagnosis is SNOMED-CT or ICD-10-CM",
+                        "assessment": "Encounter Diagnosis code is in ICD-10-CM or SNOMED CT",
                         "effect": "Scoring",
-                        "status": "Failed",
-                        "reason": "unpopulated"
+                        "status": "Skipped",
+                        "reason": "Attribute is unpopulated"
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
                   "attributeName": "encounterDisposition",
-                  "data": null,
                   "attributeAudit": {
                     "scoringData": {
                       "attributeScore": 0,
@@ -641,33 +788,44 @@
                       {
                         "attributeMnemonic": "ENC_DISPOSITION",
                         "attributeName": "encounterDisposition",
-                        "assessment": "Encounter disposition is populated",
+                        "assessment": "Encounter Disposition is populated",
                         "effect": "Scoring",
                         "status": "Failed",
-                        "reason": "Encounter disposition is not populated"
+                        "reason": "Encounter Disposition is not populated"
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
                   "attributeName": "encounterEndDateTime",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 0,
+                      "attributeDenominator": 0
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "ENC_ENDDATETIME",
+                        "attributeName": "encounterEndDateTime",
+                        "assessment": "Encounter End Date is valid past date",
+                        "effect": "Scoring",
+                        "status": "Skipped",
+                        "reason": "Attribute is unpopulated"
+                      }
+                    ]
+                  }
                 },
                 {
-                  "attributeName": "encounterIdentifier",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "encounterIdentifier"
                 },
                 {
-                  "attributeName": "encounterIdentifierNamespace",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "encounterIdentifierNamespace"
                 },
                 {
                   "attributeName": "encounterLocation",
-                  "data": null,
                   "attributeAudit": {
                     "scoringData": {
                       "attributeScore": 0,
@@ -680,67 +838,73 @@
                       {
                         "attributeMnemonic": "ENC_LOCATION",
                         "attributeName": "encounterLocation",
-                        "assessment": "Encounter location is populated",
+                        "assessment": "Encounter Location is populated",
                         "effect": "Scoring",
                         "status": "Failed",
-                        "reason": "Encounter location is not populated"
+                        "reason": "Encounter Location is not populated"
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
-                  "attributeName": "encounterReason",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "encounterReason"
                 },
                 {
-                  "attributeName": "encounterStatus",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "encounterStartDate"
+                },
+                {
+                  "attributeName": "encounterStatus"
                 },
                 {
                   "attributeName": "encounterType",
                   "data": {
                     "$type": "cc",
-                    "codings": null,
                     "text": "Psychiatric interview and evaluation (procedure)"
                   },
                   "attributeAudit": {
                     "scoringData": {
-                      "attributeScore": 100,
-                      "attributeScoreWeighted": 100,
+                      "attributeScore": 0,
+                      "attributeScoreWeighted": 0,
                       "attributeCriticalFailureCount": 0,
-                      "attributeNumerator": 1,
+                      "attributeNumerator": 0,
                       "attributeDenominator": 1
                     },
                     "assessmentItems": [
                       {
                         "attributeMnemonic": "ENC_TYPE",
                         "attributeName": "encounterType",
-                        "assessment": "Encounter type is populated",
+                        "assessment": "Encounter Type code is in CPT or SNOMED CT",
                         "effect": "Scoring",
-                        "status": "Passed",
-                        "reason": ""
+                        "status": "Failed",
+                        "reason": "Display is unpopulated"
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 }
               ],
               "elementAudit": {
-                "elementScore": 20,
-                "elementScoreWeighted": 20,
-                "elementCriticalFailureCount": 0,
-                "elementNumerator": 1,
-                "elementDenominator": 5
+                "scoringData": {
+                  "elementScore": 25,
+                  "elementScoreWeighted": 25,
+                  "elementCriticalFailureCount": 0,
+                  "elementNumerator": 1,
+                  "elementDenominator": 4
+                }
               }
             }
-          ]
+          ],
+          "classAudit": {
+            "scoringData": {
+              "classScore": 25,
+              "classScoreWeighted": 25,
+              "classCriticalFailureCount": 0,
+              "classNumerator": 1,
+              "classDenominator": 4
+            }
+          }
         },
         {
-          "className": "goals",
-          "elements": null
+          "className": "goals"
         },
         {
           "className": "healthAssessments",
@@ -772,24 +936,19 @@
                       {
                         "attributeMnemonic": "HA_ITEM",
                         "attributeName": "assessment",
-                        "assessment": "Health status assessment is  LOINC or SNOMED-CT",
+                        "assessment": "Health Assessment code is in LOINC",
                         "effect": "Scoring",
                         "status": "Passed",
                         "reason": ""
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
                 },
                 {
-                  "attributeName": "assessmentStatus",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "assessmentStatus"
                 },
                 {
-                  "attributeName": "category",
-                  "data": null,
-                  "attributeAudit": null
+                  "attributeName": "category"
                 },
                 {
                   "attributeName": "effectiveDate",
@@ -797,6 +956,40 @@
                     "$type": "tx",
                     "text": "6/15/2026 4:00:00 AM"
                   },
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 100,
+                      "attributeScoreWeighted": 100,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 1,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "HA_EFFDT",
+                        "attributeName": "effectiveDate",
+                        "assessment": "Health Assessment Date is valid past date",
+                        "effect": "Scoring",
+                        "status": "Passed",
+                        "reason": ""
+                      }
+                    ]
+                  }
+                },
+                {
+                  "attributeName": "issueDateTime"
+                },
+                {
+                  "attributeName": "performerIdentifier"
+                },
+                {
+                  "attributeName": "performerName"
+                },
+                {
+                  "attributeName": "questionnaireURL"
+                },
+                {
+                  "attributeName": "resultUnit",
                   "attributeAudit": {
                     "scoringData": {
                       "attributeScore": 0,
@@ -807,98 +1000,101 @@
                     },
                     "assessmentItems": [
                       {
-                        "attributeMnemonic": "HA_EFFDT",
-                        "attributeName": "effectiveDate",
-                        "assessment": "Health Status assessment date is date in past",
+                        "attributeMnemonic": "HA_RESUOM",
+                        "attributeName": "resultUnit",
+                        "assessment": "Health Assessment Result Unit is in UCUM",
                         "effect": "Scoring",
                         "status": "Failed",
-                        "reason": "Health Status assessment date is not date in past"
+                        "reason": "Attribute is unpopulated"
                       }
-                    ],
-                    "informationalItems": null
+                    ]
                   }
-                },
-                {
-                  "attributeName": "issueDateTime",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "performerIdentifier",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "performerName",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "questionnaireURL",
-                  "data": null,
-                  "attributeAudit": null
-                },
-                {
-                  "attributeName": "resultUnit",
-                  "data": null,
-                  "attributeAudit": null
                 },
                 {
                   "attributeName": "resultValue",
                   "data": {
                     "$type": "ov",
                     "type": {
-                      "codings": null,
                       "text": "CE"
                     },
                     "text": "Depression screening negative (finding)"
                   },
-                  "attributeAudit": null
+                  "attributeAudit": {
+                    "scoringData": {
+                      "attributeScore": 100,
+                      "attributeScoreWeighted": 100,
+                      "attributeCriticalFailureCount": 0,
+                      "attributeNumerator": 1,
+                      "attributeDenominator": 1
+                    },
+                    "assessmentItems": [
+                      {
+                        "attributeMnemonic": "HA_RESVAL",
+                        "attributeName": "resultValue",
+                        "assessment": "Health Assessment Result Value is populated",
+                        "effect": "Scoring",
+                        "status": "Passed",
+                        "reason": ""
+                      }
+                    ]
+                  }
                 }
               ],
               "elementAudit": {
-                "elementScore": 50,
-                "elementScoreWeighted": 50,
-                "elementCriticalFailureCount": 0,
-                "elementNumerator": 1,
-                "elementDenominator": 2
+                "scoringData": {
+                  "elementScore": 75,
+                  "elementScoreWeighted": 75,
+                  "elementCriticalFailureCount": 0,
+                  "elementNumerator": 3,
+                  "elementDenominator": 4
+                }
               }
             }
-          ]
+          ],
+          "classAudit": {
+            "scoringData": {
+              "classScore": 75,
+              "classScoreWeighted": 75,
+              "classCriticalFailureCount": 0,
+              "classNumerator": 3,
+              "classDenominator": 4
+            }
+          }
         },
         {
-          "className": "immunizations",
-          "elements": null
+          "className": "immunizations"
         },
         {
-          "className": "labResults",
-          "elements": null
+          "className": "labResults"
         },
         {
-          "className": "medicalDevices",
-          "elements": null
+          "className": "medicalDevices"
         },
         {
-          "className": "medications",
-          "elements": null
+          "className": "medications"
         },
         {
-          "className": "practitioners",
-          "elements": null
+          "className": "practitioners"
         },
         {
-          "className": "procedures",
-          "elements": null
+          "className": "procedures"
         },
         {
-          "className": "provenance",
-          "elements": null
+          "className": "provenance"
         },
         {
-          "className": "vitalSigns",
-          "elements": null
+          "className": "vitalSigns"
         }
-      ]
+      ],
+      "rootAudit": {
+        "scoringData": {
+          "rootScore": 36,
+          "rootScoreWeighted": 36,
+          "rootCriticalFailureCount": 0,
+          "rootNumerator": 7,
+          "rootDenominator": 19
+        }
+      }
     }
   }
 }

@@ -58,16 +58,19 @@
     <Content Include="TestData\CQLTestData\ExpectedOutput\AnnualFluVaccine_Fail_FluNotInPeriod.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Evaluations\EvaluationProfileLibrary.json">
+    <Content Include="TestData\Evaluations\CONNECTATHON_LABORATORY_EVALUATIONS.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Evaluations\CONNECTATHON_PLAUSIBILITY_EVALUATIONS.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\Evaluations\CQL_LIBRARY_TEST.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Evaluations\USCDI_V2.json">
+    <Content Include="TestData\Evaluations\EOB_C4BB_INPATIENT.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Evaluations\USCDI_V3.json">
+    <Content Include="TestData\Evaluations\EvaluationProfileLibrary.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\Evaluations\USCDI_V31.json">
