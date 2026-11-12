@@ -86,6 +86,25 @@ List things that are prerequisites to setting up the project.
     dotnet run
     ```
 
+### Running in Docker Compose
+
+1. Copy `.env.example` to `.env` and modify it for your particular terminology server.
+
+2. If you want to run the server on a port besides 8080, also specify a value for `PIQI_PORT`.
+
+```
+# Environment variables to be used for docker compose.
+# FHIR_BASE_URL represnts the endpoint for the FHIR
+# terminology server.
+#FHIR_BASE_URL=https://tx.fhir.org/r4/
+FHIR_BASE_URL=http://hapi.fhir.org/baseR4/
+PIQI_PORT=8090
+```
+
+3. Start the orchestrated Docker containers with the `docker compose up --build` command.
+
+4. Stop the containers with `docker compose down`.
+
 ## Usage
 
 ### Using Swagger UI

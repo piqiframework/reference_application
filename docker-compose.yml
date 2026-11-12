@@ -1,0 +1,42 @@
+# Run with:  cp .env.example .env  (edit FHIR_BASE_URL)  then  docker compose up --build
+# Swagger UI: http://localhost:${PIQI_PORT:-8080}/swagger
+services:
+  cql-sidecar:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.sidecar
+    environment:
+      CQL_TERMINOLOGY_FHIR_BASE_URL: ${FHIR_BASE_URL:?Set FHIR_BASE_URL in .env}
+      CQL_TERMINOLOGY_SKIP_SSL_VERIFY: ${FHIR_SKIP_SSL_VERIFY:-false}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+  cql-service:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.cql-service
+    environment:
+      # appsettings.json sets Urls to localhost only; override so other containers can reach it.
+      Urls: http://+:5100
+      # CQL.Service tries to launch java.exe itself (Windows only). If a healthy sidecar
+      # is already at this URL it skips the launch, which is what we want here.
+      JavaSidecar__BaseUrl: http://cql-sidecar:8080
+    depends_on:
+      cql-sidecar:
+        condition: service_healthy
+
+  piqi-engine:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.server
+    environment:
+      Fhir__BaseUrl: ${FHIR_BASE_URL:?Set FHIR_BASE_URL in .env}
+      CqlService__BaseUrl: http://cql-service:5100
+    ports:
+      - "${PIQI_PORT:-8080}:8080"
+    depends_on:
+      - cql-service
