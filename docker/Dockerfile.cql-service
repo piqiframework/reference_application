@@ -1,0 +1,14 @@
+# CQL.Service: .NET wrapper that the engine calls for CQL evaluation. Build context: repo root.
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+COPY . .
+# The folder has two .csproj files, so name the one to build.
+RUN dotnet publish CQLTest.Service/CQL.Service.csproj -c Release -o /app/publish \
+    --configfile docker/nuget.docker.config
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+USER $APP_UID
+EXPOSE 5100
+ENTRYPOINT ["dotnet", "CQL.Service.dll"]
